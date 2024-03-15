@@ -5,4 +5,4 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Print Reseave
-        run: echo GitHub reseaved project
+        run: echo "GitHub reseaved project"
