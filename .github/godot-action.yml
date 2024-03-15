@@ -1,0 +1,10 @@
+name: Godot-Build
+on: workflow_dispatch
+jobs:
+  print:
+    runs-on: windows-latest
+    steps:
+    - name: Project Reseaved
+      run: echo Git reseaved project
+
+    
