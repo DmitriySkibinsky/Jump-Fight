@@ -1,5 +1,5 @@
 name: Build Godot
-on: workflow_dispatch
+on: push
 jobs:
   print:
     runs-on: ubuntu-latest
