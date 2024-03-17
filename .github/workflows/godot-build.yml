@@ -1,8 +1,42 @@
 name: Build Godot
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   print:
     runs-on: ubuntu-latest
     steps:
       - name: Print Reseave
         run: echo "GitHub reseaved project"
+
+        #или любая другая ветка, которая должна активировать рабочий процесс
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Godot Export Templates
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev libpulse-dev libudev-dev libxi-dev libxrandr-dev yasm
+          git clone https://github.com/godotengine/godot.git
+          cd godot
+          scons platform=x11 target=release_debug
+          scons platform=x11 target=release bits=64
+
+      #- name: Export Godot Project
+      #  run: |
+      #    # Здесь должен быть ваш скрипт для экспорта проекта Godot
+          # Например, если у вас есть сценарий export.sh, вы можете выполнить его:
+          # ./export.sh
+
+      #- name: Deploy to GitHub Pages
+      #  uses: JamesIves/github-pages-deploy-action@4.1.5
+      #  with:
+      #    branch: gh-pages # Выберите ветку, в которой будет развернут сайт
+      #    folder: path/to/exported/files # Замените на путь к экспортированным файлам
+
+      - name: Cleanup
+        run: |
+          rm -rf godot
