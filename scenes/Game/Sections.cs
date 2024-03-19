@@ -3,6 +3,7 @@ using System;
 
 public partial class Sections : Node2D
 {
+	private PackedScene BattleSection;
 	private PackedScene PlatformingSection = GD.Load<PackedScene>("res://scenes/PlatformingSection/PlatformingSection.tscn");
 
 	[Export]
@@ -12,6 +13,7 @@ public partial class Sections : Node2D
 	private player Player;
 	public override void _Ready()
 	{
+		BattleSection = GD.Load<PackedScene>("res://scenes/Rooms/Room1.tscn");
 		this.Player = GetParent<Node2D>().GetNode<player>("Player");
 		this.camera = GetParent<Node2D>().GetNode<Camera2D>("Camera2D");
 	
@@ -21,7 +23,6 @@ public partial class Sections : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
 	}
 
 	private void _spawn_levels(){
@@ -36,14 +37,26 @@ public partial class Sections : Node2D
 				prev_room = room;
 				prev_room_name = "PlatformingSection";
 				AddChild(room);
+				
+			}else if (prev_room_name == "PlatformingSection"){
+				room = BattleSection.Instantiate<Node2D>();
+				room.Position = new Vector2(room.Position.X, -(float)prev_room.Get("max_height"));
+				prev_room = room;
+				prev_room_name = "BattleSection";
+				AddChild(room);
+			}else if(prev_room_name == "BattleSection"){
+				room = PlatformingSection.Instantiate<Node2D>();
+				room.Set("amount", 20);
+				room.Position = new Vector2(room.Position.X, prev_room.GlobalPosition.Y);
+				prev_room = room;
+				prev_room_name = "PlatformingSection";
+				AddChild(room);
 			}
 		}
 	}
 
 	private void _physics_process(float delta)
 	{
-		if (Player.Position.Y < camera.Position.Y){
-			camera.Position = new Vector2(camera.Position.X, Player.Position.Y);
-		}
+		
 	}
 }
