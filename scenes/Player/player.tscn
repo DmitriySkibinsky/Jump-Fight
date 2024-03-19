@@ -1,10 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://8a0si0ayx0ix"]
+[gd_scene load_steps=49 format=3 uid="uid://8a0si0ayx0ix"]
 
 [ext_resource type="Script" path="res://scenes/Player/player.cs" id="1_6toyy"]
+[ext_resource type="Script" path="res://scenes/DamageArea/DamageArea.cs" id="3_fdkf8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
 radius = 12.0
-height = 38.0
+height = 34.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bytkp"]
 region = Rect2(0, 280, 56, 56)
@@ -297,6 +298,10 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mb4eg"]
+radius = 1.99998
+height = 16.0083
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 9
 script = ExtResource("1_6toyy")
@@ -318,6 +323,16 @@ sprite_frames = SubResource("SpriteFrames_bxqn3")
 animation = &"Damage"
 autoplay = "Idle"
 frame_progress = 0.562597
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_fdkf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, 17)
+rotation = -1.56656
+shape = SubResource("CapsuleShape2D_mb4eg")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 8
