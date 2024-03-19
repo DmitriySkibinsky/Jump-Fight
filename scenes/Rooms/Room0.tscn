@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyu1hnbgu1an6"]
+
+[ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/SolidPlatform/SolidPlatform.tscn" id="1_oqgpb"]
+[ext_resource type="Script" path="res://scenes/Rooms/Room1.cs" id="1_rbk30"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/JumpPlatform/JumpPlatform.tscn" id="3_cutbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84ujf"]
+size = Vector2(2560, 46.8012)
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_rbk30")
+
+[node name="SolidPlatforms" type="Node2D" parent="."]
+
+[node name="SolidPlatform" parent="SolidPlatforms" instance=ExtResource("1_oqgpb")]
+position = Vector2(1280, 1362.67)
+
+[node name="JumpPlatforms" type="Node2D" parent="."]
+
+[node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
+position = Vector2(1088, 1314.67)
+JumpForce = 1900
+
+[node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
+position = Vector2(1472, 1314.67)
+JumpForce = 1900
+
+[node name="BorderAnimate" type="Area2D" parent="."]
+position = Vector2(1123.95, 507.199)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderAnimate"]
+position = Vector2(156.05, 378.134)
+shape = SubResource("RectangleShape2D_84ujf")
+
+[connection signal="body_exited" from="BorderAnimate" to="." method="_on_border_animate_body_exited"]
