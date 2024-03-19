@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://bag02r1apgcm2"]
+
+[ext_resource type="Texture2D" uid="uid://dhas0p0aq80ek" path="res://assets/tile2.png" id="1_tyugt"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/JumpPlatform/JumpPlatform.tscn" id="2_33dhl"]
+[ext_resource type="Texture2D" uid="uid://dpet4amsn3d7s" path="res://assets/Chests.png" id="3_raw8y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4jgf"]
+size = Vector2(192, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0bip"]
+atlas = ExtResource("3_raw8y")
+region = Rect2(0, 128, 47, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa8fv"]
+atlas = ExtResource("3_raw8y")
+region = Rect2(47, 128, 47, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk1b2"]
+atlas = ExtResource("3_raw8y")
+region = Rect2(94, 128, 47, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48jyf"]
+atlas = ExtResource("3_raw8y")
+region = Rect2(141, 128, 47, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyj4a"]
+atlas = ExtResource("3_raw8y")
+region = Rect2(188, 128, 47, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ag1s5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0bip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa8fv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk1b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48jyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyj4a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2(1, 0.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(48, 0)
+scale = Vector2(1.5, 1)
+texture = ExtResource("1_tyugt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(-48, 0)
+scale = Vector2(1.5, 1)
+texture = ExtResource("1_tyugt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n4jgf")
+one_way_collision = true
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_33dhl")]
+position = Vector2(80, -32)
+scale = Vector2(0.25, 0.25)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+position = Vector2(-4, -272)
+scale = Vector2(4, 15)
+sprite_frames = SubResource("SpriteFrames_ag1s5")
+
+[node name="Label" type="Label" parent="AnimatedSprite2D"]
+offset_left = -22.25
+offset_top = -23.7333
+offset_right = 7.75
+offset_bottom = -0.733334
+text = "WIP"
