@@ -21,6 +21,7 @@ public partial class Sections : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 	}
 
 	private void _spawn_levels(){
@@ -41,6 +42,8 @@ public partial class Sections : Node2D
 
 	private void _physics_process(float delta)
 	{
-		
+		if (Player.Position.Y < camera.Position.Y){
+			camera.Position = new Vector2(camera.Position.X, Player.Position.Y);
+		}
 	}
 }
