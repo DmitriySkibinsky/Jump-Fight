@@ -84,7 +84,4 @@ __Прогрессия игрока__
 - [Emir EmirBuzhurov](https://github.com/EmirBuzhurov)
 
 
-## Appendix
-
-Any additional information goes here
 
