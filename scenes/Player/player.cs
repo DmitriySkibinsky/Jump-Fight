@@ -14,9 +14,12 @@ public partial class player : CharacterBody2D
 
 	public int health = 100;
 
-
+	private CustomSignals _customSignals;
 	public override void _Ready()
 	{
+		AddUserSignal("DamagePlayer");
+		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
+		_customSignals.DamagePlayer += GetDamaged;
 	}
 
 	public override async void _PhysicsProcess(double delta)
