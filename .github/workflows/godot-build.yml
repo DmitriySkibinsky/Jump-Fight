@@ -1,4 +1,5 @@
 name: Build Godot
+
 on:
   push:
     branches:
@@ -11,8 +12,6 @@ jobs:
       - name: Print Reseave
         run: echo "GitHub reseaved project"
 
-        #или любая другая ветка, которая должна активировать рабочий процесс
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -24,15 +23,11 @@ jobs:
           cd godot
           scons platform=x11 target=template_release
           scons platform=x11 target=template_release bits=64
+          echo "GODOT_BUILD_DIR=$(pwd)" >> $GITHUB_ENV
 
-      - name: Tree
-        run: tree
+      - name: Add Godot to PATH
+        run: echo "${{ env.GODOT_BUILD_DIR }}" >> $GITHUB_PATH
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '3.1.x'
-      
       - name: Export exe
         run: |
           mkdir export
