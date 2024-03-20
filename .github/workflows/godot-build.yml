@@ -1,18 +1,13 @@
-name: Build Godot
+name: Build Godot and Release
 on:
   push:
     branches:
       - main
 
 jobs:
-  Godot-Release:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Reseave
-        run: echo "GitHub reseaved project"
-
-        #или любая другая ветка, которая должна активировать рабочий процесс
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -20,26 +15,44 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev libpulse-dev libudev-dev libxi-dev libxrandr-dev yasm
+          sudo apt-get install -y dotnet-sdk
+          sudo apt-get install -y apt-transport-https
+          sudo wget https://packages.microsoft.com/config/ubuntu/версия_ubuntu/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          sudo dpkg -i packages-microsoft-prod.deb
           git clone https://github.com/godotengine/godot.git
           cd godot
           scons platform=x11 target=template_release
           scons platform=x11 target=template_release bits=64
+          scons platform=x11 target=release_debug tools=no module_mono_enabled=yes
 
-      - name: Tree
-        run: tree
+      - name: Export exe
+        run: |
+          mkdir export
+          godot --export "Windows Desktop" export/Fight&Jump.exe
 
-      #- name: Export Godot Project
-      #  run: |
-      #    # Здесь должен быть ваш скрипт для экспорта проекта Godot
-          # Например, если у вас есть сценарий export.sh, вы можете выполнить его:
-          # ./export.sh
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
 
-      #- name: Deploy to GitHub Pages
-      #  uses: JamesIves/github-pages-deploy-action@4.1.5
-      #  with:
-      #    branch: gh-pages # Выберите ветку, в которой будет развернут сайт
-      #    folder: path/to/exported/files # Замените на путь к экспортированным файлам
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./export/Fight&Jump.exe
+          asset_name: Fight&Jump.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
 
       - name: Cleanup
         run: |
           rm -rf godot
+          rm -rf export
