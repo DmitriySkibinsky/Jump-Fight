@@ -26,7 +26,7 @@ jobs:
           scons platform=x11 target=template_release
           scons platform=x11 target=template_release bits=64
           echo "GODOT_BUILD_DIR=$(pwd)" >> $GITHUB_ENV
-          wget https://www.tuxfamily.org/godotengine/3.4.0/Godot_v3.4-stable_linux_server.64.zip
+          wget https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
           unzip Godot_v3.4-stable_linux_server.64.zip
           chmod +x Godot_v3.4-stable_linux_server.64
 
