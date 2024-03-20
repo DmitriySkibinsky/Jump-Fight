@@ -1,13 +1,18 @@
-name: Build Godot and Release
+name: Build Godot
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
+  Godot-Release:
     runs-on: ubuntu-latest
     steps:
+      - name: Print Reseave
+        run: echo "GitHub reseaved project"
+
+        #или любая другая ветка, которая должна активировать рабочий процесс
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -15,25 +20,24 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev libpulse-dev libudev-dev libxi-dev libxrandr-dev yasm
-         
-          sudo apt-get install -y apt-transport-https
-          sudo wget https://packages.microsoft.com/config/ubuntu/версия_ubuntu/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-          sudo dpkg -i packages-microsoft-prod.deb
           git clone https://github.com/godotengine/godot.git
           cd godot
           scons platform=x11 target=template_release
           scons platform=x11 target=template_release bits=64
-          scons platform=x11 target=release_debug tools=no module_mono_enabled=yes
-      
+
+      - name: Tree
+        run: tree
+
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x'
-          
+      
       - name: Export exe
         run: |
           mkdir export
           godot --export "Windows Desktop" export/Fight&Jump.exe
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
