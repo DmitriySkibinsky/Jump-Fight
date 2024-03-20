@@ -9,14 +9,29 @@ jobs:
   Godot-Release:
     runs-on: ubuntu-latest
     steps:
+      - name: Print Reseave
+        run: echo "GitHub reseaved project"
+
       - name: Checkout code
         uses: actions/checkout@v2
-      #
-      - name: Download Godot
+
+      - name: Setup Godot Export Templates
         run: |
-          wget https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
+          sudo apt-get update
+          sudo apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev libpulse-dev libudev-dev libxi-dev libxrandr-dev yasm
+          sudo apt install snapd
+          sudo snap install godot --classic
+          git clone https://github.com/godotengine/godot.git
+          cd godot
+          scons platform=x11 target=template_release
+          scons platform=x11 target=template_release bits=64
+          echo "GODOT_BUILD_DIR=$(pwd)" >> $GITHUB_ENV
+         wget https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
           unzip Godot_v3.4.4-stable_linux_headless.64.zip
           chmod +x Godot_v3.4.4-stable_linux_headless.64
+
+      - name: Add Godot to PATH
+        run: echo "${{ env.GODOT_BUILD_DIR }}" >> $GITHUB_PATH
 
       - name: Export exe
         run: |
@@ -41,11 +56,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./export/FightAndJump.exe
-          asset_name: FightAndJump.exe
+          asset_path: ./export/Fight&Jump.exe
+          asset_name: Fight&Jump.exe
           asset_content_type: application/vnd.microsoft.portable-executable
 
       - name: Cleanup
         run: |
-          rm Godot_v3.4.4-stable_linux_headless.64
+          rm -rf godot
           rm -rf export
