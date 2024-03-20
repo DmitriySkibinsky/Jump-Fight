@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqhxwqq1let54"]
+
+[ext_resource type="Script" path="res://scenes/PlatformingSection/PlatformingSection.cs" id="1_a1w78"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/JumpPlatform/JumpPlatform.tscn" id="2_arbrk"]
+[ext_resource type="Script" path="res://scenes/PlatformingSection/PlatformContainer.cs" id="3_wxa8g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xslku"]
+size = Vector2(24, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a8hf"]
+size = Vector2(1335, 54)
+
+[node name="PlatformingSection" type="Node2D"]
+script = ExtResource("1_a1w78")
+
+[node name="PlatformContainer" type="Node2D" parent="."]
+script = ExtResource("3_wxa8g")
+
+[node name="AreaLeft" type="Area2D" parent="PlatformContainer"]
+position = Vector2(688, 544)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformContainer/AreaLeft"]
+position = Vector2(-64, 0)
+shape = SubResource("RectangleShape2D_xslku")
+
+[node name="AreaRight" type="Area2D" parent="PlatformContainer"]
+position = Vector2(1232, 544)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformContainer/AreaRight"]
+position = Vector2(64, -8)
+shape = SubResource("RectangleShape2D_xslku")
+
+[node name="PlatormDeleter" type="Area2D" parent="PlatformContainer/AreaRight"]
+position = Vector2(-1232, -544)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformContainer/AreaRight/PlatormDeleter"]
+position = Vector2(995, 1239)
+shape = SubResource("RectangleShape2D_2a8hf")
+
+[node name="JumpPlatform" parent="PlatformContainer" instance=ExtResource("2_arbrk")]
+position = Vector2(957, 731)
+
+[connection signal="body_entered" from="PlatformContainer/AreaLeft" to="PlatformContainer" method="_on_area_left_body_entered"]
+[connection signal="body_entered" from="PlatformContainer/AreaRight" to="PlatformContainer" method="_on_area_right_body_entered"]
+[connection signal="body_entered" from="PlatformContainer/AreaRight/PlatormDeleter" to="." method="_on_platorm_deleter_body_entered"]
