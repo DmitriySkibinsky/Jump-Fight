@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgi7n2eukw1g2"]
+
+[ext_resource type="Script" path="res://scenes/game/Utils/PlatformingBorder.cs" id="1_gqdmx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02oj2"]
+size = Vector2(32, 1080)
+
+[node name="PlatformingBorder" type="Node2D"]
+script = ExtResource("1_gqdmx")
+
+[node name="AreaLeft" type="Area2D" parent="."]
+position = Vector2(672, 544)
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaLeft"]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_02oj2")
+
+[node name="AreaRight" type="Area2D" parent="."]
+position = Vector2(1248, 544)
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaRight"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_02oj2")
+
+[connection signal="body_entered" from="AreaLeft" to="." method="_on_area_left_body_entered"]
+[connection signal="body_entered" from="AreaRight" to="." method="_on_area_right_body_entered"]
