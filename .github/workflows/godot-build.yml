@@ -30,6 +30,9 @@ jobs:
       - name: Publish project
         run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishReadyToRun=true -o ./publish
 
+      - name: tree
+        run: tree
+
       - name: Package project
         run: |
           cd publish
