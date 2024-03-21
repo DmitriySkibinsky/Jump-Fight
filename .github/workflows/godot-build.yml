@@ -5,28 +5,18 @@ on:
     branches:
       - main
 
-env:
-  GODOT_VERSION: 3.2.1
-  EXPORT_NAME: JumpAndFight
-
 jobs:
-  export-windows:
-    name: Windows Export
+  build-project:
     runs-on: ubuntu-latest
-    container:
-      image: docker://barichello/godot-ci:3.2.1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Setup
-        run: |
-          mkdir -v -p build/linux build/windows build/mac build/web ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Windows Build
-        run: godot -v --export "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: windows
-          path: ./build/windows
 
+    steps:
+     - uses: action/checkout@v3
+     - name: Export Game
+       uses: firebelley/godot-export@v5.2.1
+       with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
+          godot_export_templates_downloads_url: https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_export_templates.tpz
+          relative_project_path: ./
+          create_release: true
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
