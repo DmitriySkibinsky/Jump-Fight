@@ -28,7 +28,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore ./JumpFight.csproj
 
       - name: Publish project
-        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishReadyToRun=true -o ./publish
+        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:PublishReadyToRun=true -o ./publish
 
       - name: tree
         run: tree
