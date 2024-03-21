@@ -1,60 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7mr07ra7bew2"]
+[gd_scene load_steps=7 format=3 uid="uid://b7mr07ra7bew2"]
 
 [ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/game/LevelItems/Platforms/SolidPlatform.tscn" id="1_5l32b"]
 [ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_xb3vt"]
+[ext_resource type="PackedScene" uid="uid://60qbh2110q6" path="res://scenes/game/in_level_ui.tscn" id="2_wn0s3"]
 [ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_o2pn8"]
 [ext_resource type="Script" path="res://scenes/game/Level/Sections.cs" id="4_scjj6"]
 [ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="5_6g8d7"]
 
-[sub_resource type="Curve2D" id="Curve2D_l85rm"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1788.52, 175.491, 0, 0, 0, 0, 2215.18, 175.491)
-}
-point_count = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b17o8"]
-bg_color = Color(0.121569, 0.121569, 0.121569, 1)
-
-[sub_resource type="Curve2D" id="Curve2D_d0htp"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -426.667, 0)
-}
-point_count = 2
-
 [node name="Game" type="Node2D"]
 script = ExtResource("1_xb3vt")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Path2DRight" type="Path2D" parent="CanvasLayer"]
-position = Vector2(578.612, -131.618)
-scale = Vector2(0.75, 0.75)
-curve = SubResource("Curve2D_l85rm")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="CanvasLayer/Path2DRight"]
-position = Vector2(1788.52, 175.491)
-loop = false
-
-[node name="Panel2" type="Panel" parent="CanvasLayer/Path2DRight/PathFollow2D"]
-offset_left = -853.0
-offset_right = 32.0
-offset_bottom = 1461.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b17o8")
-
-[node name="Path2DLeft" type="Path2D" parent="CanvasLayer"]
-scale = Vector2(0.75, 0.75)
-curve = SubResource("Curve2D_d0htp")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="CanvasLayer/Path2DLeft"]
-rotation = 3.14159
-loop = false
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Path2DLeft/PathFollow2D"]
-offset_left = -856.0
-offset_top = -1461.0
-offset_right = 30.0
-offset_bottom = -1.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b17o8")
+[node name="InLevelUI" parent="." instance=ExtResource("2_wn0s3")]
 
 [node name="Jump" type="Node2D" parent="."]
 position = Vector2(1152, 1064)
