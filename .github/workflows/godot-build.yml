@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Debug --no-restore
 
       - name: List files
         run: ls
