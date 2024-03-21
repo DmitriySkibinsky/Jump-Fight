@@ -25,7 +25,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish project
-        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish
+        run: dotnet publish -c Release -r win-x64 --self-contained true -o ./publish
         
       - name: tree
         run: tree
