@@ -23,21 +23,13 @@ jobs:
 
       - name: Build project
         run: dotnet build --configuration Release --no-restore
+        run: tree
 
       - name: Publish project
-        run: dotnet publish -c Release -o ./publish
-
-      - name: Download ILRepack
-        run: |
-          wget https://github.com/ravibpatel/ILRepack.Lib.MSBuild.Task/releases/download/v3.0.19/ILRepack.MSBuild.Task.zip
-          unzip ILRepack.MSBuild.Task.zip -d ./ILRepack
-
-      - name: Create executable
-        run: |
-          dotnet ./ILRepack/tools/ilrepack.exe /out:YourApp.exe ./publish/*.dll
+        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: fightandjump
-          path: FightAndJump.exe
+          name: myapp
+          path: ./publish
