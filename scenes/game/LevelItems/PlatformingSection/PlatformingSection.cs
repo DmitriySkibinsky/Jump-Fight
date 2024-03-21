@@ -23,7 +23,7 @@ public partial class PlatformingSection : Node2D
 	public override void _Ready()
 	{	
 		JumpPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn");
-		ChestPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/ChestPlatform/ChestPlatform.tscn");
+		ChestPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/ChestPlatform.tscn");
 		BreackablePlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.tscn");
 		this.player = GetParent<Node2D>().GetParent<Node2D>().GetNode<player>("Player");
 		this.AreaLeft = GetNode<Area2D>("PlatformContainer/AreaLeft");
