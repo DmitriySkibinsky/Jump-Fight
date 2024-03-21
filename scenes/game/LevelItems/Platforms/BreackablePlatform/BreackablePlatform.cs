@@ -13,6 +13,7 @@ public partial class BreackablePlatform : JumpPlatform
 	public override void _Process(double delta)
 	{
 	}
+	
 
 	public override void _on_area_2d_body_entered(player body){
 		if (body.Velocity.Y >= 0){
@@ -20,9 +21,5 @@ public partial class BreackablePlatform : JumpPlatform
 			body.MoveAndSlide();
 			this.QueueFree();
 		}
-	}
-
-	private void _on_area_2d_body_exited(player body){
-		
 	}
 }
