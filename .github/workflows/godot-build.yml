@@ -23,10 +23,10 @@ jobs:
 
       - name: Build project
         run: dotnet build --configuration Release --no-restore
-        run: tree
 
       - name: Publish project
         run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish
+        run: tree
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
