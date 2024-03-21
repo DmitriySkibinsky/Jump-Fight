@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://teagrvnt26tc"]
+
+[ext_resource type="Script" path="res://scenes/game/Utils/TriggerOnEnterBattle.cs" id="1_6m25h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce5eu"]
+size = Vector2(1920, 26.8037)
+
+[node name="TriggerOnEnterBattle" type="Node2D"]
+script = ExtResource("1_6m25h")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+position = Vector2(56, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+position = Vector2(901.734, -0.19632)
+shape = SubResource("RectangleShape2D_ce5eu")
+
+[connection signal="body_exited" from="TriggerArea" to="." method="_on_trigger_area_body_exited"]
