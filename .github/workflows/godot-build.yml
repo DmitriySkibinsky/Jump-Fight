@@ -19,8 +19,7 @@ jobs:
 
     - name: Build project
       run: |
-        msbuild -t:Clean,Build -p:Configuration=Release
-
+        msbuild -t:Clean,Build -p:Configuration=Debug -p:Platform="Any CPU"
     - name: Archive build
       uses: actions/upload-artifact@v2
       with:
