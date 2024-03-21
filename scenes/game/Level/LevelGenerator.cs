@@ -15,18 +15,21 @@ public partial class LevelGenerator : Node2D
 	public PackedScene JumpPlatform_scene = new PackedScene();
 	public PackedScene ChestPlatform_scene = new PackedScene();
 	public PackedScene BreackablePlatform_scene = new PackedScene();
+	public PackedScene TriggerOnEnterBattle = new PackedScene();
+	public PackedScene TriggerOnExitBattle = new PackedScene();
 	public override void _Ready()
 	{
 		BattleSection = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn");
 		JumpPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn");
 		ChestPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/ChestPlatform.tscn");
 		BreackablePlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.tscn");
+		TriggerOnEnterBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnEnterBattle.tscn");
+		TriggerOnExitBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnExitBattle.tscn");
 		Player = GetParent().GetNode<player>("Player");
 	
 		_spawn_levels();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
@@ -35,16 +38,24 @@ public partial class LevelGenerator : Node2D
 		Node2D prev_battle_room = new Node2D();
 		Node2D cur_battle_room = new Node2D();
 		string prev_room_name = "";
-		for (int i = 0; i < 6; i++){
+		for (int i = 0; i < num_levels; i++){
 			if (i == 0){
-				GeneratePlatform(Player.Position.Y, 30);
+				GeneratePlatform(Player.Position.Y, 10);
 				prev_room_name = "platform";
 			}else if(prev_room_name == "platform"){
 				cur_battle_room = BattleSection.Instantiate<Room1>();
-				cur_battle_room.Position = new Vector2(cur_battle_room.Position.X, last_platform_pos_y);
+				cur_battle_room.Position = new Vector2(cur_battle_room.Position.X, last_platform_pos_y - 200);
 				prev_battle_room = cur_battle_room;
 				prev_room_name = "battle";
+
+				Node2D EnterTrigger = TriggerOnEnterBattle.Instantiate<TriggerOnEnterBattle>();
+				EnterTrigger.Position = new Vector2(cur_battle_room.Position.X, cur_battle_room.Position.Y - 500);
+
+				Node2D ExitTrigger = TriggerOnExitBattle.Instantiate<TriggerOnExitBattle>();
+				ExitTrigger.Position = new Vector2(ExitTrigger.Position.X, prev_battle_room.GetNode<Marker2D>("NextPlatform").GlobalPosition.Y - 200);
 				this.AddChild(cur_battle_room);
+				this.AddChild(EnterTrigger);
+				this.AddChild(ExitTrigger);
 			}else{
 				float init_pos_y = prev_battle_room.GetNode<Marker2D>("NextPlatform").GlobalPosition.Y;
 				GeneratePlatform(init_pos_y, 30);
