@@ -13,11 +13,16 @@ public partial class PlatformingBorder : Node2D
 	{
 	}
 	
-	public void _on_area_left_body_entered(player body){
-		body.teleport_to(GetNode<Area2D>("AreaRight").Position.X);
+	public void _on_area_left_body_entered(Node2D body){
+		if (body.Name == "Player"){
+			body.CallDeferred("teleport_to", GetNode<Area2D>("AreaRight").Position.X-20);
+		}
+		
 	}
-	public void _on_area_right_body_entered(player body){
-		body.teleport_to(GetNode<Area2D>("AreaLeft").Position.X);
+	public void _on_area_right_body_entered(Node2D body){
+		if (body.Name == "Player"){
+			body.CallDeferred("teleport_to", GetNode<Area2D>("AreaLeft").Position.X+20);
+		}
 	}
 
 	public void turn_off(){
