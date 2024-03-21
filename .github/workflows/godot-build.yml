@@ -24,6 +24,9 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release --no-restore
 
+      - name: tree
+        run: tree
+
       - name: Publish project
         run: dotnet publish -c Release -o ./publish
 
