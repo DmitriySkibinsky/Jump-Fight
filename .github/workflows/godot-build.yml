@@ -5,31 +5,28 @@ on:
     branches:
       - main
 
+env:
+  GODOT_VERSION: 3.2.1
+  EXPORT_NAME: JumpAndFight
+
 jobs:
-  build:
+  export-windows:
+    name: Windows Export
     runs-on: ubuntu-latest
-
+    container:
+      image: docker://barichello/godot-ci:3.2.1
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup
+        run: |
+          mkdir -v -p build/linux build/windows build/mac build/web ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: godot -v --export "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows
+          path: ./build/windows
 
-    - name: Set up Mono
-      run: |
-        sudo apt-get install mono-complete msbuild
-        wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-        sudo dpkg -i packages-microsoft-prod.deb
-        sudo apt-get update
-        sudo apt-get install -y apt-transport-https
-        sudo apt-get update
-        sudo apt-get install -y dotnet-sdk-6.0
-
-    - name: Build project
-      run: |
-        msbuild -t:Clean,Build -p:Configuration=Debug -p:Platform="Any CPU"
-    - name: Archive build
-      uses: actions/upload-artifact@v2
-      with:
-        name: "Build"
-        path: "bin/Fight&Jump.exe" # Замените "projectname" на имя вашего проекта
-    - name: Tree
-      run: tree
