@@ -72,7 +72,7 @@ public partial class player : CharacterBody2D
 		if (health <= 0)
 		{
 			QueueFree();
-			GetTree().ChangeSceneToFile("res://menu.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/menu/menu.tscn");
 		}
 
 
@@ -87,7 +87,7 @@ public partial class player : CharacterBody2D
 		}
 	}
 
-	private void GetDamaged(int Damage)
+	public void GetDamaged(int Damage)
 	{
 		health -= Damage;
 		GD.Print("Health = " + health);
