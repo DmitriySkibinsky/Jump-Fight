@@ -25,4 +25,4 @@ jobs:
         run: dotnet build --configuration Debug --no-restore
 
       - name: List files
-        run: ls
+        run: tree
