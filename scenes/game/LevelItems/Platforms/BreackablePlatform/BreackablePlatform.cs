@@ -15,11 +15,14 @@ public partial class BreackablePlatform : JumpPlatform
 	}
 	
 
-	public override void _on_area_2d_body_entered(player body){
-		if (body.Velocity.Y >= 0){
-			body.velocity.Y = -950;
-			body.MoveAndSlide();
-			this.QueueFree();
+	public override void _on_area_2d_body_entered(Node2D body){
+		if (body.Name == "Player"){
+			player Player = (player)body;
+			if (Player.Velocity.Y >= 0){
+				Player.velocity.Y = -JumpForce;
+				Player.MoveAndSlide();
+				this.QueueFree();
+			}
 		}
 	}
 }
