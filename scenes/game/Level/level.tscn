@@ -4,10 +4,10 @@
 [ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_xb3vt"]
 [ext_resource type="PackedScene" uid="uid://60qbh2110q6" path="res://scenes/game/in_level_ui.tscn" id="2_wn0s3"]
 [ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_o2pn8"]
-[ext_resource type="Script" path="res://scenes/game/Level/Sections.cs" id="4_scjj6"]
+[ext_resource type="Script" path="res://scenes/game/Level/LevelGenerator.cs" id="5_0p4j6"]
 [ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="5_6g8d7"]
 
-[node name="Game" type="Node2D"]
+[node name="level" type="Node2D"]
 script = ExtResource("1_xb3vt")
 
 [node name="InLevelUI" parent="." instance=ExtResource("2_wn0s3")]
@@ -46,10 +46,10 @@ rotation = 1.5708
 [node name="SolidPlatform" parent="Solid" instance=ExtResource("1_5l32b")]
 position = Vector2(-192, 0)
 
-[node name="Sections" type="Node2D" parent="."]
-script = ExtResource("4_scjj6")
+[node name="LevelGenerator" type="Node2D" parent="."]
+script = ExtResource("5_0p4j6")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2(963, 540)
 scale = Vector2(0.5, 0.5)
 

@@ -7,6 +7,9 @@
 
 [node name="Room1" instance=ExtResource("1_e3pxk")]
 
+[node name="SolidPlatforms" parent="." index="0"]
+position = Vector2(0, -1368)
+
 [node name="SolidPlatform2" parent="SolidPlatforms" index="1" instance=ExtResource("2_1ksuf")]
 position = Vector2(1472, 104)
 
@@ -31,6 +34,9 @@ position = Vector2(1280, -245.333)
 [node name="SolidPlatform6" parent="SolidPlatforms" index="8" instance=ExtResource("2_1ksuf")]
 position = Vector2(1664, 104)
 
+[node name="JumpPlatforms" parent="." index="1"]
+position = Vector2(0, -1368)
+
 [node name="Jp1" parent="JumpPlatforms" index="0"]
 position = Vector2(1090.67, 1314.67)
 JumpForce = 1400
@@ -45,13 +51,17 @@ position = Vector2(704, 74.6667)
 [node name="Jp4" parent="JumpPlatforms" index="3" instance=ExtResource("3_qkvyw")]
 position = Vector2(1856, 74.6667)
 
-[node name="BorderAnimate" parent="." index="2"]
-position = Vector2(1133.33, 74.6667)
-
-[node name="Mob" parent="." index="3" instance=ExtResource("4_jybo6")]
-position = Vector2(1050.67, 36)
+[node name="Mob" parent="." index="2" instance=ExtResource("4_jybo6")]
+position = Vector2(1050.67, -1332)
 scale = Vector2(1.5, 1.5)
 
-[node name="Mob2" parent="." index="4" instance=ExtResource("4_jybo6")]
-position = Vector2(1178.67, -306.667)
+[node name="Mob2" parent="." index="3" instance=ExtResource("4_jybo6")]
+position = Vector2(1178.67, -1674.67)
 scale = Vector2(1.5, 1.5)
+
+[node name="Jp1" parent="." index="4" instance=ExtResource("3_qkvyw")]
+position = Vector2(1280, -1634.67)
+JumpForce = 1400
+
+[node name="NextPlatform" type="Marker2D" parent="." index="5"]
+position = Vector2(1280, -1962.67)
