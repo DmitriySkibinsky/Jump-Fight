@@ -3,6 +3,7 @@
     <TargetFramework>net4.7.2</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
+    <Reference Include="Godot" />
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>JumpFight</RootNamespace>
   </PropertyGroup>
