@@ -18,22 +18,23 @@ jobs:
         with:
           dotnet-version: '6.0.x' # Replace with the .NET SDK version you need
 
+      - name: Install zip
+        run: sudo apt-get install zip
+
       - name: Restore dependencies
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Release --no-restore
-
-      - name: tree
-        run: tree
+        run: dotnet build --configuration Release --no-restore ./JumpFight.csproj
 
       - name: Publish project
-        run: dotnet publish -c Release -r win-x64 --self-contained -p:PublishReadyToRun=true
+        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishReadyToRun=true -o ./publish
 
       - name: Package project
         run: |
           cd publish
           zip -r ../myapp.zip .
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
