@@ -4,7 +4,7 @@ using System;
 public partial class Sections : Node2D
 {
 	private PackedScene BattleSection;
-	private PackedScene PlatformingSection = GD.Load<PackedScene>("res://scenes/PlatformingSection/PlatformingSection.tscn");
+	private PackedScene PlatformingSection = GD.Load<PackedScene>("res://scenes/game/LevelItems/PlatformingSection/PlatformingSection.tscn");
 
 	[Export]
 	private int platform_count = 0;
@@ -13,7 +13,7 @@ public partial class Sections : Node2D
 	private player Player;
 	public override void _Ready()
 	{
-		BattleSection = GD.Load<PackedScene>("res://scenes/Rooms/Room1.tscn");
+		BattleSection = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn");
 		this.Player = GetParent<Node2D>().GetNode<player>("Player");
 		this.camera = GetParent<Node2D>().GetNode<Camera2D>("Camera2D");
 	

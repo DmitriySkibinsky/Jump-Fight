@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Jump Fight"
-run/main_scene="res://scenes/Menu/menu.tscn"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-CustomSignals="*res://shared/CustomSignals.cs"
+CustomSignals="*res://global/CustomSignals.cs"
 
 [display]
 

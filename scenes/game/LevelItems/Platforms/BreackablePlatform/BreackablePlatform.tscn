@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmp4fvjo24lcs"]
 
-[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/JumpPlatform/JumpPlatform.tscn" id="1_3lxmp"]
-[ext_resource type="Script" path="res://scenes/BreackablePlatform/BreackablePlatform.cs" id="2_2dxv5"]
-[ext_resource type="Texture2D" uid="uid://yvaq3s81dt4w" path="res://assets/tile3.png" id="2_wfere"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="1_3lxmp"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.cs" id="2_2dxv5"]
+[ext_resource type="Texture2D" uid="uid://yvaq3s81dt4w" path="res://assets/sprites/tile3.png" id="2_wfere"]
 
 [node name="StaticBody2D" instance=ExtResource("1_3lxmp")]
 script = ExtResource("2_2dxv5")

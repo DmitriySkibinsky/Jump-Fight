@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0wsjvnycxgpw"]
 
-[ext_resource type="Script" path="res://scenes/DamageArea/DamageArea.cs" id="1_nge58"]
+[ext_resource type="Script" path="res://scenes/game/entities/DamageArea/DamageArea.cs" id="1_nge58"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5b5w0"]
 radius = 6.32456

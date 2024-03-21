@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bag02r1apgcm2"]
 
-[ext_resource type="Texture2D" uid="uid://dhas0p0aq80ek" path="res://assets/tile2.png" id="1_tyugt"]
-[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/JumpPlatform/JumpPlatform.tscn" id="2_33dhl"]
-[ext_resource type="Texture2D" uid="uid://dpet4amsn3d7s" path="res://assets/Chests.png" id="3_raw8y"]
+[ext_resource type="Texture2D" uid="uid://dhas0p0aq80ek" path="res://assets/sprites/tile2.png" id="1_tyugt"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="2_33dhl"]
+[ext_resource type="Texture2D" uid="uid://dpet4amsn3d7s" path="res://assets/sprites/Chests.png" id="3_raw8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4jgf"]
 size = Vector2(192, 64)
