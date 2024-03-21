@@ -26,3 +26,5 @@ jobs:
           create_release: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: tree
+        run: tree 
