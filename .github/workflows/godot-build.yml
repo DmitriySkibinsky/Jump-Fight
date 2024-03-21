@@ -6,49 +6,25 @@ on:
       - main
 
 jobs:
-  Godot-Release:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Print Reseave
-        run: echo "GitHub reseaved project"
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Set up Mono
+      run: |
+        sudo apt-get install mono-complete msbuild
 
-      - name: Setup Godot Export Templates
-        run: |
-          sudo apt-get install mono-devel msbuild
-          sudo apt-get update
-          sudo apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev libpulse-dev libudev-dev libxi-dev libxrandr-dev yasm
-          sudo apt install snapd
-          sudo snap install godot --classic
-          wget https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
-          unzip Godot_v3.4.4-stable_linux_headless.64.zip
-          chmod +x Godot_v3.4.4-stable_linux_headless.64
+    - name: Build project
+      run: |
+        msbuild -t:Clean,Build -p:Configuration=Release
 
-      - name: Export exe
-        run: |
-          msbuild /p:Configuration=Release /p:Platform=x64 /t:Build /p:OutputPath=./bin/ FightAndJump.csproj
-          ./Godot_v3.4.4-stable_linux_headless.64 --export "Windows Desktop" ./FightAndJump.exe
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./FightAndJump.exe
-          asset_name: FightAndJump.exe
-          asset_content_type: application/vnd.microsoft.portable-executable
+    - name: Archive build
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Build"
+        path: "bin/Fight&Jump.exe" # Замените "projectname" на имя вашего проекта
+    - name: Tree
+      run: tree
