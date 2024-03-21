@@ -25,7 +25,7 @@ jobs:
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Release --no-restore ./JumpFight.csproj
+        run: dotnet build --configuration Release ./JumpFight.csproj
 
       - name: Publish project
         run: dotnet publish -c Release -r ubuntu.18.04-x64 --self-contained true -o ./publish
