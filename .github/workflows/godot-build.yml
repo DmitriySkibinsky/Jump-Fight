@@ -22,7 +22,18 @@ jobs:
         run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Debug --no-restore
+        run: dotnet build --configuration Release --no-restore
 
-      - name: List files
-        run: tree
+      - name: Publish project
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Package project
+        run: |
+          cd publish
+          zip -r ../myapp.zip .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: myapp
+          path: myapp.zip
