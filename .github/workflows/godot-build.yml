@@ -17,13 +17,16 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x'
-
-      - name: Setup Godot
-        uses: Vitorgus/Setup-Godot@v1.1.1
+      - name: Godot Setup
+        uses: lihop/godot-setup@v2.1.2
         with:
-            godot-version: 4.2.1
-          # If set to true, will download de mono version of Godot
-            mono: true
+          # Godot version to use
+          version: 4.2.1-stable
+          bits: 64
+          mono: true
+          alias: godot
+          export-templates: true
+          
       - name: Test
         run: |
           tree
