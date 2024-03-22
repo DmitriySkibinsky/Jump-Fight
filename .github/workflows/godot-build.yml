@@ -31,7 +31,7 @@ jobs:
           export-templates: true
           
       - name: Project build
-        uses: manleydev/build-godot-action@v1.4.1
+        uses: manleydev/build-godot-action@v1.5.0
         with:
           name: Jump-Fight
           preset: windows
