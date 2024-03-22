@@ -18,11 +18,13 @@ jobs:
         with:
           dotnet-version: '3.1.x'
 
-      - name: Install Godot
+      - name: Setup Godot
+        uses: Vitorgus/Setup-Godot@v1.1.1
+        with:
+            godot-version: 4.2.1
+          # If set to true, will download de mono version of Godot
+            mono: true
+      - name: Test
         run: |
-          wget "https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.arm64.zip"
-          wget "https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz"
-          unzip Godot_v4.2.1-stable_linux.arm64.zip
-          mkdir release
-          Godot_v4.2.1-stable_linux.arm64 --export-release ./Godot_v4.2.1-stable_export_templates.tpz release
           tree
+
