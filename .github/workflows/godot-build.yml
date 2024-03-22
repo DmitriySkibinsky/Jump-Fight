@@ -36,4 +36,7 @@ jobs:
           name: Jump-Fight
           preset: windows
           subdirectory: build
+      - name: Get tree
+        run: |
+          tree
 
