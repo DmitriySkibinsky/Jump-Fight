@@ -13,32 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '6.0.x' # Replace with the .NET SDK version you need
-
-      - name: Install zip
-        run: sudo apt-get install zip
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore ./JumpFight.csproj
-
-      - name: Publish project
-        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishReadyToRun=true -o ./publish
-
-      - name: tree
-        run: tree
-
-      - name: Package project
+      - name: Install enviroment
         run: |
-          cd publish
-          zip -r ../myapp.zip .
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: myapp
-          path: myapp.zip
+          sudo apt-get update
+          sudo apt-get install mono-complete
+          wget "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y apt-transport-https
+          sudo apt-get update
+          sudo apt-get install -y dotnet-sdk-3.1
+          wget "https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.arm64.zip"
+          wget "https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz"
+          unzip Godot_v4.2.1-stable_linux.arm64.zip
+          mkdir release
+          Godot_v4.2.1-stable_linux.arm64/Godot_v4.2.1-stable_linux.arm64 --export-release ./Godot_v4.2.1-stable_export_templates.tpz release
+          tree
+
+          
