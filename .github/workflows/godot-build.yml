@@ -30,5 +30,5 @@ jobs:
       - name: Project build
         run: |
           mkdir -p build
-          ./v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --export-release "Windows Desktop" build/Jump-Fight.exe
+          ./v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --export-pack "Windows Desktop" build/Jump-Fight.zip
 
