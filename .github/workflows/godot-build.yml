@@ -1,4 +1,4 @@
-name: Build C# Project
+name: Build Godot Project
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
           alias: godot
           export-templates: true
           
-      - name: Test
+      - name: Project build
         run: |
-          tree
+          godot --export-release "Windows Desktop" build/Jump-Fight.exe
 
