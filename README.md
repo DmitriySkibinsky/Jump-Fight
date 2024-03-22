@@ -20,7 +20,7 @@
 ## Инструкции по установке/запуску:
 -
 
-## Authors
+## Разработчики
 
 - [Dmitriy Skibinskiy](https://github.com/DmitriySkiba)
 - [Maksim Baturin](https://github.com/MaksimBaturin)
