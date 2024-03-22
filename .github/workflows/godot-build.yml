@@ -13,26 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install enviroment
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+
+      - name: Install Godot
         run: |
-          sudo apt-get update
-          sudo apt-get install mono-complete
-          wget "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
-          sudo dpkg -i packages-microsoft-prod.deb
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https
-          sudo apt-get update
-          sudo apt-get clean
-          sudo apt-get install -y dotnet-targeting-pack-3.1
-          sudo apt-get install -y aspnetcore-targeting-pack-3.1
-          sudo apt-get install -y dotnet-sdk-3.1
-          sudo apt-get install -f
-          sudo apt-get install -y dotnet-sdk-5.0
           wget "https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.arm64.zip"
           wget "https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz"
           unzip Godot_v4.2.1-stable_linux.arm64.zip
           mkdir release
           Godot_v4.2.1-stable_linux.arm64/Godot_v4.2.1-stable_linux.arm64 --export-release ./Godot_v4.2.1-stable_export_templates.tpz release
           tree
-
-          
