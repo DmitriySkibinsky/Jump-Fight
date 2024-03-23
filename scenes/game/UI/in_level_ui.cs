@@ -13,12 +13,12 @@ public partial class in_level_ui : CanvasLayer
 	[Export]
 	public bool is_animate_in = false;
 
-    public override void _Ready()
-    {
-        this.PathLeft = GetNode<PathFollow2D>("Path2DLeft/PathFollow2D");
+	public override void _Ready()
+	{
+		this.PathLeft = GetNode<PathFollow2D>("Path2DLeft/PathFollow2D");
 		this.PathRight = GetNode<PathFollow2D>("Path2DRight/PathFollow2D");
-    }
-    public void animate_out(){
+	}
+	public void animate_out(){
 		is_animate_out = true;
 	}
 
@@ -26,9 +26,9 @@ public partial class in_level_ui : CanvasLayer
 		is_animate_in = true;
 	}
 
-    public override void _Process(double delta)
-    {
-        if(is_animate_out && PathLeft.ProgressRatio < 0.5){
+	public override void _Process(double delta)
+	{
+		if(is_animate_out && PathLeft.ProgressRatio < 0.5){
 			PathLeft.ProgressRatio += (float)delta * anim_speed;
 			PathRight.ProgressRatio += (float)delta * anim_speed;
 			
@@ -46,6 +46,12 @@ public partial class in_level_ui : CanvasLayer
 		if(PathLeft.ProgressRatio <= 0.5 && !is_animate_out){
 			is_animate_in = false;
 		}
-    }
-
+	}
+	private void _on_quit_pressed()
+	{
+		GetTree().Quit();
+	}
 }
+
+
+

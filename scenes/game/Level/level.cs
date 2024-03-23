@@ -31,6 +31,12 @@ public partial class level : Node2D
 		}
 	}
 
-	
+	public void _on_button_pressed()
+	{
+		GetTree().Quit();
+	}
 
 }
+
+
+
