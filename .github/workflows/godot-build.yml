@@ -20,78 +20,31 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '8.0.*'
-
       - name: Godot Setup
         uses: lihop/godot-setup@v2.1.2
         with:
+          # Godot version to use
           version: 4.2.1-stable
           bits: 64
           mono: true
           alias: godot
           export-templates: true
-
+          
       - name: Project build
         uses: manleydev/build-godot-action@v1.5.0
         with:
           name: Jump-Fight
           preset: windows
           subdirectory: build
-
+      
       - name: Refactor
         run: |
           tree
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
-
-      - name: Set tag environment variable
-        id: set_tag
-        uses: actions/github-script@v6
+          
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          script: |
-            const tag = `v${new Date().toISOString().split('T')[0].replace(/-/g, '')}-${process.env.GITHUB_RUN_ID}`;
-            core.exportVariable('RELEASE_TAG', tag);
-            console.log(`::set-output name=tag::${tag}`);
-
-      - name: Create tag
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git tag ${{ env.RELEASE_TAG }}
-          git push https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git ${{ env.RELEASE_TAG }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Jump-Fight.exe
-          path: ./build/Jump-Fight.exe
-
-  create-release:
-    needs: build-project
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: Jump-Fight.exe
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        with:
-          tag_name: ${{ needs.build-project.outputs.tag }}
-          release_name: Release ${{ needs.build-project.outputs.tag }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: .build/Jump-Fight.exe
-          asset_name: Jump-Fight.exe
-          asset_content_type: application/vnd.microsoft.portable-executable
+          files: |
+            ./build/Jump-Fight.exe
