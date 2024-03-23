@@ -9,4 +9,12 @@ public partial class menu : Node2D
 	public void _on_quit_pressed(){
 		GetTree().Quit();
 	}
+	public void _on_settings_pressed()
+{
+	GetTree().ChangeSceneToFile("res://scenes/Menu/settings.tscn");
 }
+	
+}
+
+
+
