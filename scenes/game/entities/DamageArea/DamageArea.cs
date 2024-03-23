@@ -18,7 +18,7 @@ public partial class DamageArea : Area2D
         
 	}
 
-    private void OnDetectorBodyEntered(Node2D Body)
+    public void OnDetectorBodyEntered(Node2D Body)
     {
         if (Body.Name == "Enemy")
         {
