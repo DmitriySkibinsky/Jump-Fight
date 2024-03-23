@@ -40,7 +40,8 @@ jobs:
       - name: Refactor
         run: |
           tree
-          cp /build/build/Jump-Fight /build/Jump-Fight.exe
+          pwd
+          cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
           
       - name: Release
         uses: softprops/action-gh-release@v2
