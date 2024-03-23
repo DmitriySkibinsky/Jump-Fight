@@ -52,12 +52,6 @@ jobs:
           git config --local user.name "GitHub Action"
           git tag -a -m "Automatically generated tag" v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}
 
-      - name: Create tag
-        id: create_tag
-        run: |
-          echo "::set-output name=tag::v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}"
-          git tag ${{ steps.create_tag.outputs.tag }}
-
       - name: Push tag
         uses: ad-m/github-push-action@master
         with:
