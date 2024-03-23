@@ -3,7 +3,6 @@ using System;
 
 public partial class CustomSignals : Node
 {
-    [Signal]
-    public delegate void DamagePlayerEventHandler(int Damage);
-
+	[Signal]
+	public delegate void DamagePlayerEventHandler(int Damage);
 }
