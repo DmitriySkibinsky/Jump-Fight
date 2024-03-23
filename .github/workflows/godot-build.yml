@@ -20,31 +20,46 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '8.0.*'
+
       - name: Godot Setup
         uses: lihop/godot-setup@v2.1.2
         with:
-          # Godot version to use
           version: 4.2.1-stable
           bits: 64
           mono: true
           alias: godot
           export-templates: true
-          
+
       - name: Project build
         uses: manleydev/build-godot-action@v1.5.0
         with:
           name: Jump-Fight
           preset: windows
           subdirectory: build
-      
+
       - name: Refactor
         run: |
           tree
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
-          
+
+      - name: Create tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a -m "Automatically generated tag" v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}
+
+      - name: Push tag
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
+
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            ./build/Jump-Fight.exe
+          files: ./build/Jump-Fight.exe
+          tag_name: v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
