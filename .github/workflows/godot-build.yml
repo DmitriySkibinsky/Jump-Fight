@@ -41,7 +41,8 @@ jobs:
         run: |
           tree
           pwd
-          cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
+          sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
+          tree
 
       - name: Release
         uses: softprops/action-gh-release@v2
