@@ -7,24 +7,24 @@ public partial class DamageArea : Area2D
 	public int damage = 0;
 	public override void _Ready()
 	{
-        var detector = GetNode<Area2D>(".");
-        detector.BodyEntered += OnDetectorBodyEntered;
+		var detector = GetNode<Area2D>(".");
+		detector.BodyEntered += OnDetectorBodyEntered;
 
-    }
+	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        
+		
 	}
 
-    public void OnDetectorBodyEntered(Node2D Body)
-    {
-        if (Body.Name == "Enemy")
-        {
-            damage = 100;
-            damaged = false;
-        }
-    }
+	public void OnDetectorBodyEntered(Node2D Body)
+	{
+		if (Body.Name == "Enemy")
+		{
+			damage = 100;
+			damaged = false;
+		}
+	}
 
 }
