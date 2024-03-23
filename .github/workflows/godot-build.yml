@@ -8,6 +8,9 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+  TAG_NAME: v1.0.0
+  REPO_NAME: your/repository
+
 
 jobs:
   build-project:
@@ -52,18 +55,10 @@ jobs:
           git config --local user.name "GitHub Action"
           git tag -a -m "Automatically generated tag" v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}
 
-      - name: Push tag
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          branch: main
-          tags: true
+      - name: Install gh-release action
+        uses: softprops/action-gh-release@v1
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ./build/Jump-Fight.exe
-          tag_name: ${{ steps.create_tag.outputs.tag }}
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Upload file to release
+        run: |
+         gh release create ${{ env.REPO_NAME }} ${{ env.TAG_NAME }} ./build/Jump-Fight.exe --assets Jump-Fight.exe
+
