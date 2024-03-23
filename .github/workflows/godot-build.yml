@@ -36,7 +36,15 @@ jobs:
           name: Jump-Fight
           preset: windows
           subdirectory: build
-      - name: Get tree
+      
+      - name: Refactor
         run: |
           tree
-
+          cp /build/build/Jump-Fight /build/Jump-Fight.exe
+          
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./build/Jump-Fight.exe
