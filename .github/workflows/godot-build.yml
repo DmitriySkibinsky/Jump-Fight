@@ -41,11 +41,20 @@ jobs:
         run: |
           tree
           pwd
-          sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
-          tree
+          cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
+
+      - name: Create tag
+        id: create_tag
+        run: |
+          echo "::set-output name=tag::v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}"
+          git tag ${{ steps.create_tag.outputs.tag }}
+          git push origin ${{ steps.create_tag.outputs.tag }}
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            ./build/Jump-Fight.exe
+          files: ./build/Jump-Fight.exe
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          DOTNET_ROOT: /home/runner/.dotnet
+          DISPLAY: :0
