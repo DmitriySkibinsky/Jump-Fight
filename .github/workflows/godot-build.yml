@@ -8,7 +8,6 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-  TAG_NAME: v1.0.0
   REPO_NAME: your/repository
 
 
@@ -49,11 +48,11 @@ jobs:
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
 
-      - name: Create tag
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git tag -a -m "Automatically generated tag" v$(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}
+      - name: Create tag        
+        run: |         
+          git config --local user.email "action@github.com"          
+          git config --local user.name "GitHub Action"          
+          git tag -a -m "Automatically generated tag" $(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}    
 
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
