@@ -50,8 +50,8 @@ jobs:
 
       - name: Create tag        
         run: |         
-          git config --local user.email "action@github.com"          
-          git config --local user.name "GitHub Action"          
+          git config --local user.email "dmitriy.skibinsky@gmail.com"          
+          git config --local user.name "Dmitriy"          
           git tag -a -m "Automatically generated tag" $(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}    
 
       - name: Install gh-release action
