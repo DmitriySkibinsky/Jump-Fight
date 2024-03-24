@@ -38,7 +38,7 @@ jobs:
         uses: manleydev/build-godot-action@v1.5.0
         with:
           name: Jump-Fight
-          preset: mono
+          preset: windows
           debugMode: "true"
           subdirectory: build
 
@@ -53,6 +53,7 @@ jobs:
           tree
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
+          
       - name: Generate Git Tag
         id: generate_tag
         run: |
