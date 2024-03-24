@@ -52,12 +52,12 @@ jobs:
         run: |
           tree
           pwd
-          sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
+          sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
 
       - name: Place to zip
         run: |
           
-          sudo zip -r Jump-Fight.zip ./build/build
+          sudo zip -r Jump-Fight.zip ./build/build/
           tree
           
       - name: Generate Git Tag
