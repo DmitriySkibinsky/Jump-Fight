@@ -47,7 +47,7 @@ jobs:
           tree
           pwd
           sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
-          rm ./build/build/Jump-Fight
+          sudo rm ./build/build/Jump-Fight
 
       - name: Place to zip
         run: |
