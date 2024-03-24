@@ -69,4 +69,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./Jump-Fight.zip
-          tag_name: NEW_TAG
+          tag_name: 1.0.0
