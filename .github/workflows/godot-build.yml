@@ -48,18 +48,28 @@ jobs:
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
 
-    #  - name: Create tag        
-    #    run: |    
-    #      git config --local user.email "dmitriy.skibinsky@gmail.com"          
-    #      git config --local user.name "Dmitriy"  
-    #      # git tag -a mytag -m "Automatically generated tag"  
-    #      git tag -a v1.0.0 -m "Release version 1.0.0"
+      - name: Generate Git Tag
+        id: generate_tag
+        run: |
+           VERSION_PREFIX="v"
+           VERSION_MAJOR_MINOR="1.0"
+           VERSION_PATCH=$(git tag --list "${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.*" --sort=-version:refname | head -n 1 | grep -oE '[0-9]+$')
+           if [ -z "$VERSION_PATCH" ]; then
+             VERSION_PATCH=0
+           else
+             VERSION_PATCH=$((VERSION_PATCH + 1))
+           fi
+           NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
+           echo "Generated new tag: $NEW_TAG"
+           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
-      - name: Create Tag
-        uses: negz/create-tag@v1
-        with:
-          version: v1.0.0
-          token: ${{ secrets.GITHUB_TOKEN }}
+        
+
+    #  - name: Create Tag
+    #    uses: negz/create-tag@v1
+    #    with:
+    #      version: v1.0.0
+    #      token: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Install gh-release action
