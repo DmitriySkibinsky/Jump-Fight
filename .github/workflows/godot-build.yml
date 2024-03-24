@@ -11,49 +11,79 @@ env:
 
 
 jobs:
-  build-project:
+  windows:
+    name: Windows
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        target: [x86, x86_64]
     steps:
-      - name: Checkout code
+      - name: Set Environment Variables
+        run: |
+          echo "MONO_SOURCE_ROOT=$GITHUB_WORKSPACE/mono_sources" >> $GITHUB_ENV
+      - name: Install Dependencies (x86)
+        if: matrix.target == 'x86'
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get -y update
+          sudo apt-get -y install git autoconf libtool libtool-bin automake build-essential gettext cmake python3 curl
+          sudo apt-get -y install mingw-w64
+      - name: Install Dependencies (x86_64)
+        if: matrix.target == 'x86_64'
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install git autoconf libtool libtool-bin automake build-essential gettext cmake python3 curl
+          sudo apt-get -y install mingw-w64 libz-mingw-w64-dev
+      - name: Cache Mono Sources
+        id: cache_mono_sources
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.MONO_SOURCE_ROOT }}
+          key: ${{ runner.os }}-${{ env.MONO_TAG }}-mono-sources
+      - name: Checkout Mono Sources
+        if: steps.cache_mono_sources.outputs.cache-hit != 'true'
         uses: actions/checkout@v3
         with:
-          ref: dev
-
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1
+          repository: mono/mono
+          ref: ${{ env.MONO_TAG }}
+          submodules: true
+          path: ${{ env.MONO_SOURCE_ROOT }}
+      - name: Clean Mono
+        run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          dotnet-version: '8.0.*'
-
-      - name: Godot Setup
-        uses: lihop/godot-setup@v2.1.2
+          path: godot-mono-builds
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          version: 4.2.1-stable
-          bits: 64
-          mono: true
-          alias: godot
-          export-templates: true
-
-      - name: Project build
-        uses: manleydev/build-godot-action@v1.5.0
-        with:
-          name: Jump-Fight
-          preset: windows
-          debugMode: "true"
-          subdirectory: build
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - windows
-          path: ./build
-
-      - name: Refactor
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Patch Mono
+        run:
+          python3 godot-mono-builds/patch_mono.py
+      - name: Configure
+        run:
+          python3 godot-mono-builds/windows.py configure --target=${{ matrix.target }} -j 2
+      - name: Make
+        run:
+          python3 godot-mono-builds/windows.py make --target=${{ matrix.target }} -j 2
+      - name: Compress Output
         run: |
-          tree
-          pwd
-          sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
-          
+          mkdir -p $HOME/mono-installs-artifacts
+          (cd $HOME/mono-installs && zip -ry $HOME/mono-installs-artifacts/windows-${{ matrix.target }}.zip desktop-windows-${{ matrix.target }}-release)
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-${{ matrix.target }}
+          path: ~/mono-installs-artifacts/windows-${{ matrix.target }}.zip
+      - name: Clean Mono
+        run: pushd ${{ env.MONO_SOURCE_ROOT }} && git reset --hard && git clean -xffd && git submodule foreach --recursive git reset --hard && git submodule foreach --recursive git clean -xffd && git submodule update --init --recursive && popd
+      - name: Upload config.log After Error
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-${{ matrix.target }}-config.log
+          path: ~/mono-configs/desktop-windows-${{ matrix.target }}-release/config.log
       - name: Generate Git Tag
         id: generate_tag
         run: |
