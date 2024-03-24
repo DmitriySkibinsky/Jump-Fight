@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bed1tkf8bpnpj"]
+[gd_scene load_steps=4 format=3 uid="uid://bed1tkf8bpnpj"]
 
-[ext_resource type="PackedScene" uid="uid://cyu1hnbgu1an6" path="res://scenes/game/LevelItems/Rooms/Room0.tscn" id="1_e3pxk"]
+[ext_resource type="PackedScene" uid="uid://cyu1hnbgu1an6" path="res://scenes/game/LevelItems/Rooms/Room.tscn" id="1_e3pxk"]
 [ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/game/LevelItems/Platforms/SolidPlatform.tscn" id="2_1ksuf"]
 [ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_qkvyw"]
-[ext_resource type="PackedScene" uid="uid://dqxeqy7xibk4b" path="res://scenes/game/entities/Mob/mob.tscn" id="4_jybo6"]
 
 [node name="Room1" instance=ExtResource("1_e3pxk")]
 
@@ -51,17 +50,20 @@ position = Vector2(704, 74.6667)
 [node name="Jp4" parent="JumpPlatforms" index="3" instance=ExtResource("3_qkvyw")]
 position = Vector2(1856, 74.6667)
 
-[node name="Mob" parent="." index="2" instance=ExtResource("4_jybo6")]
-position = Vector2(1050.67, -1332)
-scale = Vector2(1.5, 1.5)
+[node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
+position = Vector2(992, -1325.33)
 
-[node name="Mob2" parent="." index="3" instance=ExtResource("4_jybo6")]
-position = Vector2(1178.67, -1674.67)
-scale = Vector2(1.5, 1.5)
+[node name="Marker2D2" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(1568, -1325.33)
 
-[node name="Jp1" parent="." index="4" instance=ExtResource("3_qkvyw")]
-position = Vector2(1280, -1634.67)
-JumpForce = 1400
+[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(1280, -1661.33)
 
-[node name="NextPlatform" type="Marker2D" parent="." index="5"]
-position = Vector2(1280, -1962.67)
+[node name="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(1280, -1248)
+
+[node name="NextPlatform" parent="." index="4"]
+position = Vector2(1280, -2177.33)
+
+[node name="ExitPlatformPosition" parent="." index="5"]
+position = Vector2(1280, -1629.33)

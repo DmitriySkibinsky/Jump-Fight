@@ -43,7 +43,7 @@ public partial class LevelGenerator : Node2D
 				GeneratePlatform(Player.Position.Y, 10);
 				prev_room_name = "platform";
 			}else if(prev_room_name == "platform"){
-				cur_battle_room = BattleSection.Instantiate<Room1>();
+				cur_battle_room = BattleSection.Instantiate<Room>();
 				cur_battle_room.Position = new Vector2(cur_battle_room.Position.X, last_platform_pos_y - 200);
 				prev_battle_room = cur_battle_room;
 				prev_room_name = "battle";

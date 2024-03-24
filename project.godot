@@ -28,7 +28,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="Jump Fight"
+project/assembly_name="JumpFight"
 
 [input]
 
