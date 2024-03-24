@@ -57,7 +57,7 @@ jobs:
       - name: Place to zip
         run: |
           cd build
-          zip -r Jump-Fight.zip ./build
+          sudo zip -r Jump-Fight.zip ./build
           tree
           
       - name: Generate Git Tag
