@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-CustomSignals="*res://shared/CustomSignals.cs"
+CustomSignals="*res://global/CustomSignals.cs"
 
 [display]
 
