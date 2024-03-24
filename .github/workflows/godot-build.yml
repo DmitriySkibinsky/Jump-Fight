@@ -59,6 +59,8 @@ jobs:
         uses: negz/create-tag@v1
         with:
           version: v1.0.0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
