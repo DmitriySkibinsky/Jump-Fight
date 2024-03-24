@@ -39,7 +39,13 @@ jobs:
         with:
           name: Jump-Fight
           preset: windows
+          debugMode: "true"
           subdirectory: build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Client - windows
 
       - name: Refactor
         run: |
@@ -70,7 +76,7 @@ jobs:
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
         with:
-          files: ./
+          files: ./build/Jump-Fight.exe
           tag_name: $NEW_TAG
         
       #- name: Upload file to release
