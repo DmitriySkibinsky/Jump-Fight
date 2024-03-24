@@ -71,8 +71,9 @@ jobs:
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
         with:
+          files: ./build/Jump-Fight.exe
           tag_name: $NEW_TAG
         
-      - name: Upload file to release
-        run: |
-         gh release create ${{ env.REPO_NAME }} "${tag}" ./build/Jump-Fight.exe --assets Jump-Fight.exe
+      #- name: Upload file to release
+       # run: |
+        # gh release create ${{ env.REPO_NAME }} "${tag}" ./build/Jump-Fight.exe --assets Jump-Fight.exe
