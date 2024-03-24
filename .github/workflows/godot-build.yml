@@ -20,10 +20,10 @@ jobs:
         with:
           ref: dev
 
-      - name: Setup Mono
-        uses: actions/setup-mono@v2
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
         with:
-          mono-version: '6.x' # Adjust the version as needed
+          dotnet-version: '8.0.*'
 
       - name: Godot Setup
         uses: lihop/godot-setup@v2.1.2
@@ -35,15 +35,24 @@ jobs:
           export-templates: true
 
       - name: Project build
-        run: |
-          godot --export "Windows Desktop" ./build/Jump-Fight.exe
+        uses: manleydev/build-godot-action@v1.5.0
+        with:
+          name: Jump-Fight
+          preset: windows
+          debugMode: "true"
+          subdirectory: build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Client - windows
+          path: ./build
 
       - name: Refactor
         run: |
           tree
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
-
       - name: Generate Git Tag
         id: generate_tag
         run: |
@@ -54,9 +63,7 @@ jobs:
            NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
            echo "Generated new tag: $NEW_TAG"
            echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
-
         
-
     #  - name: Create Tag
     #    uses: negz/create-tag@v1
     #    with:
