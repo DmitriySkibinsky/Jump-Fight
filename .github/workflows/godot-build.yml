@@ -34,12 +34,6 @@ jobs:
           alias: godot
           export-templates: true
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - windows
-          path: ./build
-
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
@@ -53,11 +47,11 @@ jobs:
           tree
           pwd
           sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
+          rm ./build/build/Jump-Fight
 
       - name: Place to zip
         run: |
-          
-          sudo zip -r Jump-Fight.zip ./build/build/
+          sudo zip -r Jump-Fight.zip ./build/build/*
           tree
           
       - name: Generate Git Tag
@@ -75,4 +69,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./Jump-Fight.zip
-          tag_name: $NEW_TAG
+          tag_name: NEW_TAG
