@@ -48,16 +48,21 @@ jobs:
           pwd
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
 
-      - name: Create tag        
-        run: |    
-          git config --local user.email "dmitriy.skibinsky@gmail.com"          
-          git config --local user.name "Dmitriy"  
-          # git tag -a mytag -m "Automatically generated tag"  
-          git tag -a v1.0.0 -m "Release version 1.0.0"
+    #  - name: Create tag        
+    #    run: |    
+    #      git config --local user.email "dmitriy.skibinsky@gmail.com"          
+    #      git config --local user.name "Dmitriy"  
+    #      # git tag -a mytag -m "Automatically generated tag"  
+    #      git tag -a v1.0.0 -m "Release version 1.0.0"
+
+      - name: Create Tag
+        uses: negz/create-tag@v1
+        with:
+          version: v1.0.0
 
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
-
+        
       - name: Upload file to release
         run: |
          gh release create ${{ env.REPO_NAME }} "${tag}" ./build/Jump-Fight.exe --assets Jump-Fight.exe
