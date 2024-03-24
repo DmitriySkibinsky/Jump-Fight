@@ -1,0 +1,76 @@
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.csproj.AssemblyReference.cache
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.AssemblyInfoInputs.cache
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.AssemblyInfo.cs
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.csproj.CoreCompileInputs.cache
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.sourcelink.json
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\archive\empty.7z
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\archive\empty.bz2
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\archive\empty.gz
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\archive\empty.tar
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\archive\empty.xz
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\archive\empty.zip
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\document\empty.docx
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\document\empty.odt
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\document\empty.pdf
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\document\empty.rtf
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.avif
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.bmp
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.dds
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.dib
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.emf
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.exif
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.gif
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.heic
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.heif
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.ico
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.j2c
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.jfif
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.jp2
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.jpc
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.jpe
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.jpg
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.jxr
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.pbm
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.pcx
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.pgm
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.png
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.ppm
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.rle
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.tga
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.tif
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.wdp
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.webp
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\image\empty.wmp
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\sheet\empty.ods
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\sheet\empty.xlsx
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\slide\empty.odp
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles\slide\empty.pptx
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Jump Fight.deps.json
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Jump Fight.runtimeconfig.json
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Jump Fight.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Jump Fight.pdb
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Castle.Core.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Chickensoft.GoDotCollections.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Chickensoft.GoDotLog.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Chickensoft.GoDotTest.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\GodotTestDriver.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\DiffEngine.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\EmptyFiles.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\JetBrains.Annotations.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Moq.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\Shouldly.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\System.CodeDom.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\System.Diagnostics.EventLog.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\System.Management.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Management.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.csproj.Up2Date
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\refint\Jump Fight.dll
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.pdb
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\Jump Fight.genruntimeconfig.cache
+C:\Users\asans\JumpFight\Jump-Fight\.godot\mono\temp\obj\Debug\ref\Jump Fight.dll

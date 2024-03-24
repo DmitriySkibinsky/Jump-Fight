@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://60qbh2110q6"]
+[gd_scene load_steps=7 format=3 uid="uid://60qbh2110q6"]
 
 [ext_resource type="Script" path="res://scenes/game/UI/in_level_ui.cs" id="1_x2que"]
 [ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="2_lcujc"]
+[ext_resource type="Texture2D" uid="uid://c68p7mgr6t0ee" path="res://assets/sprites/Settings Square Button.png" id="3_ywdea"]
 
 [sub_resource type="Curve2D" id="Curve2D_l85rm"]
 _data = {
@@ -49,6 +50,13 @@ offset_right = -20.0026
 offset_bottom = 140.0
 icon = ExtResource("2_lcujc")
 
+[node name="Settings" type="Button" parent="Path2DRight/PathFollow2D"]
+offset_left = -248.003
+offset_top = 31.9997
+offset_right = -140.003
+offset_bottom = 140.0
+icon = ExtResource("3_ywdea")
+
 [node name="Path2DLeft" type="Path2D" parent="."]
 scale = Vector2(0.75, 0.75)
 curve = SubResource("Curve2D_d0htp")
@@ -69,3 +77,4 @@ wait_time = 0.2
 one_shot = true
 
 [connection signal="pressed" from="Path2DRight/PathFollow2D/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Path2DRight/PathFollow2D/Settings" to="." method="_on_settings_pressed"]
