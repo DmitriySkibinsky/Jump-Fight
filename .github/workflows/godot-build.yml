@@ -40,7 +40,7 @@ jobs:
           name: Jump-Fight
           preset: windows-mono
           debugMode: "true"
-          subdirectory: ./build/build
+          subdirectory: build
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
