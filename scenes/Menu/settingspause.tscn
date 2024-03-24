@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bs4ayffshvalm"]
+
+[ext_resource type="Script" path="res://scenes/Menu/settingspause.cs" id="1_g68vc"]
+[ext_resource type="Texture2D" uid="uid://bqvxxhorlucxn" path="res://assets/sprites/bg.png" id="2_sth6u"]
+[ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="3_fgl7e"]
+[ext_resource type="Texture2D" uid="uid://crtn7kw00ob3e" path="res://assets/sprites/Resume Button.png" id="4_c4355"]
+[ext_resource type="Texture2D" uid="uid://b6t4yt0jxyp5j" path="res://assets/sprites/New game Button.png" id="5_m4fof"]
+
+[node name="Settings" type="Node2D"]
+script = ExtResource("1_g68vc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_sth6u")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 1807.0
+offset_top = 6.0
+offset_right = 1915.0
+offset_bottom = 114.0
+icon = ExtResource("3_fgl7e")
+
+[node name="Resum" type="Button" parent="."]
+offset_left = 820.0
+offset_top = 834.0
+offset_right = 1128.0
+offset_bottom = 942.0
+icon = ExtResource("4_c4355")
+
+[node name="new_game" type="Button" parent="."]
+offset_left = 820.0
+offset_top = 661.0
+offset_right = 1128.0
+offset_bottom = 769.0
+icon = ExtResource("5_m4fof")
+
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Resum" to="." method="_on_resum_pressed"]
+[connection signal="pressed" from="new_game" to="." method="_on_new_game_pressed"]
