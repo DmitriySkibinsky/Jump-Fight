@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctff8j3tqh7wv"]
+
+[ext_resource type="Script" path="res://scenes/game/Utils/TriggerOnExitBattle.cs" id="1_3mdwk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tdmg"]
+size = Vector2(1920, 26.8037)
+
+[node name="TriggerOnExitBattle" type="Node2D"]
+script = ExtResource("1_3mdwk")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+position = Vector2(56, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+position = Vector2(901.734, -0.19632)
+shape = SubResource("RectangleShape2D_6tdmg")
+
+[connection signal="body_exited" from="TriggerArea" to="." method="_on_trigger_area_body_exited"]

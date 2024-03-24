@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqxeqy7xibk4b"]
+
+[ext_resource type="Script" path="res://scenes/game/entities/Mob/Enemy.cs" id="1_8w45b"]
+[ext_resource type="Texture2D" uid="uid://bflyb15qn7xne" path="res://icon.svg" id="1_80fge"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
+radius = 16.0
+height = 58.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
+size = Vector2(18.7501, 27.7778)
+
+[node name="Mob" type="CharacterBody2D"]
+script = ExtResource("1_8w45b")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(1, 0.784314, 0.784314, 1)
+position = Vector2(0.500001, 0.5)
+scale = Vector2(0.257813, 0.445313)
+texture = ExtResource("1_80fge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qov7e")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+target_position = Vector2(0, 40)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="HitBoxes" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
+position = Vector2(17, 0)
+scale = Vector2(0.319999, 1.8)
+shape = SubResource("RectangleShape2D_v3bfh")
+
+[connection signal="area_entered" from="HitBoxes" to="." method="_on_hit_boxes_area_entered"]

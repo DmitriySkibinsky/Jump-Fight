@@ -1,25 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkvlb2pt5dvt"]
+[gd_scene load_steps=6 format=3 uid="uid://cg6p8cpv2rmw2"]
 
-[ext_resource type="Script" path="res://scenes/Menu/menu.cs" id="1_hlptc"]
+[ext_resource type="Script" path="res://scenes/Menu/menu.cs" id="1_8egwg"]
+[ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_uk3d0"]
+[ext_resource type="Texture2D" uid="uid://6h6gnw05nbx6" path="res://assets/sprites/Play Button.png" id="3_wq6um"]
+[ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="4_xunoe"]
+[ext_resource type="Texture2D" uid="uid://dyvxbkfkhu715" path="res://assets/sprites/Settings Button.png" id="5_ocdad"]
 
 [node name="Menu" type="Node2D"]
-script = ExtResource("1_hlptc")
+script = ExtResource("1_8egwg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1930.0
+offset_bottom = 1100.0
+texture = ExtResource("2_uk3d0")
 
 [node name="Play" type="Button" parent="."]
-offset_left = 696.0
-offset_top = 192.0
-offset_right = 1232.0
-offset_bottom = 448.0
+offset_left = 850.0
+offset_top = 700.0
+offset_right = 1158.0
+offset_bottom = 808.0
 theme_override_font_sizes/font_size = 64
-text = "Play"
+icon = ExtResource("3_wq6um")
 
 [node name="Quit" type="Button" parent="."]
-offset_left = 696.0
-offset_top = 528.0
-offset_right = 1232.0
-offset_bottom = 784.0
+offset_left = 1811.0
+offset_top = 969.0
+offset_right = 1919.0
+offset_bottom = 1077.0
 theme_override_font_sizes/font_size = 64
-text = "Quit"
+icon = ExtResource("4_xunoe")
+
+[node name="Settings" type="Button" parent="."]
+offset_left = 850.0
+offset_top = 870.0
+offset_right = 1158.0
+offset_bottom = 978.0
+icon = ExtResource("5_ocdad")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]

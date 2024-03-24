@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://60qbh2110q6"]
+
+[ext_resource type="Script" path="res://scenes/game/UI/in_level_ui.cs" id="1_x2que"]
+[ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="2_lcujc"]
+[ext_resource type="Texture2D" uid="uid://c68p7mgr6t0ee" path="res://assets/sprites/Settings Square Button.png" id="3_ywdea"]
+
+[sub_resource type="Curve2D" id="Curve2D_l85rm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1788.52, 175.491, 0, 0, 0, 0, 2215.18, 175.491, 0, 0, 0, 0, 1788.52, 175.491)
+}
+point_count = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b17o8"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+
+[sub_resource type="Curve2D" id="Curve2D_d0htp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -426.667, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 3
+
+[node name="InLevelUI" type="CanvasLayer"]
+script = ExtResource("1_x2que")
+is_animate_out = true
+
+[node name="Path2DRight" type="Path2D" parent="."]
+position = Vector2(578.612, -131.618)
+scale = Vector2(0.75, 0.75)
+curve = SubResource("Curve2D_l85rm")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2DRight"]
+position = Vector2(1788.52, 175.491)
+rotates = false
+
+[node name="Panel2" type="Panel" parent="Path2DRight/PathFollow2D"]
+offset_left = -853.0
+offset_right = 32.0
+offset_bottom = 1461.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b17o8")
+metadata/_edit_use_anchors_ = true
+
+[node name="_Timer_44755" type="Timer" parent="Path2DRight/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Quit" type="Button" parent="Path2DRight/PathFollow2D"]
+offset_left = -128.003
+offset_top = 31.9997
+offset_right = -20.0026
+offset_bottom = 140.0
+icon = ExtResource("2_lcujc")
+
+[node name="Settings" type="Button" parent="Path2DRight/PathFollow2D"]
+offset_left = -248.003
+offset_top = 31.9997
+offset_right = -140.003
+offset_bottom = 140.0
+icon = ExtResource("3_ywdea")
+
+[node name="Path2DLeft" type="Path2D" parent="."]
+scale = Vector2(0.75, 0.75)
+curve = SubResource("Curve2D_d0htp")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2DLeft"]
+rotation = 3.14159
+rotates = false
+
+[node name="Panel" type="Panel" parent="Path2DLeft/PathFollow2D"]
+offset_left = -856.0
+offset_top = -1461.0
+offset_right = 30.0
+offset_bottom = -1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b17o8")
+
+[node name="_Timer_44756" type="Timer" parent="Path2DLeft/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="pressed" from="Path2DRight/PathFollow2D/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Path2DRight/PathFollow2D/Settings" to="." method="_on_settings_pressed"]

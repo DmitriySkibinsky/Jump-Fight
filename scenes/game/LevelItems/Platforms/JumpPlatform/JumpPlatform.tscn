@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dntbgay1y2dan"]
+
+[ext_resource type="Texture2D" uid="uid://yocob2kjph8p" path="res://assets/sprites/tile1.png" id="1_2ksb2"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.cs" id="1_8v0kq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqjxt"]
+size = Vector2(128, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppcce"]
+size = Vector2(128, 4)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2(1, 0.25)
+collision_layer = 2
+script = ExtResource("1_8v0kq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(32, 0)
+rotation = -1.5708
+texture = ExtResource("1_2ksb2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(-32, 0)
+rotation = -1.5708
+texture = ExtResource("1_2ksb2")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-252.133, -11.2133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(252.133, -22.2867)
+shape = SubResource("RectangleShape2D_lqjxt")
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+rotation = 6.28318
+shape = SubResource("RectangleShape2D_ppcce")
+one_way_collision = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
