@@ -8,7 +8,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-  REPO_NAME: your/repository
+  REPO_NAME: DmitriySkiba/Jump-Fight
 
 
 jobs:
