@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)emptyfiles\4.4.0\buildTransitive\EmptyFiles.targets" Condition="Exists('$(NuGetPackageRoot)emptyfiles\4.4.0\buildTransitive\EmptyFiles.targets')" />
-    <Import Project="$(NuGetPackageRoot)shouldly\4.2.1\buildTransitive\Shouldly.targets" Condition="Exists('$(NuGetPackageRoot)shouldly\4.2.1\buildTransitive\Shouldly.targets')" />
-    <Import Project="$(NuGetPackageRoot)coverlet.collector\6.0.2\build\netstandard2.0\coverlet.collector.targets" Condition="Exists('$(NuGetPackageRoot)coverlet.collector\6.0.2\build\netstandard2.0\coverlet.collector.targets')" />
-  </ImportGroup>
-</Project>
