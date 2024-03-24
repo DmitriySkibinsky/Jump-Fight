@@ -70,7 +70,7 @@ jobs:
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
         with:
-          files: ./build/Jump-Fight.exe
+          files: ./
           tag_name: $NEW_TAG
         
       #- name: Upload file to release
