@@ -52,7 +52,8 @@ jobs:
         run: |    
           git config --local user.email "dmitriy.skibinsky@gmail.com"          
           git config --local user.name "Dmitriy"  
-          git tag -a mytag -m "Automatically generated tag"     
+          # git tag -a mytag -m "Automatically generated tag"  
+          git tag -a v1.0.0 -m "Release version 1.0.0"
 
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
