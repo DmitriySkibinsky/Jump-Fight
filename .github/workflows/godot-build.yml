@@ -49,11 +49,8 @@ jobs:
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
 
       - name: Create tag        
-        run: |         
-          tag=$(git describe --tags)          
-          git config --local user.email "action@github.com"          
-          git config --local user.name "GitHub Action"          
-          git tag -a "${tag}" -m "Automatically generated tag"     
+        run: |        
+          git tag -a mytag -m "Automatically generated tag"     
 
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
