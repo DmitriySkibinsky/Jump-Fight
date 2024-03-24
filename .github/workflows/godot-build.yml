@@ -34,6 +34,12 @@ jobs:
           alias: godot
           export-templates: true
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Client - windows
+          path: ./build
+
       - name: Project build
         uses: manleydev/build-godot-action@v1.5.0
         with:
@@ -41,12 +47,6 @@ jobs:
           preset: windows
           debugMode: "true"
           subdirectory: build
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - windows
-          path: ./build
 
       - name: Refactor
         run: |
