@@ -49,7 +49,9 @@ jobs:
           sudo cp ./build/build/Jump-Fight ./build/Jump-Fight.exe
 
       - name: Create tag        
-        run: |        
+        run: |    
+          git config --local user.email "dmitriy.skibinsky@gmail.com"          
+          git config --local user.name "Dmitriy"  
           git tag -a mytag -m "Automatically generated tag"     
 
       - name: Install gh-release action
