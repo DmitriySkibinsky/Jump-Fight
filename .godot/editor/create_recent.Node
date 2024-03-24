@@ -1,5 +1,7 @@
 Button
-CheckButton
 TextureRect
-VideoStreamPlayer
 CanvasLayer
+ParallaxBackground
+Node2D
+CheckButton
+VideoStreamPlayer

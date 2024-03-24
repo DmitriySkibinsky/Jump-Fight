@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jump Fight")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6485c76d5f523a78b9bf891e0030833df875f1e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92c179956d9ebab19e265bc2681257a6fee208b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Jump Fight")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Jump Fight")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

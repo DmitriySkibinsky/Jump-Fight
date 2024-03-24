@@ -15,3 +15,11 @@ res://scenes/game/Utils/TriggerOnExitBattle.cs
 res://scenes/Menu/menu.cs
 res://Chickensoft.GodotPackage.Tests/test/TestScene.cs
 res://Main/Main.cs
+res://scenes/game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.cs
+res://scenes/Menu/settings.tscn
+res://scenes/Menu/settings.cs
+res://scenes/Menu/bg.tscn
+res://scenes/Menu/bg.cs
+res://scenes/Menu/settingspause.tscn
+res://scenes/Menu/settingspause.cs
+res://scenes/game/UI/in_level_ui.tscn
