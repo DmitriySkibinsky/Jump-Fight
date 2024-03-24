@@ -50,14 +50,14 @@ jobs:
 
       - name: Create tag        
         run: |         
-          git config --local user.email "dmitriy.skibinsky@gmail.com"          
-          git config --local user.name "Dmitriy"          
-          git tag -a -m "Automatically generated tag" $(date +'%Y%m%d%H%M%S')-${GITHUB_RUN_ID}    
+          tag=$(git describe --tags)          
+          git config --local user.email "action@github.com"          
+          git config --local user.name "GitHub Action"          
+          git tag -a "${tag}" -m "Automatically generated tag"     
 
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
 
       - name: Upload file to release
         run: |
-         gh release create ${{ env.REPO_NAME }} ${{ env.TAG_NAME }} ./build/Jump-Fight.exe --assets Jump-Fight.exe
-
+         gh release create ${{ env.REPO_NAME }} "${tag}" ./build/Jump-Fight.exe --assets Jump-Fight.exe
