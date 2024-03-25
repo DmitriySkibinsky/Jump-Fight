@@ -3,7 +3,10 @@ using System;
 
 public partial class LevelGenerator : Node2D
 {
-	private PackedScene BattleSection;
+	private Godot.Collections.Array<PackedScene> BattleSection = new Godot.Collections.Array<PackedScene>{
+		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room2.tscn")
+		};
 	[Export]
 	private int platform_count = 0;
 	public int num_levels = 6;
@@ -19,7 +22,6 @@ public partial class LevelGenerator : Node2D
 	public PackedScene TriggerOnExitBattle = new PackedScene();
 	public override void _Ready()
 	{
-		BattleSection = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn");
 		JumpPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn");
 		ChestPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/ChestPlatform.tscn");
 		BreackablePlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.tscn");
@@ -43,7 +45,9 @@ public partial class LevelGenerator : Node2D
 				GeneratePlatform(Player.Position.Y, 10);
 				prev_room_name = "platform";
 			}else if(prev_room_name == "platform"){
-				cur_battle_room = BattleSection.Instantiate<Room>();
+				Random rand = new Random();
+				int randomRoom = rand.Next(BattleSection.Count);
+				cur_battle_room = BattleSection[randomRoom].Instantiate<Room>();
 				cur_battle_room.Position = new Vector2(cur_battle_room.Position.X, last_platform_pos_y - 200);
 				prev_battle_room = cur_battle_room;
 				prev_room_name = "battle";

@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnfdc6qd2lki3"]
+
+[ext_resource type="PackedScene" path="res://scenes/Game/LevelItems/Rooms/Room.tscn" id="1_gxphl"]
+[ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/game/LevelItems/Platforms/SolidPlatform.tscn" id="2_uhe5v"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_y0j8n"]
+
+[node name="Node2D2" instance=ExtResource("1_gxphl")]
+
+[node name="SolidPlatform2" parent="SolidPlatforms" index="1" instance=ExtResource("2_uhe5v")]
+position = Vector2(1566.67, -1548)
+
+[node name="SolidPlatform3" parent="SolidPlatforms" index="2" instance=ExtResource("2_uhe5v")]
+position = Vector2(1757.33, -1548)
+
+[node name="SolidPlatform4" parent="SolidPlatforms" index="3" instance=ExtResource("2_uhe5v")]
+position = Vector2(1952, -1548)
+
+[node name="SolidPlatform7" parent="SolidPlatforms" index="4" instance=ExtResource("2_uhe5v")]
+position = Vector2(606.667, -1548)
+
+[node name="SolidPlatform8" parent="SolidPlatforms" index="5" instance=ExtResource("2_uhe5v")]
+position = Vector2(798.667, -1548)
+
+[node name="SolidPlatform9" parent="SolidPlatforms" index="6" instance=ExtResource("2_uhe5v")]
+position = Vector2(992, -1548)
+
+[node name="SolidPlatform10" parent="SolidPlatforms" index="7" instance=ExtResource("2_uhe5v")]
+position = Vector2(992, -2070)
+
+[node name="SolidPlatform11" parent="SolidPlatforms" index="8" instance=ExtResource("2_uhe5v")]
+position = Vector2(1182.67, -2070)
+
+[node name="SolidPlatform12" parent="SolidPlatforms" index="9" instance=ExtResource("2_uhe5v")]
+position = Vector2(1374.67, -2070)
+
+[node name="SolidPlatform13" parent="SolidPlatforms" index="10" instance=ExtResource("2_uhe5v")]
+position = Vector2(1566.67, -2070)
+
+[node name="Jp1" parent="JumpPlatforms" index="0"]
+JumpForce = 1500
+
+[node name="Jp2" parent="JumpPlatforms" index="1"]
+JumpForce = 1500
+
+[node name="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(1280, -1441.33)
+
+[node name="NextPlatform" parent="." index="4"]
+position = Vector2(1269.33, -2830.67)
+
+[node name="ExitPlatformPosition" parent="." index="5"]
+position = Vector2(1278.67, -2086)
+
+[node name="Jp3" parent="." index="6" instance=ExtResource("3_y0j8n")]
+position = Vector2(1280, -1433.33)
+scale = Vector2(2, 0.25)
+JumpForce = 700
+
+[node name="Jp4" parent="." index="7" instance=ExtResource("3_y0j8n")]
+position = Vector2(2048, -1574.67)
+
+[node name="Jp5" parent="." index="8" instance=ExtResource("3_y0j8n")]
+position = Vector2(510.667, -1566.67)

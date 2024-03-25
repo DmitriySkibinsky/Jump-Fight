@@ -20,11 +20,11 @@ position = Vector2(1280, -11.3303)
 
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1088, -59.3303)
-JumpForce = 1900
+JumpForce = 1400
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1472, -59.3303)
-JumpForce = 1900
+JumpForce = 1400
 
 [node name="EnemyPositions" type="Node2D" parent="."]
 position = Vector2(0, 5.33333)

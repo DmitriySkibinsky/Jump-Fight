@@ -41,28 +41,15 @@ position = Vector2(0, -1368)
 
 [node name="Jp1" parent="JumpPlatforms" index="0"]
 position = Vector2(1090.67, 1314.67)
-JumpForce = 1400
 
 [node name="Jp2" parent="JumpPlatforms" index="1"]
 position = Vector2(1474.67, 1314.67)
-JumpForce = 1400
 
 [node name="Jp3" parent="JumpPlatforms" index="2" instance=ExtResource("3_qkvyw")]
 position = Vector2(704, 74.6667)
-JumpForce = null
 
 [node name="Jp4" parent="JumpPlatforms" index="3" instance=ExtResource("3_qkvyw")]
 position = Vector2(1856, 74.6667)
-JumpForce = null
-
-[node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
-position = Vector2(992, -1325.33)
-
-[node name="Marker2D2" type="Marker2D" parent="EnemyPositions" index="1"]
-position = Vector2(1568, -1325.33)
-
-[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="2"]
-position = Vector2(1280, -1661.33)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(1280, -1248)
