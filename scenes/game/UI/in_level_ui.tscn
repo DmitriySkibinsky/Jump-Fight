@@ -43,20 +43,6 @@ metadata/_edit_use_anchors_ = true
 wait_time = 0.2
 one_shot = true
 
-[node name="Quit" type="Button" parent="Path2DRight/PathFollow2D"]
-offset_left = -128.003
-offset_top = 31.9997
-offset_right = -20.0026
-offset_bottom = 140.0
-icon = ExtResource("2_lcujc")
-
-[node name="Settings" type="Button" parent="Path2DRight/PathFollow2D"]
-offset_left = -248.003
-offset_top = 31.9997
-offset_right = -140.003
-offset_bottom = 140.0
-icon = ExtResource("3_ywdea")
-
 [node name="Path2DLeft" type="Path2D" parent="."]
 scale = Vector2(0.75, 0.75)
 curve = SubResource("Curve2D_d0htp")
@@ -76,5 +62,19 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_b17o8")
 wait_time = 0.2
 one_shot = true
 
-[connection signal="pressed" from="Path2DRight/PathFollow2D/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="Path2DRight/PathFollow2D/Settings" to="." method="_on_settings_pressed"]
+[node name="Settings" type="Button" parent="."]
+offset_left = 1690.0
+offset_top = 24.0
+offset_right = 1798.0
+offset_bottom = 132.0
+icon = ExtResource("3_ywdea")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 1800.0
+offset_top = 24.0
+offset_right = 1908.0
+offset_bottom = 132.0
+icon = ExtResource("2_lcujc")
+
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
