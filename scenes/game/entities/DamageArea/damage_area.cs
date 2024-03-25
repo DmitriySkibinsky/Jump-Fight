@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class DamageArea : Area2D
+public partial class damage_area : Area2D
 {
 	public bool damaged = false;
 	public int damage = 0;

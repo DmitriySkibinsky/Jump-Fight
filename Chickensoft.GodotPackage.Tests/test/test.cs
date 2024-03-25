@@ -47,7 +47,7 @@ public class PlayerTest : TestClass {
 	{
 		var enemy = new Node2D();
 		enemy.Name = "Enemy";
-		var d_area = new DamageArea(); 
+		var d_area = new damage_area(); 
 		bool damaged = false;
 		d_area.damaged = damaged;
 
