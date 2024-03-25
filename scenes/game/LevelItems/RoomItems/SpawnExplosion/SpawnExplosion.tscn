@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://xr0jl861ak4e"]
 
-[ext_resource type="Texture2D" uid="uid://lf3e3d2rdssq" path="res://assets/sprites/Free Smoke Fx  Pixel 07.png" id="1_f5u8h"]
-[ext_resource type="Script" path="res://scenes/game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.cs" id="2_daex4"]
+[ext_resource type="Texture2D" uid="uid://de4fo44b618ui" path="res://assets/sprites/Free Smoke Fx  Pixel 07.png" id="1_f5u8h"]
+[ext_resource type="Script" path="res://scenes/Game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.cs" id="2_1flmx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uuqx"]
 atlas = ExtResource("1_f5u8h")
@@ -110,6 +110,6 @@ sprite_frames = SubResource("SpriteFrames_ib2n4")
 animation = &"new_animation"
 frame = 12
 frame_progress = 1.0
-script = ExtResource("2_daex4")
+script = ExtResource("2_1flmx")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

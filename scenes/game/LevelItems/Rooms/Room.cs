@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public partial class Room : Node2D
 {
-	private PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/SpawnExplosion/spawn_explosion.tscn");
-	/* private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/ExitPlatform/exit_platform.tscn"); */
+	private PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
+	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
 		{"BasicEnemy", GD.Load<PackedScene>("res://scenes/game/entities/Mob/mob.tscn")}
@@ -46,11 +46,11 @@ public partial class Room : Node2D
 
 	private void _on_enemy_killed(){
 		num_enemies -= 1;
-		/* if (num_enemies == 0){
+		if (num_enemies == 0){
 			ExitPlatform exitPlatform = ExitPlatformScene.Instantiate<ExitPlatform>();
 			exitPlatform.Position = ExitPlatformPosition.Position;
 			this.AddChild(exitPlatform);
-		} */
+		}
 	}
 
 	public async void _on_player_detector_body_entered(Node2D body){
@@ -59,11 +59,11 @@ public partial class Room : Node2D
 			await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
 			this.CallDeferred("SpawnEnemies");
 
-		/* 	if (num_enemies == 0){
+			if (num_enemies == 0){
 			ExitPlatform exitPlatform = ExitPlatformScene.Instantiate<ExitPlatform>();
 			exitPlatform.Position = ExitPlatformPosition.Position;
 			this.AddChild(exitPlatform);
-			} */
+			}
 		}
 	}
 }
