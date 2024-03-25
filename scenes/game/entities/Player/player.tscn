@@ -1,7 +1,7 @@
 [gd_scene load_steps=48 format=3 uid="uid://8a0si0ayx0ix"]
 
-[ext_resource type="Script" path="res://scenes/Game/entities/Player/player.cs" id="1_vvxxl"]
-[ext_resource type="PackedScene" uid="uid://0wsjvnycxgpw" path="res://scenes/Game/entities/DamageArea/damage_area.tscn" id="2_soevy"]
+[ext_resource type="Script" path="res://scenes/game/entities/Player/player.cs" id="1_vvxxl"]
+[ext_resource type="PackedScene" uid="uid://0wsjvnycxgpw" path="res://scenes/game/entities/DamageArea/damage_area.tscn" id="2_soevy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
 radius = 12.0

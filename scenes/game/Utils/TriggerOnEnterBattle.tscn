@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://teagrvnt26tc"]
 
-[ext_resource type="Script" path="res://scenes/Game/Utils/TriggerOnEnterBattle.cs" id="1_trtuy"]
+[ext_resource type="Script" path="res://scenes/game/Utils/TriggerOnEnterBattle.cs" id="1_trtuy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce5eu"]
 size = Vector2(1920, 26.8037)

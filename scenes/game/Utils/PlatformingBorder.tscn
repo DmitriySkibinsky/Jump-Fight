@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgi7n2eukw1g2"]
 
-[ext_resource type="Script" path="res://scenes/Game/Utils/PlatformingBorder.cs" id="1_7j3vn"]
+[ext_resource type="Script" path="res://scenes/game/Utils/PlatformingBorder.cs" id="1_7j3vn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02oj2"]
 size = Vector2(32, 1080)

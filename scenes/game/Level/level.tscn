@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b7mr07ra7bew2"]
 
 [ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/game/LevelItems/Platforms/SolidPlatform.tscn" id="1_5l32b"]
-[ext_resource type="Script" path="res://scenes/Game/Level/level.cs" id="1_8fvfi"]
+[ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_8fvfi"]
 [ext_resource type="PackedScene" uid="uid://60qbh2110q6" path="res://scenes/game/UI/in_level_ui.tscn" id="2_wn0s3"]
 [ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_o2pn8"]
-[ext_resource type="Script" path="res://scenes/Game/Level/LevelGenerator.cs" id="4_av2qa"]
+[ext_resource type="Script" path="res://scenes/game/Level/LevelGenerator.cs" id="4_av2qa"]
 [ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="5_6g8d7"]
 [ext_resource type="PackedScene" uid="uid://dgi7n2eukw1g2" path="res://scenes/game/Utils/PlatformingBorder.tscn" id="5_fvii3"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://c116awmqeqn6u"]
 
-[ext_resource type="Script" path="res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.cs" id="1_8dhby"]
-[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/Game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="2_hg6um"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.cs" id="1_8dhby"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="2_hg6um"]
 [ext_resource type="Texture2D" uid="uid://de4fo44b618ui" path="res://assets/sprites/Free Smoke Fx  Pixel 07.png" id="3_vy2ik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq4mu"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://60qbh2110q6"]
 
-[ext_resource type="Script" path="res://scenes/Game/UI/in_level_ui.cs" id="1_m06mk"]
+[ext_resource type="Script" path="res://scenes/game/UI/in_level_ui.cs" id="1_m06mk"]
 [ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="2_lcujc"]
 [ext_resource type="Texture2D" uid="uid://c68p7mgr6t0ee" path="res://assets/sprites/Settings Square Button.png" id="3_ywdea"]
 

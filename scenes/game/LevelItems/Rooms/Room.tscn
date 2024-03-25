@@ -1,29 +1,29 @@
 [gd_scene load_steps=5 format=3 uid="uid://dislaide0ehs7"]
 
 [ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/game/LevelItems/Platforms/SolidPlatform.tscn" id="1_oqgpb"]
-[ext_resource type="Script" path="res://scenes/Game/LevelItems/Rooms/Room.cs" id="1_yi28r"]
-[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/Game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_cutbx"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/Rooms/Room.cs" id="1_rbk30"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_cutbx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3cn2"]
 size = Vector2(2547.71, 54.3391)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 scale = Vector2(0.75, 0.75)
-script = ExtResource("1_yi28r")
+script = ExtResource("1_rbk30")
 
 [node name="SolidPlatforms" type="Node2D" parent="."]
 
 [node name="SolidPlatform" parent="SolidPlatforms" instance=ExtResource("1_oqgpb")]
-position = Vector2(1280, 1362.67)
+position = Vector2(1280, -11.3303)
 
 [node name="JumpPlatforms" type="Node2D" parent="."]
 
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
-position = Vector2(1088, 1314.67)
+position = Vector2(1088, -59.3303)
 JumpForce = 1900
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
-position = Vector2(1472, 1314.67)
+position = Vector2(1472, -59.3303)
 JumpForce = 1900
 
 [node name="EnemyPositions" type="Node2D" parent="."]
@@ -36,9 +36,9 @@ position = Vector2(1302.14, -11.661)
 shape = SubResource("RectangleShape2D_y3cn2")
 
 [node name="NextPlatform" type="Marker2D" parent="."]
-position = Vector2(1285.33, 681.333)
+position = Vector2(1285.33, -692.667)
 
 [node name="ExitPlatformPosition" type="Marker2D" parent="."]
-position = Vector2(1286.67, 370.667)
+position = Vector2(1286.67, -1003.33)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

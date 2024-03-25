@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://xr0jl861ak4e"]
 
 [ext_resource type="Texture2D" uid="uid://de4fo44b618ui" path="res://assets/sprites/Free Smoke Fx  Pixel 07.png" id="1_f5u8h"]
-[ext_resource type="Script" path="res://scenes/Game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.cs" id="2_1flmx"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.cs" id="2_1flmx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uuqx"]
 atlas = ExtResource("1_f5u8h")
