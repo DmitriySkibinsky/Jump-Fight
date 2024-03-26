@@ -1,16 +1,128 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmp4fvjo24lcs"]
+[gd_scene load_steps=20 format=3 uid="uid://bmp4fvjo24lcs"]
 
 [ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="1_3lxmp"]
 [ext_resource type="Script" path="res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.cs" id="2_2dxv5"]
-[ext_resource type="Texture2D" uid="uid://yvaq3s81dt4w" path="res://assets/sprites/tile3.png" id="2_wfere"]
+[ext_resource type="Texture2D" uid="uid://coglykhjo0184" path="res://assets/sprites/BreackablePlatform/BFX003_01.png" id="3_41d0b"]
+[ext_resource type="Texture2D" uid="uid://bs5ijif27ffvp" path="res://assets/sprites/BreackablePlatform/BFX003_02.png" id="4_80h6v"]
+[ext_resource type="Texture2D" uid="uid://d33glbnqip1lv" path="res://assets/sprites/BreackablePlatform/BFX003_03.png" id="5_y8g5t"]
+[ext_resource type="Texture2D" uid="uid://dveb2smaqflil" path="res://assets/sprites/BreackablePlatform/02.png" id="6_1032c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ldcnx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_41d0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_80h6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y8g5t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlc66"]
+atlas = ExtResource("6_1032c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cybbi"]
+atlas = ExtResource("6_1032c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p2lt"]
+atlas = ExtResource("6_1032c")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkbc2"]
+atlas = ExtResource("6_1032c")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qer6i"]
+atlas = ExtResource("6_1032c")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsk7g"]
+atlas = ExtResource("6_1032c")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utpuk"]
+atlas = ExtResource("6_1032c")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k2cg"]
+atlas = ExtResource("6_1032c")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pni4u"]
+atlas = ExtResource("6_1032c")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0w0q"]
+atlas = ExtResource("6_1032c")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1awge"]
+atlas = ExtResource("6_1032c")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyx8g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlc66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cybbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7p2lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkbc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qer6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsk7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utpuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2k2cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pni4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0w0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1awge")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="StaticBody2D" instance=ExtResource("1_3lxmp")]
 script = ExtResource("2_2dxv5")
 
-[node name="Sprite2D2" parent="." index="0"]
-texture = ExtResource("2_wfere")
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ldcnx")
+frame_progress = 0.0
 
-[node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("2_wfere")
+[node name="Explosion" type="AnimatedSprite2D" parent="." index="3"]
+texture_filter = 3
+position = Vector2(6, -100)
+scale = Vector2(4.36404, 10.6861)
+sprite_frames = SubResource("SpriteFrames_dyx8g")
+frame = 10
+frame_progress = 1.0
 
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]

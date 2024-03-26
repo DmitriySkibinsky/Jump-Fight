@@ -4,12 +4,15 @@ using System.Runtime.CompilerServices;
 
 public partial class BreackablePlatform : JumpPlatform
 {
-	// Called when the node enters the scene tree for the first time.
+	private AnimatedSprite2D Explosion;
+	private AnimatedSprite2D Platform;
 	public override void _Ready()
 	{
+		Explosion = GetNode<AnimatedSprite2D>("Explosion");
+		Platform = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		Platform.Play();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
@@ -21,8 +24,13 @@ public partial class BreackablePlatform : JumpPlatform
 			if (Player.Velocity.Y >= 0){
 				Player.velocity.Y = -JumpForce;
 				Player.MoveAndSlide();
-				this.QueueFree();
+				Platform.Hide();
+				Explosion.Play();
 			}
 		}
+	}
+
+	public void _on_explosion_animation_finished(){
+		this.QueueFree();
 	}
 }
