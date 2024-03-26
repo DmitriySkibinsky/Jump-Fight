@@ -6,7 +6,12 @@ public partial class LevelGenerator : Node2D
 	private Godot.Collections.Array<PackedScene> BattleSection = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room2.tscn")
-		};
+	};
+
+	private Godot.Collections.Array<PackedScene> Platforms = new Godot.Collections.Array<PackedScene>{
+		GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.tscn")
+	};
 	[Export]
 	private int platform_count = 0;
 	public int num_levels = 6;
@@ -15,18 +20,10 @@ public partial class LevelGenerator : Node2D
 	private Camera2D camera;
 	private player Player;
 
-	public PackedScene JumpPlatform_scene = new PackedScene();
-	public PackedScene ChestPlatform_scene = new PackedScene();
-	public PackedScene BreackablePlatform_scene = new PackedScene();
-	public PackedScene TriggerOnEnterBattle = new PackedScene();
-	public PackedScene TriggerOnExitBattle = new PackedScene();
+	public PackedScene TriggerOnEnterBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnEnterBattle.tscn");
+	public PackedScene TriggerOnExitBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnExitBattle.tscn");
 	public override void _Ready()
 	{
-		JumpPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn");
-		ChestPlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/ChestPlatform.tscn");
-		BreackablePlatform_scene = GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.tscn");
-		TriggerOnEnterBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnEnterBattle.tscn");
-		TriggerOnExitBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnExitBattle.tscn");
 		Player = GetParent().GetNode<player>("Player");
 	
 		_spawn_levels();
@@ -76,11 +73,11 @@ public partial class LevelGenerator : Node2D
 	private void GeneratePlatform(float initial_pos_y, int amount){
 		Random rnd = new Random();
 		for (int i = 0; i < amount; i++){
-			int random_y = rnd.Next(120, 170);
+			int random_y = rnd.Next(150, 225);
 			int random_x = rnd.Next(700, 1225);
-
+			int random_platform = rnd.Next(Platforms.Count);
 			initial_pos_y -= random_y;
-			JumpPlatform new_platform = JumpPlatform_scene.Instantiate<JumpPlatform>();
+			Node2D new_platform = Platforms[random_platform].Instantiate<Node2D>();
 			new_platform.Position = new Vector2(random_x, initial_pos_y);
 			last_platform_pos_y = initial_pos_y;
 			this.AddChild(new_platform);
