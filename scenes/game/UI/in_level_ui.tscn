@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_l85rm"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1788.52, 175.491, 0, 0, 0, 0, 2215.18, 175.491, 0, 0, 0, 0, 1788.52, 175.491)
+"points": PackedVector2Array(0, 0, 0, 0, 1788.52, 175.491, 0, 0, 0, 0, 2471.18, 175.491, 0, 0, 0, 0, 1788.52, 175.491)
 }
 point_count = 3
 
@@ -152,7 +152,7 @@ sources/0 = SubResource("TileSetAtlasSource_xa82m")
 
 [sub_resource type="Curve2D" id="Curve2D_d0htp"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -426.667, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -682.667, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 3
 
@@ -201,10 +201,10 @@ wait_time = 0.2
 one_shot = true
 
 [node name="Settings" type="Button" parent="."]
-offset_left = 1690.0
-offset_top = 24.0
-offset_right = 1798.0
-offset_bottom = 132.0
+offset_left = 1800.0
+offset_top = 132.0
+offset_right = 1908.0
+offset_bottom = 240.0
 icon = ExtResource("3_ywdea")
 
 [node name="Quit" type="Button" parent="."]
