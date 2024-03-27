@@ -126,7 +126,6 @@ texture = ExtResource("4_mn6oe")
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:1/0/physics_layer_0/polygon_0/one_way = true
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
@@ -136,7 +135,6 @@ texture = ExtResource("4_mn6oe")
 3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:1/0/physics_layer_0/angular_velocity = 0.0
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:1/0/physics_layer_0/polygon_0/one_way = true
 5:1/0 = 0
 5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:1/0/physics_layer_0/angular_velocity = 0.0
@@ -260,7 +258,6 @@ texture = ExtResource("4_mn6oe")
 1:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:5/0/physics_layer_0/angular_velocity = 0.0
 1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:5/0/physics_layer_0/polygon_0/one_way = true
 2:5/0 = 0
 2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:5/0/physics_layer_0/angular_velocity = 0.0
@@ -270,7 +267,6 @@ texture = ExtResource("4_mn6oe")
 3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:5/0/physics_layer_0/angular_velocity = 0.0
 3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:5/0/physics_layer_0/polygon_0/one_way = true
 5:5/0 = 0
 5:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:5/0/physics_layer_0/angular_velocity = 0.0
@@ -557,8 +553,8 @@ texture = ExtResource("4_mn6oe")
 12:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_gis1m"]
-physics_layer_0/collision_layer = 65
-physics_layer_0/collision_mask = 65
+physics_layer_0/collision_layer = 64
+physics_layer_0/collision_mask = 64
 sources/0 = SubResource("TileSetAtlasSource_6m0wk")
 
 [node name="Node2D2" type="Node2D"]
@@ -569,15 +565,18 @@ script = ExtResource("1_rbk30")
 
 [node name="SolidPlatform" parent="SolidPlatforms" instance=ExtResource("1_oqgpb")]
 position = Vector2(1280, -11.3303)
+scale = Vector2(1.75, 1.75)
 
 [node name="JumpPlatforms" type="Node2D" parent="."]
 
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
-position = Vector2(1088, -59.3303)
+position = Vector2(1016, -58.6667)
+scale = Vector2(1.75, 0.438)
 JumpForce = 1400
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
-position = Vector2(1472, -59.3303)
+position = Vector2(1562.67, -65.3333)
+scale = Vector2(1.75, 0.438)
 JumpForce = 1400
 
 [node name="EnemyPositions" type="Node2D" parent="."]
@@ -597,13 +596,15 @@ position = Vector2(1286.67, -1003.33)
 
 [node name="stuff" type="TileMap" parent="."]
 texture_filter = 3
-scale = Vector2(2, 2)
+position = Vector2(-962, 954)
+scale = Vector2(3.5, 3.5)
 tile_set = SubResource("TileSet_ve4b6")
 format = 2
 
 [node name="Terrain" type="TileMap" parent="."]
 texture_filter = 3
-scale = Vector2(2, 2)
+position = Vector2(-962, 954)
+scale = Vector2(3.5, 3.5)
 tile_set = SubResource("TileSet_gis1m")
 format = 2
 
