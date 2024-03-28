@@ -3,22 +3,25 @@ using System;
 
 public partial class LevelGenerator : Node2D
 {
-	private Godot.Collections.Array<PackedScene> BattleSection = new Godot.Collections.Array<PackedScene>{
+	public Godot.Collections.Array<PackedScene> BattleSection = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room2.tscn")
 	};
 
-	private Godot.Collections.Array<PackedScene> Platforms = new Godot.Collections.Array<PackedScene>{
+	public Godot.Collections.Array<PackedScene> Platforms = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Platforms/BreackablePlatform/BreackablePlatform.tscn")
 	};
-	[Export]
-	private int platform_count = 0;
-	public int num_levels = 6;
 
-	private float last_platform_pos_y = 0;
-	private Camera2D camera;
-	private player Player;
+	public Godot.Collections.Array<PackedScene> EndRooms = new Godot.Collections.Array<PackedScene>{
+		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/EndRooms/EndRoom.tscn")
+	};
+
+	public int num_levels = 4;
+
+	public float last_platform_pos_y = 0;
+	public Camera2D camera;
+	public player Player;
 
 	public PackedScene TriggerOnEnterBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnEnterBattle.tscn");
 	public PackedScene TriggerOnExitBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnExitBattle.tscn");
@@ -32,8 +35,8 @@ public partial class LevelGenerator : Node2D
 	public override void _Process(double delta)
 	{
 	}
-
-	private void _spawn_levels(){
+	// Памагити
+	public void _spawn_levels(){
 		Node2D prev_battle_room = new Node2D();
 		Node2D cur_battle_room = new Node2D();
 		string prev_room_name = "";
@@ -41,7 +44,7 @@ public partial class LevelGenerator : Node2D
 			if (i == 0){
 				GeneratePlatform(Player.Position.Y, 10);
 				prev_room_name = "platform";
-			}else if(prev_room_name == "platform"){
+			}else if(prev_room_name == "platform" && i != num_levels-1){
 				Random rand = new Random();
 				int randomRoom = rand.Next(BattleSection.Count);
 				cur_battle_room = BattleSection[randomRoom].Instantiate<Room>();
@@ -57,6 +60,12 @@ public partial class LevelGenerator : Node2D
 				this.AddChild(cur_battle_room);
 				this.AddChild(EnterTrigger);
 				this.AddChild(ExitTrigger);
+			}else if(i == num_levels-1){
+				Random rand = new Random();
+				int randomRoom = rand.Next(EndRooms.Count);
+				Node2D EndRoom = EndRooms[randomRoom].Instantiate<Node2D>();
+				EndRoom.Position = new Vector2(EndRoom.Position.X, last_platform_pos_y - 50);
+				this.AddChild(EndRoom);
 			}else{
 				float init_pos_y = prev_battle_room.GetNode<Marker2D>("NextPlatform").GlobalPosition.Y;
 				GeneratePlatform(init_pos_y, 30);
@@ -70,7 +79,7 @@ public partial class LevelGenerator : Node2D
 		
 	}
 
-	private void GeneratePlatform(float initial_pos_y, int amount){
+	public void GeneratePlatform(float initial_pos_y, int amount){
 		Random rnd = new Random();
 		for (int i = 0; i < amount; i++){
 			int random_y = rnd.Next(150, 225);
