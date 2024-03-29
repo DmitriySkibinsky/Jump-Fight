@@ -35,8 +35,6 @@ public partial class level : Node2D
 	{
 		GetTree().Quit();
 	}
-
+	
 }
-
-
 

@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7mr07ra7bew2"]
+[gd_scene load_steps=17 format=3 uid="uid://b7mr07ra7bew2"]
 
 [ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_8fvfi"]
 [ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="2_b2xxe"]
+[ext_resource type="Script" path="res://scenes/game/Level/Manager.cs" id="2_ueoro"]
 [ext_resource type="PackedScene" uid="uid://60qbh2110q6" path="res://scenes/game/UI/in_level_ui.tscn" id="2_wn0s3"]
 [ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_o2pn8"]
 [ext_resource type="Script" path="res://scenes/game/Level/LevelGenerator.cs" id="4_av2qa"]
 [ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="5_6g8d7"]
 [ext_resource type="PackedScene" uid="uid://dgi7n2eukw1g2" path="res://scenes/game/Utils/PlatformingBorder.tscn" id="5_fvii3"]
 [ext_resource type="Texture2D" uid="uid://dk0lcd0xfhghk" path="res://assets/sprites/level1/Dungeon Tile Set.png" id="8_50t7h"]
+[ext_resource type="PackedScene" uid="uid://bs4ayffshvalm" path="res://scenes/Menu/settingspause.tscn" id="8_aihkb"]
 [ext_resource type="PackedScene" uid="uid://bc5wc55l3pwql" path="res://scenes/game/Utils/parallax_background.tscn" id="9_d2san"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryjtw"]
@@ -543,6 +545,10 @@ sources/0 = SubResource("TileSetAtlasSource_ig6kw")
 [node name="level" type="Node2D"]
 script = ExtResource("1_8fvfi")
 
+[node name="Manager" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("2_ueoro")
+
 [node name="stuff" type="TileMap" parent="."]
 texture_filter = 3
 scale = Vector2(2, 2)
@@ -587,6 +593,19 @@ collision_mask = 193
 
 [node name="InLevelUI" parent="." instance=ExtResource("2_wn0s3")]
 
+[node name="Settings2" parent="InLevelUI" instance=ExtResource("8_aihkb")]
+process_mode = 2
+offset_left = -262.0
+offset_top = -243.0
+offset_right = 162.0
+offset_bottom = 330.0
+
+[node name="Panel" parent="InLevelUI/Settings2" index="0"]
+offset_left = -162.0
+offset_top = -286.5
+offset_right = 272.0
+offset_bottom = 259.5
+
 [node name="ParallaxBackground" parent="." instance=ExtResource("9_d2san")]
 
 [node name="Footer" type="TileMap" parent="."]
@@ -597,3 +616,8 @@ format = 2
 layer_0/tile_data = PackedInt32Array(720906, 131072, 1, 720907, 131072, 1, 720908, 131072, 1, 720909, 131072, 1, 720910, 131072, 1, 720911, 131072, 1, 720912, 131072, 1, 720913, 131072, 1, 720914, 131072, 1, 720915, 131072, 1, 786451, 131072, 2, 851987, 131072, 2, 917523, 131072, 2, 983059, 131072, 2, 1048595, 131072, 2, 786442, 131072, 2, 851978, 131072, 2, 917514, 131072, 2, 983050, 131072, 2, 1048586, 131072, 2, 786443, 131072, 2, 786444, 131072, 2, 851981, 131072, 2, 851982, 131072, 2, 851983, 131072, 2, 851984, 131072, 2, 851985, 131072, 2, 851986, 131072, 2, 786450, 131072, 2, 786449, 131072, 2, 786448, 131072, 2, 786447, 131072, 2, 786446, 131072, 2, 786445, 131072, 2, 851980, 131072, 2, 917516, 131072, 2, 917515, 131072, 2, 851979, 131072, 2, 917518, 131072, 2, 917519, 131072, 2, 917520, 131072, 2, 917521, 131072, 2, 917522, 131072, 2, 983058, 131072, 2, 983057, 131072, 2, 983056, 131072, 2, 983055, 131072, 2, 983054, 131072, 2, 983053, 131072, 2, 983052, 131072, 2, 983051, 131072, 2, 1048587, 131072, 2, 1048588, 131072, 2, 1048589, 131072, 2, 1048590, 131072, 2, 1048591, 131072, 2, 1048592, 131072, 2, 1048593, 131072, 2, 1048594, 131072, 2, 917517, 131072, 2)
 
 [connection signal="body_entered" from="PlayerCamera/CleanerArea" to="." method="_on_cleaner_area_body_entered"]
+[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
+[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
+[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
+
+[editable path="InLevelUI/Settings2"]

@@ -47,13 +47,12 @@ public partial class in_level_ui : CanvasLayer
 			is_animate_in = false;
 		}
 	}
-	public void _on_quit_pressed()
-	{
-		GetTree().Quit();
-	}
+
 	public void _on_settings_pressed()
 	{
 		GetTree().ChangeSceneToFile("res://scenes/Menu/settingspause.tscn");
 	}
 }
+
+
 
