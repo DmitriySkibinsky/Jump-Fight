@@ -17,8 +17,11 @@ public partial class LevelGenerator : Node2D
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/EndRooms/EndRoom.tscn")
 	};
 
+	public Godot.Collections.Array<PackedScene> Enemies = new Godot.Collections.Array<PackedScene>{
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
+	};
 	public int num_levels = 4;
-
+	public int platform_amount = 10;
 	public float last_platform_pos_y = 0;
 	public Camera2D camera;
 	public player Player;
@@ -42,7 +45,7 @@ public partial class LevelGenerator : Node2D
 		string prev_room_name = "";
 		for (int i = 0; i < num_levels; i++){
 			if (i == 0){
-				GeneratePlatform(Player.Position.Y, 10);
+				GeneratePlatform(Player.Position.Y, platform_amount);
 				prev_room_name = "platform";
 			}else if(prev_room_name == "platform" && i != num_levels-1){
 				Random rand = new Random();
@@ -67,8 +70,9 @@ public partial class LevelGenerator : Node2D
 				EndRoom.Position = new Vector2(EndRoom.Position.X, last_platform_pos_y - 50);
 				this.AddChild(EndRoom);
 			}else{
+				platform_amount += 10;
 				float init_pos_y = prev_battle_room.GetNode<Marker2D>("NextPlatform").GlobalPosition.Y;
-				GeneratePlatform(init_pos_y, 30);
+				GeneratePlatform(init_pos_y, platform_amount);
 				prev_room_name = "platform";
 			}
 		}
@@ -90,6 +94,12 @@ public partial class LevelGenerator : Node2D
 			new_platform.Position = new Vector2(random_x, initial_pos_y);
 			last_platform_pos_y = initial_pos_y;
 			this.AddChild(new_platform);
+
+			if (rnd.Next(0, 10) >= 8){
+				Node2D new_enemy = Enemies[rnd.Next(Enemies.Count)].Instantiate<Node2D>();
+				new_enemy.Position = new Vector2(960, initial_pos_y);
+				this.AddChild(new_enemy);
+			}
 		}
 	}
 
