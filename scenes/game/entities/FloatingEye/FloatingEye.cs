@@ -5,7 +5,7 @@ using System;
 public static class Trajectory
 {
     // Настройки траекторий обозначены комментарием "Настройки", что бы их можно было найти
-    private static int GameSpace = 640; // Ширина доступного игрового поля
+    private static int GameSpace = 525; // Ширина доступного игрового поля
 
     private static Random rnd = new Random();
 
@@ -119,7 +119,7 @@ public static class Trajectory
     /// </summary>
     public static void SetRandomTrajectory(ref Vector2[] WayPoints, Vector2 StartPos)
     {
-        TrajectoryType trajectory = TrajectoryType.ZigZag;//(TrajectoryType)rnd.Next(4);  // Генерируем число [0;4)
+        TrajectoryType trajectory = (TrajectoryType)rnd.Next(4); // Генерируем число [0;4)
         switch (trajectory)
         {
             case TrajectoryType.Linear:
@@ -140,7 +140,7 @@ public static class Trajectory
 }
 public partial class FloatingEye : CharacterBody2D
 {
-    private int Speed = 75;
+    private int Speed = 125;
     private int Damage = 100;
     private int direction = 1;
     private bool Alive = true;
@@ -210,19 +210,20 @@ public partial class FloatingEye : CharacterBody2D
 
     public void _on_hurt_boxes_area_entered(Node2D Body)
     {
-        if (Body.GetParent() != null && Body.GetParent().Name == "player" && Body.GetParent() is CharacterBody2D Player && Alive)
+        if (Body.GetParent() != null && Body.GetParent().Name == "Player" && Body.GetParent() is player Player && Alive && Player.Velocity.Y >= 0)
         {
-            Player.Velocity -= new Vector2(0, 500);
+            Player.velocity.Y = -500;
+            Player.MoveAndSlide();
             death();
         }
     }
 
     public void Attack(Node2D Body)
     {
-        if (Body.GetParent() != null && Body.GetParent().Name == "player" && Body.GetParent() is CharacterBody2D Player && Alive)
+        if (Body.GetParent() != null && Body.GetParent().Name == "Player" && Body.GetParent() is player Player && Alive)
         {
             //_customSignals.EmitSignal(nameof(CustomSignals.DamagePlayer), Damage);
-            Player.CallDeferred("GetDamage", Damage);
+            Player.CallDeferred("GetDamaged", Damage);
         }
     }
 

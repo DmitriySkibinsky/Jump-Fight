@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://hgtqpmihduqs"]
 
-[ext_resource type="Script" path="res://Mob/FloatingEye/FloatingEye.cs" id="1_bqkjj"]
-[ext_resource type="Texture2D" uid="uid://10motxj6bwlu" path="res://Mob/FloatingEye/Eyeball.png" id="3_lu3by"]
+[ext_resource type="Script" path="res://scenes/game/entities/FloatingEye/FloatingEye.cs" id="1_bqkjj"]
+[ext_resource type="Texture2D" uid="uid://10motxj6bwlu" path="res://scenes/game/entities/FloatingEye/Eyeball.png" id="3_lu3by"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
 size = Vector2(125, 2.22222)
@@ -51,7 +51,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Death",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -68,13 +68,15 @@ animations = [{
 }],
 "loop": true,
 "name": &"Floating",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61nv8"]
 size = Vector2(32, 32)
 
 [node name="Mob" type="CharacterBody2D"]
+texture_filter = 3
+scale = Vector2(4, 4)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_bqkjj")
@@ -101,9 +103,8 @@ shape = SubResource("RectangleShape2D_lrymv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_828ti")
-animation = &"Death"
+animation = &"Floating"
 autoplay = "Floating"
-frame_progress = 0.368974
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.25, 1.25)
