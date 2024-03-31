@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=3 uid="uid://hgtqpmihduqs"]
+
+[ext_resource type="Script" path="res://Mob/FloatingEye/FloatingEye.cs" id="1_bqkjj"]
+[ext_resource type="Texture2D" uid="uid://10motxj6bwlu" path="res://Mob/FloatingEye/Eyeball.png" id="3_lu3by"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
+size = Vector2(125, 2.22222)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrymv"]
+size = Vector2(27, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xoyf"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eijsk"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sehpu"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4wf2"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cbun"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nok6"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks7uj"]
+atlas = ExtResource("3_lu3by")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_828ti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xoyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eijsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sehpu")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4wf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cbun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nok6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks7uj")
+}],
+"loop": true,
+"name": &"Floating",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61nv8"]
+size = Vector2(32, 32)
+
+[node name="Mob" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_bqkjj")
+metadata/_edit_group_ = true
+
+[node name="HurtBoxes" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
+position = Vector2(-4.76837e-07, -18)
+scale = Vector2(0.319999, 1.8)
+shape = SubResource("RectangleShape2D_v3bfh")
+
+[node name="HitBoxes" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="HitBox" type="CollisionShape2D" parent="HitBoxes"]
+position = Vector2(4.48029e-05, -2.50001)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_lrymv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_828ti")
+animation = &"Death"
+autoplay = "Floating"
+frame_progress = 0.368974
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.25, 1.25)
+shape = SubResource("RectangleShape2D_61nv8")
+
+[connection signal="area_entered" from="HurtBoxes" to="." method="_on_hurt_boxes_area_entered"]
+[connection signal="area_entered" from="HitBoxes" to="." method="_on_hit_boxes_area_entered"]
+[connection signal="child_entered_tree" from="HitBoxes/HitBox" to="." method="_on_hit_box_child_entered_tree"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
