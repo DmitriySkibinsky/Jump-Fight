@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7mr07ra7bew2"]
+[gd_scene load_steps=17 format=3 uid="uid://b7mr07ra7bew2"]
 
 [ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_8fvfi"]
 [ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="2_b2xxe"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dk0lcd0xfhghk" path="res://assets/sprites/level1/Dungeon Tile Set.png" id="8_50t7h"]
 [ext_resource type="PackedScene" uid="uid://bc5wc55l3pwql" path="res://scenes/game/Utils/parallax_background.tscn" id="9_d2san"]
 [ext_resource type="PackedScene" uid="uid://bfph7mlmasj20" path="res://scenes/game/Utils/Interaction/InteractionManager.tscn" id="10_26sic"]
+[ext_resource type="PackedScene" uid="uid://dm7xdh2fttkq" path="res://scenes/game/UI/Health bar/health_bar.tscn" id="11_0pvqr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryjtw"]
 texture = ExtResource("2_b2xxe")
@@ -596,7 +597,7 @@ position = Vector2(-1926, -1080)
 scale = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("5_6g8d7")]
-position = Vector2(960, 657)
+position = Vector2(963, 672)
 scale = Vector2(2, 2)
 collision_layer = 201
 collision_mask = 193
@@ -613,5 +614,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(720906, 65537, 1, 720907, 131073, 1, 720908, 131073, 1, 720909, 131073, 1, 720910, 131073, 1, 720911, 131073, 1, 720912, 131073, 1, 720913, 131073, 1, 720914, 131073, 1, 720915, 196609, 1, 786451, 196609, 2, 851987, 196609, 2, 917523, 196609, 2, 983059, 196609, 2, 1048595, 196609, 2, 786442, 65537, 2, 851978, 65537, 2, 917514, 65537, 2, 983050, 65537, 2, 1048586, 65537, 2, 786443, 655361, 7, 786444, 655361, 7, 851981, 524289, 6, 851982, 720897, 6, 851983, 589825, 6, 851984, 589825, 6, 851985, 655361, 6, 851986, 655361, 7, 786450, 393217, 6, 786449, 589825, 6, 786448, 458753, 7, 786447, 524289, 6, 786446, 524289, 6, 786445, 524289, 7, 851980, 524289, 6, 917516, 655361, 6, 917515, 655361, 7, 851979, 655361, 6, 917518, 524289, 6, 917519, 524289, 7, 917520, 589825, 7, 917521, 524289, 6, 917522, 524289, 6, 983058, 720897, 6, 983057, 720897, 7, 983056, 589825, 6, 983055, 458753, 6, 983054, 589825, 7, 983053, 524289, 6, 983052, 720897, 7, 983051, 524289, 7, 1048587, 655361, 6, 1048588, 655361, 6, 1048589, 655361, 6, 1048590, 720897, 6, 1048591, 655361, 7, 1048592, 458753, 7, 1048593, 524289, 6, 1048594, 524289, 7, 917517, 655361, 7)
 
 [node name="InteractionManager" parent="." instance=ExtResource("10_26sic")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("11_0pvqr")]
 
 [connection signal="body_entered" from="PlayerCamera/CleanerArea" to="." method="_on_cleaner_area_body_entered"]
