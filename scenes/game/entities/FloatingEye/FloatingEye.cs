@@ -2,23 +2,6 @@ using Godot;
 using System;
 
 
-
-public static class Serve
-{
-    public static void Shift(Vector2[] WayPoints, int Number)
-    {
-        Vector2[] result = new Vector2[WayPoints.Length];
-        for (int i = 0; i < WayPoints.Length; i++)
-        {
-            if ((i + Number) >= WayPoints.Length)
-                result[(i + Number) - WayPoints.Length] = WayPoints[i];
-            else
-                result[i + Number] = WayPoints[i];
-        }
-
-    }
-}
-
 public static class Trajectory
 {
     // Настройки траекторий обозначены комментарием "Настройки", что бы их можно было найти
