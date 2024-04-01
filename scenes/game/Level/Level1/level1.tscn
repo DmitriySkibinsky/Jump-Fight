@@ -1,20 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7mr07ra7bew2"]
+[gd_scene load_steps=16 format=3 uid="uid://dx4nxng0ylg4r"]
 
-[ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_8fvfi"]
-[ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="2_b2xxe"]
-[ext_resource type="Script" path="res://scenes/game/Level/Manager.cs" id="2_ueoro"]
-[ext_resource type="PackedScene" uid="uid://60qbh2110q6" path="res://scenes/game/UI/in_level_ui.tscn" id="2_wn0s3"]
-[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_o2pn8"]
-[ext_resource type="Script" path="res://scenes/game/Level/LevelGenerator.cs" id="4_av2qa"]
-[ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="5_6g8d7"]
-[ext_resource type="PackedScene" uid="uid://dgi7n2eukw1g2" path="res://scenes/game/Utils/PlatformingBorder.tscn" id="5_fvii3"]
-[ext_resource type="Texture2D" uid="uid://dk0lcd0xfhghk" path="res://assets/sprites/level1/Dungeon Tile Set.png" id="8_50t7h"]
-[ext_resource type="PackedScene" uid="uid://bs4ayffshvalm" path="res://scenes/Menu/settingspause.tscn" id="8_aihkb"]
-[ext_resource type="PackedScene" uid="uid://bc5wc55l3pwql" path="res://scenes/game/Utils/parallax_background.tscn" id="9_d2san"]
-[ext_resource type="PackedScene" uid="uid://bfph7mlmasj20" path="res://scenes/game/Utils/Interaction/InteractionManager.tscn" id="10_26sic"]
+[ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_0n62r"]
+[ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="2_0gxvy"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="3_xbuj6"]
+[ext_resource type="Script" path="res://scenes/game/Level/Level1/LevelGenerator1.cs" id="4_qapde"]
+[ext_resource type="PackedScene" uid="uid://dgi7n2eukw1g2" path="res://scenes/game/Utils/PlatformingBorder.tscn" id="5_6oxha"]
+[ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="6_mck2y"]
+[ext_resource type="PackedScene" uid="uid://60qbh2110q6" path="res://scenes/game/UI/in_level_ui.tscn" id="7_jia42"]
+[ext_resource type="PackedScene" uid="uid://bc5wc55l3pwql" path="res://scenes/game/Utils/parallax_background.tscn" id="8_qkw1b"]
+[ext_resource type="Texture2D" uid="uid://dk0lcd0xfhghk" path="res://assets/sprites/level1/Dungeon Tile Set.png" id="9_814vd"]
+[ext_resource type="PackedScene" uid="uid://bfph7mlmasj20" path="res://scenes/game/Utils/Interaction/InteractionManager.tscn" id="9_ipb3p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryjtw"]
-texture = ExtResource("2_b2xxe")
+texture = ExtResource("2_0gxvy")
 8:1/0 = 0
 10:1/0 = 0
 12:1/0 = 0
@@ -127,8 +125,8 @@ sources/1 = SubResource("TileSetAtlasSource_ryjtw")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ihbsy"]
 size = Vector2(1952, 18)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sl7fy"]
-texture = ExtResource("8_50t7h")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ig6kw"]
+texture = ExtResource("9_814vd")
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
@@ -144,11 +142,9 @@ texture = ExtResource("8_50t7h")
 5:1/0 = 0
 5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:1/0/physics_layer_0/angular_velocity = 0.0
-5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0 = 0
 6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:1/0/physics_layer_0/angular_velocity = 0.0
-6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:1/0 = 0
 8:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:1/0/physics_layer_0/angular_velocity = 0.0
@@ -182,11 +178,9 @@ texture = ExtResource("8_50t7h")
 5:2/0 = 0
 5:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:2/0/physics_layer_0/angular_velocity = 0.0
-5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:2/0 = 0
 6:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:2/0/physics_layer_0/angular_velocity = 0.0
-6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:2/0 = 0
 8:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:2/0/physics_layer_0/angular_velocity = 0.0
@@ -220,11 +214,9 @@ texture = ExtResource("8_50t7h")
 5:3/0 = 0
 5:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:3/0/physics_layer_0/angular_velocity = 0.0
-5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:3/0 = 0
 6:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:3/0/physics_layer_0/angular_velocity = 0.0
-6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:3/0 = 0
 8:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:3/0/physics_layer_0/angular_velocity = 0.0
@@ -261,15 +253,12 @@ texture = ExtResource("8_50t7h")
 1:5/0 = 0
 1:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:5/0/physics_layer_0/angular_velocity = 0.0
-1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:5/0 = 0
 2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:5/0/physics_layer_0/angular_velocity = 0.0
-2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:5/0 = 0
 3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:5/0/physics_layer_0/angular_velocity = 0.0
-3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:5/0 = 0
 5:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:5/0/physics_layer_0/angular_velocity = 0.0
@@ -294,15 +283,12 @@ texture = ExtResource("8_50t7h")
 1:6/0 = 0
 1:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:6/0/physics_layer_0/angular_velocity = 0.0
-1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:6/0 = 0
 2:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:6/0/physics_layer_0/angular_velocity = 0.0
-2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:6/0 = 0
 3:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:6/0/physics_layer_0/angular_velocity = 0.0
-3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:6/0 = 0
 6:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:6/0/physics_layer_0/angular_velocity = 0.0
@@ -327,15 +313,12 @@ texture = ExtResource("8_50t7h")
 1:7/0 = 0
 1:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:7/0/physics_layer_0/angular_velocity = 0.0
-1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:7/0 = 0
 2:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:7/0/physics_layer_0/angular_velocity = 0.0
-2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:7/0 = 0
 3:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:7/0/physics_layer_0/angular_velocity = 0.0
-3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:7/0 = 0
 6:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:7/0/physics_layer_0/angular_velocity = 0.0
@@ -556,14 +539,10 @@ texture = ExtResource("8_50t7h")
 [sub_resource type="TileSet" id="TileSet_aq5c0"]
 physics_layer_0/collision_layer = 64
 physics_layer_0/collision_mask = 0
-sources/1 = SubResource("TileSetAtlasSource_sl7fy")
+sources/0 = SubResource("TileSetAtlasSource_ig6kw")
 
 [node name="level" type="Node2D"]
-script = ExtResource("1_8fvfi")
-
-[node name="Manager" type="Node2D" parent="."]
-process_mode = 3
-script = ExtResource("2_ueoro")
+script = ExtResource("1_0n62r")
 
 [node name="stuff" type="TileMap" parent="."]
 texture_filter = 3
@@ -575,14 +554,14 @@ layer_0/tile_data = PackedInt32Array(1245204, 1048577, 6, 1310740, 1048577, 7, 1
 [node name="Jump" type="Node2D" parent="."]
 position = Vector2(1152, 721)
 
-[node name="StaticBody2D" parent="Jump" instance=ExtResource("3_o2pn8")]
+[node name="StaticBody2D" parent="Jump" instance=ExtResource("3_xbuj6")]
 position = Vector2(-384, -24)
 
-[node name="StaticBody2D2" parent="Jump" instance=ExtResource("3_o2pn8")]
+[node name="StaticBody2D2" parent="Jump" instance=ExtResource("3_xbuj6")]
 position = Vector2(0, -24)
 
 [node name="LevelGenerator" type="Node2D" parent="."]
-script = ExtResource("4_av2qa")
+script = ExtResource("4_qapde")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2(963, 539)
@@ -597,45 +576,35 @@ collision_mask = 3
 position = Vector2(1131, 315)
 shape = SubResource("RectangleShape2D_ihbsy")
 
-[node name="PlatformingBorder" parent="PlayerCamera" instance=ExtResource("5_fvii3")]
+[node name="PlatformingBorder" parent="PlayerCamera" instance=ExtResource("5_6oxha")]
 position = Vector2(-1926, -1080)
 scale = Vector2(2, 2)
 
-[node name="Player" parent="." instance=ExtResource("5_6g8d7")]
+[node name="Player" parent="." instance=ExtResource("6_mck2y")]
 position = Vector2(960, 657)
 scale = Vector2(2, 2)
 collision_layer = 201
 collision_mask = 193
 
-[node name="InLevelUI" parent="." instance=ExtResource("2_wn0s3")]
+[node name="InLevelUI" parent="." instance=ExtResource("7_jia42")]
 
-[node name="Settings2" parent="InLevelUI" instance=ExtResource("8_aihkb")]
-process_mode = 2
-offset_left = -262.0
-offset_top = -243.0
-offset_right = 162.0
-offset_bottom = 330.0
-
-[node name="Panel" parent="InLevelUI/Settings2" index="0"]
-offset_left = -162.0
-offset_top = -286.5
-offset_right = 272.0
-offset_bottom = 259.5
-
-[node name="ParallaxBackground" parent="." instance=ExtResource("9_d2san")]
+[node name="ParallaxBackground" parent="." instance=ExtResource("8_qkw1b")]
 
 [node name="Footer" type="TileMap" parent="."]
 texture_filter = 3
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_aq5c0")
 format = 2
-layer_0/tile_data = PackedInt32Array(720906, 65537, 1, 720907, 131073, 1, 720908, 131073, 1, 720909, 131073, 1, 720910, 131073, 1, 720911, 131073, 1, 720912, 131073, 1, 720913, 131073, 1, 720914, 131073, 1, 720915, 196609, 1, 786451, 196609, 2, 851987, 196609, 2, 917523, 196609, 2, 983059, 196609, 2, 1048595, 196609, 2, 786442, 65537, 2, 851978, 65537, 2, 917514, 65537, 2, 983050, 65537, 2, 1048586, 65537, 2, 786443, 655361, 7, 786444, 655361, 7, 851981, 524289, 6, 851982, 720897, 6, 851983, 589825, 6, 851984, 589825, 6, 851985, 655361, 6, 851986, 655361, 7, 786450, 393217, 6, 786449, 589825, 6, 786448, 458753, 7, 786447, 524289, 6, 786446, 524289, 6, 786445, 524289, 7, 851980, 524289, 6, 917516, 655361, 6, 917515, 655361, 7, 851979, 655361, 6, 917518, 524289, 6, 917519, 524289, 7, 917520, 589825, 7, 917521, 524289, 6, 917522, 524289, 6, 983058, 720897, 6, 983057, 720897, 7, 983056, 589825, 6, 983055, 458753, 6, 983054, 589825, 7, 983053, 524289, 6, 983052, 720897, 7, 983051, 524289, 7, 1048587, 655361, 6, 1048588, 655361, 6, 1048589, 655361, 6, 1048590, 720897, 6, 1048591, 655361, 7, 1048592, 458753, 7, 1048593, 524289, 6, 1048594, 524289, 7, 917517, 655361, 7)
+layer_0/tile_data = PackedInt32Array(720906, 131072, 1, 720907, 131072, 1, 720908, 131072, 1, 720909, 131072, 1, 720910, 131072, 1, 720911, 131072, 1, 720912, 131072, 1, 720913, 131072, 1, 720914, 131072, 1, 720915, 131072, 1, 786451, 131072, 2, 851987, 131072, 2, 917523, 131072, 2, 983059, 131072, 2, 1048595, 131072, 2, 786442, 131072, 2, 851978, 131072, 2, 917514, 131072, 2, 983050, 131072, 2, 1048586, 131072, 2, 786443, 131072, 2, 786444, 131072, 2, 851981, 131072, 2, 851982, 131072, 2, 851983, 131072, 2, 851984, 131072, 2, 851985, 131072, 2, 851986, 131072, 2, 786450, 131072, 2, 786449, 131072, 2, 786448, 131072, 2, 786447, 131072, 2, 786446, 131072, 2, 786445, 131072, 2, 851980, 131072, 2, 917516, 131072, 2, 917515, 131072, 2, 851979, 131072, 2, 917518, 131072, 2, 917519, 131072, 2, 917520, 131072, 2, 917521, 131072, 2, 917522, 131072, 2, 983058, 131072, 2, 983057, 131072, 2, 983056, 131072, 2, 983055, 131072, 2, 983054, 131072, 2, 983053, 131072, 2, 983052, 131072, 2, 983051, 131072, 2, 1048587, 131072, 2, 1048588, 131072, 2, 1048589, 131072, 2, 1048590, 131072, 2, 1048591, 131072, 2, 1048592, 131072, 2, 1048593, 131072, 2, 1048594, 131072, 2, 917517, 131072, 2)
 
-[node name="InteractionManager" parent="." instance=ExtResource("10_26sic")]
+[node name="InteractionManager" parent="." instance=ExtResource("9_ipb3p")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 814.63
+offset_top = 486.488
+offset_right = 854.63
+offset_bottom = 509.488
+theme_override_font_sizes/font_size = 24
+text = "[DEBUG] Это второй этап"
 
 [connection signal="body_entered" from="PlayerCamera/CleanerArea" to="." method="_on_cleaner_area_body_entered"]
-[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
-[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
-[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
-
-[editable path="InLevelUI/Settings2"]

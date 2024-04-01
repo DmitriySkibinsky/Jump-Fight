@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfph7mlmasj20"]
+
+[ext_resource type="Script" path="res://scenes/game/Utils/Interaction/InteractionManager.cs" id="1_rlkh3"]
+
+[node name="InteractionManager" type="Node2D" groups=["InteractionManager"]]
+script = ExtResource("1_rlkh3")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_right = 60.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+text = "[E] to interact"
+horizontal_alignment = 1
+vertical_alignment = 1

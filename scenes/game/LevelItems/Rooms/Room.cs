@@ -8,7 +8,8 @@ public partial class Room : Node2D
 	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
-		{"BasicEnemy", GD.Load<PackedScene>("res://scenes/game/entities/Mob/mob.tscn")}
+		{"BasicEnemy", GD.Load<PackedScene>("res://scenes/game/entities/Mob/mob.tscn")},
+		
 	};
 	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;
@@ -30,7 +31,9 @@ public partial class Room : Node2D
 
 	private async void SpawnEnemies(){
 		foreach(Marker2D EnemyPosition in EnemyPositionsContainer.GetChildren()){
-			Enemy enemy = Enemies["BasicEnemy"].Instantiate<Enemy>();
+			string EnemyName = EnemyPosition.Name.ToString();
+			EnemyName = EnemyName.Substr(0, EnemyName.IndexOf("_"));
+			Node2D enemy = Enemies[EnemyName].Instantiate<Node2D>();
 			enemy.Connect("tree_exited", Callable.From(_on_enemy_killed));
 			enemy.Position = EnemyPosition.Position;
 			this.AddChild(enemy);
