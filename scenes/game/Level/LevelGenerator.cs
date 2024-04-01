@@ -4,8 +4,6 @@ using System;
 public partial class LevelGenerator : Node2D
 {
 	public Godot.Collections.Array<PackedScene> BattleSection = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room1.tscn"),
-		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Room2.tscn")
 	};
 
 	public Godot.Collections.Array<PackedScene> Platforms = new Godot.Collections.Array<PackedScene>{
@@ -14,12 +12,13 @@ public partial class LevelGenerator : Node2D
 	};
 
 	public Godot.Collections.Array<PackedScene> EndRooms = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/EndRooms/EndRoom.tscn")
 	};
 
 	public Godot.Collections.Array<PackedScene> Enemies = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
 	};
+
+	public string NextScenePath;
 	public int num_levels = 4;
 	public int platform_amount = 10;
 	public float last_platform_pos_y = 0;
@@ -68,6 +67,7 @@ public partial class LevelGenerator : Node2D
 				int randomRoom = rand.Next(EndRooms.Count);
 				Node2D EndRoom = EndRooms[randomRoom].Instantiate<Node2D>();
 				EndRoom.Position = new Vector2(EndRoom.Position.X, last_platform_pos_y - 50);
+				EndRoom.Set("NextScenePath", NextScenePath);
 				this.AddChild(EndRoom);
 			}else{
 				platform_amount += 10;
