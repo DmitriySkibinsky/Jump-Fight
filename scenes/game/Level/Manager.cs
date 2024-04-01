@@ -44,7 +44,7 @@ public partial class Manager : Node2D
 	}
 	public void _on_new_game_pressed()
 	{
-		GetTree().ChangeSceneToFile("res://scenes/game/Level/level.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/game/Level/Level1/level1.tscn");
 	}
 	
 }
