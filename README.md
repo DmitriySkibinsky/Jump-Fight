@@ -1,4 +1,4 @@
-# Игра в жанре платформер с элементами rogue-lite "Jump & Fight" [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0) [![Build Godot Project](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godot-build.yml/badge.svg)](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godot-build.yml)
+# Игра в жанре платформер с элементами rogue-lite "Jump & Fight" [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/) 
 Аркадный платформер с видом сбоку в сеттинге классического фентези. Жанры - platformer, rogue-lite. Главной задачей игрока является подъем по башне при помощи прыжков. Однако, помимо преодоления платформ, игроку предстоит столкнуться с врагами на отдельных аренах, что представляют собой промежуточный этап между прыжковыми секциями. Визуально игра выполнена в стиле пиксельной графики для лучшего погружения в атмосферу игр подобного жанра. Платформа, для которой разрабатывается игровой продукт - ПК.
 ## Основные возможности:
 Игроку предоставляется возможность прочувствовать ключевые возможности двух на первый взгляд несовместимых жанров. Данная идея реализована с помощью разделения игрового процесса на две части - прыжковую и боевую. 
@@ -10,6 +10,9 @@
 2. Docker - программная платформа для быстрой разработки, и развертывания приложений. Docker упаковывает ПО в стандартизованные блоки - контейнеры. Каждый контейнер включает все необходимое для работы приложения: библиотеки, системные инструменты, код и среду исполнения.
 3. Jenkins - сервер непрерывной интеграции (CI) с открытым исходным кодом, написанный на Java. Это веб-приложение позволяет автоматизировать различные задачи разработки программного обеспечения, такие как сборка, тестирование и развертывание.
 4. Git - GitFlow — система управления версиями с распределенной архитектурой, предназначенная для отслеживания и ведения истории изменения файлов.
+
+## Система Интеграции и развертывания 
+В качестве системы CI/CD выступает Github Actions[![Build Godot Project](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godot-build.yml/badge.svg)](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godot-build.yml)
 
 ## Инструкции по установке/запуску:
 -
