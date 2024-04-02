@@ -8,7 +8,6 @@ using Chickensoft.GodotTestDriver.Drivers;
 using System;
 using System.Linq;
 using Shouldly;
-using Moq;
 
 public class PlayerTest : TestClass {
 	private readonly ILog _log = new GDLog(nameof(PlayerTest));
