@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cv8r5x4jhhmrw"]
 
-[ext_resource type="Script" path="res://test/TestScene.cs" id="1_7vnp0"]
+[ext_resource type="Script" path="res://Chickensoft.GodotPackage.Tests/test/TestScene.cs" id="1_b7c42"]
 
 [node name="TestScene" type="Node2D"]
-script = ExtResource("1_7vnp0")
+script = ExtResource("1_b7c42")

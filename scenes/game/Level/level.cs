@@ -3,9 +3,9 @@ using System;
 
 public partial class level : Node2D
 {	
-	private bool isMoveableCamera = false;
-	private Camera2D camera;
-	private player player;
+	public bool isMoveableCamera = false;
+	public Camera2D camera;
+	public player player;
 	public override void _Ready()
 	{
 		this.player = GetNode<player>("Player");
@@ -35,8 +35,6 @@ public partial class level : Node2D
 	{
 		GetTree().Quit();
 	}
-
+	
 }
-
-
 
