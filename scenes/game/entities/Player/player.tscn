@@ -909,7 +909,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_layer = 137
+collision_layer = 141
 collision_mask = 129
 script = ExtResource("1_6toyy")
 

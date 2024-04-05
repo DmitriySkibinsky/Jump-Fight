@@ -26,7 +26,7 @@ public partial class player : CharacterBody2D
 
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-    public const float speed = 100.0f;
+    public const float speed = 120.0f;
 
     public const float jump_velocity = -250f;
 
@@ -42,6 +42,7 @@ public partial class player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        velocity = Velocity;
         switch (State)
         {
             case StateMachine.MOVE:

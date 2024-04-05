@@ -22,7 +22,7 @@ public partial class BreackablePlatform : JumpPlatform
 		if (body.Name == "Player"){
 			player Player = (player)body;
 			if (Player.Velocity.Y >= 0){
-				Player.velocity.Y = -JumpForce;
+				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
 				Player.MoveAndSlide();
 				Platform.Hide();
 				Explosion.Play();

@@ -15,13 +15,13 @@ public partial class JumpPlatform : StaticBody2D
 	}
 
 	[Export] 
-	public int JumpForce = 950;
+	public int JumpForce = 700;
 	public virtual void _on_area_2d_body_entered(Node2D body)
 	{
 		if (body.Name == "Player"){
 			player Player = (player)body;
 				if (Player.Velocity.Y >= 0){
-				Player.velocity.Y = -JumpForce;
+				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
 				Player.MoveAndSlide();
 			}
 		}
