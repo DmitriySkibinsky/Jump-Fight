@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dm7xdh2fttkq"]
 
-[ext_resource type="Texture2D" uid="uid://d0u07amj1u63i" path="res://scenes/game/LevelItems/Platforms/Pixel Health Bar/Bar/no health bar.png" id="1_m366b"]
+[ext_resource type="Texture2D" uid="uid://d0u07amj1u63i" path="res://assets/sprites/Pixel Health Bar/Bar/no health bar.png" id="1_m366b"]
 [ext_resource type="Script" path="res://scenes/game/UI/Health bar/health_bar.cs" id="1_r28uu"]
-[ext_resource type="Texture2D" uid="uid://dkdlkxpvls8fv" path="res://scenes/game/LevelItems/Platforms/Pixel Health Bar/Bar/empty health bar.png" id="2_xoeis"]
-[ext_resource type="Texture2D" uid="uid://xcetxtt1536c" path="res://scenes/game/LevelItems/Platforms/Pixel Health Bar/Bar/health bar.png" id="3_apgwa"]
+[ext_resource type="Texture2D" uid="uid://dkdlkxpvls8fv" path="res://assets/sprites/Pixel Health Bar/Bar/empty health bar.png" id="2_xoeis"]
+[ext_resource type="Texture2D" uid="uid://xcetxtt1536c" path="res://assets/sprites/Pixel Health Bar/Bar/health bar.png" id="3_apgwa"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_r28uu")
