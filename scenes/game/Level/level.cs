@@ -24,8 +24,10 @@ public partial class level : Node2D
 
 	public void _on_cleaner_area_body_entered(Node2D body){
 		if (body.Name == "Player"){
-			body.CallDeferred("GetDamaged", 20);
-			body.Position = new Vector2(body.Position.X, camera.Position.Y);
+			player player = (player)body;
+			player.GetDamaged(20);
+			player.Position = new Vector2(body.Position.X, camera.Position.Y);
+			player.Velocity = new Vector2(0, 0);
 		}else{
 			body.QueueFree();
 		}

@@ -86,7 +86,7 @@ public partial class LevelGenerator : Node2D
 	public void GeneratePlatform(float initial_pos_y, int amount){
 		Random rnd = new Random();
 		for (int i = 0; i < amount; i++){
-			int random_y = rnd.Next(150, 225);
+			int random_y = rnd.Next(175, 275);
 			int random_x = rnd.Next(700, 1225);
 			int random_platform = rnd.Next(Platforms.Count);
 			initial_pos_y -= random_y;

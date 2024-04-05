@@ -836,12 +836,12 @@ scale = Vector2(1.75, 1.75)
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1016, -58.6667)
 scale = Vector2(1.75, 0.438)
-JumpForce = 1400
+JumpForce = 1000
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1562.67, -65.3333)
 scale = Vector2(1.75, 0.438)
-JumpForce = 1400
+JumpForce = 1000
 
 [node name="EnemyPositions" type="Node2D" parent="."]
 position = Vector2(0, 5.33333)

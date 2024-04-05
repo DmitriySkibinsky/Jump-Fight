@@ -11,12 +11,12 @@ layer_0/tile_data = PackedInt32Array(0, 65537, 1, 5, 196609, 1, 1, 131073, 1, 2,
 [node name="Jp3" parent="JumpPlatforms" index="1" instance=ExtResource("2_fpnc4")]
 position = Vector2(1256, -912)
 scale = Vector2(1.75, 0.438)
-JumpForce = 900
+JumpForce = 800
 
 [node name="Jp4" parent="JumpPlatforms" index="2" instance=ExtResource("2_fpnc4")]
 position = Vector2(2245.33, -1465.33)
 scale = Vector2(1.75, 0.438)
-JumpForce = 900
+JumpForce = 800
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(1280, -926.667)
