@@ -829,6 +829,7 @@ scale = Vector2(0.5, 0.5)
 [node name="CleanerArea" type="Area2D" parent="PlayerCamera"]
 position = Vector2(-2262, 712)
 scale = Vector2(2, 2)
+collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCamera/CleanerArea"]

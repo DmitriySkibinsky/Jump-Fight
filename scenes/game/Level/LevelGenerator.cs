@@ -86,7 +86,15 @@ public partial class LevelGenerator : Node2D
 	public void GeneratePlatform(float initial_pos_y, int amount){
 		Random rnd = new Random();
 		for (int i = 0; i < amount; i++){
-			int random_y = rnd.Next(175, 275);
+			float enemy_pos_y = initial_pos_y;
+			if (rnd.Next(0, 10) >= 8){
+				enemy_pos_y -= rnd.Next(75, 200);
+				Node2D new_enemy = Enemies[rnd.Next(Enemies.Count)].Instantiate<Node2D>();
+				new_enemy.Position = new Vector2(960, enemy_pos_y);
+				this.AddChild(new_enemy);
+			}
+
+			int random_y = rnd.Next(225, 350);
 			int random_x = rnd.Next(700, 1225);
 			int random_platform = rnd.Next(Platforms.Count);
 			initial_pos_y -= random_y;
@@ -95,11 +103,7 @@ public partial class LevelGenerator : Node2D
 			last_platform_pos_y = initial_pos_y;
 			this.AddChild(new_platform);
 
-			if (rnd.Next(0, 10) >= 8){
-				Node2D new_enemy = Enemies[rnd.Next(Enemies.Count)].Instantiate<Node2D>();
-				new_enemy.Position = new Vector2(960, initial_pos_y);
-				this.AddChild(new_enemy);
-			}
+			
 		}
 	}
 

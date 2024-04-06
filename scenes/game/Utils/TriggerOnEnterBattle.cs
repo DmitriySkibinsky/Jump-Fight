@@ -17,7 +17,7 @@ public partial class TriggerOnEnterBattle : Node2D
 		if (body.Name == "Player"){
 			GetParent().GetParent().GetNode<PlatformingBorder>("PlayerCamera/PlatformingBorder").turn_off();
 			GetParent().GetParent().GetNode<in_level_ui>("InLevelUI").animate_out();
-			GetParent().GetParent().Set("isMoveableCamera", true);
+			GetParent().GetParent().Set("isBattleSection", true);
 		}
 	}
 }

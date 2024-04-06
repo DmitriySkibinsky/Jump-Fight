@@ -3,7 +3,7 @@ using System;
 
 public partial class level : Node2D
 {	
-	public bool isMoveableCamera = false;
+	public bool isBattleSection = false;
 	public Camera2D camera;
 	public player player;
 	public override void _Ready()
@@ -15,7 +15,7 @@ public partial class level : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (player.Position.Y < camera.Position.Y && isMoveableCamera){
+		if (player.Position.Y < camera.Position.Y && isBattleSection){
 			camera.Position = new Vector2(camera.Position.X, player.Position.Y + 20);
 		}else if (player.Position.Y < camera.Position.Y){
 			camera.Position = new Vector2(camera.Position.X, player.Position.Y);
