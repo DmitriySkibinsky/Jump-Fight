@@ -830,17 +830,20 @@ script = ExtResource("1_rbk30")
 [node name="SolidPlatform" parent="SolidPlatforms" instance=ExtResource("1_oqgpb")]
 position = Vector2(1280, -11.3303)
 scale = Vector2(1.75, 1.75)
+collision_layer = 64
 
 [node name="JumpPlatforms" type="Node2D" parent="."]
 
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1016, -58.6667)
 scale = Vector2(1.75, 0.438)
+collision_layer = 64
 JumpForce = 1000
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1562.67, -65.3333)
 scale = Vector2(1.75, 0.438)
+collision_layer = 64
 JumpForce = 1000
 
 [node name="EnemyPositions" type="Node2D" parent="."]

@@ -23,14 +23,17 @@ position = Vector2(1280, -2429.33)
 [node name="Jp3" parent="." index="6" instance=ExtResource("3_y0j8n")]
 position = Vector2(1280, -1433.33)
 scale = Vector2(2, 0.25)
+collision_layer = 0
 JumpForce = 500
 
 [node name="Jp4" parent="." index="7" instance=ExtResource("3_y0j8n")]
 position = Vector2(2173.33, -1682.67)
+collision_layer = 0
 JumpForce = 800
 
 [node name="Jp5" parent="." index="8" instance=ExtResource("3_y0j8n")]
 position = Vector2(398.667, -1689.33)
+collision_layer = 0
 JumpForce = 800
 
 [node name="stuff" parent="." index="9"]

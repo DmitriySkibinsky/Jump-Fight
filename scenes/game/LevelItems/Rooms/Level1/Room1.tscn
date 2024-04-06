@@ -23,11 +23,13 @@ position = Vector2(1562.67, 1318.67)
 [node name="Jp3" parent="JumpPlatforms" index="2" instance=ExtResource("3_qkvyw")]
 position = Vector2(320, 78.6667)
 scale = Vector2(1.75, 0.438)
+collision_layer = 64
 JumpForce = 750
 
 [node name="Jp4" parent="JumpPlatforms" index="3" instance=ExtResource("3_qkvyw")]
 position = Vector2(2240, 73.3333)
 scale = Vector2(1.75, 0.438)
+collision_layer = 64
 JumpForce = 750
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
