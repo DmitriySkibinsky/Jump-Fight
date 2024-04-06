@@ -37,7 +37,7 @@ public static class Trajectory
     {
         // Настройки
         float Angle = Mathf.DegToRad(10); // Угл по которому будем делиться круг !!!! ДОЛЖНО ДЕЛИТЬСЯ НА 360 БЕЗ ОСТАТКА
-        int FlatY = rnd.Next(40, 75); // Сплющиваем круг на рандомное значение
+        float FlatY = rnd.Next(40, 75); // Сплющиваем круг на рандомное значение
         Vector2 Flatten = new Vector2(1, FlatY/100); // Насколько будет приплюснут круг
 
 
@@ -59,7 +59,7 @@ public static class Trajectory
         //Настройки
         float DivGS = GameSpace / 4; // Радиус кругов у петли
         float Angle = Mathf.DegToRad(10); // Угл по которому будем делить круг !!!! ДОЛЖНО ДЕЛИТЬСЯ НА 180 БЕЗ ОСТАТКА
-        int FlatY = rnd.Next(50, 100); // Сплющиваем круг на рандомное значение
+        float FlatY = rnd.Next(50, 100); // Сплющиваем круг на рандомное значение
         Vector2 Flatten = new Vector2(1, FlatY/100); // Насколько будет приплюснута петля
         int Side = rnd.Next(1) == 1 ? 1 : -1; // Направление
 
@@ -119,7 +119,7 @@ public static class Trajectory
     /// </summary>
     public static void SetRandomTrajectory(ref Vector2[] WayPoints, Vector2 StartPos)
     {
-        TrajectoryType trajectory = (TrajectoryType)rnd.Next(0,3); // Генерируем число [0;4)
+        TrajectoryType trajectory = (TrajectoryType)rnd.Next(4); // Генерируем число [0;4)
         switch (trajectory)
         {
             case TrajectoryType.Linear:
