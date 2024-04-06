@@ -119,7 +119,7 @@ public static class Trajectory
     /// </summary>
     public static void SetRandomTrajectory(ref Vector2[] WayPoints, Vector2 StartPos)
     {
-        TrajectoryType trajectory = (TrajectoryType)rnd.Next(4); // Генерируем число [0;4)
+        TrajectoryType trajectory = (TrajectoryType)rnd.Next(0,3); // Генерируем число [0;4)
         switch (trajectory)
         {
             case TrajectoryType.Linear:
@@ -141,7 +141,7 @@ public static class Trajectory
 public partial class FloatingEye : CharacterBody2D
 {
     private int Speed = 125;
-    private int Damage = 100;
+    private int Damage = 5;
     private int direction = 1;
     private bool Alive = true;
 
@@ -153,13 +153,15 @@ public partial class FloatingEye : CharacterBody2D
 
     private AnimatedSprite2D Anim;
 
+    private player Player;
+
     public override void _Ready()
     {
         Area2D HitBoxes = GetNode<Area2D>("HitBoxes");
         Area2D HurtBoxes = GetNode<Area2D>("HurtBoxes");
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
         Anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
+        Player = (player)GetTree().GetFirstNodeInGroup("Player");
         //CollisionShape2D CollisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
         StartPos = this.Position; // Сохраняем стартовую позицию
 
@@ -170,7 +172,7 @@ public partial class FloatingEye : CharacterBody2D
         this.Position = WayPoints[CurrentWayPoint]; // Ставим врага на рандомную позицию его маршрута
 
         //HurtBoxes.AreaEntered += GetDamage;
-        HitBoxes.AreaEntered += Attack;
+        //HitBoxes.BodyEntered += Attack; Оно не работает
     }
 
     public override void _Process(double delta)
@@ -208,22 +210,23 @@ public partial class FloatingEye : CharacterBody2D
         }
     }
 
-    public void _on_hurt_boxes_area_entered(Node2D Body)
+    public void _on_hurt_boxes_body_entered(Node2D Body)
     {
-        if (Body.GetParent() != null && Body.GetParent().Name == "Player" && Body.GetParent() is player Player && Alive && Player.Velocity.Y >= 0)
+        if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
-            Player.velocity.Y = -500;
+            Player.Velocity = new Vector2(Player.Velocity.X, -500);
             Player.MoveAndSlide();
             death();
+            
         }
     }
 
     public void Attack(Node2D Body)
     {
-        if (Body.GetParent() != null && Body.GetParent().Name == "Player" && Body.GetParent() is player Player && Alive)
+        if (Body == Player && Alive)
         {
             //_customSignals.EmitSignal(nameof(CustomSignals.DamagePlayer), Damage);
-            Player.CallDeferred("GetDamaged", Damage);
+            Player.GetDamaged(Damage);
         }
     }
 
