@@ -14,12 +14,16 @@ public partial class Room : Node2D
 	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;
 	private Marker2D ExitPlatformPosition;
+	private Marker2D PlayerSpawn;
+	private Area2D DamageBox;
 
 	private int num_enemies;
 	public override void _Ready()
 	{
 		EnemyPositionsContainer = GetNode<Node2D>("EnemyPositions");
 		PlayerDetector = GetNode<Area2D>("PlayerDetector");
+		DamageBox = GetNode<Area2D>("DamageBox");
+		PlayerSpawn = GetNode<Marker2D>("PlayerSpawn");
 		ExitPlatformPosition = GetNode<Marker2D>("ExitPlatformPosition");
 		num_enemies = EnemyPositionsContainer.GetChildCount();
 	}
@@ -63,10 +67,19 @@ public partial class Room : Node2D
 			this.CallDeferred("SpawnEnemies");
 
 			if (num_enemies == 0){
-			ExitPlatform exitPlatform = ExitPlatformScene.Instantiate<ExitPlatform>();
-			exitPlatform.Position = ExitPlatformPosition.Position;
-			this.AddChild(exitPlatform);
+				ExitPlatform exitPlatform = ExitPlatformScene.Instantiate<ExitPlatform>();
+				exitPlatform.Position = ExitPlatformPosition.Position;
+				this.AddChild(exitPlatform);
 			}
+
+			DamageBox.SetCollisionMaskValue(1, true);
+		}
+	}
+
+	public void _on_damage_box_body_entered(Node2D body){
+		if (body.Name == "Player"){
+			body.GlobalPosition = PlayerSpawn.GlobalPosition;
+			body.CallDeferred("GetDamaged", 20);
 		}
 	}
 }
