@@ -1,4 +1,5 @@
 using Godot;
+using Shouldly;
 using System;
 
 public partial class LevelGenerator : Node2D
@@ -24,12 +25,14 @@ public partial class LevelGenerator : Node2D
 	public float last_platform_pos_y = 0;
 	public Camera2D camera;
 	public player Player;
+	public level Level;
 
 	public PackedScene TriggerOnEnterBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnEnterBattle.tscn");
 	public PackedScene TriggerOnExitBattle = GD.Load<PackedScene>("res://scenes/game/Utils/TriggerOnExitBattle.tscn");
 	public override void _Ready()
 	{
 		Player = GetParent().GetNode<player>("Player");
+		Level = (level)this.Owner;
 	
 		_spawn_levels();
 	}
@@ -101,8 +104,8 @@ public partial class LevelGenerator : Node2D
 			Node2D new_platform = Platforms[random_platform].Instantiate<Node2D>();
 			new_platform.Position = new Vector2(random_x, initial_pos_y);
 			last_platform_pos_y = initial_pos_y;
+			this.Owner.CallDeferred("RegisterPlatform", new_platform);
 			this.AddChild(new_platform);
-
 			
 		}
 	}

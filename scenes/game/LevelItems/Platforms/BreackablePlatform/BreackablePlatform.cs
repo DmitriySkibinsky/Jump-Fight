@@ -31,6 +31,7 @@ public partial class BreackablePlatform : JumpPlatform
 	}
 
 	public void _on_explosion_animation_finished(){
+		GetParent().Owner.CallDeferred("UnregisterPlatform", this);
 		this.QueueFree();
 	}
 }
