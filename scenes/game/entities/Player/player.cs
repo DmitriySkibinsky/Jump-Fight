@@ -138,11 +138,11 @@ public partial class player : CharacterBody2D
         {
             animPlayer.Play("Fall");
         }
-        if (Input.IsActionJustPressed("attack") && !attack_cooldown)
+        if (Input.IsActionJustPressed("attack") && !attack_cooldown && IsOnFloor())
         {
             State = StateMachine.ATTACK;
         }
-        if (Input.IsActionPressed("block"))
+        if (Input.IsActionPressed("block") && IsOnFloor())
         {
             State = StateMachine.BLOCK;
         }
@@ -228,7 +228,7 @@ public partial class player : CharacterBody2D
 
     public void GetDamaged(int Damage)
     {
-        if (Input.IsActionPressed("block"))
+       if (Input.IsActionPressed("block"))
         {
             State = StateMachine.BLOCK;
             health -= Damage / 2;
@@ -239,7 +239,7 @@ public partial class player : CharacterBody2D
             State = StateMachine.DAMAGE;
             health -= Damage;
             EmitSignal(SignalName.HealthChanged, health);
-        }
+       }
     }
 
     public async void attack_freeze()
