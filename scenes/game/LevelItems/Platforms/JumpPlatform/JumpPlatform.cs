@@ -16,13 +16,15 @@ public partial class JumpPlatform : StaticBody2D
 
 	[Export] 
 	public int JumpForce = 700;
-	public virtual void _on_area_2d_body_entered(Node2D body)
+	public virtual async void _on_area_2d_body_entered(Node2D body)
 	{
 		if (body.Name == "Player"){
 			player Player = (player)body;
 				if (Player.Velocity.Y >= 0){
 				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
-				Player.MoveAndSlide();
+				Player.GetNode<AnimationPlayer>("AnimationPlayer").Play("Jump");
+                await ToSignal(Player.GetNode<AnimationPlayer>("AnimationPlayer"), AnimationPlayer.SignalName.AnimationFinished);
+                Player.MoveAndSlide();
 			}
 		}
 		

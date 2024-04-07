@@ -18,12 +18,14 @@ public partial class BreackablePlatform : JumpPlatform
 	}
 	
 
-	public override void _on_area_2d_body_entered(Node2D body){
+	public override async void _on_area_2d_body_entered(Node2D body){
 		if (body.Name == "Player"){
 			player Player = (player)body;
 			if (Player.Velocity.Y >= 0){
 				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
-				Player.MoveAndSlide();
+                Player.GetNode<AnimationPlayer>("AnimationPlayer").Play("Jump");
+                await ToSignal(Player.GetNode<AnimationPlayer>("AnimationPlayer"), AnimationPlayer.SignalName.AnimationFinished);
+                Player.MoveAndSlide();
 				Platform.Hide();
 				Explosion.Play();
 			}
