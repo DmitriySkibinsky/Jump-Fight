@@ -23,11 +23,11 @@ public partial class BreackablePlatform : JumpPlatform
 			player Player = (player)body;
 			if (Player.Velocity.Y >= 0){
 				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
+				Platform.Hide();
+				Explosion.Play();
                 Player.GetNode<AnimationPlayer>("AnimationPlayer").Play("Jump");
                 await ToSignal(Player.GetNode<AnimationPlayer>("AnimationPlayer"), AnimationPlayer.SignalName.AnimationFinished);
                 Player.MoveAndSlide();
-				Platform.Hide();
-				Explosion.Play();
 			}
 		}
 	}
