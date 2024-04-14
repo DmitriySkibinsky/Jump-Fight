@@ -39,6 +39,10 @@ jobs:
           sudo apt update
           sudo apt install build-essential
           sudo apt install mono-complete
+          cd Chickensoft.GodotPackage.Tests/test
+          msc test.cs
+          cd /
+          tree
           
 
       - name: Build with Godot Mono Build Action
