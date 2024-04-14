@@ -816,15 +816,15 @@ texture = ExtResource("5_pi1es")
 5:12/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_gis1m"]
-physics_layer_0/collision_layer = 64
-physics_layer_0/collision_mask = 64
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_6m0wk")
 sources/1 = SubResource("TileSetAtlasSource_1bcnl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fqh8"]
 size = Vector2(2587.33, 50)
 
-[node name="Node2D2" type="Node2D"]
+[node name="Node2D3" type="Node2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_rbk30")
 
@@ -833,26 +833,25 @@ script = ExtResource("1_rbk30")
 [node name="SolidPlatform" parent="SolidPlatforms" instance=ExtResource("1_oqgpb")]
 position = Vector2(1280, -11.3303)
 scale = Vector2(1.75, 1.75)
-collision_layer = 64
 
 [node name="JumpPlatforms" type="Node2D" parent="."]
 
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1016, -58.6667)
 scale = Vector2(1.75, 0.438)
-collision_layer = 64
 JumpForce = 1000
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1562.67, -65.3333)
 scale = Vector2(1.75, 0.438)
-collision_layer = 64
 JumpForce = 1000
 
 [node name="EnemyPositions" type="Node2D" parent="."]
 position = Vector2(0, 5.33333)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2(1302.14, -11.661)

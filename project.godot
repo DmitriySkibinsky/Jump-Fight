@@ -88,6 +88,15 @@ super={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="PlayerJumpAttack"
+2d_physics/layer_8="DisappearingOb"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
