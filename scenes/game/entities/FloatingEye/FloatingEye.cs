@@ -159,7 +159,6 @@ public partial class FloatingEye : CharacterBody2D
     {
         Area2D HitBoxes = GetNode<Area2D>("HitBoxes");
         Area2D HurtBoxes = GetNode<Area2D>("HurtBoxes");
-        _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
         Anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
         //CollisionShape2D CollisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
