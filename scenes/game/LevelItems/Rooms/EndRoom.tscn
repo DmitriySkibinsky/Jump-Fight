@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=12 format=3 uid="uid://dx10jsxbdcf8b"]
-=======
-[gd_scene load_steps=14 format=3 uid="uid://dmh06rrbsmmm0"]
->>>>>>> 89b6937fb821f82a81b59ccd27496495ebc3b489
+[gd_scene load_steps=14 format=3 uid="uid://dx10jsxbdcf8b"]
 
 [ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="1_gmala"]
 [ext_resource type="Script" path="res://scenes/game/LevelItems/Rooms/EndRoom.cs" id="1_lmhyh"]
