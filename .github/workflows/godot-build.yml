@@ -34,6 +34,13 @@ jobs:
           alias: godot
           export-templates: true
 
+      - name: Testing game
+        run: |
+          sudo apt update
+          sudo apt install build-essential
+          sudo apt update
+          sudo apt install mono-complete
+
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
