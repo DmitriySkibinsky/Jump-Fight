@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cewo3ebd4w1rg" path="res://assets/sprites/char_blue.png" id="2_nscaq"]
 [ext_resource type="Texture2D" uid="uid://c47xdmqd1drxn" path="res://assets/sprites/player/char_blue_1.png" id="3_0m3m7"]
 [ext_resource type="Texture2D" uid="uid://dglifr18q4mhp" path="res://assets/sprites/player/char_blue_2.png" id="4_l22p0"]
+[ext_resource type="PackedScene" uid="uid://bhm0qmsx782o2" path="res://scenes/game/entities/DamageBox/DamageBox.tscn" id="5_xwwmt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
 radius = 12.0
@@ -1199,15 +1200,12 @@ _data = {
 "Walk": SubResource("Animation_h7h65")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
-radius = 12.0
-height = 34.0
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 10
 script = ExtResource("1_6toyy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="AttackDirection_DamageBox_HurtBox#CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
 shape = SubResource("CapsuleShape2D_cpaui")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -1219,16 +1217,9 @@ autoplay = "Idle"
 
 [node name="AttackDirection" type="Node2D" parent="."]
 
-[node name="DamageBox" parent="AttackDirection" instance=ExtResource("5_dumrw")]
-
-[node name="CollisionShape2D" parent="AttackDirection/DamageBox/HurtBox" index="0"]
-position = Vector2(3, 0)
-
-[node name="HitBox" parent="AttackDirection/DamageBox" index="1"]
-position = Vector2(21, 1)
+[node name="DamageBox" parent="AttackDirection" instance=ExtResource("5_xwwmt")]
 
 [node name="CollisionShape2D" parent="AttackDirection/DamageBox/HitBox" index="0"]
-position = Vector2(-1, -1)
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1236,3 +1227,5 @@ root_node = NodePath("../AnimatedSprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_v0wwh")
 }
+
+[editable path="AttackDirection/DamageBox"]
