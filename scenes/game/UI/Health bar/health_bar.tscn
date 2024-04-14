@@ -9,11 +9,12 @@
 script = ExtResource("1_r28uu")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
 offset_left = 3.0
 offset_top = 7.0
-offset_right = 286.0
+offset_right = 285.0
 offset_bottom = 49.0
-value = 50.0
+value = 20.0
 nine_patch_stretch = true
 texture_under = ExtResource("1_m366b")
 texture_over = ExtResource("2_xoeis")

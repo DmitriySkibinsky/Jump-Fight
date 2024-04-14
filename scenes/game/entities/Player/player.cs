@@ -4,12 +4,16 @@ using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Timers;
+using static System.Net.Mime.MediaTypeNames;
 
 public partial class player : CharacterBody2D
 {
 
     [Signal]
     public delegate void HealthChangedEventHandler(int new_health);
+
+    [Signal]
+    public delegate void SuperReloadEventHandler(int new_super);
 
     enum StateMachine
     {
@@ -18,6 +22,7 @@ public partial class player : CharacterBody2D
         ATTACK,
         ATTACK2,
         ATTACK3,
+        SUPER,
         BLOCK,
         DEATH
     }
@@ -25,6 +30,8 @@ public partial class player : CharacterBody2D
     StateMachine State = StateMachine.MOVE;
 
     Node2D level;
+
+    Vector2 player_pos;
 
     public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -40,10 +47,19 @@ public partial class player : CharacterBody2D
 
     public bool attack_cooldown = false;
 
-     public Vector2 velocity = new Vector2();
+    public bool super_cooldown = false;
+
+    public float damage_basic = 10;
+
+    public float damage_multiplier = 1;
+
+    public float damage_current;
+
+    public Vector2 velocity = new Vector2();
 
     public override void _PhysicsProcess(double delta)
     {
+
         velocity = Velocity;
         switch (State)
         {
@@ -58,6 +74,9 @@ public partial class player : CharacterBody2D
                 break;
             case StateMachine.ATTACK3:
                 attack3_state();
+                break;
+            case StateMachine.SUPER:
+                super_state();
                 break;
             case StateMachine.DAMAGE:
                 damage_state();
@@ -81,7 +100,10 @@ public partial class player : CharacterBody2D
 
         Velocity = velocity;
 
+        damage_current = damage_basic * damage_multiplier;
+
         MoveAndSlide();
+
     }
     public void move_state()
     {
@@ -90,6 +112,8 @@ public partial class player : CharacterBody2D
         var anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        var attackDirection = GetNode<Node2D>("AttackDirection");
 
         Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
@@ -101,10 +125,12 @@ public partial class player : CharacterBody2D
                 if (direction.X == 1)
                 {
                     anim.FlipH = false;
+                    attackDirection.RotationDegrees = 0;
                 }
                 else
                 {
                     anim.FlipH = true;
+                    attackDirection.RotationDegrees = 180;
                 }
                 if (velocity.Y == 0)
                 {
@@ -145,13 +171,17 @@ public partial class player : CharacterBody2D
             {
                 animPlayer.Play("Fall");
             }
-            if (Input.IsActionJustPressed("attack") && !attack_cooldown)
+            if (Input.IsActionJustPressed("attack") && !attack_cooldown && IsOnFloor())
             {
                 State = StateMachine.ATTACK;
             }
             if (Input.IsActionPressed("block") && IsOnFloor())
             {
                 State = StateMachine.BLOCK;
+            }
+            if (Input.IsActionJustPressed("super") && !super_cooldown && IsOnFloor())
+            {
+                State = StateMachine.SUPER;
             }
         }
         else
@@ -200,6 +230,7 @@ public partial class player : CharacterBody2D
 
     public async void attack_state()
     {
+        damage_multiplier = 1;
         if (Input.IsActionJustPressed("attack") && combo)
         {
             State = StateMachine.ATTACK2;
@@ -220,6 +251,7 @@ public partial class player : CharacterBody2D
 
     public async void attack2_state()
     {
+        damage_multiplier = 1.25f;
         if (Input.IsActionJustPressed("attack") && combo)
         {
             State = StateMachine.ATTACK3;
@@ -227,15 +259,32 @@ public partial class player : CharacterBody2D
         var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Attack2");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        attack_freeze();
         State = StateMachine.MOVE;
     }
 
     public async void attack3_state()
     {
+        damage_multiplier = 2;
         var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Attack3");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         State = StateMachine.MOVE;
+    }
+
+    public async void super_state()
+    {
+        if (velocity.Y == 0)
+        {
+            damage_multiplier = 3;
+            velocity = Velocity;
+            velocity.X = 0;
+            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            animPlayer.Play("Super_Attack");
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+            super_freeze();
+            State = StateMachine.MOVE;
+        }
     }
 
     public async void death_state()
@@ -253,6 +302,11 @@ public partial class player : CharacterBody2D
         if ((bool)level.Get("isBattleSection"))
         {
             animPlayer.Play("Damage");
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        }
+        else
+        {
+            animPlayer.Play("Fall_Damage");
             await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         }
         State = StateMachine.MOVE;
@@ -291,7 +345,7 @@ public partial class player : CharacterBody2D
             State = StateMachine.DAMAGE;
             health -= Damage;
             EmitSignal(SignalName.HealthChanged, health);
-       }
+        }
     }
 
     public async void attack_freeze()
@@ -299,6 +353,23 @@ public partial class player : CharacterBody2D
         attack_cooldown = true;
         await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
         attack_cooldown = false;
+    }
+
+    public async void super_freeze()
+    {
+        EmitSignal(SignalName.SuperReload, 0);
+        super_cooldown = true;
+        await ToSignal(GetTree().CreateTimer(30), SceneTreeTimer.SignalName.Timeout);
+        super_cooldown = false;
+        EmitSignal(SignalName.SuperReload, 100);
+    }
+
+    public void _on_hit_box_area_entered(Area2D area)
+    {
+        if (area.GetParent().Name == "FloatingEye")
+        {
+            area.GetParent().CallDeferred("GetDamaged", damage_current);
+        }
     }
 
     public void teleport_to(float target_posX)

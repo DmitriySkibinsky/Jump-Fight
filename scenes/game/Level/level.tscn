@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ctp0f35hrooi2"]
+[gd_scene load_steps=22 format=3 uid="uid://ctp0f35hrooi2"]
 
 [ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_8fvfi"]
 [ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="2_b2xxe"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bfph7mlmasj20" path="res://scenes/game/Utils/Interaction/InteractionManager.tscn" id="10_26sic"]
 [ext_resource type="Texture2D" uid="uid://b1wit2utkka75" path="res://assets/sprites/level2/desert-ruins.png" id="11_fmoq0"]
 [ext_resource type="PackedScene" uid="uid://dm7xdh2fttkq" path="res://scenes/game/UI/Health bar/health_bar.tscn" id="14_8r2e5"]
+[ext_resource type="PackedScene" uid="uid://27aoux12dwq0" path="res://scenes/game/UI/Super reload/canvas_layer.tscn" id="15_lg42l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryjtw"]
 texture = ExtResource("2_b2xxe")
@@ -874,8 +875,13 @@ layer_0/tile_data = PackedInt32Array(720906, 65537, 1, 720907, 131073, 1, 720908
 
 [node name="CanvasLayer" parent="." instance=ExtResource("14_8r2e5")]
 
+[node name="CanvasLayer2" parent="." instance=ExtResource("15_lg42l")]
+offset = Vector2(3, 40)
+transform = Transform2D(1, 0, 0, 1, 3, 40)
+
 [connection signal="body_entered" from="PlayerCamera/CleanerArea" to="." method="_on_cleaner_area_body_entered"]
 [connection signal="HealthChanged" from="Player" to="CanvasLayer" method="_on_player_health_changed"]
+[connection signal="SuperReload" from="Player" to="CanvasLayer2" method="_on_player_super_reload"]
 [connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
 [connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
 [connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
