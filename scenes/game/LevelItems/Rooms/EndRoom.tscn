@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmh06rrbsmmm0"]
+[gd_scene load_steps=12 format=3 uid="uid://dx10jsxbdcf8b"]
 
 [ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="1_gmala"]
 [ext_resource type="Script" path="res://scenes/game/LevelItems/Rooms/EndRoom.cs" id="1_lmhyh"]
@@ -797,8 +797,8 @@ texture = ExtResource("4_yfpbf")
 5:12/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_t2bsa"]
-physics_layer_0/collision_layer = 64
-physics_layer_0/collision_mask = 64
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_6m0wk")
 sources/1 = SubResource("TileSetAtlasSource_ems7u")
 

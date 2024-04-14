@@ -141,7 +141,7 @@ public static class Trajectory
 public partial class FloatingEye : CharacterBody2D
 {
     private int Speed = 125;
-    private int Damage = 5;
+    private int Damage = 20;
     private int direction = 1;
     private bool Alive = true;
 

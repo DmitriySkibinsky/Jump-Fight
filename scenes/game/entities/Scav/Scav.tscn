@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dqxeqy7xibk4b"]
+[gd_scene load_steps=40 format=3 uid="uid://dqxeqy7xibk4b"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Scav/Scav.cs" id="1_3bx88"]
 [ext_resource type="Texture2D" uid="uid://brtht6ue6igda" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-attack-1.png" id="3_wjr8a"]
@@ -89,10 +89,6 @@ region = Rect2(0, 175, 320, 145)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrphs"]
 atlas = ExtResource("5_icqji")
-region = Rect2(0, 175, 320, 145)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wpd42"]
-atlas = ExtResource("6_lfggd")
 region = Rect2(0, 175, 320, 145)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjx85"]
@@ -206,9 +202,6 @@ animations = [{
 "frames": [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_mrphs")
-}, {
-"duration": 0.2,
-"texture": SubResource("AtlasTexture_wpd42")
 }],
 "loop": true,
 "name": &"Grep",
@@ -256,7 +249,9 @@ animations = [{
 }]
 
 [node name="Scav" type="CharacterBody2D"]
-scale = Vector2(1.28, 1)
+scale = Vector2(2, 1.563)
+collision_layer = 0
+collision_mask = 65
 script = ExtResource("1_3bx88")
 metadata/_edit_group_ = true
 
@@ -264,18 +259,21 @@ metadata/_edit_group_ = true
 shape = SubResource("CapsuleShape2D_qov7e")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(17, 0)
-target_position = Vector2(0, 40)
+position = Vector2(14, 20)
+target_position = Vector2(0, 20)
+collision_mask = 65
 
 [node name="HitBoxes" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 2
 
 [node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
-position = Vector2(17.9688, 0)
+position = Vector2(18, 0)
 shape = SubResource("RectangleShape2D_v3bfh")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
 shape = SubResource("CapsuleShape2D_6oe4v")
@@ -286,6 +284,6 @@ scale = Vector2(0.319824, 0.648276)
 sprite_frames = SubResource("SpriteFrames_ec8yf")
 animation = &"Grep"
 autoplay = "Run"
-frame_progress = 0.64978
+frame_progress = 0.182215
 
 [connection signal="body_entered" from="HitBoxes" to="." method="Attack"]

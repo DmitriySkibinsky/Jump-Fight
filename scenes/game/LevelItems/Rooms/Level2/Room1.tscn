@@ -8,6 +8,9 @@
 [node name="TileMap" parent="SolidPlatforms/SolidPlatform" index="1"]
 layer_0/tile_data = PackedInt32Array(0, 65537, 1, 5, 196609, 1, 1, 131073, 1, 2, 131073, 1, 3, 131073, 1, 4, 131073, 1)
 
+[node name="Jp1" parent="JumpPlatforms" index="0"]
+collision_layer = 0
+
 [node name="Jp3" parent="JumpPlatforms" index="1" instance=ExtResource("2_fpnc4")]
 position = Vector2(1256, -912)
 scale = Vector2(1.75, 0.438)
@@ -19,6 +22,9 @@ position = Vector2(2245.33, -1465.33)
 scale = Vector2(1.75, 0.438)
 collision_layer = 0
 JumpForce = 800
+
+[node name="Jp2" parent="JumpPlatforms" index="3"]
+collision_layer = 0
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(1280, -926.667)

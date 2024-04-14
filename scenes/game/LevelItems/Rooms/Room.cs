@@ -9,8 +9,8 @@ public partial class Room : Node2D
 
 	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
 		{"BasicEnemy", GD.Load<PackedScene>("res://scenes/game/entities/Mob/mob.tscn")},
-		
-	};
+        {"Scav", GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")}
+    };
 	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;
 	private Marker2D ExitPlatformPosition;
@@ -72,7 +72,7 @@ public partial class Room : Node2D
 				this.AddChild(exitPlatform);
 			}
 
-			DamageBox.SetCollisionMaskValue(1, true);
+			DamageBox.SetCollisionMaskValue(2, true);
 		}
 	}
 

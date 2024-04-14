@@ -9,8 +9,9 @@ public partial class Scav : CharacterBody2D
     enum Statement
     {
         Run,
-        Idle, // Âêëþ÷àåòñÿ ïîñëå òîãî êàê îí óäàðèë
+        Idle, // Ð’ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ÑÑ Ð¿Ð¾ÑÐ»Ðµ Ñ‚Ð¾Ð³Ð¾ ÐºÐ°Ðº Ð¾Ð½ ÑƒÐ´Ð°Ñ€Ð¸Ð»
         Damaged,
+        Attack,
     }
     private static Random RNG = new Random();
 
@@ -21,12 +22,11 @@ public partial class Scav : CharacterBody2D
     private Statement State = Statement.Run;
     private bool Alive = true;
 
-    private float AttackTime = 0;
     private float DamagedTime = 0;
     private float IdleTime = 0;
 
     //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
-    private float Gravity = 100;
+    private float Gravity = 200;
 
 
     private int Direction = RNG.Next(2) == 1 ? 1 : -1;
@@ -68,7 +68,41 @@ public partial class Scav : CharacterBody2D
     public override void _Process(double delta)
     {
 
-        GD.Print("Proc");
+        //GD.Print("Proc");
+
+        if (DamagedTime > 0 && Alive)
+        {
+            DamagedTime -= (float)delta;
+            if (DamagedTime <= 0 && State != Statement.Attack)
+            {
+                if(IdleTime > 0)
+                {
+                    Anim.Play("Idle");
+                }
+                else
+                {
+                    Anim.Play("Run");
+                    State = Statement.Run;
+                }
+            }
+        }
+
+        if (IdleTime > 0 && Alive)
+        {
+            IdleTime -= (float)delta;
+            if (IdleTime <= 0 && State != Statement.Attack)
+            {
+                if (DamagedTime > 0)
+                {
+                    Anim.Play("Grep");
+                }
+                else
+                {
+                    Anim.Play("Run");
+                    State = Statement.Run;
+                }
+            }
+        }
 
         Vector2 velocity = Vector2.Zero;
 
@@ -76,6 +110,7 @@ public partial class Scav : CharacterBody2D
         {
             if (!rayCast2D.IsColliding() || IsOnWall())
             {
+                Anim.FlipH = !Anim.FlipH;
                 Direction *= -1;
                 Vector2 Reverse = new Vector2(-1, 1);
                 Anim.Position *= Reverse;
@@ -92,6 +127,11 @@ public partial class Scav : CharacterBody2D
 
         MoveAndCollide(velocity);
         MoveAndSlide();
+
+        Godot.Collections.Array<Node2D> OverlappingBodies = HitBoxes.GetOverlappingBodies();
+        for (int i = 0; i < OverlappingBodies.Count; i++) {
+            Attack(OverlappingBodies[i]);
+        }
     }
 
 
@@ -104,26 +144,31 @@ public partial class Scav : CharacterBody2D
 
     private async void Attack(Node2D body)
     {
-        if (Alive && body.GetParent() != null && body.GetParent() is CharacterBody2D Player && body.GetParent().Name == "Player")
+        if (State == Statement.Run && Alive && body.GetParent() != null && body.GetParent() is CharacterBody2D Player && body.GetParent().Name == "Player")
         {
             Anim.Play("Attack1");
             Player.CallDeferred("GetDamage", Damage);
             State = Statement.Idle;
             IdleTime = 2;
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
-            Anim.Play("Idle");
+            if (DamagedTime > 0)
+            {
+                Anim.Play("Grep");
+            }
+            else if(IdleTime > 0)
+            {
+                Anim.Play("Idle");
+            }
         }
     }
 
-    private async void GetDamage(int Damage)
+    private void GetDamage(int Damage)
     {
 
         Health -= Damage;
-        State = Statement.Damaged;
-        IdleTime = 1;
+        State = Statement.Idle;
+        DamagedTime = 1;
         Anim.Play("Grep");
-        await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
-        Anim.Play("Idle");
 
         if (Health <= 0)
         {
