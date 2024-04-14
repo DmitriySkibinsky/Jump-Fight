@@ -227,6 +227,7 @@ public partial class FloatingEye : CharacterBody2D
         {
             //_customSignals.EmitSignal(nameof(CustomSignals.DamagePlayer), Damage);
             Player.GetDamaged(Damage);
+            Player.Velocity += new Vector2(Math.Sign(Player.Position.X - Position.X) * 700, 0);
         }
     }
 
