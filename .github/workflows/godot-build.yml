@@ -52,7 +52,16 @@ jobs:
           #
           # This allows checks on renovatebot PR's to succeed whenever
           # renovatebot updates the Godot SDK version.
-          version: global.json
+          version: {
+  "sdk": {
+    "version": "9.0.100-preview.2.24157.14",
+    "rollForward": "latestMinor"
+  },
+  "msbuild-sdks": {
+    "Godot.NET.Sdk": "4.2.2-rc.2"
+  }
+}
+
 
       - name: 🔬 Verify Setup
         run: |
