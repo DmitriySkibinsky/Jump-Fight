@@ -44,6 +44,7 @@ jobs:
         run: |
           dotnet --version
           godot --version
+          tree
 
       - name: Run Tests
         run: |
