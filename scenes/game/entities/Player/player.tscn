@@ -1115,6 +1115,21 @@ tracks/1/keys = {
 "values": ["Jump"]
 }
 
+[sub_resource type="Animation" id="Animation_jmyui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_vv47e"]
 length = 0.8
 loop_mode = 1
@@ -1209,21 +1224,6 @@ tracks/1/keys = {
 "values": ["Walk"]
 }
 
-[sub_resource type="Animation" id="Animation_jmyui"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t3ygn"]
 _data = {
 "Attack": SubResource("Animation_j42xn"),
@@ -1256,7 +1256,6 @@ position = Vector2(2, -12)
 sprite_frames = SubResource("SpriteFrames_bxqn3")
 animation = &"Super_Attack"
 autoplay = "Idle"
-frame = 25
 
 [node name="AttackDirection" type="Node2D" parent="."]
 

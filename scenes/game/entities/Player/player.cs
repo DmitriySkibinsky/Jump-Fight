@@ -372,6 +372,16 @@ public partial class player : CharacterBody2D
         }
     }
 
+    public void heal(int hp)
+    {
+        health += hp;
+        if (health > 100)
+        {
+            health = 100;
+        }
+        EmitSignal(SignalName.HealthChanged, health);
+    }
+
     public void teleport_to(float target_posX)
     {
         Vector2 NewPos = new Vector2(target_posX, GlobalPosition.Y);
