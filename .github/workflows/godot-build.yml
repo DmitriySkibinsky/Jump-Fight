@@ -52,8 +52,7 @@ jobs:
           #
           # This allows checks on renovatebot PR's to succeed whenever
           # renovatebot updates the Godot SDK version.
-          version: {
-  "sdk": {
+          version: { "sdk": {
     "version": "9.0.100-preview.2.24157.14",
     "rollForward": "latestMinor"
   },
