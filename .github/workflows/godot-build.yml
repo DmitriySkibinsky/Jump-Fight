@@ -34,12 +34,6 @@ jobs:
           alias: godot
           export-templates: true
 
-
-      - name: 🔬 Verify Setup
-        run: |
-          dotnet --version
-          godot --version
-
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
