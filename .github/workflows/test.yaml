@@ -45,6 +45,20 @@ jobs:
           dotnet --version
           godot --version
 
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.*'
+
+      - name: Godot Setup
+        uses: lihop/godot-setup@v2.1.2
+        with:
+          version: 4.2.1-stable
+          bits: 64
+          mono: true
+          alias: godot
+          export-templates: true
+
       - name:  Generate .NET Bindings
         working-directory: Chickensoft.GodotPackage.Tests
         run: godot --headless --build-solutions --quit || exit 0
