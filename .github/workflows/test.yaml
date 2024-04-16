@@ -49,8 +49,13 @@ jobs:
         working-directory: Chickensoft.GodotPackage.Tests
         run: godot --headless --build-solutions --quit || exit 0
 
-      - name:  Build Projects
-        run: dotnet build
+      - name: Build with Godot Mono Build Action
+        uses: QuakeEye/godot-mono-build-action@v0.0.2
+        with:
+          name: Jump-Fight
+          preset: windows
+          debugMode: true
+          subdirectory: build
 
       - name:  Run Tests
         working-directory: Chickensoft.GodotPackage.Tests
