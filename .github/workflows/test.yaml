@@ -46,12 +46,12 @@ jobs:
           godot --version
 
       - name:  Generate .NET Bindings
-        working-directory: Chickensoft.GoDotTest.Tests
+        working-directory: Chickensoft.GodotPackage.Tests
         run: godot --headless --build-solutions --quit || exit 0
 
       - name:  Build Projects
         run: dotnet build
 
       - name:  Run Tests
-        working-directory: Chickensoft.GoDotTest.Tests
+        working-directory: Chickensoft.GodotPackage.Tests
         run: godot --headless --run-tests --quit-on-finish
