@@ -7,7 +7,7 @@ public static class Trajectory
     // Настройки траекторий обозначены комментарием "Настройки", что бы их можно было найти
     private static int GameSpace = 525; // Ширина доступного игрового поля
 
-    private static Random rnd = new Random();
+    private static Random RNG = new Random();
 
     enum TrajectoryType
     {
@@ -37,7 +37,7 @@ public static class Trajectory
     {
         // Настройки
         float Angle = Mathf.DegToRad(10); // Угл по которому будем делиться круг !!!! ДОЛЖНО ДЕЛИТЬСЯ НА 360 БЕЗ ОСТАТКА
-        int FlatY = rnd.Next(40, 75); // Сплющиваем круг на рандомное значение
+        float FlatY = RNG.Next(40, 75); // Сплющиваем круг на рандомное значение
         Vector2 Flatten = new Vector2(1, FlatY/100); // Насколько будет приплюснут круг
 
 
@@ -59,9 +59,9 @@ public static class Trajectory
         //Настройки
         float DivGS = GameSpace / 4; // Радиус кругов у петли
         float Angle = Mathf.DegToRad(10); // Угл по которому будем делить круг !!!! ДОЛЖНО ДЕЛИТЬСЯ НА 180 БЕЗ ОСТАТКА
-        int FlatY = rnd.Next(50, 100); // Сплющиваем круг на рандомное значение
+        float FlatY = RNG.Next(50, 100); // Сплющиваем круг на рандомное значение
         Vector2 Flatten = new Vector2(1, FlatY/100); // Насколько будет приплюснута петля
-        int Side = rnd.Next(1) == 1 ? 1 : -1; // Направление
+        int Side = RNG.Next(1) == 1 ? 1 : -1; // Направление
 
 
         int N = (int)(Mathf.Pi / Angle); // Определяем кол-во сегментов у полуокружностей
@@ -87,9 +87,9 @@ public static class Trajectory
     private static void SetZigZagTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         // Настройки
-        int N = rnd.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
-        int Side = rnd.Next(1) == 1 ? 1 : -1; // В какую сторону он пойдёт сперва
-        int Amplitude = rnd.Next(25, 51); // Высота вершин
+        int N = RNG.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
+        int Side = RNG.Next(1) == 1 ? 1 : -1; // В какую сторону он пойдёт сперва
+        int Amplitude = RNG.Next(25, 51); // Высота вершин
 
 
         int Step = GameSpace / (N);
@@ -105,7 +105,7 @@ public static class Trajectory
             Side *= -1; // Меняем сторону что бы вершина в след. раз в другую сторону смотрела
         }
 
-        Side = 1 == rnd.Next(1) ? 1 : -1;
+        Side = 1 == RNG.Next(1) ? 1 : -1;
         for (int i = 0; i < N; i++)
         {
             WayPoints[i + 2 + N] = new Vector2(WayPoints[N + 1].X - (Step * i + Step / 2), StartPos.Y + Amplitude * Side);
@@ -119,7 +119,7 @@ public static class Trajectory
     /// </summary>
     public static void SetRandomTrajectory(ref Vector2[] WayPoints, Vector2 StartPos)
     {
-        TrajectoryType trajectory = (TrajectoryType)rnd.Next(4); // Генерируем число [0;4)
+        TrajectoryType trajectory = (TrajectoryType)RNG.Next(4); // Генерируем число [0;4)
         switch (trajectory)
         {
             case TrajectoryType.Linear:
@@ -141,7 +141,7 @@ public static class Trajectory
 public partial class FloatingEye : CharacterBody2D
 {
     private int Speed = 125;
-    private int Damage = 100;
+    private int Damage = 20;
     private int direction = 1;
     private bool Alive = true;
 
@@ -153,24 +153,25 @@ public partial class FloatingEye : CharacterBody2D
 
     private AnimatedSprite2D Anim;
 
+    private player Player;
+
     public override void _Ready()
     {
         Area2D HitBoxes = GetNode<Area2D>("HitBoxes");
         Area2D HurtBoxes = GetNode<Area2D>("HurtBoxes");
-        _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
         Anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
+        Player = (player)GetTree().GetFirstNodeInGroup("Player");
         //CollisionShape2D CollisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
         StartPos = this.Position; // Сохраняем стартовую позицию
 
         Trajectory.SetRandomTrajectory(ref WayPoints, StartPos);
 
-        Random rnd = new Random();
-        CurrentWayPoint = rnd.Next(WayPoints.Length);  // Генерируем число [0;`Кол-во Вейпоинтов`)
+        Random RNG = new Random();
+        CurrentWayPoint = RNG.Next(WayPoints.Length);  // Генерируем число [0;`Кол-во Вейпоинтов`)
         this.Position = WayPoints[CurrentWayPoint]; // Ставим врага на рандомную позицию его маршрута
 
         //HurtBoxes.AreaEntered += GetDamage;
-        HitBoxes.AreaEntered += Attack;
+        //HitBoxes.BodyEntered += Attack; Оно не работает
     }
 
     public override void _Process(double delta)
@@ -208,22 +209,24 @@ public partial class FloatingEye : CharacterBody2D
         }
     }
 
-    public void _on_hurt_boxes_area_entered(Node2D Body)
+    public void _on_hurt_boxes_body_entered(Node2D Body)
     {
-        if (Body.GetParent() != null && Body.GetParent().Name == "Player" && Body.GetParent() is player Player && Alive && Player.Velocity.Y >= 0)
+        if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
-            Player.velocity.Y = -500;
+            Player.Velocity = new Vector2(Player.Velocity.X, -500);
             Player.MoveAndSlide();
             death();
+            
         }
     }
 
     public void Attack(Node2D Body)
     {
-        if (Body.GetParent() != null && Body.GetParent().Name == "Player" && Body.GetParent() is player Player && Alive)
+        if (Body == Player && Alive)
         {
             //_customSignals.EmitSignal(nameof(CustomSignals.DamagePlayer), Damage);
-            Player.CallDeferred("GetDamaged", Damage);
+            Player.GetDamaged(Damage);
+            Player.Velocity += new Vector2(Math.Sign(Player.Position.X - Position.X) * 700, 0);
         }
     }
 

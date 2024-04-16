@@ -36,7 +36,7 @@ public class LevelTest : TestClass {
     {
         // Arrange
         player.Position = new Vector2(0, -10); 
-        level.isMoveableCamera = true;
+        level.isBattleSection = true;
 
         // Act
         level._Process(0.1); 
@@ -51,7 +51,7 @@ public class LevelTest : TestClass {
     {
         // Arrange
         player.Position = new Vector2(0, -10); // Player below the camera
-        level.isMoveableCamera = false;
+        level.isBattleSection = false;
 
         // Act
         level._Process(0.1); // Assuming delta value

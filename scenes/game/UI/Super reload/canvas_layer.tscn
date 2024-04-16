@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://27aoux12dwq0"]
+
+[ext_resource type="Script" path="res://scenes/game/UI/Super reload/canvas_layer.cs" id="1_f0jiu"]
+[ext_resource type="Texture2D" uid="uid://d0u07amj1u63i" path="res://assets/sprites/Pixel Health Bar/Bar/no health bar.png" id="2_bua6j"]
+[ext_resource type="Texture2D" uid="uid://dkdlkxpvls8fv" path="res://assets/sprites/Pixel Health Bar/Bar/empty health bar.png" id="3_1xa1o"]
+[ext_resource type="Texture2D" uid="uid://xcetxtt1536c" path="res://assets/sprites/Pixel Health Bar/Bar/health bar.png" id="4_yjsgw"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_f0jiu")
+
+[node name="SuperReload" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_right = 282.0
+offset_bottom = 42.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_bua6j")
+texture_over = ExtResource("3_1xa1o")
+texture_progress = ExtResource("4_yjsgw")
+tint_under = Color(1, 15.976, 1, 1)
+tint_progress = Color(1, 2.5, 1, 1)
+
+[node name="reload" type="Timer" parent="."]
+wait_time = 0.31
+autostart = true
+
+[connection signal="timeout" from="reload" to="." method="_on_reload_timeout"]

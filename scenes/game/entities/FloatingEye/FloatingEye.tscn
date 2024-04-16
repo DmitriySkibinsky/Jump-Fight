@@ -3,12 +3,6 @@
 [ext_resource type="Script" path="res://scenes/game/entities/FloatingEye/FloatingEye.cs" id="1_bqkjj"]
 [ext_resource type="Texture2D" uid="uid://10motxj6bwlu" path="res://scenes/game/entities/FloatingEye/Eyeball.png" id="3_lu3by"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
-size = Vector2(125, 2.22222)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrymv"]
-size = Vector2(27, 40)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xoyf"]
 atlas = ExtResource("3_lu3by")
 region = Rect2(0, 128, 32, 32)
@@ -71,34 +65,24 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
+size = Vector2(70.3125, 2.22222)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h7hmk"]
+radius = 7.75
+height = 19.5
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61nv8"]
-size = Vector2(32, 32)
+size = Vector2(27.6, 28.8)
 
 [node name="Mob" type="CharacterBody2D"]
 texture_filter = 3
+position = Vector2(-5, 3)
 scale = Vector2(4, 4)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_bqkjj")
 metadata/_edit_group_ = true
-
-[node name="HurtBoxes" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-
-[node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
-position = Vector2(-4.76837e-07, -18)
-scale = Vector2(0.319999, 1.8)
-shape = SubResource("RectangleShape2D_v3bfh")
-
-[node name="HitBoxes" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 4
-
-[node name="HitBox" type="CollisionShape2D" parent="HitBoxes"]
-position = Vector2(4.48029e-05, -2.50001)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_lrymv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.25, 1.25)
@@ -106,11 +90,29 @@ sprite_frames = SubResource("SpriteFrames_828ti")
 animation = &"Floating"
 autoplay = "Floating"
 
+[node name="HurtBoxes" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
+position = Vector2(3, -17.5)
+scale = Vector2(0.319999, 1.8)
+shape = SubResource("RectangleShape2D_v3bfh")
+
+[node name="HitBoxes" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 54
+
+[node name="HitBox" type="CollisionShape2D" parent="HitBoxes"]
+position = Vector2(2.75, -7.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_h7hmk")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.75, -2)
 scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_61nv8")
 
-[connection signal="area_entered" from="HurtBoxes" to="." method="_on_hurt_boxes_area_entered"]
-[connection signal="area_entered" from="HitBoxes" to="." method="_on_hit_boxes_area_entered"]
-[connection signal="child_entered_tree" from="HitBoxes/HitBox" to="." method="_on_hit_box_child_entered_tree"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="HurtBoxes" to="." method="_on_hurt_boxes_body_entered"]
+[connection signal="body_entered" from="HitBoxes" to="." method="Attack"]

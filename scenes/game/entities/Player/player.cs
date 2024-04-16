@@ -1,100 +1,380 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Timers;
 using static System.Net.Mime.MediaTypeNames;
 
 public partial class player : CharacterBody2D
 {
 
-	public const float Speed = 250.0f;
-	public const float JumpVelocity = -450.0f;
+    [Signal]
+    public delegate void HealthChangedEventHandler(int new_health);
 
-	public  Vector2 velocity = new Vector2();
+    [Signal]
+    public delegate void SuperReloadEventHandler(int new_super);
 
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    enum StateMachine
+    {
+        MOVE,
+        DAMAGE,
+        ATTACK,
+        ATTACK2,
+        ATTACK3,
+        SUPER,
+        BLOCK,
+        DEATH
+    }
 
-	public int health = 100;
+    StateMachine State = StateMachine.MOVE;
 
-	private CustomSignals _customSignals;
-	public override void _Ready()
-	{
-		AddUserSignal("DamagePlayer");
-		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
-		_customSignals.DamagePlayer += GetDamaged;
-	}
+    Node2D level;
 
-	public override async void _PhysicsProcess(double delta)
+    Vector2 player_pos;
 
-	{
-		var anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		int a = 0;
+    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
+    public const float speed = 120.0f;
 
-		if (!IsOnFloor())
-			velocity.Y += gravity * (float)delta;
+    public const float jump_velocity = -450f;
 
-		if (Input.IsActionJustPressed("ui_accept")&& IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-			anim.Play("Jump");
-		}
+    public float run_speed = 1.0f;
 
+    public int health = 100;
 
-		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-			if (direction.X == 1)
-			{
-				anim.FlipH = false;
-			}
-			else
-			{
-				anim.FlipH = true;
-			}
-			if (velocity.Y == 0 && a != 1)
-			{
-				anim.Play("Run");
-			}
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			if (velocity.Y == 0 && a != 1)
-			{
-				anim.Play("Idle");
-			}
-		}
-		if (velocity.Y > 0)
-		{
-			anim.Play("Fall");
-		}
+    public bool combo = false;
 
-		if (health <= 0)
-		{
-			QueueFree();
-			GetTree().ChangeSceneToFile("res://scenes/menu/menu.tscn");
-		}
+    public bool attack_cooldown = false;
 
+    public bool super_cooldown = false;
 
-		Velocity = velocity;
+    public float damage_basic = 10;
 
-		MoveAndSlide();
+    public float damage_multiplier = 1;
 
-		void GetDamage()
-		{
-			health -= 10;
-			anim.Play("Damage");
-		}
-	}
+    public float damage_current;
 
-	public void GetDamaged(int Damage)
-	{
-		health -= Damage;
-		GD.Print("Health = " + health);
-	}
+    public Vector2 velocity = new Vector2();
 
-	public void teleport_to(float target_posX){
-		Vector2 NewPos = new Vector2(target_posX, GlobalPosition.Y);
-		GlobalPosition = NewPos;
-	}
+    public override void _PhysicsProcess(double delta)
+    {
+
+        velocity = Velocity;
+        switch (State)
+        {
+            case StateMachine.MOVE:
+                move_state();
+                break;
+            case StateMachine.ATTACK:
+                attack_state();
+                break;
+            case StateMachine.ATTACK2:
+                attack2_state();
+                break;
+            case StateMachine.ATTACK3:
+                attack3_state();
+                break;
+            case StateMachine.SUPER:
+                super_state();
+                break;
+            case StateMachine.DAMAGE:
+                damage_state();
+                break;
+            case StateMachine.DEATH:
+                death_state();
+                break;
+            case StateMachine.BLOCK:
+                block_state();
+                break;
+        }
+
+        if (!IsOnFloor())
+            velocity.Y += gravity * (float)delta;
+
+        if (health <= 0)
+        {
+            health = 0;
+            State = StateMachine.DEATH;
+        }
+
+        Velocity = velocity;
+
+        damage_current = damage_basic * damage_multiplier;
+
+        MoveAndSlide();
+
+    }
+    public void move_state()
+    {
+        level = GetNode<Node2D>("../");
+
+        var anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        var attackDirection = GetNode<Node2D>("AttackDirection");
+
+        Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+
+        if ((bool)level.Get("isBattleSection"))
+        {
+            if (direction != Vector2.Zero)
+            {
+                velocity.X = direction.X * speed * run_speed;
+                if (direction.X == 1)
+                {
+                    anim.FlipH = false;
+                    attackDirection.RotationDegrees = 0;
+                }
+                else
+                {
+                    anim.FlipH = true;
+                    attackDirection.RotationDegrees = 180;
+                }
+                if (velocity.Y == 0)
+                {
+                    if (run_speed == 1)
+                    {
+                        animPlayer.Play("Walk");
+                    }
+                    else
+                    {
+                        animPlayer.Play("Run");
+                    }
+
+                }
+                if (Input.IsActionPressed("run"))
+                {
+                    run_speed = 2;
+                }
+                else
+                {
+                    run_speed = 1;
+                }
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
+                if (velocity.Y == 0)
+                {
+                    animPlayer.Play("Idle");
+                }
+            }
+            if (Input.IsActionJustPressed("jump") && IsOnFloor())
+            {
+                velocity.Y = jump_velocity;
+                animPlayer.Play("Jump");
+            }
+
+            if (velocity.Y > 0)
+            {
+                animPlayer.Play("Fall");
+            }
+            if (Input.IsActionJustPressed("attack") && !attack_cooldown && IsOnFloor())
+            {
+                State = StateMachine.ATTACK;
+            }
+            if (Input.IsActionPressed("block") && IsOnFloor())
+            {
+                State = StateMachine.BLOCK;
+            }
+            if (Input.IsActionJustPressed("super") && !super_cooldown && IsOnFloor())
+            {
+                State = StateMachine.SUPER;
+            }
+        }
+        else
+        {
+            if (direction != Vector2.Zero)
+            {
+                velocity.X = direction.X * speed * run_speed;
+                if (direction.X == 1)
+                {
+                    anim.FlipH = false;
+                }
+                else
+                {
+                    anim.FlipH = true;
+                }
+                if (velocity.Y == 0)
+                {
+                    if (run_speed == 1)
+                    {
+                        animPlayer.Play("Walk");
+                    }
+                    else
+                    {
+                        animPlayer.Play("Run");
+                    }
+
+                }
+                run_speed = 2;
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
+                if (velocity.Y == 0)
+                {
+                    animPlayer.Play("Idle");
+                }
+            }
+            if (velocity.Y > 0)
+            {
+                animPlayer.Play("Fall");
+            }
+        }
+        
+        MoveAndSlide();
+    }
+
+    public async void attack_state()
+    {
+        damage_multiplier = 1;
+        if (Input.IsActionJustPressed("attack") && combo)
+        {
+            State = StateMachine.ATTACK2;
+        }
+        velocity = Velocity;
+        velocity.X = 0;
+        if (velocity.Y == 0)
+        {
+            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            animPlayer.Play("Attack");
+            Velocity = velocity;
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+            attack_freeze();
+            State = StateMachine.MOVE;
+            MoveAndSlide();
+        }
+    }
+
+    public async void attack2_state()
+    {
+        damage_multiplier = 1.25f;
+        if (Input.IsActionJustPressed("attack") && combo)
+        {
+            State = StateMachine.ATTACK3;
+        }
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer.Play("Attack2");
+        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        attack_freeze();
+        State = StateMachine.MOVE;
+    }
+
+    public async void attack3_state()
+    {
+        damage_multiplier = 2;
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer.Play("Attack3");
+        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        State = StateMachine.MOVE;
+    }
+
+    public async void super_state()
+    {
+        if (velocity.Y == 0)
+        {
+            damage_multiplier = 3;
+            velocity = Velocity;
+            velocity.X = 0;
+            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            animPlayer.Play("Super_Attack");
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+            super_freeze();
+            State = StateMachine.MOVE;
+        }
+    }
+
+    public async void death_state()
+    {
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer.Play("Death");
+        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        QueueFree();
+        GetTree().ChangeSceneToFile("res://scenes/Menu/menu.tscn");
+    }
+
+    public async void damage_state()
+    {
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        if ((bool)level.Get("isBattleSection"))
+        {
+            animPlayer.Play("Damage");
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        }
+        else
+        {
+            animPlayer.Play("Fall_Damage");
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        }
+        State = StateMachine.MOVE;
+    }
+    public void block_state()
+    {
+        velocity = Velocity;
+        velocity.X = 0;
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer.Play("Block");
+        if (Input.IsActionJustReleased("block"))
+        {
+            State = StateMachine.MOVE;
+        }
+        MoveAndSlide();
+    }
+
+    public async void combat()
+    {
+        combo = true;
+        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        combo = false;
+    }
+
+    public void GetDamaged(int Damage)
+    {
+       if (Input.IsActionPressed("block") && (bool)level.Get("isBattleSection"))
+        {
+            State = StateMachine.BLOCK;
+            health -= Damage / 2;
+            EmitSignal(SignalName.HealthChanged, health);
+        }
+        else
+        {
+            State = StateMachine.DAMAGE;
+            health -= Damage;
+            EmitSignal(SignalName.HealthChanged, health);
+        }
+    }
+
+    public async void attack_freeze()
+    {
+        attack_cooldown = true;
+        await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
+        attack_cooldown = false;
+    }
+
+    public async void super_freeze()
+    {
+        EmitSignal(SignalName.SuperReload, 0);
+        super_cooldown = true;
+        await ToSignal(GetTree().CreateTimer(30), SceneTreeTimer.SignalName.Timeout);
+        super_cooldown = false;
+        EmitSignal(SignalName.SuperReload, 100);
+    }
+
+    public void _on_hit_box_area_entered(Area2D area)
+    {
+        if (area.GetParent().Name == "FloatingEye")
+        {
+            area.GetParent().CallDeferred("GetDamaged", damage_current);
+        }
+    }
+
+    public void teleport_to(float target_posX)
+    {
+        Vector2 NewPos = new Vector2(target_posX, GlobalPosition.Y);
+        GlobalPosition = NewPos;
+    }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dislaide0ehs7"]
+[gd_scene load_steps=14 format=3 uid="uid://dislaide0ehs7"]
 
 [ext_resource type="PackedScene" uid="uid://bc2eawbp5g4l3" path="res://scenes/game/LevelItems/Platforms/SolidPlatform.tscn" id="1_oqgpb"]
 [ext_resource type="Script" path="res://scenes/game/LevelItems/Rooms/Room.cs" id="1_rbk30"]
@@ -816,12 +816,15 @@ texture = ExtResource("5_pi1es")
 5:12/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_gis1m"]
-physics_layer_0/collision_layer = 64
-physics_layer_0/collision_mask = 64
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_6m0wk")
 sources/1 = SubResource("TileSetAtlasSource_1bcnl")
 
-[node name="Node2D2" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fqh8"]
+size = Vector2(2587.33, 50)
+
+[node name="Node2D3" type="Node2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_rbk30")
 
@@ -836,17 +839,19 @@ scale = Vector2(1.75, 1.75)
 [node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1016, -58.6667)
 scale = Vector2(1.75, 0.438)
-JumpForce = 1400
+JumpForce = 1000
 
 [node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
 position = Vector2(1562.67, -65.3333)
 scale = Vector2(1.75, 0.438)
-JumpForce = 1400
+JumpForce = 1000
 
 [node name="EnemyPositions" type="Node2D" parent="."]
 position = Vector2(0, 5.33333)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2(1302.14, -11.661)
@@ -872,6 +877,18 @@ scale = Vector2(3.5, 3.5)
 tile_set = SubResource("TileSet_gis1m")
 format = 2
 
+[node name="DamageBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+position = Vector2(1283.67, -15)
+shape = SubResource("RectangleShape2D_1fqh8")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(1301.33, -429.333)
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_entered" from="DamageBox" to="." method="_on_damage_box_body_entered"]
 
 [editable path="SolidPlatforms/SolidPlatform"]

@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scenes/game/Utils/Interaction/InteractionArea.cs" id="1_5lsvy"]
 
 [node name="InteractionArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_5lsvy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

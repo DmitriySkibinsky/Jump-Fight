@@ -52,6 +52,7 @@ animations = [{
 
 [node name="StaticBody2D" type="StaticBody2D"]
 scale = Vector2(1, 0.25)
+collision_layer = 129
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 3

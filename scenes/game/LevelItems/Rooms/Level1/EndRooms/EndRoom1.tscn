@@ -1,5 +1,5 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8kpnbprfbp4w"]
 
-[ext_resource type="PackedScene" uid="uid://dmh06rrbsmmm0" path="res://scenes/game/LevelItems/Rooms/EndRoom.tscn" id="1_pdomp"]
+[ext_resource type="PackedScene" uid="uid://dx10jsxbdcf8b" path="res://scenes/game/LevelItems/Rooms/EndRoom.tscn" id="1_pdomp"]
 
 [node name="EndRoom" instance=ExtResource("1_pdomp")]
