@@ -34,21 +34,30 @@ jobs:
           alias: godot
           export-templates: true
 
-      - name: Setup Mono
-        uses: actions/setup-mono@v2
+      - name: 💽 Setup .NET SDK
+        uses: actions/setup-dotnet@v4
         with:
-          mono-version: '6.x'
-          
-      - name: Testing game
+          global-json-file: global.json
+
+      - name: 📦 Restore Dependencies
+        run: dotnet restore
+
+      - name: 🤖 Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          # Version must include major, minor, and patch, and be >= 4.0.0
+          # Pre-release label is optional.
+          #
+          # In this case, we are using the version from global.json.
+          #
+          # This allows checks on renovatebot PR's to succeed whenever
+          # renovatebot updates the Godot SDK version.
+          version: global.json
+
+      - name: 🔬 Verify Setup
         run: |
-          sudo apt update
-          sudo apt install build-essential
-          sudo apt install mono-complete
-          cd Chickensoft.GodotPackage.Tests/test
-          msc test.cs
-          cd /
-          tree
-          
+          dotnet --version
+          godot --version
 
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
