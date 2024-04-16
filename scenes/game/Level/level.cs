@@ -3,9 +3,9 @@ using System;
 
 public partial class level : Node2D
 {	
-	private bool isMoveableCamera = false;
-	private Camera2D camera;
-	private player player;
+	public bool isMoveableCamera = false;
+	public Camera2D camera;
+	public player player;
 	public override void _Ready()
 	{
 		this.player = GetNode<player>("Player");
@@ -16,7 +16,7 @@ public partial class level : Node2D
 	public override void _Process(double delta)
 	{
 		if (player.Position.Y < camera.Position.Y && isMoveableCamera){
-			camera.Position = new Vector2(camera.Position.X, player.Position.Y + 25);
+			camera.Position = new Vector2(camera.Position.X, player.Position.Y + 20);
 		}else if (player.Position.Y < camera.Position.Y){
 			camera.Position = new Vector2(camera.Position.X, player.Position.Y);
 		}
@@ -35,8 +35,6 @@ public partial class level : Node2D
 	{
 		GetTree().Quit();
 	}
-
+	
 }
-
-
 

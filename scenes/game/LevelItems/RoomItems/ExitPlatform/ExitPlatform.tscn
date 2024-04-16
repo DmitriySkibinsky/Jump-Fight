@@ -1,0 +1,133 @@
+[gd_scene load_steps=20 format=3 uid="uid://c116awmqeqn6u"]
+
+[ext_resource type="Script" path="res://scenes/game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.cs" id="1_8dhby"]
+[ext_resource type="PackedScene" uid="uid://dntbgay1y2dan" path="res://scenes/game/LevelItems/Platforms/JumpPlatform/JumpPlatform.tscn" id="2_hg6um"]
+[ext_resource type="Texture2D" uid="uid://de4fo44b618ui" path="res://assets/sprites/Free Smoke Fx  Pixel 07.png" id="3_vy2ik"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq4mu"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrho5"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmbcc"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dh4yg"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vovr4"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhf3e"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfuuy"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpknh"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(448, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epvmr"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(512, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lacs8"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(576, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sttrh"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(640, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02357"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(704, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jubl8"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(768, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vauls"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(832, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioegd"]
+atlas = ExtResource("3_vy2ik")
+region = Rect2(896, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3bjk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq4mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrho5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmbcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dh4yg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vovr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhf3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfuuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpknh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epvmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lacs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sttrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02357")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jubl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vauls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioegd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="ExitPlatform" type="Node2D"]
+script = ExtResource("1_8dhby")
+
+[node name="JumpPlatform" parent="." instance=ExtResource("2_hg6um")]
+JumpForce = 1300
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+position = Vector2(0, -29)
+scale = Vector2(3.26562, 2.7268)
+sprite_frames = SubResource("SpriteFrames_e3bjk")
+frame_progress = 0.636064
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

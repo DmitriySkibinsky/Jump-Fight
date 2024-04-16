@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqs41nos0vn6m"]
+
+[ext_resource type="PackedScene" uid="uid://b7mr07ra7bew2" path="res://scenes/game/Level/level.tscn" id="1_g7nia"]
+[ext_resource type="Script" path="res://scenes/game/Level/Level1/LevelGeneratorLevel1.cs" id="2_rjfds"]
+
+[node name="level" instance=ExtResource("1_g7nia")]
+
+[node name="LevelGenerator" parent="." index="3"]
+script = ExtResource("2_rjfds")
+
+[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
+[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
+[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
+
+[editable path="InLevelUI"]
+[editable path="InLevelUI/Settings2"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=49 format=3 uid="uid://8a0si0ayx0ix"]
+[gd_scene load_steps=48 format=3 uid="uid://8a0si0ayx0ix"]
 
-[ext_resource type="Script" path="res://scenes/game/entities/Player/player.cs" id="1_6toyy"]
-[ext_resource type="Script" path="res://scenes/game/entities/DamageArea/DamageArea.cs" id="3_fdkf8"]
+[ext_resource type="Script" path="res://scenes/game/entities/Player/player.cs" id="1_vvxxl"]
+[ext_resource type="PackedScene" uid="uid://0wsjvnycxgpw" path="res://scenes/Game/entities/DamageArea/damage_area.tscn" id="2_soevy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
 radius = 12.0
-height = 34.0
+height = 36.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bytkp"]
 region = Rect2(0, 280, 56, 56)
@@ -298,14 +298,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mb4eg"]
-radius = 1.99998
-height = 16.0083
-
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 137
 collision_mask = 129
-script = ExtResource("1_6toyy")
+script = ExtResource("1_vvxxl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0
@@ -325,15 +321,9 @@ animation = &"Damage"
 autoplay = "Idle"
 frame_progress = 0.562597
 
-[node name="DamageArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("3_fdkf8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+[node name="DamageArea" parent="." instance=ExtResource("2_soevy")]
 position = Vector2(0, 17)
-rotation = -1.56656
-shape = SubResource("CapsuleShape2D_mb4eg")
+scale = Vector2(1.835, 0.2)
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 8

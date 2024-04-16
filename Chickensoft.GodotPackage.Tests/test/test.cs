@@ -8,7 +8,6 @@ using Chickensoft.GodotTestDriver.Drivers;
 using System;
 using System.Linq;
 using Shouldly;
-using Moq;
 
 public class PlayerTest : TestClass {
 	private readonly ILog _log = new GDLog(nameof(PlayerTest));
@@ -47,7 +46,7 @@ public class PlayerTest : TestClass {
 	{
 		var enemy = new Node2D();
 		enemy.Name = "Enemy";
-		var d_area = new DamageArea(); 
+		var d_area = new damage_area(); 
 		bool damaged = false;
 		d_area.damaged = damaged;
 

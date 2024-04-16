@@ -1,25 +1,21 @@
 [gd_scene load_steps=3 format=3 uid="uid://bc2eawbp5g4l3"]
 
-[ext_resource type="Texture2D" uid="uid://dhas0p0aq80ek" path="res://assets/sprites/tile2.png" id="1_p16lk"]
+[ext_resource type="TileSet" uid="uid://mi1v14l0bfar" path="res://assets/sprites/level1/DungeonBG.tres" id="1_bw02b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4h2tm"]
 size = Vector2(192, 64)
 
 [node name="SolidPlatform" type="StaticBody2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 3
-position = Vector2(48, 0)
-scale = Vector2(1.5, 0.5)
-texture = ExtResource("1_p16lk")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-texture_filter = 3
-position = Vector2(-48, 0)
-scale = Vector2(1.5, 0.5)
-texture = ExtResource("1_p16lk")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_4h2tm")
 one_way_collision = true
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 3
+position = Vector2(-96, -16)
+scale = Vector2(2, 2)
+tile_set = ExtResource("1_bw02b")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 65536, 1, 5, 196608, 1, 1, 131072, 1, 2, 131072, 1, 3, 131072, 1, 4, 131072, 1)
