@@ -34,33 +34,6 @@ jobs:
           alias: godot
           export-templates: true
 
-      - name: 💽 Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: global.json
-
-      - name: 📦 Restore Dependencies
-        run: dotnet restore
-
-      - name: 🤖 Setup Godot
-        uses: chickensoft-games/setup-godot@v2
-        with:
-          # Version must include major, minor, and patch, and be >= 4.0.0
-          # Pre-release label is optional.
-          #
-          # In this case, we are using the version from global.json.
-          #
-          # This allows checks on renovatebot PR's to succeed whenever
-          # renovatebot updates the Godot SDK version.
-          version: { "sdk": {
-    "version": "9.0.100-preview.2.24157.14",
-    "rollForward": "latestMinor"
-  },
-  "msbuild-sdks": {
-    "Godot.NET.Sdk": "4.2.2-rc.2"
-  }
-}
-
 
       - name: 🔬 Verify Setup
         run: |
