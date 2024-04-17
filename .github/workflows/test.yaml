@@ -45,7 +45,7 @@ jobs:
           godot --version
           tree
           sudo mkdir -p /github/workspace/addons/gut
-          touch /github/workspace/addons/gut/.cli_support
+          sudo touch /github/workspace/addons/gut/.cli_support
 
       - name: Run Tests
         uses: croconut/godot-tester@v5
