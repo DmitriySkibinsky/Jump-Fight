@@ -53,4 +53,5 @@ jobs:
 
       - name: Run Tests
         run: |
+          mv -r ./Main ./main
           godot -d --headless --run-tests --quit-on-finish
