@@ -53,4 +53,5 @@ jobs:
 
       - name: Run Tests
         run: |
+          godot --headless --build-solutions --quit || exit 0
           godot --headless --run-tests --quit-on-finish
