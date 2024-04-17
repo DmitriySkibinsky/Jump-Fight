@@ -1,16 +1,12 @@
-name:  Tests
+name: Tests
 on:
   push:
-      branches:
+    branches:
       - main
-  
 
 jobs:
   tests:
     name: 🧪 Evaluate Tests on ${{ matrix.os }}
-    # Only run the workflow if it's not a PR or if it's a PR from a fork.
-    # This prevents duplicate workflows from running on PR's that originate
-    # from the repository itself.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     runs-on: ${{ matrix.os }}
     strategy:
@@ -22,74 +18,46 @@ jobs:
       DOTNET_NOLOGO: true
     defaults:
       run:
-        # Use bash shells on all platforms.
         shell: bash
     steps:
-      - name:  Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Checkout
+        uses: actions/checkout@v3
         with: 
           ref: dev
-          
 
-      - name:  Setup .NET SDK
-        uses: actions/setup-dotnet@v4
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
         with:
-          # Use the .NET SDK from global.json in the root of the repository.
           global-json-file: global.json
 
-      - name:  Restore Dependencies
+      - name: Restore Dependencies
         run: dotnet restore
 
-      - name:  Setup Godot
+      - name: Setup Godot
         uses: chickensoft-games/setup-godot@v2
         with:
-          version: global.json
+          version: 4.2.1
+          is-mono: true
 
-      - name:  Verify Setup
+      - name: Verify Setup
         run: |
           dotnet --version
           godot --version
           tree
 
-      - name: Run Testss
+      - name: Run Tests
         uses: croconut/godot-tester@v5
         with:
-            # required
-            version: "4.2.1"
-            # the type of release of godot that the tests should be run with
-            is-mono: "true"
-            # the folder with your project.godot file in it
-            # path: "tester"
-            # how long to spend importing assets before tests are run
-            import-time: "5"
-            # how long tests can run in seconds
-            #test-timeout: "45"
-            # the ratio of tests that must pass for this action to pass
-            # e.g. 0.6 means 60% of your tests must pass
-            #minimum-pass: "0.6"
-            # the directory containing Gut tests
-            test-dir: "res://Chickensoft.GodotPackage.Tests/test"
-            # instead of running GUT's command line tool, 
-            # you can run a test scene if you have one
-            # set up a scene like in this repo --> located at /tester_GUT_v9.0.1/test/alt_mode/tests.tscn
-            # set up a script like in this repo --> located at /tester_GUT_v9.0.1/test/alt_mode/cli_test.gd
-            # ensure that the script exits on test completion
-            # uses relative path from your godot project directory
-            direct-scene: "Chickensoft.GodotPackage.Tests/test/TestScene.tscn" 
-            # default is false, set true to count asserts instead of tests
-            assert-check: "true" 
-            # not checked by default, set to a number to limit the 
-            # maximum amount of failed tests for a passing test suite
-            max-fails: 3  
-            # default is GUTs default: 'res://.gutconfig.json'; set this to load a different config file
-            config-file: "res://.myconfig.json" 
-            # designate a custom url to download the godot binary from
-            #custom-godot-dl-url: ""
-            # relative path to the xml file to read / write GUT's results from, recommended
-            #   for direct-scene users to check this file if you have issues
-            result-output-file: "test_results.xml"
-      
-      - name: Run Tests
+          version: "4.2.1"
+          is-mono: "true"
+          test-dir: "res://Chickensoft.GodotPackage.Tests/test"
+          direct-scene: "Chickensoft.GodotPackage.Tests/test/TestScene.tscn"
+          assert-check: "true"
+          max-fails: 3
+          config-file: "res://.myconfig.json"
+          result-output-file: "test_results.xml"
+
+      - name: Run Godot Tests
         run: |
-          sudo cp -r ./Main ./main
+          cp -r ./Main ./main
           godot -d --headless --run-tests --quit-on-finish
