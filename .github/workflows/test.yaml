@@ -53,4 +53,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          dotnet test --no-build --verbosity normal
+          godot -d --headless --run-tests --quit-on-finish
