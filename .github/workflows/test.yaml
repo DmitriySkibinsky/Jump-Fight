@@ -44,6 +44,7 @@ jobs:
           dotnet --version
           godot --version
           tree
+          sudo mkdir '/github/workspace/addons/gut/.cli_support'
 
       - name: Run Tests
         uses: croconut/godot-tester@v5
@@ -54,6 +55,7 @@ jobs:
           direct-scene: "Chickensoft.GodotPackage.Tests/test/TestScene.tscn"
           assert-check: "true"
           max-fails: 3
+          config-file: "res://.myconfig.json"
           result-output-file: "test_results.xml"
 
       - name: Run Godot Tests
