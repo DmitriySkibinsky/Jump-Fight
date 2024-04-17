@@ -1,0 +1,70 @@
+[gd_scene load_steps=14 format=3 uid="uid://cy7kqcq82chpp"]
+
+[ext_resource type="Texture2D" uid="uid://bgjclqs78ewl" path="res://assets/sprites/arrow/seta-de-upgrade.png" id="1_4avxg"]
+[ext_resource type="Script" path="res://scenes/game/entities/Collectibles/JumpBoost/jump_boost.cs" id="1_qj0pq"]
+[ext_resource type="Texture2D" uid="uid://y13ls6qs0owq" path="res://assets/sprites/arrow/seta-de-upgrade2.png" id="2_7ic8t"]
+[ext_resource type="Texture2D" uid="uid://lyqysp8akoon" path="res://assets/sprites/arrow/seta-de-upgrade3.png" id="3_oisea"]
+[ext_resource type="Texture2D" uid="uid://bw68qy1a2jppm" path="res://assets/sprites/arrow/seta-de-upgrade4.png" id="4_3dsbe"]
+[ext_resource type="Texture2D" uid="uid://br786vcht3xhr" path="res://assets/sprites/arrow/seta-de-upgrade5.png" id="5_plpvn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_haosy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pala"]
+atlas = ExtResource("1_4avxg")
+region = Rect2(378, 279, 126, 163)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xn4t"]
+atlas = ExtResource("2_7ic8t")
+region = Rect2(378, 279, 126, 163)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w82hb"]
+atlas = ExtResource("3_oisea")
+region = Rect2(378, 279, 126, 163)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq1d1"]
+atlas = ExtResource("4_3dsbe")
+region = Rect2(378, 279, 126, 163)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eimhm"]
+atlas = ExtResource("5_plpvn")
+region = Rect2(378, 279, 126, 163)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgvdj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pala")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xn4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w82hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq1d1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eimhm")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 7.0
+}]
+
+[node name="jump boost" type="Area2D"]
+script = ExtResource("1_qj0pq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_haosy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.125, 0.125)
+sprite_frames = SubResource("SpriteFrames_rgvdj")
+animation = &"Idle"
+autoplay = "Idle"
+frame = 2
+frame_progress = 0.971356
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
