@@ -55,9 +55,8 @@ jobs:
         uses: croconut/godot-tester@v5
         with:
             # required
-            version: "4.0.3"
+            version: "4.2.1"
             # the type of release of godot that the tests should be run with
-            release_type: "rc2"
             is-mono: "true"
             # the folder with your project.godot file in it
             # path: "tester"
@@ -69,7 +68,7 @@ jobs:
             # e.g. 0.6 means 60% of your tests must pass
             #minimum-pass: "0.6"
             # the directory containing Gut tests
-            test-dir: "res://test"
+            test-dir: "res://Chickensoft.GodotPackage.Tests/test"
             # instead of running GUT's command line tool, 
             # you can run a test scene if you have one
             # set up a scene like in this repo --> located at /tester_GUT_v9.0.1/test/alt_mode/tests.tscn
