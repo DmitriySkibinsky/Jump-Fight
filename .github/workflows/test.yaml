@@ -52,8 +52,7 @@ jobs:
           tree
 
       - name: Run Testss
-      - uses: actions/checkout@v2
-      - uses: croconut/godot-tester@v5
+        uses: croconut/godot-tester@v5
         with:
             # required
             version: "4.0.3"
