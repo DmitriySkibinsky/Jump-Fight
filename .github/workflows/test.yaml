@@ -54,7 +54,6 @@ jobs:
           direct-scene: "Chickensoft.GodotPackage.Tests/test/TestScene.tscn"
           assert-check: "true"
           max-fails: 3
-          config-file: "res://.myconfig.json"
           result-output-file: "test_results.xml"
 
       - name: Run Godot Tests
