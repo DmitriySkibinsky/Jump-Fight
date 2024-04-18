@@ -39,7 +39,7 @@ jobs:
           export-templates: true
 
       - name: Build with Godot Mono Build Action
-        uses: QuakeEye/godot-mono-build-action@v0.0.2
+        uses: QuakeEye/godot-mono-build-action@v0.0.3
         with:
           name: JumpFight
           preset: windows
