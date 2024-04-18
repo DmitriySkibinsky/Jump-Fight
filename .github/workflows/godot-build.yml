@@ -41,7 +41,6 @@ jobs:
           name: Jump-Fight
           preset: windows
           debugMode: true
-          subdirectory: build
           
       - name: Refactor
         run: |
