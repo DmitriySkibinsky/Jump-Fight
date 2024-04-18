@@ -9,46 +9,38 @@ env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   REPO_NAME: DmitriySkiba/Jump-Fight
 
+
 jobs:
   build-project:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: dev
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
         with:
-          global-json-file: global.json
+          dotnet-version: '8.0.*'
 
-      - name: Restore Dependencies
-        run: dotnet restore
-
-      - name: Setup Godot
-        uses: chickensoft-games/setup-godot@v2
+      - name: Godot Setup
+        uses: lihop/godot-setup@v2.1.2
         with:
-          version: 4.2.1
-          is-mono: true
+          version: 4.2.1-stable
+          bits: 64
+          mono: true
+          alias: godot
+          export-templates: true
 
-      - name: Verify Setup
-        run: |
-          dotnet --version
-          godot --version
-          mono --version
-          tree
-      - name: Build Godot Project for Windows
-        run: |
-          export G Godot/Scripts/godot="--render-mode gl3"
-          godot --export-release "Windows Desktop" "build/game.exe"
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+      - name: Build with Godot Mono Build Action
+        uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
-          name: game-windows
-          path: build/game.exe
+          name: Jump-Fight
+          preset: windows
+          debugMode: true
+          subdirectory: build
           
       - name: Refactor
         run: |
