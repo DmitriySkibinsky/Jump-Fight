@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Jump Fight"
-run/main_scene="res://Main/main.tscn"
+run/main_scene="res://Main/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
