@@ -41,7 +41,6 @@ jobs:
           preset: windows
           debugMode: true
           subdirectory: build
-          export-templates: false
           
       - name: Refactor
         run: |
@@ -49,6 +48,7 @@ jobs:
           pwd
           sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
           sudo rm ./build/build/Jump-Fight
+
       - name: Place to zip
         run: |
           sudo zip -r Jump-Fight.zip ./build/build/*
@@ -64,6 +64,7 @@ jobs:
            NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
            echo "Generated new tag: $NEW_TAG"
            echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
         with:
