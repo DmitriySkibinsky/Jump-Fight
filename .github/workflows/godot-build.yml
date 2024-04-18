@@ -33,7 +33,28 @@ jobs:
           mono: true
           alias: godot
           export-templates: true
+    
+      - name: Setufp .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: global.json
 
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1
+          is-mono: true
+
+      - name: Verify Setup
+        run: |
+          dotnet --version
+          godot --version
+          mono --version
+          tree
+          
       - name: Copy Godot Export Templates
         run: |
           sudo mkdir -p /github/home/.local/share/godot/export_templates
