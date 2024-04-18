@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           ref: dev
 
@@ -34,11 +34,12 @@ jobs:
           alias: godot
           export-templates: true
 
-      - name: Project build
-        uses: manleydev/build-godot-action@v1.5.0
+      - name: Build with Godot Mono Build Action
+        uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
           name: Jump-Fight
           preset: windows
+          debugMode: true
           subdirectory: build
           
       - name: Refactor
