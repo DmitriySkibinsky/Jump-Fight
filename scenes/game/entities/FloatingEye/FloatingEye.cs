@@ -5,9 +5,10 @@ using System;
 public static class Trajectory
 {
     // Настройки траекторий обозначены комментарием "Настройки", что бы их можно было найти
-    private static int GameSpace = 525; // Ширина доступного игрового поля
+    public static int GameSpace = 525; // Ширина доступного игрового поля
 
-    private static Random RNG = new Random();
+    public static Random RNG = new Random();
+    public static float FlatY;
 
     enum TrajectoryType
     {
@@ -22,7 +23,7 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться справа на лево и наоборот
     /// </summary>
-    private static void SetLinearTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetLinearTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         WayPoints = new Vector2[2]; // Создаём новый массив
         float Div = GameSpace / 2; // Маленькая оптимизация
@@ -33,11 +34,11 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться по кругу
     /// </summary>
-    private static void SetCircularTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetCircularTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         // Настройки
         float Angle = Mathf.DegToRad(10); // Угл по которому будем делиться круг !!!! ДОЛЖНО ДЕЛИТЬСЯ НА 360 БЕЗ ОСТАТКА
-        float FlatY = RNG.Next(40, 75); // Сплющиваем круг на рандомное значение
+        FlatY = RNG.Next(40, 75); // Сплющиваем круг на рандомное значение
         Vector2 Flatten = new Vector2(1, FlatY/100); // Насколько будет приплюснут круг
 
 
@@ -54,7 +55,7 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться по петле(знак бесконечности)
     /// </summary>
-    private static void SetLoopTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetLoopTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         //Настройки
         float DivGS = GameSpace / 4; // Радиус кругов у петли
@@ -84,7 +85,7 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться зигзагом
     /// </summary>
-    private static void SetZigZagTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetZigZagTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         // Настройки
         int N = RNG.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
