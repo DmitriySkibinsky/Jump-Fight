@@ -43,7 +43,7 @@ jobs:
 
       - name: Build Godot Project for Windows
         run: |
-          godot --export "Windows Desktop" "build/game.exe"
+          godot --export-release "Windows Desktop" "build/game.exe"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
