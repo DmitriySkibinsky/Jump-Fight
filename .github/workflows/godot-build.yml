@@ -41,6 +41,7 @@ jobs:
           preset: windows
           debugMode: true
           subdirectory: build
+          export-templates: false
           
       - name: Refactor
         run: |
