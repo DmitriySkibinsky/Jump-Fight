@@ -1,4 +1,3 @@
-
 name: Build Godot Project
 
 on:
@@ -9,7 +8,6 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   REPO_NAME: DmitriySkiba/Jump-Fight
-
 
 jobs:
   build-project:
@@ -35,12 +33,21 @@ jobs:
           alias: godot
           export-templates: true
 
+      - name: Verify Godot Installation
+        run: |
+          godot --version
+
+      - name: Check Export Templates
+        run: |
+          ls $HOME/.local/share/godot/export_templates/
+
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
           name: Jump-Fight
           preset: windows
           debugMode: true
+          subdirectory: build
           
       - name: Refactor
         run: |
