@@ -61,40 +61,41 @@ jobs:
           sudo mkdir -p /root/home/.local/share/godot/export_templates
           sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/
           sudo cp export_presets.cfg /root/home/.local/share/godot/export_templates/
+          godot --export-release "windows" ./Fight-Jump.exe
 
-      - name: Build with Godot Mono Build Action
-        uses: QuakeEye/godot-mono-build-action@v0.0.2
-        with:
-          name: Jump-Fight
-          preset: windows
-          debugMode: true
-          subdirectory: build
+     # - name: Build with Godot Mono Build Action
+     #   uses: QuakeEye/godot-mono-build-action@v0.0.2
+     #   with:
+     #     name: Jump-Fight
+     #     preset: windows
+     #     debugMode: true
+     #     subdirectory: build
           
-      - name: Refactor
-        run: |
-          tree
-          pwd
-          sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
-          sudo rm ./build/build/Jump-Fight
+     # - name: Refactor
+     #   run: |
+     #     tree
+     #     pwd
+     #     sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
+     #     sudo rm ./build/build/Jump-Fight
 
-      - name: Place to zip
-        run: |
-          sudo zip -r Jump-Fight.zip ./build/build/*
-          tree
+     # - name: Place to zip
+     #   run: |
+     #     sudo zip -r Jump-Fight.zip ./build/build/*
+     #     tree
           
-      - name: Generate Git Tag
-        id: generate_tag
-        run: |
-           VERSION_PREFIX="v"
-           VERSION_MAJOR_MINOR="1.0"
-           VERSION_PATCH="0"
-           
-           NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
-           echo "Generated new tag: $NEW_TAG"
-           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+     # - name: Generate Git Tag
+     #   id: generate_tag
+     #   run: |
+     #      VERSION_PREFIX="v"
+     #      VERSION_MAJOR_MINOR="1.0"
+     #      VERSION_PATCH="0"
+     #      
+     #     NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
+     #      echo "Generated new tag: $NEW_TAG"
+     #      echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
-      - name: Install gh-release action
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./Jump-Fight.zip
-          tag_name: v1.0.0
+     # - name: Install gh-release action
+     #   uses: softprops/action-gh-release@v1
+     #   with:
+     #     files: ./Jump-Fight.zip
+     #     tag_name: v1.0.0
