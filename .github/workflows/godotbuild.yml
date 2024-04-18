@@ -46,7 +46,7 @@ jobs:
           sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/4.2.2.stable.mono
           
       - name: Build with Godot Mono Build Action
-        uses: QuakeEye/godot-mono-build-action@v0.0.4
+        uses: QuakeEye/godot-mono-build-action@v0.0.1
         with:
           name: JumpFight
           preset: windows
