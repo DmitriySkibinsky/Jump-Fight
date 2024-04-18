@@ -38,12 +38,12 @@ jobs:
         run: sudo mkdir -p /root/.local/share/godot/templates
 
       - name: Build with Godot Mono Build Action
-        uses: QuakeEye/godot-mono-build-action@v0.0.2
+        uses: lillian1024/godot-mono-action@v1.0
         with:
           name: Jump-Fight
-          preset: "Windows Mono"
+          preset: "windows"
           debugMode: true
-          subdirectory: build
+          #subdirectory: build
           
       - name: Refactor
         run: |
