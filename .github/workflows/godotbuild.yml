@@ -40,7 +40,7 @@ jobs:
 
       - name: REf
         run: |
-          sudo cp export_templates.cfg /github/home/.local/share/godot/export_templates/4.2.2.stable.mono/windows_debug_x86_64.exe
+          sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/4.2.2.stable.mono/windows_debug_x86_64.exe
 
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.3
