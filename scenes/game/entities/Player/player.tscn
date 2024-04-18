@@ -1254,7 +1254,7 @@ shape = SubResource("CapsuleShape2D_cpaui")
 texture_filter = 1
 position = Vector2(2, -12)
 sprite_frames = SubResource("SpriteFrames_bxqn3")
-animation = &"Super_Attack"
+animation = &"Attack"
 autoplay = "Idle"
 
 [node name="AttackDirection" type="Node2D" parent="."]
@@ -1268,5 +1268,7 @@ disabled = true
 libraries = {
 "": SubResource("AnimationLibrary_t3ygn")
 }
+
+[connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="DoDamage"]
 
 [editable path="AttackDirection/DamageBox"]

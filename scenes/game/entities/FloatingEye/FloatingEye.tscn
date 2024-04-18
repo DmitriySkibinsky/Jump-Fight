@@ -75,7 +75,7 @@ height = 19.5
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61nv8"]
 size = Vector2(27.6, 28.8)
 
-[node name="Mob" type="CharacterBody2D"]
+[node name="FloatingEye" type="CharacterBody2D"]
 texture_filter = 3
 position = Vector2(-5, 3)
 scale = Vector2(4, 4)
@@ -113,6 +113,5 @@ position = Vector2(2.75, -2)
 scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_61nv8")
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="HurtBoxes" to="." method="_on_hurt_boxes_body_entered"]
 [connection signal="body_entered" from="HitBoxes" to="." method="Attack"]

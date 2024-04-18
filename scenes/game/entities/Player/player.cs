@@ -366,11 +366,13 @@ public partial class player : CharacterBody2D
         EmitSignal(SignalName.SuperReload, 100);
     }
 
-    public void _on_hit_box_area_entered(Area2D area)
+    private ulong LastAttack = Godot.Time.GetTicksMsec();
+    public void DoDamage(Area2D Area)
     {
-        if (area.GetParent().Name == "FloatingEye")
+        if (Area.Name == "HurtBoxes" && Godot.Time.GetTicksMsec() - LastAttack > 300)
         {
-            area.GetParent().CallDeferred("GetDamaged", damage_current);
+            LastAttack = Godot.Time.GetTicksMsec();
+            Area.GetParent().CallDeferred("GetDamage", damage_current);
         }
     }
 
