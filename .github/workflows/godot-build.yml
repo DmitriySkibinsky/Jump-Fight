@@ -34,6 +34,9 @@ jobs:
           alias: godot
           export-templates: true
 
+      - name: Mkdir
+        run: sudo mkdir -p /root/.local/share/godot/templates
+
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
