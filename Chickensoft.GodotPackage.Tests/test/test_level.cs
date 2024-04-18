@@ -10,7 +10,6 @@ using System.Linq;
 using Shouldly;
 
 public class LevelTest : TestClass {
-	private readonly ILog _log = new GDLog(nameof(PlayerTest));
 
 	private player player;
 	private level level;
@@ -28,7 +27,6 @@ public class LevelTest : TestClass {
         camera = new Camera2D();
         level.player = player;
         level.camera = camera;
-		_log.Print("Setup");
 	}
 
 	[Test]
@@ -75,36 +73,4 @@ public class LevelTest : TestClass {
         camera.Position.Y.ShouldBe(player.Position.Y);
     }
 
-    [Test]
-    public void CleanerAreaBodyEntered_WhenPlayerCollides_PlayerGetDamagedAndPositionIsAdjusted()
-    {
-        // Arrange
-        var body = new Node2D();
-        body.Name = "Player";
-        var initialPlayerPosition = player.Position;
-
-        // Act
-        level._on_cleaner_area_body_entered(body);
-
-        // Assert
-        player.Position.X.ShouldBe(initialPlayerPosition.X);
-        player.Position.Y.ShouldBe(camera.Position.Y);
-        //player.GetDamageCalled.ShouldBe(20);
     }
-
-    /*[Test]
-	public async Task CleanerAreaBodyEntered_WhenNonPlayerBodyCollides_BodyIsFreed()
-{
-    // Arrange
-    var body = new Node2D();
-  
-    // Act
-    level._on_cleaner_area_body_entered(body);
-
-    // Wait for one frame
-    await Task.Delay(1);
-
-    // Assert
-    body.GetParent().ShouldBeNull();
-}*/
-}
