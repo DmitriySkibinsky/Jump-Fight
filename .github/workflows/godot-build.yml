@@ -36,8 +36,8 @@ jobs:
 
       - name: Copy Godot Export Templates
         run: |
-          sudo mkdir -p /root/home/.local/share/godot/export_templates
-          sudo cp export_presets.cfg /root/home/.local/share/godot/export_templates/
+          sudo mkdir -p /github/home/.local/share/godot/export_templates
+          sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/
 
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
