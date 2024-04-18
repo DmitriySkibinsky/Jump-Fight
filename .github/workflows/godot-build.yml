@@ -20,10 +20,10 @@ jobs:
         with:
           ref: main
 
-      - name: Setup .NET Core SDK
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.*'
+          global-json-file: global.json
 
       - name: Restore Dependencies
         run: dotnet restore
