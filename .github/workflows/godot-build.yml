@@ -62,6 +62,7 @@ jobs:
           sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/
           sudo cp export_presets.cfg /root/home/.local/share/godot/export_templates/
           godot --export-release "windows" ./Fight-Jump.exe
+          tree
 
      # - name: Build with Godot Mono Build Action
      #   uses: QuakeEye/godot-mono-build-action@v0.0.2
