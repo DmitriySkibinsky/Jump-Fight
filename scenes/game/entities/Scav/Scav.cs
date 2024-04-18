@@ -136,12 +136,21 @@ public partial class Scav : CharacterBody2D
         }
     }
 
+    private bool SecondAttack = false;
 
     private async void Attack(Node2D Body)
     {
         if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
-            Anim.Play("Attack1");
+            if (SecondAttack)
+            {
+                Anim.Play("Attack2");
+            }
+            else
+            {
+                Anim.Play("Attack1");
+            }
+            SecondAttack = !SecondAttack;
             Player.CallDeferred("GetDamaged", Damage);
             State = Statement.Idle;
             IdleTime = 2;
