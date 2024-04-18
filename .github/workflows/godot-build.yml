@@ -38,7 +38,7 @@ jobs:
         uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
           name: "Jump-Fight"
-          preset: windows
+          preset: windows-mono
           debugMode: true
           subdirectory: build
           
