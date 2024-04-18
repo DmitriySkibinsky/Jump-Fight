@@ -22,7 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
@@ -46,7 +46,7 @@ jobs:
           sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/4.2.2.stable.mono
           
       - name: Build with Godot Mono Build Action
-        uses: QuakeEye/godot-mono-build-action@v0.0.3
+        uses: QuakeEye/godot-mono-build-action@v0.0.4
         with:
           name: JumpFight
           preset: windows
