@@ -49,7 +49,7 @@ jobs:
           preset: windows
           subdirectory: build
           projectDir: /
-          debugMode: true
+          debugMode: false
           
           
       - name: Refactor
