@@ -37,10 +37,6 @@ jobs:
         run: |
           godot --version
 
-      - name: Check Export Templates
-        run: |
-          ls $HOME/.local/share/godot/export_templates/
-
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.1
         with:
