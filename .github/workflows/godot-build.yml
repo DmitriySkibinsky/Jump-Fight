@@ -33,10 +33,6 @@ jobs:
           alias: godot
           export-templates: true
 
-      - name: Verify Godot Installation
-        run: |
-          godot --version
-
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.5
         with:
