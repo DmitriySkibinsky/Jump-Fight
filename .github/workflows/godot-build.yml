@@ -13,49 +13,55 @@ env:
 jobs:
   build-project:
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:mono-3.4.4
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
 
-      - name: Print variables
-        run : echo $GODOT_VERSION
-      - name: Setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.*'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1
+          is-mono: true
+
+      - name: Verify Setup
         run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/$GODOT_VERSION.stable.mono ~/.local/share/godot/templates/$GODOT_VERSION.stable.mono
-      - run: |
-          # install rsync
-          apt-get update && apt-get install -y rsync
-      - run: |
-          # make file runnable
-          chmod +x $GITHUB_WORKSPACE/.github/rsync_wrapper.sh
-      - name: Web Build
-        run: |
-          # add the export directory
-          mkdir ./$EXPORT_NAME
-      - run: |
-          #run rsync wrapper script
-          $GITHUB_WORKSPACE/.github/rsync_wrapper.sh -Rr . ./$EXPORT_NAME
-      - run: |
-          # navigate to export dir
-          cd $EXPORT_NAME
-          mkdir -v -p export
-      - run: |
-          # make export script runnable
-          chmod +x $GITHUB_WORKSPACE/.github/export_godot.sh
-      - run: |
-          #run godot export
-          $GITHUB_WORKSPACE/.github/export_godot.sh "HTML5" $GITHUB_WORKSPACE
+          dotnet --version
+          godot --version
+          mono --version
           tree
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: web
-          path: ${{ env.EXPORT_NAME }}/export
+      - name: Build Godot Project for Windows
+        run: |
+          godot --export "Windows Desktop" "build/game.exe"
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: game-windows
+          path: build/game.exe
+          
+      - name: Refactor
+        run: |
+          tree
+          pwd
+          sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
+          sudo rm ./build/build/Jump-Fight
+
+      - name: Place to zip
+        run: |
+          sudo zip -r Jump-Fight.zip ./build/build/*
+          tree
           
       - name: Generate Git Tag
         id: generate_tag
