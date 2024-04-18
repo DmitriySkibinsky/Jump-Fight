@@ -6,7 +6,7 @@ using System.Reflection;
 using Chickensoft.GoDotTest;
 #endif
 
-public partial class Main<T> : Node2D where T : class{
+public partial class Main : Node2D {
 #if DEBUG
   public TestEnvironment Environment = default!;
 #endif
