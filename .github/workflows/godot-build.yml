@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           ref: dev
 
@@ -33,70 +33,40 @@ jobs:
           mono: true
           alias: godot
           export-templates: true
-    
-      - name: Setufp .NET SDK
-        uses: actions/setup-dotnet@v3
+
+      - name: Build with Godot Mono Build Action
+        uses: QuakeEye/godot-mono-build-action@v0.0.2
         with:
-          global-json-file: global.json
-
-      - name: Restore Dependencies
-        run: dotnet restore
-
-      - name: Setup Godot
-        uses: chickensoft-games/setup-godot@v2
-        with:
-          version: 4.2.1
-          is-mono: true
-          user: true
-
-      - name: Verify Setup
+          name: Jump-Fight
+          preset: windows
+          debugMode: true
+          subdirectory: build
+          
+      - name: Refactor
         run: |
-          dotnet --version
-          godot --version
-          mono --version
+          tree
+          pwd
+          sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
+          sudo rm ./build/build/Jump-Fight
+
+      - name: Place to zip
+        run: |
+          sudo zip -r Jump-Fight.zip ./build/build/*
           tree
           
-      - name: Copy Godot Export Templates
+      - name: Generate Git Tag
+        id: generate_tag
         run: |
-          sudo mkdir -p /github/home/.local/share/godot/export_templates
-          sudo cp export_presets.cfg /github/home/.local/share/godot/export_templates/
-          sudo chmod +x /github/home/.local/share/godot/export_templates/export_presets.cfg
-          sudo godot --export-release "windows" ./Fight-Jump.exe
-          tree
+           VERSION_PREFIX="v"
+           VERSION_MAJOR_MINOR="1.0"
+           VERSION_PATCH="0"
+           
+           NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
+           echo "Generated new tag: $NEW_TAG"
+           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
-     # - name: Build with Godot Mono Build Action
-     #   uses: QuakeEye/godot-mono-build-action@v0.0.2
-     #   with:
-     #     name: Jump-Fight
-     #     preset: windows
-     #     debugMode: true
-     #     subdirectory: build
-          
-     # - name: Refactor
-     #   run: |
-     #     tree
-     #     pwd
-     #     sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
-     #     sudo rm ./build/build/Jump-Fight
-
-     # - name: Place to zip
-     #   run: |
-     #     sudo zip -r Jump-Fight.zip ./build/build/*
-     #     tree
-          
-     # - name: Generate Git Tag
-     #   id: generate_tag
-     #   run: |
-     #      VERSION_PREFIX="v"
-     #      VERSION_MAJOR_MINOR="1.0"
-     #      VERSION_PATCH="0"
-     #      
-     #     NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
-     #      echo "Generated new tag: $NEW_TAG"
-     #      echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
-
-     # - name: Install gh-release action
-     #   uses: softprops/action-gh-release@v1
-     #   with:
-     #     files: ./Jump-Fight.zip
-     #     tag_name: v1.0.0
+      - name: Install gh-release action
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./Jump-Fight.zip
+          tag_name: v1.0.0
