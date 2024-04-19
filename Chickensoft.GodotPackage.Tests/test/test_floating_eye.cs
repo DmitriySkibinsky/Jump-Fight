@@ -153,13 +153,13 @@ public class FloatingEyeTests:TestClass
     }
 
     [Test]
-    public void Attack_Should_Update_Player_Velocity()
+    public void Attack_Test()
     {
         // Arrange
         FloatingEye.Alive = true;
-        var player = new player(); // Assuming player class exists and is properly instantiated
+        var player = new player(); 
         FloatingEye.Player = player;
-        player.Position = new Vector2(100, 0); // Player is falling
+        player.Position = new Vector2(100, 0); 
 
         // Act
         _floatingEye.Attack(player);
@@ -169,7 +169,7 @@ public class FloatingEyeTests:TestClass
     }
 
     [Test]
-    public void _Process_Should_Update_Position_Correctly_When_Alive()
+    public void _Process_Test()
     {
         // Arrange
         FloatingEye.Alive = true;
@@ -187,11 +187,12 @@ public class FloatingEyeTests:TestClass
     }
 
     [Test]
-    public void _on_hurt_boxes_body_entered_Should_Update_Player_Velocity_When_Player_Is_Alive_And_Falling()
+    public void _on_hurt_boxes_body_entered_Test()
     {
         // Arrange
+        FloatingEye.Anim = new AnimatedSprite2D();
         FloatingEye.Alive = true;
-        var player = new player(); // Assuming player class exists and is properly instantiated
+        var player = new player(); 
         FloatingEye.Player = player;
         player.Velocity = new Vector2(0, 100); // Player is falling
 
@@ -205,7 +206,7 @@ public class FloatingEyeTests:TestClass
     
 
     [Test]
-    public void death_Should_Set_Alive_To_False_And_QueueFree_After_Anim_Finished()
+    public void death_Test()
     {
         // Arrange
         FloatingEye.Alive = true;
