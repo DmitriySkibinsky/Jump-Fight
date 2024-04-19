@@ -37,6 +37,10 @@ jobs:
           mono: true
           alias: godot
           export-templates: true
+
+      - name: Redd
+        run: |
+         sudo cp /root/.local/share/godot/templates/. /github/home/.local/share/godot/export_templates/
    
       - name: Build with Godot Mono Build Action
         uses: QuakeEye/godot-mono-build-action@v0.0.2
