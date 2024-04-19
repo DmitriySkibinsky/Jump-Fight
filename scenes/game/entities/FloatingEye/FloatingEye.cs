@@ -9,6 +9,8 @@ public static class Trajectory
 
     public static Random RNG = new Random();
     public static float FlatY;
+     public static int N;
+    public static int Amplitude;
 
     enum TrajectoryType
     {
@@ -88,9 +90,9 @@ public static class Trajectory
     public static void SetZigZagTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         // Настройки
-        int N = RNG.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
+        N = RNG.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
         int Side = RNG.Next(1) == 1 ? 1 : -1; // В какую сторону он пойдёт сперва
-        int Amplitude = RNG.Next(25, 51); // Высота вершин
+        Amplitude = RNG.Next(25, 51); // Высота вершин
 
 
         int Step = GameSpace / (N);
@@ -141,20 +143,18 @@ public static class Trajectory
 }
 public partial class FloatingEye : CharacterBody2D
 {
-    private int Speed = 125;
-    private int Damage = 20;
-    private int direction = 1;
-    private bool Alive = true;
+    public static int Speed = 125;
+    public static int Damage = 20;
+    public static int direction = 1;
+    public static bool Alive = true;
 
-    private Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
+    public static Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
     private Vector2 StartPos; // Стартовая позиция
-    private int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
+    public static int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
 
-    private CustomSignals _customSignals;
+    public static AnimatedSprite2D Anim;
 
-    private AnimatedSprite2D Anim;
-
-    private player Player;
+    public static player Player;
 
     public override void _Ready()
     {

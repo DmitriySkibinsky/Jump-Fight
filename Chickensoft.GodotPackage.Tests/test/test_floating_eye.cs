@@ -97,4 +97,126 @@ public void SetLoopTrajectory_Test()
         }
     }
 
+[Test]
+    public void SetZigZagTrajectory_GeneratesValidWaypoints()
+    {
+        // Arrange
+        var startPos = new Vector2(0, 0);
+        Vector2[] waypoints = null;
+
+        // Act
+        Trajectory.SetZigZagTrajectory(out waypoints, startPos);
+
+        // Assert
+        waypoints.ShouldNotBeNull(); // Убеждаемся, что массив точек не равен null
+
+        // Проверяем количество вершин
+        int expectedWaypointsCount = (Trajectory.N +1)* 2 ; // Ожидаемое количество вершин
+        waypoints.Length.ShouldBe(expectedWaypointsCount);
+
+        // Проверяем координаты вершин
+        int gameSpace = Trajectory.GameSpace;
+        int amplitude = Trajectory.Amplitude;
+        int step = gameSpace / (waypoints.Length / 2 - 1);
+
+         // Проверяем начало и конец траектории
+        waypoints[0].X.ShouldBe(startPos.X - new Vector2(gameSpace / 2, 0).X, tolerance: 0.001f); // Начало
+        waypoints[0].Y.ShouldBe(startPos.Y - new Vector2(gameSpace / 2, 0).Y, tolerance: 0.001f); // Начало
+        waypoints[waypoints.Length / 2].X.ShouldBe(startPos.X + new Vector2(gameSpace / 2, 0).X, tolerance: 0.001f); // Конец
+        waypoints[waypoints.Length / 2].Y.ShouldBe(startPos.Y + new Vector2(gameSpace / 2, 0).Y, tolerance: 0.001f); // Конец
+
+        for (int i = 0; i < waypoints.Length / 2 - 1; i++)
+        {
+            // Проверяем координаты x
+            waypoints[i + 1].X.ShouldBe(waypoints[0].X + (step * i + step / 2), tolerance: 0.001f);
+            waypoints[i + 2 + Trajectory.N].X.ShouldBe(waypoints[Trajectory.N + 1].X - (step * i + step / 2), tolerance: 0.001f);
+
+            // Проверяем координаты y
+            waypoints[i + 1].Y.ShouldBe(-1*(waypoints[0].Y + amplitude), tolerance: 0.001f);
+            waypoints[i + 2 + Trajectory.N].Y.ShouldBe(waypoints[0].Y - amplitude, tolerance: 0.001f);
+
+            // Меняем сторону для следующей вершины
+            amplitude *= -1;
+        }       
+    }
+}
+
+public class FloatingEyeTests:TestClass
+{
+    public FloatingEyeTests(Node testScene) : base(testScene) { }
+    private FloatingEye _floatingEye;
+
+    [Setup]
+    public void SetUp()
+    {
+        _floatingEye = new FloatingEye();
+    }
+
+    [Test]
+    public void Attack_Should_Update_Player_Velocity()
+    {
+        // Arrange
+        FloatingEye.Alive = true;
+        var player = new player(); // Assuming player class exists and is properly instantiated
+        FloatingEye.Player = player;
+        player.Position = new Vector2(100, 0); // Player is falling
+
+        // Act
+        _floatingEye.Attack(player);
+
+        // Assert
+        player.Velocity.ShouldBe(new Vector2(700, 0));
+    }
+
+    [Test]
+    public void _Process_Should_Update_Position_Correctly_When_Alive()
+    {
+        // Arrange
+        FloatingEye.Alive = true;
+        _floatingEye.Position = new Vector2(0, 0);
+        FloatingEye.CurrentWayPoint = 1;
+        FloatingEye.WayPoints = new Vector2[] { new Vector2(0, 0), new Vector2(100, 0) };
+        FloatingEye.Speed = 125;
+        double delta = 0.1; // arbitrary delta value for testing
+
+        // Act
+        _floatingEye._Process(delta);
+
+        // Assert
+        _floatingEye.Position.ShouldBe(new Vector2(12.5f, 0)); // Assuming Direction.Length() == 100 and CurrentWayPoint == 1
+    }
+
+    [Test]
+    public void _on_hurt_boxes_body_entered_Should_Update_Player_Velocity_When_Player_Is_Alive_And_Falling()
+    {
+        // Arrange
+        FloatingEye.Alive = true;
+        var player = new player(); // Assuming player class exists and is properly instantiated
+        FloatingEye.Player = player;
+        player.Velocity = new Vector2(0, 100); // Player is falling
+
+        // Act
+        _floatingEye._on_hurt_boxes_body_entered(player);
+
+        // Assert
+        player.Velocity.ShouldBe(new Vector2(0, -500));
+    }
+
+    
+
+    [Test]
+    public void death_Should_Set_Alive_To_False_And_QueueFree_After_Anim_Finished()
+    {
+        // Arrange
+        FloatingEye.Alive = true;
+        FloatingEye.Anim = new AnimatedSprite2D(); // Assuming AnimatedSprite2D is properly instantiated
+
+        // Act
+        _floatingEye.death();
+
+        // Assert
+        FloatingEye.Alive.ShouldBeFalse();
+        //FloatingEye.Anim.ShouldBe("Death");
+    }
+
 }
