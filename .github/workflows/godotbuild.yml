@@ -35,7 +35,7 @@ jobs:
           export-templates: true
 
       - name: Build with Godot Mono Build Action
-        uses: QuakeEye/build-godot-action@v1.4.1
+        uses: yeslayla/build-godot-action@v1.4.1
         with:
           name: Jump-Fight
           preset: windows
