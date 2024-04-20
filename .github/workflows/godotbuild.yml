@@ -29,7 +29,6 @@ jobs:
 
       - name: Build with Godot Mono Build Action
         run: |
-          tree
           godot -v --export "windows" ../build/$EXPORT_NAME.exe
           test -e ../build/windows/$EXPORT_NAME.exe
           
