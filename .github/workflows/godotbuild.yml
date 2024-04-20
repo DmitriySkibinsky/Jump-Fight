@@ -27,19 +27,6 @@ jobs:
         with:
           dotnet-version: '8.0.*'
 
-      - name: Godot Setup
-        uses: lihop/godot-setup@v2.1.2
-        with:
-          version: 4.2.1-stable
-          bits: 64
-          mono: true
-          alias: godot
-          export-templates: true
-
-      - name: Res
-        run: |
-          sudo mkdir -p '/root/.local/share/godot/templates/.'
-
       - name: Build with Godot Mono Build Action
         run: |
           cd Godot
