@@ -9,6 +9,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   REPO_NAME: DmitriySkiba/Jump-Fight
   GODOT_OPENGL: yes
+  DOTNET_ROOT: /github/home/.dotnet
 
 
 jobs:
@@ -30,7 +31,8 @@ jobs:
 
       - name : step
         run: |
-         sudo apt-get install libxcursor1
+          apt-get update
+          apt-get install -y libxcursor1
          
 
       - name: Build with Godot Mono Build Action
