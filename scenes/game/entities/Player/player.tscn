@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bhm0qmsx782o2" path="res://scenes/game/entities/DamageBox/DamageBox.tscn" id="5_xwwmt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
-radius = 12.0
+radius = 7.0
 height = 34.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nbjho"]
@@ -1247,7 +1247,6 @@ collision_layer = 10
 script = ExtResource("1_6toyy")
 
 [node name="AttackDirection_DamageBox_HurtBox#CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 0)
 shape = SubResource("CapsuleShape2D_cpaui")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
