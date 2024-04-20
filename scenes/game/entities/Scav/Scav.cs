@@ -30,17 +30,17 @@ public partial class Scav : CharacterBody2D
     private float Gravity = 200;
 
 
-    private int Direction = RNG.Next(2) == 1 ? 1 : -1;
+    public static int Direction = RNG.Next(2) == 1 ? 1 : -1;
 
 
     private RayCast2D rayCast2D;
     public static AnimatedSprite2D Anim;
-    private Area2D HitBoxes;
+    public static Area2D HitBoxes;
     private Area2D HurtBoxes;
     private CollisionShape2D HitBox1;
     private CollisionShape2D HurtBox1;
 
-    private player Player;
+    public static player Player;
     public override void _Ready()
     {
         rayCast2D = GetNode<RayCast2D>("RayCast2D");

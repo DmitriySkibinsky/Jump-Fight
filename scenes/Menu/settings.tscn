@@ -1,31 +1,94 @@
 [gd_scene load_steps=5 format=3 uid="uid://bs4ayffshvalm"]
 
 [ext_resource type="Script" path="res://scenes/Menu/settings.cs" id="1_g68vc"]
-[ext_resource type="Texture2D" uid="uid://bqvxxhorlucxn" path="res://assets/sprites/bg.png" id="2_sth6u"]
-[ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="3_fgl7e"]
+[ext_resource type="Texture2D" uid="uid://bnd6uj05ayql5" path="res://assets/sprites/Quit Button.png" id="1_tfwcm"]
+[ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_l6s0q"]
 [ext_resource type="Texture2D" uid="uid://c6nijyhgy4p5w" path="res://assets/sprites/Exit Button.png" id="4_w64r6"]
 
-[node name="Settings" type="Node2D"]
+[node name="Main_settings" type="Control"]
+process_mode = 3
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_g68vc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("2_sth6u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l6s0q")
 
-[node name="Quit" type="Button" parent="."]
-offset_left = 1807.0
-offset_top = 6.0
-offset_right = 1915.0
-offset_bottom = 114.0
-icon = ExtResource("3_fgl7e")
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.5
+offset_top = -293.0
+offset_right = 247.5
+offset_bottom = 293.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="exit" type="Button" parent="."]
-offset_left = 820.0
-offset_top = 834.0
-offset_right = 1128.0
-offset_bottom = 942.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.5
+offset_top = -49.0
+offset_right = 150.5
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("1_tfwcm")
+
+[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
 icon = ExtResource("4_w64r6")
 
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[node name="Audio" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+offset_left = 126.0
+offset_top = 100.0
+offset_right = 226.0
+offset_bottom = 250.0
+
+[node name="Audio" type="Button" parent="Panel/Audio"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Sounds" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -233.0
+offset_top = 100.0
+offset_right = -133.0
+offset_bottom = 240.0
+grow_horizontal = 0
+
+[node name="Sounds" type="Button" parent="Panel/Sounds"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Panel/Audio/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Panel/Sounds/Sounds" to="." method="_on_sounds_pressed"]
