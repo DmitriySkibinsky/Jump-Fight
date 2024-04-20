@@ -13,7 +13,9 @@ env:
 jobs:
   build-project:
     runs-on: ubuntu-latest
-
+    container:
+      image: barichello/godot-ci:mono-4.2.1
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -39,12 +41,10 @@ jobs:
           sudo mkdir -p '/root/.local/share/godot/templates/.'
 
       - name: Build with Godot Mono Build Action
-        uses: QuakeEye/godot-mono-build-action@v0.0.2
-        with:
-          name: Jump-Fight
-          preset: windows
-          debugMode: true
-          subdirectory: build
+        run: |
+          cd Godot
+          godot -v --export "windows" ../build/$EXPORT_NAME.exe
+          test -e ../build/windows/$EXPORT_NAME.exe
           
       - name: Refactor
         run: |
