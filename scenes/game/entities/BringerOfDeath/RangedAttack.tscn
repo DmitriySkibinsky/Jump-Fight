@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://p0wn4b0lgi7l"]
+
+[ext_resource type="Script" path="res://scenes/game/entities/BringerOfDeath/RangedAttack.cs" id="1_eipx6"]
+[ext_resource type="Texture2D" uid="uid://cduboqx1u0mwu" path="res://assets/sprites/BringerOfDeath/Bringer-of-Death-SpritSheet.png" id="1_gvf2t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xf65r"]
+size = Vector2(36.8, 111.25)
+
+[sub_resource type="Animation" id="Animation_vaur8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_tmxk1"]
+resource_name = "attack"
+length = 1.75001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6), Vector2i(0, 7), Vector2i(1, 7), Vector2i(7, 6), Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_o14s6"]
+resource_name = "idle"
+length = 0.500013
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 6), Vector2i(2, 6), Vector2i(1, 6), Vector2i(2, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xrvn1"]
+_data = {
+"RESET": SubResource("Animation_vaur8"),
+"attack": SubResource("Animation_tmxk1"),
+"idle": SubResource("Animation_o14s6")
+}
+
+[node name="RangedAttack" type="Node2D"]
+scale = Vector2(3.75, 3.75)
+script = ExtResource("1_eipx6")
+
+[node name="Indicator" type="ColorRect" parent="."]
+offset_left = 0.000236511
+offset_top = -101.0
+offset_right = 41.0002
+color = Color(0.643137, 0.333333, 0.952941, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(31.5022, -98.5)
+scale = Vector2(1.80717, 2.16667)
+texture = ExtResource("1_gvf2t")
+hframes = 8
+vframes = 8
+frame = 48
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+position = Vector2(27.5025, 1.75)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(-5.9025, -57.375)
+shape = SubResource("RectangleShape2D_xf65r")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_xrvn1")
+}
+autoplay = "idle"
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
