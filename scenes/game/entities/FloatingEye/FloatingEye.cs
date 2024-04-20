@@ -5,9 +5,12 @@ using System;
 public static class Trajectory
 {
     // Настройки траекторий обозначены комментарием "Настройки", что бы их можно было найти
-    private static int GameSpace = 525; // Ширина доступного игрового поля
+    public static int GameSpace = 525; // Ширина доступного игрового поля
 
-    private static Random RNG = new Random();
+    public static Random RNG = new Random();
+    public static float FlatY;
+     public static int N;
+    public static int Amplitude;
 
     enum TrajectoryType
     {
@@ -22,7 +25,7 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться справа на лево и наоборот
     /// </summary>
-    private static void SetLinearTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetLinearTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         WayPoints = new Vector2[2]; // Создаём новый массив
         float Div = GameSpace / 2; // Маленькая оптимизация
@@ -33,11 +36,11 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться по кругу
     /// </summary>
-    private static void SetCircularTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetCircularTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         // Настройки
         float Angle = Mathf.DegToRad(10); // Угл по которому будем делиться круг !!!! ДОЛЖНО ДЕЛИТЬСЯ НА 360 БЕЗ ОСТАТКА
-        float FlatY = RNG.Next(40, 75); // Сплющиваем круг на рандомное значение
+        FlatY = RNG.Next(40, 75); // Сплющиваем круг на рандомное значение
         Vector2 Flatten = new Vector2(1, FlatY/100); // Насколько будет приплюснут круг
 
 
@@ -54,7 +57,7 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться по петле(знак бесконечности)
     /// </summary>
-    private static void SetLoopTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetLoopTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         //Настройки
         float DivGS = GameSpace / 4; // Радиус кругов у петли
@@ -84,12 +87,12 @@ public static class Trajectory
     /// <summary>
     /// Враг будет двигаться зигзагом
     /// </summary>
-    private static void SetZigZagTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
+    public static void SetZigZagTrajectory(out Vector2[] WayPoints, Vector2 StartPos)
     {
         // Настройки
-        int N = RNG.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
+        N = RNG.Next(6, 13);  // Генерируем число [4;11)  Кол-во вершин
         int Side = RNG.Next(1) == 1 ? 1 : -1; // В какую сторону он пойдёт сперва
-        int Amplitude = RNG.Next(25, 51); // Высота вершин
+        Amplitude = RNG.Next(25, 51); // Высота вершин
 
 
         int Step = GameSpace / (N);
@@ -140,20 +143,21 @@ public static class Trajectory
 }
 public partial class FloatingEye : CharacterBody2D
 {
-    private int Speed = 125;
-    private int Damage = 20;
-    private int direction = 1;
-    private bool Alive = true;
+    public static int Speed = 125;
+    public static int Damage = 20;
+    public static int direction = 1;
+    public static bool Alive = true;
 
-    private Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
+    public static Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
     private Vector2 StartPos; // Стартовая позиция
-    private int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
+    public static int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
 
-    private AnimatedSprite2D Anim;
+    public static AnimatedSprite2D Anim;
     private Area2D HitBoxes;
     private Area2D HurtBoxes;
 
-    private player Player;
+    public static player Player;
+
 
     public override void _Ready()
     {
