@@ -1174,6 +1174,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(65535, 851968, 10, 131071, 851968, 11, 0, 851968, 268435466, 65536, 851968, 268435467)
 
 [node name="InteractionArea" parent="Doors" instance=ExtResource("3_a562i")]
+collision_mask = 10
 ActionName = "Enter"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/InteractionArea"]

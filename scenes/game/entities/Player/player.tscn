@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://8a0si0ayx0ix"]
+[gd_scene load_steps=123 format=3 uid="uid://8a0si0ayx0ix"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Player/player.cs" id="1_6toyy"]
 [ext_resource type="Texture2D" uid="uid://cewo3ebd4w1rg" path="res://assets/sprites/char_blue.png" id="2_nscaq"]
@@ -294,57 +294,81 @@ region = Rect2(280, 448, 56, 56)
 atlas = ExtResource("3_0m3m7")
 region = Rect2(336, 448, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sbrr7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ocme"]
 atlas = ExtResource("3_0m3m7")
-region = Rect2(0, 56, 56, 56)
+region = Rect2(392, 448, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p5kb2"]
-atlas = ExtResource("3_0m3m7")
-region = Rect2(168, 56, 56, 56)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ses7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw5tv"]
 atlas = ExtResource("3_0m3m7")
 region = Rect2(224, 56, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vw6n2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljdln"]
 atlas = ExtResource("3_0m3m7")
 region = Rect2(280, 56, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2t43p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4roym"]
 atlas = ExtResource("3_0m3m7")
 region = Rect2(336, 56, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0pwx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_43621"]
 atlas = ExtResource("3_0m3m7")
 region = Rect2(392, 56, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sh35y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wewvy"]
+atlas = ExtResource("4_l22p0")
+region = Rect2(0, 224, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1uex"]
 atlas = ExtResource("4_l22p0")
 region = Rect2(56, 224, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2k0pm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag3xw"]
 atlas = ExtResource("4_l22p0")
 region = Rect2(112, 224, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_08nuo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2rad"]
 atlas = ExtResource("4_l22p0")
 region = Rect2(168, 224, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fiah"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gean"]
 atlas = ExtResource("4_l22p0")
 region = Rect2(224, 224, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x2ejm"]
-atlas = ExtResource("4_l22p0")
-region = Rect2(280, 224, 56, 56)
+[sub_resource type="AtlasTexture" id="AtlasTexture_67hr7"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(224, 56, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_keg8k"]
-atlas = ExtResource("4_l22p0")
-region = Rect2(336, 224, 56, 56)
+[sub_resource type="AtlasTexture" id="AtlasTexture_n03sn"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(280, 56, 56, 56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ptlys"]
-atlas = ExtResource("4_l22p0")
-region = Rect2(392, 224, 56, 56)
+[sub_resource type="AtlasTexture" id="AtlasTexture_81v5e"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(336, 56, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_163ha"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(392, 56, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqfew"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(0, 56, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_af5ym"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(56, 56, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vy5q"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(112, 56, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vo6w"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(168, 56, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrb7u"]
+atlas = ExtResource("3_0m3m7")
+region = Rect2(224, 56, 56, 56)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1wb7"]
 atlas = ExtResource("4_l22p0")
@@ -658,43 +682,61 @@ animations = [{
 "texture": SubResource("AtlasTexture_tyrnr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sbrr7")
+"texture": SubResource("AtlasTexture_7ocme")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p5kb2")
+"texture": SubResource("AtlasTexture_xw5tv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0ses7")
+"texture": SubResource("AtlasTexture_ljdln")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vw6n2")
+"texture": SubResource("AtlasTexture_4roym")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2t43p")
+"texture": SubResource("AtlasTexture_43621")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j0pwx")
+"texture": SubResource("AtlasTexture_wewvy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sh35y")
+"texture": SubResource("AtlasTexture_t1uex")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2k0pm")
+"texture": SubResource("AtlasTexture_ag3xw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_08nuo")
+"texture": SubResource("AtlasTexture_q2rad")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7fiah")
+"texture": SubResource("AtlasTexture_2gean")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x2ejm")
+"texture": SubResource("AtlasTexture_67hr7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_keg8k")
+"texture": SubResource("AtlasTexture_n03sn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ptlys")
+"texture": SubResource("AtlasTexture_81v5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_163ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqfew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_af5ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vy5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vo6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrb7u")
 }],
 "loop": false,
 "name": &"Super_Attack",
@@ -736,12 +778,12 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Animation" id="Animation_bkll6"]
+[sub_resource type="Animation" id="Animation_j42xn"]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -753,7 +795,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -765,11 +807,11 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("..")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -779,7 +821,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/3/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -789,40 +831,40 @@ tracks/3/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_obt4l"]
+[sub_resource type="Animation" id="Animation_u0vi1"]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 1, 2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": ["Attack2"]
+"values": ["Attack2", &"Attack2"]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("..")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -832,7 +874,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/3/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -842,12 +884,12 @@ tracks/3/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_2andv"]
+[sub_resource type="Animation" id="Animation_02uin"]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -859,7 +901,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -871,7 +913,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -881,13 +923,13 @@ tracks/2/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_i3bio"]
+[sub_resource type="Animation" id="Animation_nw7qq"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -899,7 +941,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -909,12 +951,12 @@ tracks/1/keys = {
 "values": ["Block"]
 }
 
-[sub_resource type="Animation" id="Animation_ldpm8"]
+[sub_resource type="Animation" id="Animation_ml25h"]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -926,7 +968,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -936,12 +978,12 @@ tracks/1/keys = {
 "values": ["Damage"]
 }
 
-[sub_resource type="Animation" id="Animation_mkooc"]
+[sub_resource type="Animation" id="Animation_8v1s0"]
 length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -953,7 +995,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -963,13 +1005,13 @@ tracks/1/keys = {
 "values": ["Death"]
 }
 
-[sub_resource type="Animation" id="Animation_vydlb"]
+[sub_resource type="Animation" id="Animation_1hnbt"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -981,7 +1023,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -991,24 +1033,24 @@ tracks/1/keys = {
 "values": ["Fall"]
 }
 
-[sub_resource type="Animation" id="Animation_xj212"]
-length = 0.3
+[sub_resource type="Animation" id="Animation_226v5"]
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 1, 2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1018,12 +1060,12 @@ tracks/1/keys = {
 "values": ["Fall_Damage"]
 }
 
-[sub_resource type="Animation" id="Animation_bc2hb"]
+[sub_resource type="Animation" id="Animation_tof5a"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1035,7 +1077,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1045,13 +1087,13 @@ tracks/1/keys = {
 "values": ["Idle"]
 }
 
-[sub_resource type="Animation" id="Animation_wed1r"]
+[sub_resource type="Animation" id="Animation_p0ash"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1063,7 +1105,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1073,12 +1115,12 @@ tracks/1/keys = {
 "values": ["Jump"]
 }
 
-[sub_resource type="Animation" id="Animation_cwnr7"]
+[sub_resource type="Animation" id="Animation_jmyui"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1088,13 +1130,13 @@ tracks/0/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_rl7vq"]
+[sub_resource type="Animation" id="Animation_vv47e"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1106,7 +1148,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1116,24 +1158,24 @@ tracks/1/keys = {
 "values": ["Run"]
 }
 
-[sub_resource type="Animation" id="Animation_mos0y"]
-length = 2.0
+[sub_resource type="Animation" id="Animation_ufxvj"]
+length = 2.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1145,22 +1187,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.8, 0.9, 1.1, 1.2, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.1, 1.4, 1.5, 1.9, 2, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [true, false, true, false, true, false, true]
+"values": [true, false, true, false, true, false, true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_h7h65"]
+[sub_resource type="Animation" id="Animation_u4j31"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1172,7 +1214,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1182,22 +1224,22 @@ tracks/1/keys = {
 "values": ["Walk"]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0wwh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t3ygn"]
 _data = {
-"Attack": SubResource("Animation_bkll6"),
-"Attack2": SubResource("Animation_obt4l"),
-"Attack3": SubResource("Animation_2andv"),
-"Block": SubResource("Animation_i3bio"),
-"Damage": SubResource("Animation_ldpm8"),
-"Death": SubResource("Animation_mkooc"),
-"Fall": SubResource("Animation_vydlb"),
-"Fall_Damage": SubResource("Animation_xj212"),
-"Idle": SubResource("Animation_bc2hb"),
-"Jump": SubResource("Animation_wed1r"),
-"RESET": SubResource("Animation_cwnr7"),
-"Run": SubResource("Animation_rl7vq"),
-"Super_Attack": SubResource("Animation_mos0y"),
-"Walk": SubResource("Animation_h7h65")
+"Attack": SubResource("Animation_j42xn"),
+"Attack2": SubResource("Animation_u0vi1"),
+"Attack3": SubResource("Animation_02uin"),
+"Block": SubResource("Animation_nw7qq"),
+"Damage": SubResource("Animation_ml25h"),
+"Death": SubResource("Animation_8v1s0"),
+"Fall": SubResource("Animation_1hnbt"),
+"Fall_Damage": SubResource("Animation_226v5"),
+"Idle": SubResource("Animation_tof5a"),
+"Jump": SubResource("Animation_p0ash"),
+"RESET": SubResource("Animation_jmyui"),
+"Run": SubResource("Animation_vv47e"),
+"Super_Attack": SubResource("Animation_ufxvj"),
+"Walk": SubResource("Animation_u4j31")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
@@ -1212,7 +1254,7 @@ shape = SubResource("CapsuleShape2D_cpaui")
 texture_filter = 1
 position = Vector2(2, -12)
 sprite_frames = SubResource("SpriteFrames_bxqn3")
-animation = &"Fall_Damage"
+animation = &"Attack"
 autoplay = "Idle"
 
 [node name="AttackDirection" type="Node2D" parent="."]
@@ -1223,9 +1265,10 @@ autoplay = "Idle"
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../AnimatedSprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_v0wwh")
+"": SubResource("AnimationLibrary_t3ygn")
 }
+
+[connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="DoDamage"]
 
 [editable path="AttackDirection/DamageBox"]

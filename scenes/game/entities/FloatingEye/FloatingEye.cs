@@ -153,13 +153,16 @@ public partial class FloatingEye : CharacterBody2D
     public static int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
 
     public static AnimatedSprite2D Anim;
+    private Area2D HitBoxes;
+    private Area2D HurtBoxes;
 
     public static player Player;
 
+
     public override void _Ready()
     {
-        Area2D HitBoxes = GetNode<Area2D>("HitBoxes");
-        Area2D HurtBoxes = GetNode<Area2D>("HurtBoxes");
+        HitBoxes = GetNode<Area2D>("HitBoxes");
+        HurtBoxes = GetNode<Area2D>("HurtBoxes");
         Anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
         //CollisionShape2D CollisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
@@ -170,9 +173,6 @@ public partial class FloatingEye : CharacterBody2D
         Random RNG = new Random();
         CurrentWayPoint = RNG.Next(WayPoints.Length);  // Генерируем число [0;`Кол-во Вейпоинтов`)
         this.Position = WayPoints[CurrentWayPoint]; // Ставим врага на рандомную позицию его маршрута
-
-        //HurtBoxes.AreaEntered += GetDamage;
-        //HitBoxes.BodyEntered += Attack; Оно не работает
     }
 
     public override void _Process(double delta)
@@ -195,18 +195,39 @@ public partial class FloatingEye : CharacterBody2D
                 CurrentWayPoint = 0;
             }
 
-            if (Position.X - WayPoints[CurrentWayPoint].X > 0)
+            int WP = CurrentWayPoint - 2;
+            if(WP < 0)
             {
-                Anim.FlipH = true;
+                WP = WayPoints.Length + WP;
             }
-            else
-            {
-                Anim.FlipH = false;
-            }
+                TurnAround();
         }
         else //Если враг не добрался до вейпоинта
         {
             Position = NewPos; // Применяем новую позицию
+        }
+    }
+
+    private void TurnAround()
+    {
+        if ((Math.Sign(WayPoints[CurrentWayPoint].X - Position.X) == 1) == Anim.FlipH)
+        {
+            Anim.FlipH = !Anim.FlipH;
+            Vector2 Reverse = new Vector2(-1, 1);
+            Anim.Position *= Reverse;
+            GetNode<CollisionShape2D>("CollisionShape2D").Position *= Reverse;
+            HurtBoxes.Position *= Reverse;
+            Godot.Collections.Array<Node> hurtboxes = HurtBoxes.GetChildren();
+            for(int i = 0; i < hurtboxes.Count; i++)
+            {
+                ((CollisionShape2D)hurtboxes[i]).Position *= Reverse;
+            }
+            HitBoxes.Position *= Reverse;
+            Godot.Collections.Array<Node> hitboxes = HitBoxes.GetChildren();
+            for (int i = 0; i < hitboxes.Count; i++)
+            {
+                ((CollisionShape2D)hitboxes[i]).Position *= Reverse;
+            }
         }
     }
 
@@ -223,9 +244,8 @@ public partial class FloatingEye : CharacterBody2D
 
     public void Attack(Node2D Body)
     {
-        if (Body == Player && Alive)
+        if (Alive)
         {
-            //_customSignals.EmitSignal(nameof(CustomSignals.DamagePlayer), Damage);
             Player.GetDamaged(Damage);
             Player.Velocity += new Vector2(Math.Sign(Player.Position.X - Position.X) * 700, 0);
         }

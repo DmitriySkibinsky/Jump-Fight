@@ -19,6 +19,7 @@ public partial class Scav : CharacterBody2D
     public static int Damage = 20;
     public static int Health = 100;
 
+
     public static Statement State = Statement.Run;
     public static bool Alive = true;
 
@@ -39,7 +40,7 @@ public partial class Scav : CharacterBody2D
     private CollisionShape2D HitBox1;
     private CollisionShape2D HurtBox1;
 
-
+    private player Player;
     public override void _Ready()
     {
         rayCast2D = GetNode<RayCast2D>("RayCast2D");
@@ -48,6 +49,8 @@ public partial class Scav : CharacterBody2D
         HurtBoxes = GetNode<Area2D>("HurtBoxes");
         HitBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
         HurtBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
+
+        Player = (player)GetTree().GetFirstNodeInGroup("Player");
 
         if (Direction == -1)
         {
@@ -128,26 +131,28 @@ public partial class Scav : CharacterBody2D
         MoveAndCollide(velocity);
         MoveAndSlide();
 
-        Godot.Collections.Array<Node2D> OverlappingBodies = HitBoxes.GetOverlappingBodies();
+        Godot.Collections.Array<Area2D> OverlappingBodies = HitBoxes.GetOverlappingAreas();
         for (int i = 0; i < OverlappingBodies.Count; i++) {
             Attack(OverlappingBodies[i]);
         }
     }
 
-
-    private void StateUpdate()
-    {
-
-    }
-
-
+    private bool SecondAttack = false;
 
     public async void Attack(Node2D body)
     {
-        if (State == Statement.Run && Alive && body.GetParent() != null && body.GetParent() is CharacterBody2D Player && body.GetParent().Name == "Player")
+        if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
-            Anim.Play("Attack1");
-            Player.CallDeferred("GetDamage", Damage);
+            if (SecondAttack)
+            {
+                Anim.Play("Attack2");
+            }
+            else
+            {
+                Anim.Play("Attack1");
+            }
+            SecondAttack = !SecondAttack;
+            Player.CallDeferred("GetDamaged", Damage);
             State = Statement.Idle;
             IdleTime = 2;
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
@@ -180,8 +185,7 @@ public partial class Scav : CharacterBody2D
     {
         Alive = false;
         Anim.Play("Death");
-        await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
-        Thread.Sleep(1);
+        await ToSignal(GetTree().CreateTimer(3), "timeout");
         QueueFree();
     }
 }

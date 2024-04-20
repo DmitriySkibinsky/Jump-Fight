@@ -37,9 +37,11 @@ public partial class player : CharacterBody2D
 
     public const float speed = 120.0f;
 
+    public float run_speed = 1.0f;
+
     public const float jump_velocity = -450f;
 
-    public float run_speed = 1.0f;
+    public float jump_multiplier = 1f;
 
     public int health = 100;
 
@@ -163,7 +165,7 @@ public partial class player : CharacterBody2D
             }
             if (Input.IsActionJustPressed("jump") && IsOnFloor())
             {
-                velocity.Y = jump_velocity;
+                velocity.Y = jump_velocity * jump_multiplier;
                 animPlayer.Play("Jump");
             }
 
@@ -364,12 +366,38 @@ public partial class player : CharacterBody2D
         EmitSignal(SignalName.SuperReload, 100);
     }
 
-    public void _on_hit_box_area_entered(Area2D area)
+    private ulong LastAttack = Godot.Time.GetTicksMsec();
+    public void DoDamage(Area2D Area)
     {
-        if (area.GetParent().Name == "FloatingEye")
+        if (Area.Name == "HurtBoxes" && Godot.Time.GetTicksMsec() - LastAttack > 200)
         {
-            area.GetParent().CallDeferred("GetDamaged", damage_current);
+            LastAttack = Godot.Time.GetTicksMsec();
+            Area.GetParent().CallDeferred("GetDamage", damage_current);
         }
+    }
+
+    public void heal(int hp)
+    {
+        health += hp;
+        if (health > 100)
+        {
+            health = 100;
+        }
+        EmitSignal(SignalName.HealthChanged, health);
+    }
+
+    public async void jump_boost()
+    {
+        jump_multiplier = 1.8f;
+        await ToSignal(GetTree().CreateTimer(10), SceneTreeTimer.SignalName.Timeout);
+        jump_multiplier = 1f;
+    }
+
+    public async void attack_boost()
+    {
+        damage_basic = 20;
+        await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
+        damage_multiplier = 10;
     }
 
     public void teleport_to(float target_posX)

@@ -28,10 +28,14 @@ public partial class PlatformingBorder : Node2D
 	public void turn_off(){
 		GetNode<Area2D>("AreaLeft").SetCollisionMaskValue(2, false);
 		GetNode<Area2D>("AreaRight").SetCollisionMaskValue(2, false);
-	}
+        GetNode<Area2D>("AreaLeft").SetCollisionMaskValue(4, false);
+        GetNode<Area2D>("AreaRight").SetCollisionMaskValue(4, false);
+    }
 
 	public void turn_on(){
 		GetNode<Area2D>("AreaLeft").SetCollisionMaskValue(2, true);
 		GetNode<Area2D>("AreaRight").SetCollisionMaskValue(2, true);
-	}
+        GetNode<Area2D>("AreaLeft").SetCollisionMaskValue(4, true);
+        GetNode<Area2D>("AreaRight").SetCollisionMaskValue(4, true);
+    }
 }
