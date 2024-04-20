@@ -8,6 +8,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   REPO_NAME: DmitriySkiba/Jump-Fight
+  GODOT_OPENGL: yes
 
 
 jobs:
@@ -27,8 +28,14 @@ jobs:
         with:
           dotnet-version: '8.0.*'
 
+      - name : step
+        run: |
+         sudo apt-get install libxcursor1
+         
+
       - name: Build with Godot Mono Build Action
         run: |
+          export GODOT_OPENGL=yes
           godot -v --export-release "windows" ../build/$EXPORT_NAME.exe
           test -e ../build/windows/$EXPORT_NAME.exe
           
