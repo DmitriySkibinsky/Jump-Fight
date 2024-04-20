@@ -29,7 +29,7 @@ jobs:
 
       - name: Build with Godot Mono Build Action
         run: |
-          godot -v --export "windows" ../build/$EXPORT_NAME.exe
+          godot -v --export-release "windows" ../build/$EXPORT_NAME.exe
           test -e ../build/windows/$EXPORT_NAME.exe
           
       - name: Refactor
