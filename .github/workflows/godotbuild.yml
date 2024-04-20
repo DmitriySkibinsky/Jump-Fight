@@ -8,16 +8,12 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   REPO_NAME: DmitriySkiba/Jump-Fight
-  GODOT_OPENGL: yes
-  DOTNET_ROOT: /github/home/.dotnet
 
 
 jobs:
   build-project:
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:mono-4.2.1
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,17 +25,23 @@ jobs:
         with:
           dotnet-version: '8.0.*'
 
-      - name : step
-        run: |
-          apt-get update
-          apt-get install -y libxcursor1
-         
+      - name: Godot Setup
+        uses: lihop/godot-setup@v2.1.2
+        with:
+          version: 4.2.1-stable
+          bits: 64
+          mono: true
+          alias: godot
+          export-templates: true
 
       - name: Build with Godot Mono Build Action
-        run: |
-          export GODOT_OPENGL=yes
-          godot -v --export-release "windows" ../build/$EXPORT_NAME.exe
-          test -e ../build/windows/$EXPORT_NAME.exe
+        uses: QuakeEye/build-godot-action@v1.4.1
+        with:
+          name: Jump-Fight
+          preset: windows
+          mono: true
+          debugMode: true
+          subdirectory: build
           
       - name: Refactor
         run: |
