@@ -3,22 +3,22 @@ using System;
 
 public partial class settings : Control
 {
-	public static bool audio = true;
-	public static bool sound = true;
+	public static bool Audio = true;
+	public static bool Sound = true;
 	public static Button button;
 	public static Button button_s;
 	
 	public override void _Ready()
 	{
 		button_s = GetNode<Button>("Panel/Sounds/Sounds");
-		if (!sound){
+		if (!Sound){
 			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
 		}else{
 			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
 		}
 		AddChild(button_s);
 		button = GetNode<Button>("Panel/Audio/Audio");
-		if (!audio){
+		if (!Audio){
 			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
 		}else{
 			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
@@ -36,24 +36,24 @@ public partial class settings : Control
 		GetTree().ChangeSceneToFile("res://scenes/Menu/menu.tscn");
 	}
 	
-	private void _on_audio_pressed()
+	public void _on_audio_pressed()
 	{
-		if (audio){
+		if (Audio){
 			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
-			audio = false;
+			Audio = false;
 		}else{
 			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
-			audio = true;
+			Audio = true;
 		}
 	}
-	private void _on_sounds_pressed()
+	public void _on_sounds_pressed()
 	{
-		if (sound){
+		if (Sound){
 			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
-			sound = false;
+			Sound = false;
 		}else{
 			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
-			sound = true;
+			Sound = true;
 		}
 	}
 }

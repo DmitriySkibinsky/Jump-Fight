@@ -15,7 +15,7 @@ public partial class player : CharacterBody2D
     [Signal]
     public delegate void SuperReloadEventHandler(int new_super);
 
-    enum StateMachine
+    public enum StateMachine
     {
         MOVE,
         DAMAGE,
@@ -27,9 +27,9 @@ public partial class player : CharacterBody2D
         DEATH
     }
 
-    StateMachine State = StateMachine.MOVE;
+    public StateMachine State = StateMachine.MOVE;
 
-    Node2D level;
+    public Node2D level;
 
     Vector2 player_pos;
 
