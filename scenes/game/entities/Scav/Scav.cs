@@ -6,7 +6,7 @@ using System.Threading;
 public partial class Scav : CharacterBody2D
 {
 
-    enum Statement
+    public enum Statement
     {
         Run,
         Idle, // Включается после того как он ударил
@@ -15,16 +15,17 @@ public partial class Scav : CharacterBody2D
     }
     private static Random RNG = new Random();
 
-    private int Speed = 50;
-    private int Damage = 20;
-    private int Health = 100;
+    public int Speed = 50;
+    public int Damage = 20;
+    public int Health = 100;
 
-    private Statement State = Statement.Run;
+
+    public Statement State = Statement.Run;
     public bool Alive = true;
 
-    private float DamagedTime = 0;
-    private float IdleTime = 0;
-    private ulong LastDamagedTime = Godot.Time.GetTicksMsec();
+    public float DamagedTime = 0;
+    public float IdleTime = 0;
+    public ulong LastDamagedTime = Godot.Time.GetTicksMsec();
 
     //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
     private float Gravity = 200;
@@ -34,7 +35,7 @@ public partial class Scav : CharacterBody2D
 
 
     private RayCast2D rayCast2D;
-    private AnimatedSprite2D Anim;
+    public AnimatedSprite2D Anim;
     private Area2D HitBoxes;
     private Area2D HurtBoxes;
     private CollisionShape2D HitBox1;
@@ -144,7 +145,7 @@ public partial class Scav : CharacterBody2D
 
     private bool SecondAttack = false;
 
-    private async void Attack(Node2D Body)
+    public async void Attack(Node2D body)
     {
         if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
@@ -172,7 +173,7 @@ public partial class Scav : CharacterBody2D
         }
     }
 
-    private void GetDamage(int Damage)
+    public void GetDamage(int Damage)
     {
 
         Health -= Damage;
@@ -190,7 +191,7 @@ public partial class Scav : CharacterBody2D
         }
     }
 
-    private async void Death()
+    public async void Death()
     {
         Alive = false;
         Anim.Play("Death");
