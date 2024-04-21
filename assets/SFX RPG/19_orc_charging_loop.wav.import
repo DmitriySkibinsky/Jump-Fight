@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjxwxvc1wlinj"
+path="res://.godot/imported/19_orc_charging_loop.wav-91c49180efedfb1b53646d66253c8fe8.sample"
+
+[deps]
+
+source_file="res://assets/SFX RPG/19_orc_charging_loop.wav"
+dest_files=["res://.godot/imported/19_orc_charging_loop.wav-91c49180efedfb1b53646d66253c8fe8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

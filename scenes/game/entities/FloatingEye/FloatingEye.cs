@@ -235,6 +235,7 @@ public partial class FloatingEye : CharacterBody2D
     {
         if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
+            Player.GetNode<AudioStreamPlayer>("Sounds/Jump").Play();
             Player.Velocity = new Vector2(Player.Velocity.X, -500);
             Player.MoveAndSlide();
             death();
