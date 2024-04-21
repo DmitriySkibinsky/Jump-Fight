@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d38gejry8ovht"
+path="res://.godot/imported/08_human_charge_1.wav-cb6ecb378ef44b1cc00c15db359d7b6f.sample"
+
+[deps]
+
+source_file="res://assets/SFX RPG/08_human_charge_1.wav"
+dest_files=["res://.godot/imported/08_human_charge_1.wav-cb6ecb378ef44b1cc00c15db359d7b6f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

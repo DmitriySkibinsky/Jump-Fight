@@ -338,6 +338,8 @@ public partial class player : CharacterBody2D
 
     public void GetDamaged(int Damage)
     {
+        var smack = GetNode<AudioStreamPlayer>("Sounds/Smack");
+        smack.Play();
        if (Input.IsActionPressed("block") && (bool)level.Get("isBattleSection"))
         {
             State = StateMachine.BLOCK;

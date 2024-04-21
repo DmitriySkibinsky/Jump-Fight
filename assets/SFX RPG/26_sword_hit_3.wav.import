@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bhytuv6cem2wo"
+path="res://.godot/imported/26_sword_hit_3.wav-128f62262135626555b3d0e58b889dae.sample"
+
+[deps]
+
+source_file="res://assets/SFX RPG/26_sword_hit_3.wav"
+dest_files=["res://.godot/imported/26_sword_hit_3.wav-128f62262135626555b3d0e58b889dae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
