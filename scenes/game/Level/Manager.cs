@@ -9,7 +9,7 @@ public partial class Manager : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		pause_menu = GetNode<Control>("../InLevelUI/Settings2");
+		pause_menu = GetNode<Control>("../InLevelUI/Pause");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,5 +48,3 @@ public partial class Manager : Node2D
 	}
 	
 }
-
-
