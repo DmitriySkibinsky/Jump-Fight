@@ -15,7 +15,7 @@ public partial class player : CharacterBody2D
     [Signal]
     public delegate void SuperReloadEventHandler(int new_super);
 
-    enum StateMachine
+    public enum StateMachine
     {
         MOVE,
         DAMAGE,
@@ -27,9 +27,9 @@ public partial class player : CharacterBody2D
         DEATH
     }
 
-    StateMachine State = StateMachine.MOVE;
+    public StateMachine State = StateMachine.MOVE;
 
-    Node2D level;
+    public Node2D level;
 
     Vector2 player_pos;
 
@@ -56,9 +56,14 @@ public partial class player : CharacterBody2D
     public float damage_multiplier = 1;
 
     public float damage_current;
+    public AnimationPlayer animPlayer; 
 
     public Vector2 velocity = new Vector2();
 
+    public override void _Ready()
+    {
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+    }
     public override void _PhysicsProcess(double delta)
     {
 
@@ -107,15 +112,16 @@ public partial class player : CharacterBody2D
         MoveAndSlide();
 
     }
+
+    public AnimatedSprite2D anim;
+    public Node2D attackDirection;
     public void move_state()
     {
         level = GetNode<Node2D>("../");
 
-        var anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
-        var attackDirection = GetNode<Node2D>("AttackDirection");
+        attackDirection = GetNode<Node2D>("AttackDirection");
 
         Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
@@ -241,7 +247,6 @@ public partial class player : CharacterBody2D
         velocity.X = 0;
         if (velocity.Y == 0)
         {
-            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             animPlayer.Play("Attack");
             Velocity = velocity;
             await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
@@ -258,7 +263,6 @@ public partial class player : CharacterBody2D
         {
             State = StateMachine.ATTACK3;
         }
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Attack2");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         attack_freeze();
@@ -268,7 +272,6 @@ public partial class player : CharacterBody2D
     public async void attack3_state()
     {
         damage_multiplier = 2;
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Attack3");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         State = StateMachine.MOVE;
@@ -281,7 +284,6 @@ public partial class player : CharacterBody2D
             damage_multiplier = 3;
             velocity = Velocity;
             velocity.X = 0;
-            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             animPlayer.Play("Super_Attack");
             await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
             super_freeze();
@@ -291,7 +293,7 @@ public partial class player : CharacterBody2D
 
     public async void death_state()
     {
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Death");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         QueueFree();
@@ -300,7 +302,6 @@ public partial class player : CharacterBody2D
 
     public async void damage_state()
     {
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         if ((bool)level.Get("isBattleSection"))
         {
             animPlayer.Play("Damage");
@@ -317,7 +318,6 @@ public partial class player : CharacterBody2D
     {
         velocity = Velocity;
         velocity.X = 0;
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Block");
         if (Input.IsActionJustReleased("block"))
         {
@@ -329,7 +329,7 @@ public partial class player : CharacterBody2D
     public async void combat()
     {
         combo = true;
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         combo = false;
     }
@@ -368,7 +368,7 @@ public partial class player : CharacterBody2D
         EmitSignal(SignalName.SuperReload, 100);
     }
 
-    private ulong LastAttack = Godot.Time.GetTicksMsec();
+    public ulong LastAttack = Godot.Time.GetTicksMsec();
     public void DoDamage(Area2D Area)
     {
         if (Area.Name == "HurtBoxes" && Godot.Time.GetTicksMsec() - LastAttack > 200 && (bool)Area.GetParent().Get("Alive"))

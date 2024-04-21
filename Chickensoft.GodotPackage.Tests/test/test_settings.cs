@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Chickensoft.GodotTestDriver.Drivers;
 using Shouldly;
+using NSubstitute;
 
 public partial class settingsTests : TestClass
 {
@@ -13,6 +14,7 @@ public partial class settingsTests : TestClass
 
     public settingsTests(Node testScene) : base(testScene) { }
 
+    [Setup]
     public void SetUp()
     {
         _settings = new settings();
@@ -21,7 +23,7 @@ public partial class settingsTests : TestClass
      public Func<SceneTree> GetTree { get; set; }
 
     [Test]
-    public void PlayButtonPressed_ShouldChangeSceneToMenu()
+    public void ExitButtonPressed_ShouldChangeSceneToMenu()
     {
         // Arrange
         SceneTree tree = GetTree?.Invoke();
@@ -62,6 +64,68 @@ public partial class settingsTests : TestClass
         // Assert
         currentScene.GetPath().ToString().ShouldBe("");
     }
+    }
+
+    [Test]
+    public void Settings_AudioButtonPressed1()
+    {
+         // Arrange
+        settings.Audio = true;
+        settings.button = Substitute.For<Button>();
+        settings.button_s = Substitute.For<Button>();
+        settings.button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+        
+        // Act
+        _settings._on_audio_pressed();
+
+        // Assert
+        settings.Audio.ShouldBe(false);
+    }
+
+    [Test]
+    public void Settings_AudioButtonPressed2()
+    {
+         // Arrange
+        settings.Audio = false;
+        settings.button = Substitute.For<Button>();
+        settings.button_s = Substitute.For<Button>();
+        settings.button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+        
+        // Act
+        _settings._on_audio_pressed();
+
+        // Assert
+        settings.Audio.ShouldBe(true);
+    }
+    [Test]
+    public void Settings_SoundsButtonPressed1()
+    {
+         // Arrange
+        settings.Sound = true;
+        settings.button = Substitute.For<Button>();
+        settings.button_s = Substitute.For<Button>();
+        settings.button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+        
+        // Act
+        _settings._on_sounds_pressed();
+
+        // Assert
+        settings.Sound.ShouldBe(false);
+    }
+
+        public void Settings_SoundsButtonPressed2()
+    {
+         // Arrange
+        settings.Sound = false;
+        settings.button = Substitute.For<Button>();
+        settings.button_s = Substitute.For<Button>();
+        settings.button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+        
+        // Act
+        _settings._on_sounds_pressed();
+
+        // Assert
+        settings.Sound.ShouldBe(true);
     }
 
 }

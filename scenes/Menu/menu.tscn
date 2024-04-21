@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg6p8cpv2rmw2"]
+[gd_scene load_steps=7 format=3 uid="uid://cg6p8cpv2rmw2"]
 
 [ext_resource type="Script" path="res://scenes/Menu/menu.cs" id="1_8egwg"]
 [ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_uk3d0"]
@@ -6,12 +6,35 @@
 [ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="4_xunoe"]
 [ext_resource type="Texture2D" uid="uid://dyvxbkfkhu715" path="res://assets/sprites/Settings Button.png" id="5_ocdad"]
 
+[sub_resource type="CSharpScript" id="CSharpScript_w05we"]
+script/source = "using Godot;
+using System;
+
+public partial class Node2D : Godot.Node2D
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
+
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_8egwg")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1930.0
-offset_bottom = 1100.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1923.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_uk3d0")
 
 [node name="Play" type="Button" parent="."]
@@ -21,12 +44,13 @@ offset_right = 1158.0
 offset_bottom = 808.0
 theme_override_font_sizes/font_size = 64
 icon = ExtResource("3_wq6um")
+script = SubResource("CSharpScript_w05we")
 
 [node name="Quit" type="Button" parent="."]
 offset_left = 1811.0
-offset_top = 969.0
+offset_top = -2.0
 offset_right = 1919.0
-offset_bottom = 1077.0
+offset_bottom = 106.0
 theme_override_font_sizes/font_size = 64
 icon = ExtResource("4_xunoe")
 
