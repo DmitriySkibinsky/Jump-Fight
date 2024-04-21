@@ -9,15 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://3hrw6ctwfain" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-run.png" id="7_e2xi1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
-radius = 16.0
-height = 58.0
+radius = 42.0
+height = 116.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
-size = Vector2(28.9348, 56)
+size = Vector2(75, 100)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6oe4v"]
-radius = 18.75
-height = 68.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5u5bn"]
+radius = 42.0
+height = 116.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xk01o"]
 atlas = ExtResource("3_wjr8a")
@@ -249,7 +249,6 @@ animations = [{
 }]
 
 [node name="Scav" type="CharacterBody2D"]
-scale = Vector2(2.559, 2)
 collision_layer = 0
 collision_mask = 65
 script = ExtResource("1_3bx88")
@@ -259,8 +258,8 @@ metadata/_edit_group_ = true
 shape = SubResource("CapsuleShape2D_qov7e")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(14, 20)
-target_position = Vector2(0, 20)
+position = Vector2(36, 40)
+target_position = Vector2(0, 40)
 collision_mask = 65
 
 [node name="HitBoxes" type="Area2D" parent="."]
@@ -268,7 +267,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
-position = Vector2(21.5014, 0)
+position = Vector2(50, 0)
 shape = SubResource("RectangleShape2D_v3bfh")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
@@ -276,11 +275,11 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
-shape = SubResource("CapsuleShape2D_6oe4v")
+shape = SubResource("CapsuleShape2D_5u5bn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(14, -18)
-scale = Vector2(0.319824, 0.648276)
+position = Vector2(36, -36)
+scale = Vector2(0.819, 1.296)
 sprite_frames = SubResource("SpriteFrames_ec8yf")
 animation = &"Grep"
 autoplay = "Run"

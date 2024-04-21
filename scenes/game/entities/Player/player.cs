@@ -369,7 +369,7 @@ public partial class player : CharacterBody2D
     private ulong LastAttack = Godot.Time.GetTicksMsec();
     public void DoDamage(Area2D Area)
     {
-        if (Area.Name == "HurtBoxes" && Godot.Time.GetTicksMsec() - LastAttack > 200)
+        if (Area.Name == "HurtBoxes" && Godot.Time.GetTicksMsec() - LastAttack > 200 && (bool)Area.GetParent().Get("Alive"))
         {
             LastAttack = Godot.Time.GetTicksMsec();
             Area.GetParent().CallDeferred("GetDamage", damage_current);

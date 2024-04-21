@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-public partial class Scav : CharacterBody2D
+public partial class Barbarian : CharacterBody2D
 {
 
     enum Statement
@@ -24,7 +24,6 @@ public partial class Scav : CharacterBody2D
 
     private float DamagedTime = 0;
     private float IdleTime = 0;
-    private ulong LastDamagedTime = Godot.Time.GetTicksMsec();
 
     //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
     private float Gravity = 200;
@@ -107,11 +106,6 @@ public partial class Scav : CharacterBody2D
             }
         }
 
-        if (Anim.Modulate == new Color(1, 0.5f, 0.5f) &&  Godot.Time.GetTicksMsec() - LastDamagedTime > 100) //Если в последний раз урон проходил 100 милисекунд назад, то убираем красный цвет
-        {
-            Anim.Modulate = new Color(1, 1, 1);
-        }
-
         Vector2 velocity = Vector2.Zero;
 
         if (IsOnFloor() && Alive && State == Statement.Run)
@@ -176,17 +170,13 @@ public partial class Scav : CharacterBody2D
     {
 
         Health -= Damage;
+        State = Statement.Idle;
+        DamagedTime = 1;
+        Anim.Play("Grep");
+
         if (Health <= 0)
         {
             Death();
-        }
-        else
-        {
-            State = Statement.Idle;
-            DamagedTime = 1;
-            Anim.Play("Grep");
-            LastDamagedTime = Godot.Time.GetTicksMsec();
-            Anim.Modulate = new Color(1, 0.5f, 0.5f);
         }
     }
 
