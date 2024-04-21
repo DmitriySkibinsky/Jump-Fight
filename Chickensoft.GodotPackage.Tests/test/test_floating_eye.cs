@@ -144,12 +144,12 @@ public void SetLoopTrajectory_Test()
 public class FloatingEyeTests:TestClass
 {
     public FloatingEyeTests(Node testScene) : base(testScene) { }
-    private FloatingEye _floatingEye;
+    private FloatingEye FloatingEye;
 
     [Setup]
     public void SetUp()
     {
-        _floatingEye = new FloatingEye();
+        FloatingEye = new FloatingEye();
     }
 
     [Test]
@@ -162,7 +162,7 @@ public class FloatingEyeTests:TestClass
         player.Position = new Vector2(100, 0); 
 
         // Act
-        _floatingEye.Attack(player);
+        FloatingEye.Attack(player);
 
         // Assert
         player.Velocity.ShouldBe(new Vector2(700, 0));
@@ -173,17 +173,17 @@ public class FloatingEyeTests:TestClass
     {
         // Arrange
         FloatingEye.Alive = true;
-        _floatingEye.Position = new Vector2(0, 0);
+        FloatingEye.Position = new Vector2(0, 0);
         FloatingEye.CurrentWayPoint = 1;
         FloatingEye.WayPoints = new Vector2[] { new Vector2(0, 0), new Vector2(100, 0) };
         FloatingEye.Speed = 125;
         double delta = 0.1; // arbitrary delta value for testing
 
         // Act
-        _floatingEye._Process(delta);
+        FloatingEye._Process(delta);
 
         // Assert
-        _floatingEye.Position.ShouldBe(new Vector2(12.5f, 0)); // Assuming Direction.Length() == 100 and CurrentWayPoint == 1
+        FloatingEye.Position.ShouldBe(new Vector2(12.5f, 0)); // Assuming Direction.Length() == 100 and CurrentWayPoint == 1
     }
 
     [Test]
@@ -197,7 +197,7 @@ public class FloatingEyeTests:TestClass
         player.Velocity = new Vector2(0, 100); // Player is falling
 
         // Act
-        _floatingEye._on_hurt_boxes_body_entered(player);
+        FloatingEye._on_hurt_boxes_body_entered(player);
 
         // Assert
         player.Velocity.ShouldBe(new Vector2(0, -500));
@@ -213,7 +213,7 @@ public class FloatingEyeTests:TestClass
         FloatingEye.Anim = new AnimatedSprite2D(); // Assuming AnimatedSprite2D is properly instantiated
 
         // Act
-        _floatingEye.death();
+        FloatingEye.death();
 
         // Assert
         FloatingEye.Alive.ShouldBeFalse();

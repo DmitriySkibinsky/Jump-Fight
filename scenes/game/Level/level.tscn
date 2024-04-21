@@ -9,9 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://8a0si0ayx0ix" path="res://scenes/game/entities/Player/player.tscn" id="5_6g8d7"]
 [ext_resource type="PackedScene" uid="uid://dgi7n2eukw1g2" path="res://scenes/game/Utils/PlatformingBorder.tscn" id="5_fvii3"]
 [ext_resource type="Texture2D" uid="uid://dk0lcd0xfhghk" path="res://assets/sprites/level1/Dungeon Tile Set.png" id="8_50t7h"]
-[ext_resource type="PackedScene" uid="uid://bs4ayffshvalm" path="res://scenes/Menu/settingspause.tscn" id="8_aihkb"]
 [ext_resource type="PackedScene" uid="uid://bc5wc55l3pwql" path="res://scenes/game/Utils/parallax_background.tscn" id="9_d2san"]
 [ext_resource type="PackedScene" uid="uid://bfph7mlmasj20" path="res://scenes/game/Utils/Interaction/InteractionManager.tscn" id="10_26sic"]
+[ext_resource type="PackedScene" uid="uid://bs4ayffshvalm" path="res://scenes/Menu/settingspause.tscn" id="10_fg75v"]
 [ext_resource type="Texture2D" uid="uid://b1wit2utkka75" path="res://assets/sprites/level2/desert-ruins.png" id="11_fmoq0"]
 [ext_resource type="Texture2D" uid="uid://cf2p657padrec" path="res://assets/sprites/level3/SR_Stone Ruins_TileSet 16x16.png" id="13_5xw5g"]
 [ext_resource type="PackedScene" uid="uid://dm7xdh2fttkq" path="res://scenes/game/UI/Health bar/health_bar.tscn" id="14_8r2e5"]
@@ -1184,18 +1184,7 @@ scale = Vector2(3.5, 3.5)
 
 [node name="InLevelUI" parent="." instance=ExtResource("2_wn0s3")]
 
-[node name="Settings2" parent="InLevelUI" instance=ExtResource("8_aihkb")]
-process_mode = 2
-offset_left = -262.0
-offset_top = -243.0
-offset_right = 162.0
-offset_bottom = 330.0
-
-[node name="Panel" parent="InLevelUI/Settings2" index="0"]
-offset_left = -162.0
-offset_top = -286.5
-offset_right = 272.0
-offset_bottom = 259.5
+[node name="Pause" parent="InLevelUI" instance=ExtResource("10_fg75v")]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("9_d2san")]
 
@@ -1217,9 +1206,9 @@ transform = Transform2D(1, 0, 0, 1, 3, 40)
 [connection signal="body_entered" from="PlayerCamera/CleanerArea" to="." method="_on_cleaner_area_body_entered"]
 [connection signal="HealthChanged" from="Player" to="CanvasLayer" method="_on_player_health_changed"]
 [connection signal="SuperReload" from="Player" to="CanvasLayer2" method="_on_player_super_reload"]
-[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
-[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
-[connection signal="pressed" from="InLevelUI/Settings2/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
 
 [editable path="InLevelUI"]
-[editable path="InLevelUI/Settings2"]
+[editable path="InLevelUI/Pause"]

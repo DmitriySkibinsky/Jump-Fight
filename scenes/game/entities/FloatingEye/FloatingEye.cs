@@ -170,11 +170,6 @@ public partial class FloatingEye : CharacterBody2D
 
         Trajectory.SetRandomTrajectory(ref WayPoints, StartPos);
 
-        /*for (int i = 0; i < WayPoints.Length; i++)
-        {
-            GD.Print(WayPoints[i].X, "\t", WayPoints[i].Y);
-        }*/
-
         Random RNG = new Random();
         CurrentWayPoint = RNG.Next(WayPoints.Length);  // Генерируем число [0;`Кол-во Вейпоинтов`)
         this.Position = WayPoints[CurrentWayPoint]; // Ставим врага на рандомную позицию его маршрута
@@ -240,7 +235,9 @@ public partial class FloatingEye : CharacterBody2D
     {
         if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
-            Player.GetNode<AudioStreamPlayer>("Sounds/Jump").Play();
+            AudioStreamPlayer jump = new AudioStreamPlayer();
+            jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Jump");
+            jump.Play();
             Player.Velocity = new Vector2(Player.Velocity.X, -500);
             Player.MoveAndSlide();
             death();

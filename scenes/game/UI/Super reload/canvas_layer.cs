@@ -3,8 +3,8 @@ using System;
 
 public partial class canvas_layer : CanvasLayer
 {
-    TextureProgressBar Super_bar;
-    CharacterBody2D Player;
+    public TextureProgressBar Super_bar;
+    public CharacterBody2D Player;
 
     public override void _Ready()
     {

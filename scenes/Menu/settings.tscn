@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs4ayffshvalm"]
+[gd_scene load_steps=5 format=3 uid="uid://cyw0nqgor3xtx"]
 
 [ext_resource type="Script" path="res://scenes/Menu/settings.cs" id="1_g68vc"]
 [ext_resource type="Texture2D" uid="uid://bnd6uj05ayql5" path="res://assets/sprites/Quit Button.png" id="1_tfwcm"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://c6nijyhgy4p5w" path="res://assets/sprites/Exit Button.png" id="4_w64r6"]
 
 [node name="Main_settings" type="Control"]
-process_mode = 3
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 3
 anchors_preset = 15

@@ -4,10 +4,10 @@ using System;
 public partial class in_level_ui : CanvasLayer
 {
 	[Export]
-	private float anim_speed = 0.8f;
+	public float anim_speed = 0.8f;
 
-	private PathFollow2D PathLeft;
-	private PathFollow2D PathRight;
+	public PathFollow2D PathLeft;
+	public PathFollow2D PathRight;
 	[Export]
 	public bool is_animate_out = false;
 	[Export]
@@ -28,6 +28,7 @@ public partial class in_level_ui : CanvasLayer
 
 	public override void _Process(double delta)
 	{
+		this.PathLeft.ProgressRatio=10f;
 		if(is_animate_out && PathLeft.ProgressRatio < 0.5){
 			PathLeft.ProgressRatio += (float)delta * anim_speed;
 			PathRight.ProgressRatio += (float)delta * anim_speed;
