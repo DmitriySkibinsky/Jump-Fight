@@ -15,32 +15,32 @@ public partial class Scav : CharacterBody2D
     }
     private static Random RNG = new Random();
 
-    public static int Speed = 50;
-    public static int Damage = 20;
-    public static int Health = 100;
+    public int Speed = 50;
+    public int Damage = 20;
+    public int Health = 100;
 
 
-    public static Statement State = Statement.Run;
-    public static bool Alive = true;
+    public Statement State = Statement.Run;
+    public bool Alive = true;
 
-    public static float DamagedTime = 0;
-    public static float IdleTime = 0;
+    public float DamagedTime = 0;
+    public float IdleTime = 0;
 
     //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
     private float Gravity = 200;
 
 
-    public static int Direction = RNG.Next(2) == 1 ? 1 : -1;
+    public int Direction = RNG.Next(2) == 1 ? 1 : -1;
 
 
     private RayCast2D rayCast2D;
-    public static AnimatedSprite2D Anim;
-    public static Area2D HitBoxes;
+    public AnimatedSprite2D Anim;
+    public Area2D HitBoxes;
     private Area2D HurtBoxes;
     private CollisionShape2D HitBox1;
     private CollisionShape2D HurtBox1;
 
-    public static player Player;
+    public player Player;
     public override void _Ready()
     {
         rayCast2D = GetNode<RayCast2D>("RayCast2D");

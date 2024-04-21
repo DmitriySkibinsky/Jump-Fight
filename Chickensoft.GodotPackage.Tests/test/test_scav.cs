@@ -14,12 +14,14 @@ using NUnit.Framework;
 public class ScavTests : TestClass
 {
     public ScavTests(Node testScene) : base(testScene) { }
-    private Scav _scav;
+    private Scav Scav;
 
+	public Func<SceneTree> GetTree { get; set; }
+    
     [Setup]
     public void SetUp()
     {
-        _scav = new Scav();
+        Scav = new Scav();
     }
 
     [Test]
@@ -31,7 +33,7 @@ public class ScavTests : TestClass
         Scav.Anim = anim;
 
         // Act
-        _scav.Death();
+        Scav.Death();
 
         // Assert
         Scav.Alive.ShouldBeFalse();
@@ -46,7 +48,7 @@ public class ScavTests : TestClass
         Scav.Anim = new AnimatedSprite2D();
 
         // Act
-        _scav.GetDamage(damage);
+        Scav.GetDamage(damage);
 
         // Assert
         Scav.Health.ShouldBe(80); // Проверяем уменьшение здоровья
@@ -63,7 +65,7 @@ public class ScavTests : TestClass
         Scav.Anim = anim;
 
         // Act
-        _scav.GetDamage(damage);
+        Scav.GetDamage(damage);
 
         // Assert
         Scav.Alive.ShouldBeFalse();
@@ -85,7 +87,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav.Attack(body);
+        Scav.Attack(body);
 
         // Assert
         Scav.IdleTime.ShouldBe(2);
@@ -107,7 +109,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.DamagedTime.ShouldBe((float)0.0);
@@ -129,7 +131,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.DamagedTime.ShouldBe((float)0.0);
@@ -152,7 +154,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.DamagedTime.ShouldBe((float)0.5);
@@ -175,7 +177,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.DamagedTime.ShouldBe((float)0.5);
@@ -198,7 +200,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.DamagedTime.ShouldBe((float)0.5);
@@ -221,7 +223,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.DamagedTime.ShouldBe((float)-0.5);
@@ -244,7 +246,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.IdleTime.ShouldBe((float)0.0);
@@ -267,7 +269,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.IdleTime.ShouldBe((float)0.0);
@@ -290,7 +292,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.IdleTime.ShouldBe((float)0.5);
@@ -313,7 +315,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.IdleTime.ShouldBe((float)0.5);
@@ -336,7 +338,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.IdleTime.ShouldBe((float)0.5);
@@ -359,7 +361,7 @@ public class ScavTests : TestClass
 
 
         // Act
-        _scav._Process(delta);
+        Scav._Process(delta);
 
         // Assert
         Scav.IdleTime.ShouldBe((float)-0.5);
