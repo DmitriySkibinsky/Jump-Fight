@@ -198,20 +198,15 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="debug" type="Label" parent="." groups=["debug"]]
-offset_left = -24.0
-offset_top = -99.0
-offset_right = 25.0
-offset_bottom = -76.0
-text = "debug
-"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
 shape = SubResource("CapsuleShape2D_hvo7b")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
 script = ExtResource("2_5an6k")
+
+[node name="Spawn" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("11_8r7ng")
 
 [node name="Idle" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("3_7kxud")
@@ -233,9 +228,6 @@ script = ExtResource("8_2nv8q")
 
 [node name="Teleport" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("10_hcnjk")
-
-[node name="Spawn" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("11_8r7ng")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 0

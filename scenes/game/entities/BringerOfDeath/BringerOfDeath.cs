@@ -15,12 +15,20 @@ public partial class BringerOfDeath : CharacterBody2D
 	public Area2D HurtBoxes;
 	public float Direction;
 	private float healthPoints = 500;
+	public bool HealthToPlayerDroped = false;
+	public PackedScene HealthToPlayer = GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn");
 	public float HealthPoints{get{
         return healthPoints;
     }set{
         healthPoints = value;
         if (healthPoints <= 0){
 			GetNode<FiniteStateMachine>("FiniteStateMachine").ChangeState("Death");
+		}
+		if(healthPoints <= 250 && !HealthToPlayerDroped){
+			Node2D healthToPlayer = HealthToPlayer.Instantiate<Node2D>();
+			healthToPlayer.GlobalPosition = GlobalPosition;
+			Owner.AddChild(healthToPlayer);
+			HealthToPlayerDroped = true;
 		}
     }}
 
