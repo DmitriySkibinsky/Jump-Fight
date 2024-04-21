@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b46temebts3n1"]
+
+[ext_resource type="PackedScene" uid="uid://dislaide0ehs7" path="res://scenes/game/LevelItems/Rooms/Room.tscn" id="1_4hjdc"]
+[ext_resource type="PackedScene" uid="uid://exgmjj4k0vm0" path="res://scenes/game/entities/Collectibles/Heart/heart.tscn" id="2_688xy"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/Rooms/BossRoom.cs" id="2_nqstk"]
+
+[node name="BossRoom" instance=ExtResource("1_4hjdc")]
+script = ExtResource("2_nqstk")
+
+[node name="heart" parent="." index="10" instance=ExtResource("2_688xy")]
+position = Vector2(1273.33, -168)
+scale = Vector2(3, 3)
+
+[editable path="SolidPlatforms/SolidPlatform"]

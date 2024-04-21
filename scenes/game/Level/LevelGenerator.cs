@@ -14,13 +14,13 @@ public partial class LevelGenerator : Node2D
 
 	public Godot.Collections.Array<PackedScene> EndRooms = new Godot.Collections.Array<PackedScene>{
 	};
-
+	public PackedScene BossRoom = new PackedScene();
 	public Godot.Collections.Array<PackedScene> Enemies = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
 	};
 
 	public string NextScenePath;
-	public int num_levels = 4;
+	public int num_levels = 6;
 	public int platform_amount = 10;
 	public float last_platform_pos_y = 0;
 	public Camera2D camera;
@@ -49,7 +49,7 @@ public partial class LevelGenerator : Node2D
 			if (i == 0){
 				GeneratePlatform(Player.Position.Y, platform_amount);
 				prev_room_name = "platform";
-			}else if(prev_room_name == "platform" && i != num_levels-1){
+			}else if(prev_room_name == "platform" && i != num_levels-3 && i != num_levels-1){
 				Random rand = new Random();
 				int randomRoom = rand.Next(BattleSection.Count);
 				cur_battle_room = BattleSection[randomRoom].Instantiate<Room>();
@@ -65,7 +65,20 @@ public partial class LevelGenerator : Node2D
 				this.AddChild(cur_battle_room);
 				this.AddChild(EnterTrigger);
 				this.AddChild(ExitTrigger);
-			}else if(i == num_levels-1){
+			}else if(i == num_levels-3){
+				Node2D bossRoom = BossRoom.Instantiate<Node2D>();
+				bossRoom.GlobalPosition = new Vector2(bossRoom.GlobalPosition.X, last_platform_pos_y - 200);
+				prev_battle_room = bossRoom;
+				Node2D EnterTrigger = TriggerOnEnterBattle.Instantiate<TriggerOnEnterBattle>();
+				EnterTrigger.Position = new Vector2(bossRoom.Position.X, bossRoom.Position.Y - 500);
+
+				Node2D ExitTrigger = TriggerOnExitBattle.Instantiate<TriggerOnExitBattle>();
+				ExitTrigger.Position = new Vector2(ExitTrigger.Position.X, bossRoom.GetNode<Marker2D>("NextPlatform").GlobalPosition.Y - 200);
+				this.AddChild(bossRoom);
+				this.AddChild(EnterTrigger);
+				this.AddChild(ExitTrigger);
+				prev_room_name = "boss";
+			}else if( i == num_levels-1){
 				Random rand = new Random();
 				int randomRoom = rand.Next(EndRooms.Count);
 				Node2D EndRoom = EndRooms[randomRoom].Instantiate<Node2D>();
