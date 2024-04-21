@@ -30,7 +30,6 @@ public partial class state : Node2D
     public override void _PhysicsProcess(double delta)
     {
 		Transition();
-		Debug.Text = Name;
     }
 
 }
