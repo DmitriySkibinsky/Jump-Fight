@@ -56,9 +56,14 @@ public partial class player : CharacterBody2D
     public float damage_multiplier = 1;
 
     public float damage_current;
+    public AnimationPlayer animPlayer; 
 
     public Vector2 velocity = new Vector2();
 
+    public override void _Ready()
+    {
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+    }
     public override void _PhysicsProcess(double delta)
     {
 
@@ -115,7 +120,6 @@ public partial class player : CharacterBody2D
         level = GetNode<Node2D>("../");
 
         anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         attackDirection = GetNode<Node2D>("AttackDirection");
 
@@ -243,7 +247,6 @@ public partial class player : CharacterBody2D
         velocity.X = 0;
         if (velocity.Y == 0)
         {
-            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             animPlayer.Play("Attack");
             Velocity = velocity;
             await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
@@ -260,7 +263,6 @@ public partial class player : CharacterBody2D
         {
             State = StateMachine.ATTACK3;
         }
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Attack2");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         attack_freeze();
@@ -270,7 +272,6 @@ public partial class player : CharacterBody2D
     public async void attack3_state()
     {
         damage_multiplier = 2;
-        var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("Attack3");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         State = StateMachine.MOVE;
@@ -283,7 +284,6 @@ public partial class player : CharacterBody2D
             damage_multiplier = 3;
             velocity = Velocity;
             velocity.X = 0;
-            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             animPlayer.Play("Super_Attack");
             await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
             super_freeze();
@@ -325,8 +325,6 @@ public partial class player : CharacterBody2D
         }
         MoveAndSlide();
     }
-
-    public static AnimationPlayer animPlayer; 
 
     public async void combat()
     {
