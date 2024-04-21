@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://caumvw4i02r2q"
+path="res://.godot/imported/12_human_jump_2.wav-a1b5a1109d77e1a66ee34805f00acb57.sample"
+
+[deps]
+
+source_file="res://assets/SFX RPG/12_human_jump_2.wav"
+dest_files=["res://.godot/imported/12_human_jump_2.wav-a1b5a1109d77e1a66ee34805f00acb57.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

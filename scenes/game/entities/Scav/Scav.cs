@@ -147,7 +147,7 @@ public partial class Scav : CharacterBody2D
 
     public async void Attack(Node2D body)
     {
-        if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
+        if (State == Statement.Run && Alive && body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
             if (SecondAttack)
             {
