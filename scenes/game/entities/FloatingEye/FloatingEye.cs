@@ -9,7 +9,7 @@ public static class Trajectory
 
     public static Random RNG = new Random();
     public static float FlatY;
-     public static int N;
+    public static int N;
     public static int Amplitude;
 
     enum TrajectoryType
@@ -143,20 +143,20 @@ public static class Trajectory
 }
 public partial class FloatingEye : CharacterBody2D
 {
-    public static int Speed = 125;
-    public static int Damage = 20;
-    public static int direction = 1;
-    public static bool Alive = true;
+    public int Speed = 125;
+    public int Damage = 20;
+    public int direction = 1;
+    public bool Alive = true;
 
-    public static Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
+    public Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
     private Vector2 StartPos; // Стартовая позиция
-    public static int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
+    public int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
 
-    public static AnimatedSprite2D Anim;
+    public AnimatedSprite2D Anim;
     private Area2D HitBoxes;
     private Area2D HurtBoxes;
 
-    public static player Player;
+    public player Player;
 
 
     public override void _Ready()
@@ -169,6 +169,11 @@ public partial class FloatingEye : CharacterBody2D
         StartPos = this.Position; // Сохраняем стартовую позицию
 
         Trajectory.SetRandomTrajectory(ref WayPoints, StartPos);
+
+        /*for (int i = 0; i < WayPoints.Length; i++)
+        {
+            GD.Print(WayPoints[i].X, "\t", WayPoints[i].Y);
+        }*/
 
         Random RNG = new Random();
         CurrentWayPoint = RNG.Next(WayPoints.Length);  // Генерируем число [0;`Кол-во Вейпоинтов`)
@@ -208,7 +213,7 @@ public partial class FloatingEye : CharacterBody2D
         }
     }
 
-    private void TurnAround()
+    public void TurnAround()
     {
         if ((Math.Sign(WayPoints[CurrentWayPoint].X - Position.X) == 1) == Anim.FlipH)
         {

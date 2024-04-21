@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
 radius = 16.0
-height = 58.0
+height = 40.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3gx1n"]
 atlas = ExtResource("2_flxsb")
@@ -315,15 +315,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
-size = Vector2(36, 56)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghn87"]
+radius = 20.0
+height = 56.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6oe4v"]
 radius = 16.0
 height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86gex"]
-size = Vector2(1000, 100)
+size = Vector2(512, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqrt6"]
 size = Vector2(50, 40)
@@ -347,16 +348,17 @@ collision_mask = 65
 sprite_frames = SubResource("SpriteFrames_ec8yf")
 animation = &"Attack"
 autoplay = "Idle"
+frame = 7
+frame_progress = 1.0
 
 [node name="HitBoxes" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
-position = Vector2(46.0221, 0)
-scale = Vector2(2.559, 2)
-shape = SubResource("RectangleShape2D_v3bfh")
+position = Vector2(8, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ghn87")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
 collision_layer = 4
@@ -366,14 +368,12 @@ collision_mask = 0
 shape = SubResource("CapsuleShape2D_6oe4v")
 
 [node name="FOV" type="Area2D" parent="."]
-visible = false
 
 [node name="Shape1" type="CollisionShape2D" parent="FOV"]
-position = Vector2(0, -20)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_86gex")
 
 [node name="AttackTrigger" type="Area2D" parent="."]
-visible = false
 
 [node name="Shape1" type="CollisionShape2D" parent="AttackTrigger"]
 shape = SubResource("RectangleShape2D_iqrt6")

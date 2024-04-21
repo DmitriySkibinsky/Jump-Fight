@@ -72,8 +72,6 @@ public partial class Scav : CharacterBody2D
     public override void _Process(double delta)
     {
 
-        //GD.Print("Proc");
-
         if (DamagedTime > 0 && Alive)
         {
             DamagedTime -= (float)delta;
@@ -143,7 +141,7 @@ public partial class Scav : CharacterBody2D
         }
     }
 
-    private bool SecondAttack = false;
+    public bool SecondAttack = false;
 
     public async void Attack(Node2D Body)
     {

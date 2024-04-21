@@ -6,40 +6,48 @@ using System.Threading;
 public partial class Barbarian : CharacterBody2D
 {
 
-    enum Statement
+    public enum Statement
     {
-        Run,
-        Idle, // Включается после того как он ударил
+        Idle,
+        Roam,
         Damaged,
-        Attack,
+        PrepareAttack,
+        FinishAttack,
+        Run,
     }
-    private static Random RNG = new Random();
+    public static Random RNG = new Random();
 
-    private int Speed = 50;
-    private int Damage = 20;
-    private int Health = 100;
+    // Настройки
+    public int Speed = 75;
+    public int Damage = 20;
+    public int Health = 100;
 
-    private Statement State = Statement.Run;
+    public float Gravity = 200;
+
+    // Нужно для переключений между стейтментами
+    public float[] TimeOfState = new float[Enum.GetNames(typeof(Statement)).Length];
+    /*public float DamagedTime = 0;
+    public float IdleTime = 0;
+    public float RoamTime = 0;
+    public float PrepareAttackTime = 0;
+    public float FinishAttackTime = 0;*/
+
+    // Используются в процессе
+    public Statement State = Statement.Idle;
     public bool Alive = true;
 
-    private float DamagedTime = 0;
-    private float IdleTime = 0;
-
-    //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
-    private float Gravity = 200;
+    public int Direction = RNG.Next(2) == 1 ? 1 : -1;
+    public Vector2 PointOfInterest = new Vector2(0, 0);
 
 
-    private int Direction = RNG.Next(2) == 1 ? 1 : -1;
+    public RayCast2D rayCast2D;
+    public AnimatedSprite2D Anim;
+    public Area2D HitBoxes;
+    public Area2D HurtBoxes;
+    public CollisionShape2D HitBox1;
+    public CollisionShape2D HurtBox1;
 
-
-    private RayCast2D rayCast2D;
-    private AnimatedSprite2D Anim;
-    private Area2D HitBoxes;
-    private Area2D HurtBoxes;
-    private CollisionShape2D HitBox1;
-    private CollisionShape2D HurtBox1;
-
-    private player Player;
+    public player Player;
     public override void _Ready()
     {
         rayCast2D = GetNode<RayCast2D>("RayCast2D");
@@ -70,7 +78,10 @@ public partial class Barbarian : CharacterBody2D
     public override void _Process(double delta)
     {
 
-        //GD.Print("Proc");
+        for(int i = 0; i < TimeOfState.Length; i++)
+        {
+
+        }
 
         if (DamagedTime > 0 && Alive)
         {
@@ -136,9 +147,32 @@ public partial class Barbarian : CharacterBody2D
         }
     }
 
-    private bool SecondAttack = false;
+    public void TurnAround()
+    {
+        if ((Math.Sign(WayPoints[CurrentWayPoint].X - Position.X) == 1) == Anim.FlipH)
+        {
+            Anim.FlipH = !Anim.FlipH;
+            Vector2 Reverse = new Vector2(-1, 1);
+            Anim.Position *= Reverse;
+            GetNode<CollisionShape2D>("CollisionShape2D").Position *= Reverse;
+            HurtBoxes.Position *= Reverse;
+            Godot.Collections.Array<Node> hurtboxes = HurtBoxes.GetChildren();
+            for (int i = 0; i < hurtboxes.Count; i++)
+            {
+                ((CollisionShape2D)hurtboxes[i]).Position *= Reverse;
+            }
+            HitBoxes.Position *= Reverse;
+            Godot.Collections.Array<Node> hitboxes = HitBoxes.GetChildren();
+            for (int i = 0; i < hitboxes.Count; i++)
+            {
+                ((CollisionShape2D)hitboxes[i]).Position *= Reverse;
+            }
+        }
+    }
 
-    private async void Attack(Node2D Body)
+    public bool SecondAttack = false;
+
+    public async void Attack(Node2D Body)
     {
         if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
@@ -166,7 +200,7 @@ public partial class Barbarian : CharacterBody2D
         }
     }
 
-    private void GetDamage(int Damage)
+    public void GetDamage(int Damage)
     {
 
         Health -= Damage;
@@ -180,7 +214,7 @@ public partial class Barbarian : CharacterBody2D
         }
     }
 
-    private async void Death()
+    public async void Death()
     {
         Alive = false;
         Anim.Play("Death");
