@@ -237,7 +237,7 @@ public partial class FloatingEye : CharacterBody2D
         {
             /*AudioStreamPlayer jump = new AudioStreamPlayer();
             jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Jump");*/
-            AudioStreamPlayer jump = GetNode<AudioStreamPlayer>("../../Player/Sounds/Jump");
+            jump = GetNode<AudioStreamPlayer>("../../Player/Sounds/Jump");
             if (settings.Sound)
             {
                 jump.Play();

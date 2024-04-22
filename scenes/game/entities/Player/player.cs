@@ -69,23 +69,23 @@ public partial class player : CharacterBody2D
 
     public Vector2 velocity = new Vector2();
 
-    AudioStreamPlayer smack;
+    public AudioStreamPlayer smack;
 
-    AudioStreamPlayer hurt;
+    public AudioStreamPlayer hurt;
 
-    AudioStreamPlayer steps;
+    public AudioStreamPlayer steps;
 
-    AudioStreamPlayer run_steps;
+    public AudioStreamPlayer run_steps;
 
-    AudioStreamPlayer swings;
+    public AudioStreamPlayer swings;
 
-    AudioStreamPlayer super_attack;
+   public  AudioStreamPlayer super_attack;
 
-    AudioStreamPlayer death;
+    public AudioStreamPlayer death;
 
-    AudioStreamPlayer jump;
+    public AudioStreamPlayer jump;
 
-    AudioStreamPlayer collect;
+    public AudioStreamPlayer collect;
 
     AudioStreamPlayer collect2;
 

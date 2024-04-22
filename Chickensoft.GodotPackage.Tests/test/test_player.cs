@@ -64,6 +64,8 @@ public class PlayerTests : TestClass
 	public void Test_heal()
 	{
 		// Arrange
+		player.collect = new AudioStreamPlayer();
+        player.collect.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
 		player.health = 99;
 
 		// Act
@@ -119,6 +121,8 @@ public class PlayerTests : TestClass
 	public void Test_GetDamaged_Blocking()
 	{
 		// Arrange
+		player. smack = new AudioStreamPlayer();
+        player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
 		var initialHealth = player.health;
 		var damage = 20;
 		player.level = new Node2D();
