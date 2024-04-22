@@ -32,6 +32,5 @@ jobs:
         $GODOT_PATH --version
     - name: Build project
       run: |
-        $GODOT_PATH --headless --export-release "windows" /build/project.exe
-        tree
+        $GODOT_PATH --headless --build-solutions
         
