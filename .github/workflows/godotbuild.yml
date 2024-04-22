@@ -30,11 +30,6 @@ jobs:
   
     - name: Verify
       run: |
-        godot --version
-    - name: Build project
-      run: |
-        godot --headless --quit --build-solutions
-    - name: Export project
-      run: |
-        godot --headless --quit --export-release "windows" /build/project.exe
+        tree
+ 
         
