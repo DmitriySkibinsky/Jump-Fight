@@ -28,9 +28,6 @@ jobs:
     - name: Install dotnet
       run: sudo apt install -y mono-devel
   
-    - name: Set executable permissions
-      run: sudo chmod +x ${{ env.GODOT_PATH }}
-
     - name: Verify
       run: |
         godot --version
