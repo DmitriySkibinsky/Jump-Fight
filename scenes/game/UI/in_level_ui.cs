@@ -28,7 +28,6 @@ public partial class in_level_ui : CanvasLayer
 
 	public override void _Process(double delta)
 	{
-		this.PathLeft.ProgressRatio=10f;
 		if(is_animate_out && PathLeft.ProgressRatio < 0.5){
 			PathLeft.ProgressRatio += (float)delta * anim_speed;
 			PathRight.ProgressRatio += (float)delta * anim_speed;

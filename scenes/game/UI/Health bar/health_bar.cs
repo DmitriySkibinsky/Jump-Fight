@@ -3,7 +3,7 @@ using System;
 
 public partial class health_bar : CanvasLayer
 {
-    TextureProgressBar Health_bar;
+    public TextureProgressBar Health_bar;
     CharacterBody2D Player;
 
     public override void _Ready()
