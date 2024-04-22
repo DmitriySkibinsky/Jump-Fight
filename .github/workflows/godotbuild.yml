@@ -1,62 +1,57 @@
-name: Build Godot Project
+name: Build Godot Project for Windows
 
 on:
   push:
-    branches:
-      - main
-
-env:
-  GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-  REPO_NAME: DmitriySkiba/Jump-Fight
-
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build-project:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: dev
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: dev
 
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '8.0.*'
+    - name: Setup Godot
+      uses: lihop/setup-godot@v2
+      with:
+        version: 4.2.1-stable
+        bits: 64
+        mono: true
+        alias: godot
+        export-templates: true
+      
+    - name: Install dotnet
+      run: sudo apt install -y mono-devel
+  
+    - name: Verify
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --version
+    - name: Build project
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --quit --build-solutions
+    - name: Export project
+      run: |
+        mkdir build
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --export-release "windows" "build/project.exe"
+        tree
 
-      - name: Godot Setup
-        uses: lihop/godot-setup@v2.1.2
-        with:
-          version: 4.2.1-stable
-          bits: 64
-          mono: true
-          alias: godot
-          export-templates: true
-
-      - name: Tree
-        run: |
+    - name: Refactor
+      run: |
+        sudo mv /build/data_JumpFight_windows_x86_64 /build/JumpFight.exe
+    
+    - name: Place to zip
+      run: |
+          sudo zip -r Jump-Fight.zip ./build/*
           tree
-
-      - name: Export project
-        run: |
-          godot --no-window --export "Linux/X11"
           
-      - name: Refactor
-        run: |
-          tree
-          pwd
-          sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
-          sudo rm ./build/build/Jump-Fight
-
-      - name: Place to zip
-        run: |
-          sudo zip -r Jump-Fight.zip ./build/build/*
-          tree
-          
-      - name: Generate Git Tag
-        id: generate_tag
-        run: |
+    - name: Generate Git Tag
+      id: generate_tag
+      run: |
            VERSION_PREFIX="v"
            VERSION_MAJOR_MINOR="1.0"
            VERSION_PATCH="0"
@@ -65,8 +60,10 @@ jobs:
            echo "Generated new tag: $NEW_TAG"
            echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
-      - name: Install gh-release action
-        uses: softprops/action-gh-release@v1
-        with:
+    - name: Install gh-release action
+      uses: softprops/action-gh-release@v1
+      with:
           files: ./Jump-Fight.zip
-          tag_name: v1.0.0
+          tag_name: v2.0.0
+ 
+        
