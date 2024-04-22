@@ -15,10 +15,6 @@ run/main_scene="res://scenes/Menu/menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
-[autoload]
-
-CustomSignals="res://global/CustomSignals.cs"
-
 [display]
 
 window/size/viewport_width=1920
