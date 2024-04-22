@@ -30,5 +30,8 @@ jobs:
     - name: Verify
       run: |
         $GODOT_PATH --version
+    - name: Build project
+      run: |
+        $GODOT_PATH --headless --export-release "windows" /build/project.exe
         tree
         
