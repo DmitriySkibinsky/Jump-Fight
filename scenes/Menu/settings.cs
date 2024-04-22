@@ -12,16 +12,16 @@ public partial class settings : Control
 	{
 		button_s = GetNode<Button>("Panel/Sounds/Sounds");
 		if (!Sound){
-			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
+			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
 		}else{
-			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
+			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
 		}
 		AddChild(button_s);
 		button = GetNode<Button>("Panel/Audio/Audio");
 		if (!Audio){
-			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
 		}else{
-			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
+			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
 		}
 		AddChild(button);
 		
@@ -39,20 +39,20 @@ public partial class settings : Control
 	public void _on_audio_pressed()
 	{
 		if (Audio){
-			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
 			Audio = false;
 		}else{
-			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
+			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
 			Audio = true;
 		}
 	}
 	public void _on_sounds_pressed()
 	{
 		if (Sound){
-			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
+			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
 			Sound = false;
 		}else{
-			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
+			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
 			Sound = true;
 		}
 	}
