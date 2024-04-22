@@ -35,4 +35,7 @@ jobs:
     - name: Build project
       run: |
         $GODOT_PATH --headless --quit --build-solutions
+    - name: Export project
+      run: |
+        $GODOT_PATH --headless --quit --export-release "windows" /build/project.exe
         
