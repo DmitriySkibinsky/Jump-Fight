@@ -32,5 +32,5 @@ jobs:
         $GODOT_PATH --version
     - name: Build project
       run: |
-        $GODOT_PATH --headless --build-solutions
+        $GODOT_PATH --display-driver headless --audio-driver Dummy --build-solutions
         
