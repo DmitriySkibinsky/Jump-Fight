@@ -39,5 +39,28 @@ jobs:
         mkdir build
         v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --export-release "windows" "build/project.exe"
         tree
+
+    - name: Refactor
+      run: |
+        sudo mv /build/data_JumpFight_windows_x86_64 /build/FightJump.exe
+        sudo zip -r Jump-Fight.zip ./build/*
+        tree
+          
+    - name: Generate Git Tag
+      id: generate_tag
+      run: |
+           VERSION_PREFIX="v"
+           VERSION_MAJOR_MINOR="1.0"
+           VERSION_PATCH="0"
+           
+           NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
+           echo "Generated new tag: $NEW_TAG"
+           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+
+    - name: Install gh-release action
+      uses: softprops/action-gh-release@v1
+      with:
+          files: ./Jump-Fight.zip
+          tag_name: v2.0.0
  
         
