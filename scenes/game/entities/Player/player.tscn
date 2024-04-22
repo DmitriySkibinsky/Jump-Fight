@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://8a0si0ayx0ix"]
+[gd_scene load_steps=147 format=3 uid="uid://8a0si0ayx0ix"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Player/player.cs" id="1_6toyy"]
 [ext_resource type="Texture2D" uid="uid://cewo3ebd4w1rg" path="res://assets/sprites/char_blue.png" id="2_nscaq"]
@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://css3p3r8nsmuo" path="res://assets/SFX RPG/12_human_jump_1.wav" id="19_y0ihh"]
 [ext_resource type="AudioStream" uid="uid://caumvw4i02r2q" path="res://assets/SFX RPG/12_human_jump_2.wav" id="20_gw0ar"]
 [ext_resource type="AudioStream" uid="uid://bc8xd0i6jns17" path="res://assets/SFX RPG/12_human_jump_3.wav" id="21_jviwo"]
+[ext_resource type="AudioStream" uid="uid://d38gejry8ovht" path="res://assets/SFX RPG/08_human_charge_1.wav" id="22_c0ocv"]
+[ext_resource type="AudioStream" uid="uid://d3hxosdhtbb2q" path="res://assets/SFX RPG/08_human_charge_2.wav" id="23_yqsn4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpaui"]
 radius = 7.0
@@ -1590,6 +1592,14 @@ pitch_scale = 1.2
 stream = SubResource("AudioStreamRandomizer_5l6th")
 volume_db = -5.0
 pitch_scale = 2.0
+
+[node name="Collect" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("22_c0ocv")
+volume_db = -10.0
+
+[node name="Collect2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("23_yqsn4")
+volume_db = -10.0
 
 [connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="DoDamage"]
 
