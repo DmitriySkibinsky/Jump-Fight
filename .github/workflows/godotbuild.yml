@@ -16,15 +16,15 @@ jobs:
       with:
         ref: dev
 
-    - name: Setup Godot for Windows
-      run: |
-        wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
-        unzip Godot_v4.2.1-stable_mono_linux_x86_64.zip
-        wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_mono_export_templates.tpz
-        tar -xzf Godot_v4.2.1-stable_mono_export_templates.tpz
-        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64" >> $GITHUB_ENV
-        tree
-        
+    - name: Setup Godot
+      uses: lihop/setup-godot@v2
+      with:
+        version: 4.2.1-stable
+        bits: 64
+        mono: true
+        alias: godot
+        export-templates: true
+      
     - name: Install dotnet
       run: sudo apt install -y mono-devel
   
@@ -33,11 +33,11 @@ jobs:
 
     - name: Verify
       run: |
-        $GODOT_PATH --version
+        godot --version
     - name: Build project
       run: |
-        $GODOT_PATH --headless --quit --build-solutions
+        godot --headless --quit --build-solutions
     - name: Export project
       run: |
-        $GODOT_PATH --headless --quit --export-release "windows" /build/project.exe
+        godot --headless --quit --export-release "windows" /build/project.exe
         
