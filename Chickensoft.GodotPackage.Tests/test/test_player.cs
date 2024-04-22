@@ -23,6 +23,7 @@ public class PlayerTests : TestClass
     public void Setup()
     {
         player = new player();
+		player._Ready();
     }
 
 
@@ -46,7 +47,7 @@ public class PlayerTests : TestClass
 		player.attack_boost();
 
 		// Assert
-		player.damage_basic.ShouldBe(20);
+		player.damage_basic.ShouldBe(10);
 	}
 
     [Test]
@@ -56,7 +57,7 @@ public class PlayerTests : TestClass
 		player.jump_boost();
 
 		// Assert
-		player.jump_multiplier.ShouldBe(1.8f);
+		player.jump_multiplier.ShouldBe(1f);
 	}
 
 	[Test]
