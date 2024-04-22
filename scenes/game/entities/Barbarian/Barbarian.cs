@@ -13,6 +13,7 @@ public partial class Barbarian : CharacterBody2D
         Damaged,
         PrepareAttack,
         FinishAttack,
+        AttackIntermission,
         Run,
     }
     public static Random RNG = new Random();
@@ -21,23 +22,27 @@ public partial class Barbarian : CharacterBody2D
     public int Speed = 75;
     public int Damage = 20;
     public int Health = 100;
+    public double AttackPrepareTime = 2;
+    public double AttackFinishTime = 1;
+    public double AttackIntermission = 2;
+
 
     public float Gravity = 200;
 
     // Нужно для переключений между стейтментами
-    public float[] TimeOfState = new float[Enum.GetNames(typeof(Statement)).Length];
-    /*public float DamagedTime = 0;
+    public double[] TimeOfState = new double[Enum.GetNames(typeof(Statement)).Length];
+    public float DamagedTime = 0;
     public float IdleTime = 0;
     public float RoamTime = 0;
     public float PrepareAttackTime = 0;
-    public float FinishAttackTime = 0;*/
+    public float FinishAttackTime = 0;
 
     // Используются в процессе
     public Statement State = Statement.Idle;
     public bool Alive = true;
+    public bool IsPursue = false;
 
     public int Direction = RNG.Next(2) == 1 ? 1 : -1;
-    public Vector2 PointOfInterest = new Vector2(0, 0);
 
 
     public RayCast2D rayCast2D;
@@ -59,16 +64,6 @@ public partial class Barbarian : CharacterBody2D
 
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
 
-        if (Direction == -1)
-        {
-            Anim.FlipH = true;
-
-            Vector2 Reverse = new Vector2(-1, 1);
-            Anim.Position *= Reverse;
-            rayCast2D.Position *= Reverse;
-            HitBox1.Position *= Reverse;
-        }
-
 
         HitBoxes.AreaEntered += Attack;
     }
@@ -77,18 +72,68 @@ public partial class Barbarian : CharacterBody2D
 
     public override void _Process(double delta)
     {
-
-        for(int i = 0; i < TimeOfState.Length; i++)
+        if (!Alive)
         {
+            return;
+        }
 
+        for (int i = 0; i < TimeOfState.Length; i++)  // Определяем стейтмент
+        {
+            if (TimeOfState[i] > 0)
+            {
+                TimeOfState[i] -= delta;
+                if (TimeOfState[i] >= 0)
+                {
+                    switch ((Statement)i)
+                    {
+                        case Statement.Idle:
+                            if (!IsPursue)
+                            {
+                                TimeOfState[(int)Statement.Roam] = RNG.Next(2, 7);
+                                State = Statement.Roam;
+                                Direction = RNG.Next(2) == 1 ? 1 : -1;
+                            }
+                            break;
+                        case Statement.Roam:
+                            if (!IsPursue)
+                            {
+                                TimeOfState[(int)Statement.Idle] = RNG.Next(2, 7);
+                                State = Statement.Idle;
+                            }
+                            break;
+                        case Statement.Damaged:
+                            break;
+                        case Statement.PrepareAttack:
+                            TimeOfState[(int)Statement.FinishAttack] = FinishAttackTime;
+                            State = Statement.FinishAttack;
+                            break;
+                        case Statement.FinishAttack:
+                                TimeOfState[(int)Statement.AttackIntermission] = AttackIntermission;
+                                State = Statement.AttackIntermission;
+                            break;
+                        case Statement.AttackIntermission:
+                            if (IsPursue)
+                            {
+                                State = Statement.Run;
+                            }
+                            else
+                            {
+                                TimeOfState[(int)Statement.Roam] = RNG.Next(2, 7);
+                                State = Statement.Roam;
+                                Direction = RNG.Next(2) == 1 ? 1 : -1;
+                            }
+                                break;
+                    }
+                }
+            }
         }
 
         if (DamagedTime > 0 && Alive)
         {
             DamagedTime -= (float)delta;
-            if (DamagedTime <= 0 && State != Statement.Attack)
+            if (DamagedTime <= 0 && State != Statement.PrepareAttack)
             {
-                if(IdleTime > 0)
+                if (IdleTime > 0)
                 {
                     Anim.Play("Idle");
                 }
@@ -103,7 +148,7 @@ public partial class Barbarian : CharacterBody2D
         if (IdleTime > 0 && Alive)
         {
             IdleTime -= (float)delta;
-            if (IdleTime <= 0 && State != Statement.Attack)
+            if (IdleTime <= 0 && State != Statement.PrepareAttack)
             {
                 if (DamagedTime > 0)
                 {
@@ -142,14 +187,16 @@ public partial class Barbarian : CharacterBody2D
         MoveAndSlide();
 
         Godot.Collections.Array<Area2D> OverlappingBodies = HitBoxes.GetOverlappingAreas();
-        for (int i = 0; i < OverlappingBodies.Count; i++) {
+        for (int i = 0; i < OverlappingBodies.Count; i++)
+        {
             Attack(OverlappingBodies[i]);
         }
+        TurnAround();
     }
 
     public void TurnAround()
     {
-        if ((Math.Sign(WayPoints[CurrentWayPoint].X - Position.X) == 1) == Anim.FlipH)
+        if (Alive && (Direction == 1) == Anim.FlipH)
         {
             Anim.FlipH = !Anim.FlipH;
             Vector2 Reverse = new Vector2(-1, 1);
@@ -193,7 +240,7 @@ public partial class Barbarian : CharacterBody2D
             {
                 Anim.Play("Grep");
             }
-            else if(IdleTime > 0)
+            else if (IdleTime > 0)
             {
                 Anim.Play("Idle");
             }

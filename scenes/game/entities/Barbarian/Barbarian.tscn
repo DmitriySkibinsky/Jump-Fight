@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://eqopxlclhep1" path="res://scenes/game/entities/Barbarian/Animation/Skeleton enemy.png" id="2_flxsb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
-radius = 16.0
-height = 40.0
+radius = 12.0
+height = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3gx1n"]
 atlas = ExtResource("2_flxsb")
@@ -252,7 +252,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m02yn")
 }],
-"loop": true,
+"loop": false,
 "name": &"GetDamage",
 "speed": 5.0
 }, {
@@ -320,8 +320,8 @@ radius = 20.0
 height = 56.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6oe4v"]
-radius = 16.0
-height = 40.0
+radius = 12.0
+height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86gex"]
 size = Vector2(512, 48)
@@ -336,20 +336,18 @@ script = ExtResource("1_fq5dc")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_qov7e")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(14, 20)
+position = Vector2(6, 16)
 target_position = Vector2(0, 20)
 collision_mask = 65
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ec8yf")
-animation = &"Attack"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.260126
 
 [node name="HitBoxes" type="Area2D" parent="."]
 collision_layer = 0
@@ -361,6 +359,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ghn87")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 
@@ -368,12 +367,17 @@ collision_mask = 0
 shape = SubResource("CapsuleShape2D_6oe4v")
 
 [node name="FOV" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="Shape1" type="CollisionShape2D" parent="FOV"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_86gex")
 
 [node name="AttackTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="Shape1" type="CollisionShape2D" parent="AttackTrigger"]
 shape = SubResource("RectangleShape2D_iqrt6")
