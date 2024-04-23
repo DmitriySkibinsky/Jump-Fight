@@ -43,7 +43,8 @@ jobs:
         tree
     - name: Refactor
       run: |
-        sudo mv /build/data_JumpFight_windows_x86_64 /build/JumpFight.exe
+        cd build
+        ls -al
     
     - name: Place to zip
       run: |
