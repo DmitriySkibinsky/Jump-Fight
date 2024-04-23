@@ -25,6 +25,7 @@ public partial class Node2D : Godot.Node2D
 "
 
 [node name="Menu" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_8egwg")
 
 [node name="TextureRect" type="TextureRect" parent="."]

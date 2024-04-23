@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs4ayffshvalm"]
+[gd_scene load_steps=6 format=3 uid="uid://bs4ayffshvalm"]
 
+[ext_resource type="Texture2D" uid="uid://c6nijyhgy4p5w" path="res://assets/sprites/Exit Button.png" id="3_44jc8"]
 [ext_resource type="Texture2D" uid="uid://bnd6uj05ayql5" path="res://assets/sprites/Quit Button.png" id="3_tygxe"]
 [ext_resource type="Texture2D" uid="uid://crtn7kw00ob3e" path="res://assets/sprites/Resume Button.png" id="4_c4355"]
 [ext_resource type="Texture2D" uid="uid://b6t4yt0jxyp5j" path="res://assets/sprites/New game Button.png" id="5_m4fof"]
@@ -29,7 +30,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -225.0
-offset_top = -273.0
+offset_top = -331.0
 offset_right = 209.0
 offset_bottom = 273.0
 grow_horizontal = 2
@@ -44,9 +45,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -161.0
-offset_top = -175.5
+offset_top = -183.0
 offset_right = 149.0
-offset_bottom = 177.5
+offset_bottom = 283.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -58,6 +59,28 @@ icon = ExtResource("4_c4355")
 layout_mode = 2
 icon = ExtResource("5_m4fof")
 
+[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_44jc8")
+
 [node name="Quit" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 icon = ExtResource("3_tygxe")
+
+[node name="Audio" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 92.0
+offset_right = 192.0
+offset_bottom = 100.0
+
+[node name="Audio" type="Button" parent="Panel/Audio"]
+layout_mode = 2
+
+[node name="Sounds" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 228.0
+offset_right = 328.0
+offset_bottom = 100.0
+
+[node name="Sounds" type="Button" parent="Panel/Sounds"]
+layout_mode = 2
