@@ -195,8 +195,8 @@ public class FloatingEyeTests:TestClass
         FloatingEye.Anim = new AnimatedSprite2D();
         FloatingEye.Alive = true;
         var player = new player();
-        player.jump = new AudioStreamPlayer();
-        player.jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack"); 
+        FloatingEye.jump = new AudioStreamPlayer();
+        FloatingEye.jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack"); 
         FloatingEye.Player = player;
         player.Velocity = new Vector2(0, 100); // Player is falling
 

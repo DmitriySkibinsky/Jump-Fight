@@ -147,6 +147,7 @@ public partial class FloatingEye : CharacterBody2D
     public int Damage = 20;
     public int direction = 1;
     public bool Alive = true;
+    public AudioStreamPlayer jump;
 
     public  Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
     private Vector2 StartPos; // Стартовая позиция
@@ -161,6 +162,8 @@ public partial class FloatingEye : CharacterBody2D
 
     public override void _Ready()
     {
+        AudioStreamPlayer jump = new AudioStreamPlayer();
+        jump.Stream = ResourceLoader.Load<AudioStream>("../../Player/Sounds/Jump");
         HitBoxes = GetNode<Area2D>("HitBoxes");
         HurtBoxes = GetNode<Area2D>("HurtBoxes");
         Anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -235,9 +238,7 @@ public partial class FloatingEye : CharacterBody2D
     {
         if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
-            /*AudioStreamPlayer jump = new AudioStreamPlayer();
-            jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Jump");*/
-            jump = GetNode<AudioStreamPlayer>("../../Player/Sounds/Jump");
+            
             if (settings.Sound)
             {
                 jump.Play();
