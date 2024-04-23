@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://hgtqpmihduqs"]
+[gd_scene load_steps=16 format=3 uid="uid://hgtqpmihduqs"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/FloatingEye/FloatingEye.cs" id="1_bqkjj"]
+[ext_resource type="AudioStream" uid="uid://cjtblops1skky" path="res://assets/SFX RPG/01_chest_open_1.wav" id="3_5loou"]
 [ext_resource type="Texture2D" uid="uid://10motxj6bwlu" path="res://scenes/game/entities/FloatingEye/Eyeball.png" id="3_lu3by"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xoyf"]
@@ -75,6 +76,11 @@ height = 19.5
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61nv8"]
 size = Vector2(27.6, 28.8)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_luoci"]
+streams_count = 1
+stream_0/stream = ExtResource("3_5loou")
+stream_0/weight = 1.0
+
 [node name="FloatingEye" type="CharacterBody2D"]
 texture_filter = 3
 position = Vector2(-5, 3)
@@ -112,6 +118,11 @@ shape = SubResource("CapsuleShape2D_h7hmk")
 position = Vector2(2.75, -2)
 scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_61nv8")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_luoci")
 
 [connection signal="body_entered" from="HurtBoxes" to="." method="_on_hurt_boxes_body_entered"]
 [connection signal="body_entered" from="HitBoxes" to="." method="Attack"]

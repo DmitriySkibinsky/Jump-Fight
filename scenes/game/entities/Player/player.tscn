@@ -1539,9 +1539,9 @@ shape = SubResource("CapsuleShape2D_cpaui")
 texture_filter = 1
 position = Vector2(2, -12)
 sprite_frames = SubResource("SpriteFrames_bxqn3")
-animation = &"Jump"
+animation = &"Super_Attack"
 autoplay = "Idle"
-frame = 5
+frame = 25
 
 [node name="AttackDirection" type="Node2D" parent="."]
 
@@ -1554,6 +1554,7 @@ disabled = true
 libraries = {
 "": SubResource("AnimationLibrary_t3ygn")
 }
+speed_scale = 1.3
 
 [node name="Sounds" type="Node2D" parent="."]
 
