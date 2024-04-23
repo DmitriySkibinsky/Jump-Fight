@@ -16,7 +16,7 @@ public partial class Room : Node2D
 	private Marker2D PlayerSpawn;
 	private Area2D DamageBox;
 
-	private int num_enemies;
+	public int num_enemies;
 	public override void _Ready()
 	{
 		EnemyPositionsContainer = GetNode<Node2D>("EnemyPositions");
@@ -50,7 +50,7 @@ public partial class Room : Node2D
 		}
 	}
 
-	private void _on_enemy_killed(){
+	public void _on_enemy_killed(){
 		num_enemies -= 1;
 		if (num_enemies == 0){
 			ExitPlatform exitPlatform = ExitPlatformScene.Instantiate<ExitPlatform>();
