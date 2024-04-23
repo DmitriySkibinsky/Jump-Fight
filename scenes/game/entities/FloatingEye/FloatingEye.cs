@@ -162,8 +162,7 @@ public partial class FloatingEye : CharacterBody2D
 
     public override void _Ready()
     {
-        AudioStreamPlayer jump = new AudioStreamPlayer();
-        jump.Stream = ResourceLoader.Load<AudioStream>("../../Player/Sounds/Jump");
+        jump = GetNode<AudioStreamPlayer>("../../Player/Sounds/Jump");
         HitBoxes = GetNode<Area2D>("HitBoxes");
         HurtBoxes = GetNode<Area2D>("HurtBoxes");
         Anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -239,13 +238,18 @@ public partial class FloatingEye : CharacterBody2D
         if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
             
+            //if (settings.Sound)
+            //{
+                
+            //}
+            Player.Velocity = new Vector2(Player.Velocity.X, -700);
+            Player.MoveAndSlide();
+            death();
             if (settings.Sound)
             {
                 jump.Play();
             }
-            Player.Velocity = new Vector2(Player.Velocity.X, -700);
-            Player.MoveAndSlide();
-            death();
+            
             
         }
     }
