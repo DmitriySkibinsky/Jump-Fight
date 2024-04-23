@@ -7,14 +7,14 @@ public partial class heart : Area2D
 	{
 		if (body.Name == "Player")
 		{
-            CharacterBody2D Player = (player)GetTree().GetFirstNodeInGroup("Player");
-			Player.CallDeferred("heal", 30);
+            player Player = (player)GetTree().GetFirstNodeInGroup("Player");
+			Player.heal(30, this);
 			var tween = GetTree().CreateTween();
             var tween_fade = GetTree().CreateTween();
             Vector2  collect = new Vector2(0, 25);
-			tween.TweenProperty(GetNode("heart"), "position", Position - collect, 0.3f);
-			tween_fade.TweenProperty(GetNode("heart"), "modulate:a", 0, 0.3f);
-            tween.TweenCallback(Callable.From(GetNode("heart").QueueFree));
+			tween.TweenProperty(this, "position", Position - collect, 0.3f);
+			tween_fade.TweenProperty(this, "modulate:a", 0, 0.3f);
+            
         }
 	}
 }
