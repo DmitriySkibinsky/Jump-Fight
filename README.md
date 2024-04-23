@@ -12,10 +12,9 @@
 4. Git - GitFlow — система управления версиями с распределенной архитектурой, предназначенная для отслеживания и ведения истории изменения файлов.
 
 ## Система Интеграции и развертывания 
-В качестве системы CI/CD выступает Github Actions и Jenkins
+В качестве системы CI/CD выступает Github Actions 
 
-[![Build Godot Project for Windows](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godotbuild.yml/badge.svg)](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godotbuild.yml) ![](https://img.shields.io/jenkins/build?logo=Automatic%20Game%20Build&label=Automatic%20Game%20Build&color=rgb(255%2C%200%2C%200)
-)
+[![Build Godot Project for Windows](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godotbuild.yml/badge.svg)](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godotbuild.yml) 
 
 ## Инструкции по установке/запуску:
 -
