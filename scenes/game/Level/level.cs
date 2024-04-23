@@ -31,6 +31,7 @@ public partial class level : Node2D
 			ActivePlatforms.Sort(SortByPlayerDistance);
 			for(int i = 0; i < ActivePlatforms.Count; i++){
 				if (ActivePlatforms[i].Position.Y < player.Position.Y){
+					ActivePlatforms[i].Set("JumpForce", 800);
 					player.Position = new Vector2(ActivePlatforms[i].Position.X, ActivePlatforms[i].Position.Y - 80);
 					player.Velocity = new Vector2(0, 0);
 					break;
