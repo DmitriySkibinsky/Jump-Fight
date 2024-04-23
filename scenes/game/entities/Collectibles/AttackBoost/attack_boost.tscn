@@ -42,6 +42,8 @@ animations = [{
 }]
 
 [node name="attack_boost" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_5qyuk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -52,7 +54,6 @@ scale = Vector2(1.375, 1.375)
 sprite_frames = SubResource("SpriteFrames_oq40q")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 2
-frame_progress = 0.0915654
+frame_progress = 0.0228773
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

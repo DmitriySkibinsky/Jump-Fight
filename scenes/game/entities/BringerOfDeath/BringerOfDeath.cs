@@ -13,22 +13,17 @@ public partial class BringerOfDeath : CharacterBody2D
 	public RayCast2D rayCast2D;
 	public Area2D HitBox;
 	public Area2D HurtBoxes;
+	public ColorRect TakeDamageEffect;
 	public float Direction;
 	private float healthPoints = 500;
 	public bool HealthToPlayerDroped = false;
-	public PackedScene HealthToPlayer = GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn");
+	Tween tween;
 	public float HealthPoints{get{
         return healthPoints;
     }set{
         healthPoints = value;
         if (healthPoints <= 0){
 			GetNode<FiniteStateMachine>("FiniteStateMachine").ChangeState("Death");
-		}
-		if(healthPoints <= 250 && !HealthToPlayerDroped){
-			Node2D healthToPlayer = HealthToPlayer.Instantiate<Node2D>();
-			healthToPlayer.GlobalPosition = GlobalPosition;
-			Owner.AddChild(healthToPlayer);
-			HealthToPlayerDroped = true;
 		}
     }}
 
@@ -41,6 +36,7 @@ public partial class BringerOfDeath : CharacterBody2D
 		HurtBoxes = GetNode<Area2D>("HurtBoxes");
 		AnimationPlayer = (AnimationPlayer)GetTree().GetFirstNodeInGroup("AnimationPlayer");
 		Player = (player)GetTree().GetFirstNodeInGroup("Player");
+		TakeDamageEffect = GetNode<ColorRect>("Sprite2D/TakeDamageEffect");
     	SetPhysicsProcess(false);
 	   
     }
@@ -92,8 +88,9 @@ public partial class BringerOfDeath : CharacterBody2D
 
 	public void GetDamage (float damage){
 		HealthPoints -= damage;
-		AnimationPlayer.Play("hurt");
-		GD.Print(damage);
+		tween = CreateTween();
+		tween.TweenProperty(TakeDamageEffect, "color", new Color(1, 1, 1, (float)0.196), 0.1);
+		tween.TweenProperty(TakeDamageEffect, "color", new Color(1, 1, 1, 0), 0.1);
 	}
 
 }

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0kovkhox1brj"]
+[gd_scene load_steps=3 format=3 uid="uid://c0kovkhox1brj"]
 
 [ext_resource type="PackedScene" uid="uid://b46temebts3n1" path="res://scenes/game/LevelItems/Rooms/BossRoom.tscn" id="1_26mbm"]
+[ext_resource type="PackedScene" uid="uid://exgmjj4k0vm0" path="res://scenes/game/entities/Collectibles/Heart/heart.tscn" id="2_ile2c"]
 
 [node name="BossRoom" instance=ExtResource("1_26mbm")]
 metadata/_edit_vertical_guides_ = [130.0, 1791.0]
@@ -20,7 +21,7 @@ position = Vector2(1286.67, -904)
 position = Vector2(-26.6667, -748)
 
 [node name="NextPlatform" parent="." index="4"]
-position = Vector2(1286.67, -1918.67)
+position = Vector2(1294.67, -1490.67)
 
 [node name="ExitPlatformPosition" parent="." index="5"]
 position = Vector2(1286.67, -821.333)
@@ -34,5 +35,13 @@ layer_0/tile_data = PackedInt32Array(-2031585, 131072, 1, -2031584, 131072, 1, -
 
 [node name="PlayerSpawn" parent="." index="9"]
 position = Vector2(1286.67, -898.667)
+
+[node name="heart2" parent="." index="11" instance=ExtResource("2_ile2c")]
+position = Vector2(242.667, -898.667)
+scale = Vector2(3, 3)
+
+[node name="heart3" parent="." index="12" instance=ExtResource("2_ile2c")]
+position = Vector2(2309.33, -898.667)
+scale = Vector2(3, 3)
 
 [editable path="SolidPlatforms/SolidPlatform"]
