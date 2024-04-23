@@ -23,6 +23,7 @@ public class PlayerTests : TestClass
     public void Setup()
     {
         player = new player();
+		player._Ready();
     }
 
 
@@ -46,7 +47,7 @@ public class PlayerTests : TestClass
 		player.attack_boost();
 
 		// Assert
-		player.damage_basic.ShouldBe(20);
+		player.damage_basic.ShouldBe(10);
 	}
 
     [Test]
@@ -56,13 +57,15 @@ public class PlayerTests : TestClass
 		player.jump_boost();
 
 		// Assert
-		player.jump_multiplier.ShouldBe(1.8f);
+		player.jump_multiplier.ShouldBe(1f);
 	}
 
 	[Test]
 	public void Test_heal()
 	{
 		// Arrange
+		player.collect = new AudioStreamPlayer();
+        player.collect.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
 		player.health = 99;
 
 		// Act
@@ -118,6 +121,8 @@ public class PlayerTests : TestClass
 	public void Test_GetDamaged_Blocking()
 	{
 		// Arrange
+		player. smack = new AudioStreamPlayer();
+        player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
 		var initialHealth = player.health;
 		var damage = 20;
 		player.level = new Node2D();

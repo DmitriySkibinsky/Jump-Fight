@@ -27,7 +27,15 @@ public partial class player : CharacterBody2D
         DEATH
     }
 
+    public enum SoundSettings
+    {
+        ON,
+        OFF
+    }
+
     public StateMachine State = StateMachine.MOVE;
+
+    public SoundSettings Switcher = SoundSettings.ON;
 
     public Node2D level;
 
@@ -56,13 +64,47 @@ public partial class player : CharacterBody2D
     public float damage_multiplier = 1;
 
     public float damage_current;
+
     public AnimationPlayer animPlayer; 
 
     public Vector2 velocity = new Vector2();
 
+    public AudioStreamPlayer smack;
+
+    public AudioStreamPlayer hurt;
+
+    public AudioStreamPlayer steps;
+
+    public AudioStreamPlayer run_steps;
+
+    public AudioStreamPlayer swings;
+
+   public  AudioStreamPlayer super_attack;
+
+    public AudioStreamPlayer death;
+
+    public AudioStreamPlayer jump;
+
+    public AudioStreamPlayer collect;
+
+    AudioStreamPlayer collect2;
+
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        /*smack = new AudioStreamPlayer();
+        smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");*/
+        smack = GetNode<AudioStreamPlayer>("Sounds/Smack");
+        hurt = GetNode<AudioStreamPlayer>("Sounds/Hurt");
+        steps = GetNode<AudioStreamPlayer>("Sounds/Steps");
+        run_steps = GetNode<AudioStreamPlayer>("Sounds/Run steps");
+        swings = GetNode<AudioStreamPlayer>("Sounds/Swings");
+        super_attack = GetNode<AudioStreamPlayer>("Sounds/Super attack");
+        death = GetNode<AudioStreamPlayer>("Sounds/Death");
+        jump = GetNode<AudioStreamPlayer>("Sounds/Jump");
+        collect = GetNode<AudioStreamPlayer>("Sounds/Collect");
+        collect2 = GetNode<AudioStreamPlayer>("Sounds/Collect2");
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -93,6 +135,16 @@ public partial class player : CharacterBody2D
                 break;
             case StateMachine.BLOCK:
                 block_state();
+                break;
+        }
+
+        switch (Switcher)
+        {
+            case SoundSettings.ON:
+                turn_on();
+                break;
+            case SoundSettings.OFF:
+                turn_off();
                 break;
         }
 
@@ -232,6 +284,15 @@ public partial class player : CharacterBody2D
                 animPlayer.Play("Fall");
             }
         }
+
+        if (settings.Sound == true)
+        {
+            Switcher = SoundSettings.ON;
+        }
+        else
+        {
+            Switcher = SoundSettings.OFF;
+        }
         
         MoveAndSlide();
     }
@@ -336,8 +397,6 @@ public partial class player : CharacterBody2D
 
     public void GetDamaged(int Damage)
     {
-        AudioStreamPlayer smack = new AudioStreamPlayer();
-        smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
         smack.Play();
        if (Input.IsActionPressed("block") && (bool)level.Get("isBattleSection"))
         {
@@ -379,8 +438,37 @@ public partial class player : CharacterBody2D
         }
     }
 
+    public void turn_on()
+    {
+        smack.VolumeDb = -10;
+        hurt.VolumeDb = -10;
+        steps.VolumeDb = -10;
+        run_steps.VolumeDb = -10;
+        swings.VolumeDb = -10;
+        super_attack.VolumeDb = -10;
+        death.VolumeDb = -10;
+        jump.VolumeDb = -10;
+        collect.VolumeDb = -10;
+        collect2.VolumeDb = -10;
+    }
+
+    public void turn_off()
+    {
+        smack.VolumeDb = -80;
+        hurt.VolumeDb = -80;
+        steps.VolumeDb = -80;
+        run_steps.VolumeDb = -80;
+        swings.VolumeDb = -80;
+        super_attack.VolumeDb = -80;
+        death.VolumeDb = -80;
+        jump.VolumeDb = -80;
+        collect.VolumeDb = -80;
+        collect2.VolumeDb = -80;
+    }
+
     public void heal(int hp)
     {
+        collect.Play();
         health += hp;
         if (health > 100)
         {
@@ -391,6 +479,7 @@ public partial class player : CharacterBody2D
 
     public async void jump_boost()
     {
+        collect2.Play();
         jump_multiplier = 1.8f;
         await ToSignal(GetTree().CreateTimer(10), SceneTreeTimer.SignalName.Timeout);
         jump_multiplier = 1f;
@@ -398,6 +487,7 @@ public partial class player : CharacterBody2D
 
     public async void attack_boost()
     {
+        collect2.Play();
         damage_basic = 20;
         await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
         damage_multiplier = 10;

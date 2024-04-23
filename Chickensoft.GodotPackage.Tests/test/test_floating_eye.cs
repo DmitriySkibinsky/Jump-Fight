@@ -156,8 +156,10 @@ public class FloatingEyeTests:TestClass
     public void Attack_Test()
     {
         // Arrange
+        var player = new player();
+        player. smack = new AudioStreamPlayer();
+        player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
         FloatingEye.Alive = true;
-        var player = new player(); 
         FloatingEye.Player = player;
         player.Position = new Vector2(100, 0); 
 
@@ -192,7 +194,9 @@ public class FloatingEyeTests:TestClass
         // Arrange
         FloatingEye.Anim = new AnimatedSprite2D();
         FloatingEye.Alive = true;
-        var player = new player(); 
+        var player = new player();
+        FloatingEye.jump = new AudioStreamPlayer();
+        FloatingEye.jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack"); 
         FloatingEye.Player = player;
         player.Velocity = new Vector2(0, 100); // Player is falling
 
