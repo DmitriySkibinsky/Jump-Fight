@@ -44,6 +44,7 @@ jobs:
     - name: Refactor
       run: |
         cd build
+        sudo mv data_JumpFight_windows_x86_64 JumpFight.exe
         ls -al
     
     - name: Place to zip
