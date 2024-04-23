@@ -50,10 +50,6 @@ public partial class Manager : Node2D
 		}
 		}
 
-	public void _on_quit_pressed()
-	{
-		GetTree().Quit();
-	}
 	public void _on_resum_pressed()
 	{
 		game_paused = !game_paused;

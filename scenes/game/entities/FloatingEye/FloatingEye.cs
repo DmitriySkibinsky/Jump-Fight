@@ -237,11 +237,6 @@ public partial class FloatingEye : CharacterBody2D
     {
         if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
-            
-            //if (settings.Sound)
-            //{
-                
-            //}
             Player.Velocity = new Vector2(Player.Velocity.X, -500);
             Player.MoveAndSlide();
             death();
