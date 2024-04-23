@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c6nijyhgy4p5w" path="res://assets/sprites/Exit Button.png" id="4_w64r6"]
 
 [node name="Main_settings" type="Control"]
+process_mode = 3
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 3
 anchors_preset = 15

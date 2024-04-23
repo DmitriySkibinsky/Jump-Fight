@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctp0f35hrooi2"]
+[gd_scene load_steps=25 format=3 uid="uid://ctp0f35hrooi2"]
 
 [ext_resource type="Script" path="res://scenes/game/Level/level.cs" id="1_8fvfi"]
 [ext_resource type="Texture2D" uid="uid://biystwsbqgwc0" path="res://assets/sprites/level1/tileset.png" id="2_b2xxe"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bc5wc55l3pwql" path="res://scenes/game/Utils/parallax_background.tscn" id="9_d2san"]
 [ext_resource type="PackedScene" uid="uid://bfph7mlmasj20" path="res://scenes/game/Utils/Interaction/InteractionManager.tscn" id="10_26sic"]
 [ext_resource type="PackedScene" uid="uid://bs4ayffshvalm" path="res://scenes/Menu/settingspause.tscn" id="10_fg75v"]
+[ext_resource type="Texture2D" uid="uid://n5jvprapfh34" path="res://assets/sprites/Menu Button.png" id="10_j8rih"]
 [ext_resource type="Texture2D" uid="uid://b1wit2utkka75" path="res://assets/sprites/level2/desert-ruins.png" id="11_fmoq0"]
 [ext_resource type="Texture2D" uid="uid://cf2p657padrec" path="res://assets/sprites/level3/SR_Stone Ruins_TileSet 16x16.png" id="13_5xw5g"]
 [ext_resource type="PackedScene" uid="uid://dm7xdh2fttkq" path="res://scenes/game/UI/Health bar/health_bar.tscn" id="14_8r2e5"]
@@ -1185,6 +1186,15 @@ scale = Vector2(3.5, 3.5)
 [node name="InLevelUI" parent="." instance=ExtResource("2_wn0s3")]
 
 [node name="Pause" parent="InLevelUI" instance=ExtResource("10_fg75v")]
+offset_top = -300.0
+offset_bottom = 402.0
+
+[node name="Panel" parent="InLevelUI/Pause" index="0"]
+offset_top = -286.0
+offset_bottom = 318.0
+
+[node name="Exit" parent="InLevelUI/Pause/Panel/VBoxContainer" index="2"]
+icon = ExtResource("10_j8rih")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("9_d2san")]
 
@@ -1208,7 +1218,9 @@ transform = Transform2D(1, 0, 0, 1, 3, 40)
 [connection signal="SuperReload" from="Player" to="CanvasLayer2" method="_on_player_super_reload"]
 [connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
 [connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
-[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Exit" to="Manager" method="_on_exit_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/Audio/Audio" to="Manager" method="_on_audio_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/Sounds/Sounds" to="Manager" method="_on_sounds_pressed"]
 
 [editable path="InLevelUI"]
 [editable path="InLevelUI/Pause"]
