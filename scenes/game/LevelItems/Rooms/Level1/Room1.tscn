@@ -34,6 +34,18 @@ scale = Vector2(1.75, 0.438)
 collision_layer = 0
 JumpForce = 750
 
+[node name="Scav_1" type="Marker2D" parent="EnemyPositions" index="0"]
+position = Vector2(798.667, -1442.67)
+
+[node name="Scav_2" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(1837.33, -1430.67)
+
+[node name="Barbarian_1" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(1284, -2169.33)
+
+[node name="Barbarian_2" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(1284, -1430.67)
+
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(1280, -1248)
 

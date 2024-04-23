@@ -15,9 +15,9 @@ public partial class Scav : CharacterBody2D
     }
     private static Random RNG = new Random();
 
-    public int Speed = 50;
-    public int Damage = 20;
-    public int Health = 100;
+    public int Speed = 60;
+    public int Damage = 30;
+    public int Health = 130;
 
 
     public Statement State = Statement.Run;
@@ -62,9 +62,6 @@ public partial class Scav : CharacterBody2D
             rayCast2D.Position *= Reverse;
             HitBox1.Position *= Reverse;
         }
-
-
-        HitBoxes.AreaEntered += Attack;
     }
 
 
@@ -175,6 +172,8 @@ public partial class Scav : CharacterBody2D
     {
 
         Health -= Damage;
+        DamagedTime = 0.5f;
+        Anim.Modulate = new Color(1, 0.5f, 0.5f);
         if (Health <= 0)
         {
             Death();
@@ -182,10 +181,8 @@ public partial class Scav : CharacterBody2D
         else
         {
             State = Statement.Idle;
-            DamagedTime = 1;
             Anim.Play("Grep");
             LastDamagedTime = Godot.Time.GetTicksMsec();
-            Anim.Modulate = new Color(1, 0.5f, 0.5f);
         }
     }
 
@@ -193,7 +190,7 @@ public partial class Scav : CharacterBody2D
     {
         Alive = false;
         Anim.Play("Death");
-        await ToSignal(GetTree().CreateTimer(3), "timeout");
+        await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
         QueueFree();
     }
 }

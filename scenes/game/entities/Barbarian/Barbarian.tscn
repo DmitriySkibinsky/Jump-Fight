@@ -1,23 +1,11 @@
-[gd_scene load_steps=49 format=3 uid="uid://doglnh1avmgig"]
+[gd_scene load_steps=50 format=3 uid="uid://doglnh1avmgig"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Barbarian/Barbarian.cs" id="1_fq5dc"]
 [ext_resource type="Texture2D" uid="uid://eqopxlclhep1" path="res://scenes/game/entities/Barbarian/Animation/Skeleton enemy.png" id="2_flxsb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
-radius = 12.0
-height = 32.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3gx1n"]
-atlas = ExtResource("2_flxsb")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a2s45"]
-atlas = ExtResource("2_flxsb")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gk12u"]
-atlas = ExtResource("2_flxsb")
-region = Rect2(128, 0, 64, 64)
+radius = 48.0
+height = 160.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0v01m"]
 atlas = ExtResource("2_flxsb")
@@ -119,6 +107,22 @@ region = Rect2(128, 192, 64, 64)
 atlas = ExtResource("2_flxsb")
 region = Rect2(192, 192, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq2ou"]
+atlas = ExtResource("2_flxsb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i64bn"]
+atlas = ExtResource("2_flxsb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjtx8"]
+atlas = ExtResource("2_flxsb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugpy5"]
+atlas = ExtResource("2_flxsb")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wjx85"]
 atlas = ExtResource("2_flxsb")
 region = Rect2(0, 128, 64, 64)
@@ -170,15 +174,6 @@ region = Rect2(704, 128, 64, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ec8yf"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3gx1n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a2s45")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gk12u")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0v01m")
 }, {
@@ -238,7 +233,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_leopp")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -271,6 +266,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq2ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i64bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjtx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugpy5")
+}],
+"loop": false,
+"name": &"PrepareToAttack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -316,18 +328,18 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghn87"]
-radius = 20.0
-height = 56.0
+radius = 100.0
+height = 280.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6oe4v"]
-radius = 12.0
-height = 32.0
+radius = 48.0
+height = 160.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86gex"]
-size = Vector2(512, 48)
+size = Vector2(2560, 360)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqrt6"]
-size = Vector2(50, 40)
+size = Vector2(250, 200)
 
 [node name="Barbarian" type="CharacterBody2D"]
 collision_layer = 0
@@ -339,27 +351,26 @@ metadata/_edit_group_ = true
 shape = SubResource("CapsuleShape2D_qov7e")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(6, 16)
-target_position = Vector2(0, 20)
+position = Vector2(40, 80)
+target_position = Vector2(0, 40)
 collision_mask = 65
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ec8yf")
-animation = &"Idle"
+animation = &"Death"
 autoplay = "Idle"
-frame_progress = 0.260126
 
 [node name="HitBoxes" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
-position = Vector2(8, 0)
+position = Vector2(40, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ghn87")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 0
 
@@ -367,12 +378,11 @@ collision_mask = 0
 shape = SubResource("CapsuleShape2D_6oe4v")
 
 [node name="FOV" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="Shape1" type="CollisionShape2D" parent="FOV"]
-position = Vector2(0, -4)
+position = Vector2(0, -80)
 shape = SubResource("RectangleShape2D_86gex")
 
 [node name="AttackTrigger" type="Area2D" parent="."]
@@ -382,4 +392,6 @@ collision_mask = 2
 [node name="Shape1" type="CollisionShape2D" parent="AttackTrigger"]
 shape = SubResource("RectangleShape2D_iqrt6")
 
-[connection signal="body_entered" from="HitBoxes" to="." method="Attack"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="AnimationFinished"]
+[connection signal="area_entered" from="FOV" to="." method="StartPursue"]
+[connection signal="area_exited" from="FOV" to="." method="FinishPursue"]

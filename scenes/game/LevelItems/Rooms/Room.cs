@@ -8,7 +8,8 @@ public partial class Room : Node2D
 	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
-        {"Scav", GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")}
+		{"Scav", GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")},
+        {"Barbarian", GD.Load<PackedScene>("res://scenes/game/entities/Barbarian/Barbarian.tscn")},
     };
 	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;

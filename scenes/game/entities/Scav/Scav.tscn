@@ -9,15 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://3hrw6ctwfain" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-run.png" id="7_e2xi1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
-radius = 42.0
-height = 116.0
+radius = 40.0
+height = 140.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
-size = Vector2(75, 100)
+size = Vector2(80, 140)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5u5bn"]
-radius = 42.0
-height = 116.0
+radius = 40.0
+height = 140.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xk01o"]
 atlas = ExtResource("3_wjr8a")
@@ -192,12 +192,12 @@ animations = [{
 "speed": 10.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_s4tfv")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 4.0,
@@ -258,8 +258,8 @@ metadata/_edit_group_ = true
 shape = SubResource("CapsuleShape2D_qov7e")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(36, 40)
-target_position = Vector2(0, 40)
+position = Vector2(40, 64)
+target_position = Vector2(0, 32)
 collision_mask = 65
 
 [node name="HitBoxes" type="Area2D" parent="."]
@@ -278,11 +278,8 @@ collision_mask = 0
 shape = SubResource("CapsuleShape2D_5u5bn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(36, -36)
-scale = Vector2(0.819, 1.296)
+position = Vector2(36, -40)
+scale = Vector2(0.8, 1.5)
 sprite_frames = SubResource("SpriteFrames_ec8yf")
-animation = &"Grep"
+animation = &"Run"
 autoplay = "Run"
-frame_progress = 0.182215
-
-[connection signal="body_entered" from="HitBoxes" to="." method="Attack"]

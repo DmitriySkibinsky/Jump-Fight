@@ -238,7 +238,7 @@ public partial class FloatingEye : CharacterBody2D
             AudioStreamPlayer jump = new AudioStreamPlayer();
             jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Jump");
             jump.Play();
-            Player.Velocity = new Vector2(Player.Velocity.X, -500);
+            Player.Velocity = new Vector2(Player.Velocity.X, -700);
             Player.MoveAndSlide();
             death();
             
@@ -250,7 +250,7 @@ public partial class FloatingEye : CharacterBody2D
         if (Alive)
         {
             Player.GetDamaged(Damage);
-            Player.Velocity += new Vector2(Math.Sign(Player.Position.X - Position.X) * 700, 0);
+            Player.Velocity = new Vector2(Math.Sign(Player.Position.X - Position.X) * 300, 0);
         }
     }
 
