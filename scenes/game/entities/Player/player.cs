@@ -466,16 +466,19 @@ public partial class player : CharacterBody2D
 		collect2.VolumeDb = -80;
 	}
 
-	public void heal(int hp)
-	{
-		collect.Play();
-		health += hp;
-		if (health > 100)
-		{
-			health = 100;
-		}
-		EmitSignal(SignalName.HealthChanged, health);
-	}
+    public void heal(int hp, heart HealingOrb=null)
+    {
+        collect.Play();
+        health += hp;
+        if (health > 100)
+        {
+            health = 100;
+        }
+        EmitSignal(SignalName.HealthChanged, health);
+        if (HealingOrb != null){
+            HealingOrb.QueueFree();
+        }
+    }
 
 	public async void jump_boost()
 	{

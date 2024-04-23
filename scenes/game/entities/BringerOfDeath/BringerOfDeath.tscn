@@ -185,12 +185,20 @@ target_position = Vector2(0, 20)
 collision_mask = 65
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 texture_filter = 1
 position = Vector2(-70, -35)
 scale = Vector2(2, 2)
 texture = ExtResource("1_firq8")
 hframes = 8
 vframes = 8
+
+[node name="TakeDamageEffect" type="ColorRect" parent="Sprite2D"]
+offset_left = -61.0
+offset_top = -12.0
+offset_right = 58.0
+offset_bottom = 46.0
+color = Color(1, 1, 1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["AnimationPlayer"]]
 libraries = {
@@ -199,6 +207,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2.5)
 shape = SubResource("CapsuleShape2D_hvo7b")
 
@@ -230,6 +239,7 @@ script = ExtResource("8_2nv8q")
 script = ExtResource("10_hcnjk")
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -243,6 +253,7 @@ disabled = true
 shape = SubResource("CapsuleShape2D_8gass")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 
