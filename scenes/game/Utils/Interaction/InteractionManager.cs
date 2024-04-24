@@ -48,7 +48,7 @@ public partial class InteractionManager : Node2D
 	public int SortByPlayerDistance(InteractionArea area1, InteractionArea area2)
 	{
 		double distance1 = Player.GlobalPosition.DistanceTo(area1.GlobalPosition);
-		double distance2 = Player.GlobalPosition.DistanceTo(area1.GlobalPosition);
+		double distance2 = Player.GlobalPosition.DistanceTo(area2.GlobalPosition);
 		if (distance1 < distance2)
 		{
 			return 1; 
