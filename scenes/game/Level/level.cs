@@ -43,11 +43,6 @@ public partial class level : Node2D
 			body.QueueFree();
 		}
 	}
-
-	public void _on_button_pressed()
-	{
-		GetTree().Quit();
-	}
 	
 	public void RegisterPlatform(Node2D platform){
 		ActivePlatforms.Add(platform);

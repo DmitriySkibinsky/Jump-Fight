@@ -73,4 +73,110 @@ public class LevelTest : TestClass {
         camera.Position.Y.ShouldBe(player.Position.Y);
     }
 
+    [Test]
+    public void Test_OnCleanerAreaBodyEntered()
+    {
+        // Arrange
+        var player = new player();
+        player.Name = "Player";
+        player.health = 100;
+        player. smack = new AudioStreamPlayer();
+        player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+
+        // Act
+        level._on_cleaner_area_body_entered(player);
+
+        // Assert
+        player.Velocity.ShouldBe(new Vector2(0, 0));
+        player.health.ShouldBe(80);
     }
+
+    [Test]
+    public void Test_OnCleanerAreaBodyEntered_2()
+    {
+        // Arrange
+        var nonPlayerBody = new Node2D();
+
+        // Act
+        level._on_cleaner_area_body_entered(nonPlayerBody);
+
+        // Assert
+        level.ActivePlatforms.ShouldBeEmpty();
+    }
+
+    [Test]
+    public void Test_RegisterPlatform()
+    {
+        // Arrange
+        var platform = new Node2D();
+
+        // Act
+        level.RegisterPlatform(platform);
+
+        // Assert
+        level.ActivePlatforms.ShouldNotBeEmpty();
+    }
+
+    [Test]
+    public void Test_UnregisterPlatform()
+    {
+        // Arrange
+        var platform = new Node2D();
+
+        // Act
+        level.RegisterPlatform(platform);
+        level.ActivePlatforms.ShouldNotBeEmpty();
+        level.UnregisterPlatform(platform);
+
+        // Assert
+        level.ActivePlatforms.ShouldBeEmpty();
+    }
+
+    [Test]
+    public void Test_SortByPlayerDistance()
+    {
+        // Arrange
+        var obj1 = new Node2D();
+        var obj2 = new Node2D();
+        obj1.GlobalPosition = new Vector2(0,100);
+        obj2.GlobalPosition = new Vector2(0,100);
+
+        // Act
+        var res = level.SortByPlayerDistance(obj1,obj2);
+ 
+        // Assert
+        res.ShouldBe(0);
+    }
+
+    [Test]
+    public void Test_SortByPlayerDistance_2()
+    {
+        // Arrange
+        var obj1 = new Node2D();
+        var obj2 = new Node2D();
+        obj1.GlobalPosition = new Vector2(0,100);
+        obj2.GlobalPosition = new Vector2(0,110);
+
+        // Act
+        var res = level.SortByPlayerDistance(obj1,obj2);
+ 
+        // Assert
+        res.ShouldBe(-1);
+    }
+
+    [Test]
+    public void Test_SortByPlayerDistance_3()
+    {
+        // Arrange
+        var obj1 = new Node2D();
+        var obj2 = new Node2D();
+        obj1.GlobalPosition = new Vector2(0,110);
+        obj2.GlobalPosition = new Vector2(0,100);
+
+        // Act
+        var res = level.SortByPlayerDistance(obj1,obj2);
+ 
+        // Assert
+        res.ShouldBe(1);
+    }
+}
