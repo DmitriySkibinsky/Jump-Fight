@@ -1,24 +1,23 @@
-def get_last_line(file_path):
+def find_line_with_content(file_path, content):
     with open(file_path, 'r') as file:
-        lines = file.readlines()
-        if lines:
-            last_line = lines[-1].strip()
-            return last_line
-        else:
-            return None  # Возвращаем None, если файл пуст
+        for line in file:
+            if content in line:
+                return line.strip()
+    return None 
 
-file_path = './result.txt'  
-last_line = get_last_line(file_path)
+file_path = './result.txt'
+content_to_find = "GoTest: > OK >> Test results:"
+line_with_content = find_line_with_content(file_path, content_to_find)
 
-if last_line is not None:
-    last_line = last_line.split()
-    if len(last_line) >= 13:
-        print(last_line[10], last_line[13])
-        if int(last_line[10]) == 0 and int(last_line[13]) == 0:
+if line_with_content is not None:
+    words = line_with_content.split()
+    if len(words) >= 13:
+        print(words[10], words[13])
+        if int(words[10]) == 0 and int(words[13]) == 0:
             print("ALL TESTS PASSED")
         else:
             raise ValueError("The elements are not equal to 0.")
     else:
         raise IndexError("The line does not have enough words.")
 else:
-    raise ValueError("The file is empty.")
+    raise ValueError("The file does not contain the specified content.")
