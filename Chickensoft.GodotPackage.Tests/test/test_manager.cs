@@ -18,6 +18,7 @@ public partial class ManagerTests : TestClass
     public void SetUp()
     {
         Manager = new Manager();
+        Manager.mute = Substitute.For<AudioStreamPlayer>();
     }
 
      public Func<SceneTree> GetTree { get; set; }
@@ -27,6 +28,7 @@ public partial class ManagerTests : TestClass
     {
         // Arrange
         SceneTree tree = GetTree?.Invoke();
+        settings.Sound = false;
 
     if (tree != null)
     {

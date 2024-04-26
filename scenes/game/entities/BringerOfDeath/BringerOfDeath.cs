@@ -96,9 +96,10 @@ public partial class BringerOfDeath : CharacterBody2D
 		}
 	}
 
+	public Vector2 velocity;
     public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = new Vector2();
+		velocity = new Vector2();
 		if (!IsOnFloor())
             velocity.Y += gravity * (float)delta;
 		else{
