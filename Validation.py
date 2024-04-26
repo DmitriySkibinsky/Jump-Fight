@@ -3,10 +3,10 @@ def find_line_with_content(file_path, content):
         for line in file:
             if content in line:
                 return line.strip()
-    return None 
+    return None  # Возвращаем None, если строка не найдена
 
 file_path = './result.txt'
-content_to_find = "GoTest: > OK >> Test results:"
+content_to_find = "Test results:"
 line_with_content = find_line_with_content(file_path, content_to_find)
 
 if line_with_content is not None:
