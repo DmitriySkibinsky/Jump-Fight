@@ -4,11 +4,20 @@ using System;
 public partial class menu : Node2D
 {
 	public AudioStreamPlayer click;
-	public override void _Ready()
-	{
+
+    public menu_music Music;
+
+    public override void _Ready()
+    {
         click = GetNode<AudioStreamPlayer>("Buttons");
+        Music = GetNode<menu_music>("/root/MenuMusic");
+        if (!Music.music.Playing)
+        {
+            Music.music.Play();
+        }
     }
-    public async void _on_play_pressed()
+
+        public async void _on_play_pressed()
 	{
 		if (settings.Sound)
 		{

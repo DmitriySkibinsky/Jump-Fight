@@ -10,6 +10,7 @@ public partial class Manager : Node2D
 	public static Button button_s;
     public AudioStreamPlayer click;
     public AudioStreamPlayer mute;
+	public menu_music Music;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -32,6 +33,8 @@ public partial class Manager : Node2D
 
         click = GetNode<AudioStreamPlayer>("../InLevelUI/Pause/Buttons");
         mute = GetNode<AudioStreamPlayer>("../InLevelUI/Pause/AudioButtons");
+        Music = GetNode<menu_music>("/root/MenuMusic");
+        Music.music.Stop();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
