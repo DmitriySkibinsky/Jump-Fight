@@ -25,6 +25,7 @@ public partial class SpellCast2 : state
 			initial_x += 275;
 			Node2D portal = Portal.Instantiate<Node2D>();
         	portal.GlobalPosition = new Vector2(initial_x, BossPosition.Y + 115);
+			portal.Set("IsSpellCast2", true);
        		Portals.Add(portal);
         	Owner.GetParent().AddChild(portal);
         	await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout);

@@ -17,6 +17,8 @@ public partial class BringerOfDeath : CharacterBody2D
 	public float Direction;
 	private float healthPoints = 500;
 	public bool HealthToPlayerDroped = false;
+	public SoundSettings Switcher = SoundSettings.ON;
+	public Node2D Sounds;
 	Tween tween;
 	public float HealthPoints{get{
         return healthPoints;
@@ -27,6 +29,25 @@ public partial class BringerOfDeath : CharacterBody2D
 		}
     }}
 
+	public enum SoundSettings
+	{
+		ON,
+		OFF
+	}
+
+	public void turn_on()
+	{
+		foreach(AudioStreamPlayer audio in Sounds.GetChildren()){
+			audio.VolumeDb = -10;
+		}
+	}
+
+	public void turn_off()
+	{
+		foreach(AudioStreamPlayer audio in Sounds.GetChildren()){
+			audio.VolumeDb = -80;
+		}
+	}
 
     public override void _Ready()
     {
@@ -37,6 +58,7 @@ public partial class BringerOfDeath : CharacterBody2D
 		AnimationPlayer = (AnimationPlayer)GetTree().GetFirstNodeInGroup("AnimationPlayer");
 		Player = (player)GetTree().GetFirstNodeInGroup("Player");
 		TakeDamageEffect = GetNode<ColorRect>("Sprite2D/TakeDamageEffect");
+		Sounds = GetNode<Node2D>("Sounds");
     	SetPhysicsProcess(false);
 	   
     }
@@ -52,6 +74,25 @@ public partial class BringerOfDeath : CharacterBody2D
 			Sprite.Position = new Vector2(-70,Sprite.Position.Y);
 			rayCast2D.Position = new Vector2(-25,rayCast2D.Position.Y);
 			HitBox.GetChild<CollisionShape2D>(0).Position = new Vector2(-142, HitBox.GetChild<CollisionShape2D>(0).Position.Y);
+		}
+
+		if (settings.Sound == true)
+		{
+			Switcher = SoundSettings.ON;
+		}
+		else
+		{
+			Switcher = SoundSettings.OFF;
+		}
+
+		switch (Switcher)
+		{
+			case SoundSettings.ON:
+				turn_on();
+				break;
+			case SoundSettings.OFF:
+				turn_off();
+				break;
 		}
 	}
 
