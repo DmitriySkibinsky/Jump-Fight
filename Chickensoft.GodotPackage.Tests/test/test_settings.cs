@@ -18,6 +18,7 @@ public partial class settingsTests : TestClass
     public void SetUp()
     {
         _settings = new settings();
+        _settings.mute = Substitute.For<AudioStreamPlayer>();
     }
 
      public Func<SceneTree> GetTree { get; set; }
@@ -27,6 +28,7 @@ public partial class settingsTests : TestClass
     {
         // Arrange
         SceneTree tree = GetTree?.Invoke();
+        settings.Sound = false;
 
     if (tree != null)
     {
