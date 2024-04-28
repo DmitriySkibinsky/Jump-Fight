@@ -6,11 +6,13 @@ public partial class BreackablePlatform : JumpPlatform
 {
 	private AnimatedSprite2D Explosion;
 	private AnimatedSprite2D Platform;
+	public AudioStreamPlayer breaker;
 	public override void _Ready()
 	{
 		Explosion = GetNode<AnimatedSprite2D>("Explosion");
 		Platform = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		Platform.Play();
+		breaker = GetNode<AudioStreamPlayer>("Break");
 	}
 
 	public override void _Process(double delta)
@@ -26,6 +28,10 @@ public partial class BreackablePlatform : JumpPlatform
 				Platform.Hide();
 				Explosion.Play();
                 Player.GetNode<AnimationPlayer>("AnimationPlayer").Play("Jump");
+                if (settings.Sound)
+                {
+                    breaker.Play();
+                }
                 await ToSignal(Player.GetNode<AnimationPlayer>("AnimationPlayer"), AnimationPlayer.SignalName.AnimationFinished);
                 Player.MoveAndSlide();
 			}
@@ -33,7 +39,7 @@ public partial class BreackablePlatform : JumpPlatform
 	}
 
 	public void _on_explosion_animation_finished(){
-		GetParent().Owner.CallDeferred("UnregisterPlatform", this);
+        GetParent().Owner.CallDeferred("UnregisterPlatform", this);
 		this.QueueFree();
 	}
 }
