@@ -57,7 +57,7 @@ public partial class Manager : Node2D
 			pause_menu.Visible = false;
 			pause_menu.SetProcessInput(false);
 		}
-		}
+    }
 
 	public async void _on_resum_pressed()
 	{

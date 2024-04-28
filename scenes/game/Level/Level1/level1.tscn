@@ -8,8 +8,5 @@
 [node name="LevelGenerator" parent="." index="3"]
 script = ExtResource("2_rjfds")
 
-[node name="Player" parent="." index="5"]
-collision_mask = 1
-
 [editable path="InLevelUI"]
-[editable path="InLevelUI/Settings2"]
+[editable path="InLevelUI/Pause"]
