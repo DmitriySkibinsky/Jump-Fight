@@ -274,5 +274,87 @@ public class PlayerTests : TestClass
 		player.damage_multiplier.ShouldBe(1);
 		player.State.ShouldBe( player.StateMachine.MOVE);
 	}
+
+	[Test]
+	public void Test_turn_on()
+	{
+		// Arrange
+		player.smack = new AudioStreamPlayer();
+        player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.hurt = new AudioStreamPlayer();
+        player.hurt.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.steps = new AudioStreamPlayer();
+        player.steps.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.run_steps = new AudioStreamPlayer();
+        player.run_steps.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.swings = new AudioStreamPlayer();
+        player.swings.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.super_attack = new AudioStreamPlayer();
+        player.super_attack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.death = new AudioStreamPlayer();
+        player.death.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.jump = new AudioStreamPlayer();
+        player.jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.collect = new AudioStreamPlayer();
+        player.collect.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.collect2 = new AudioStreamPlayer();
+        player.collect2.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+
+		// Act
+		player.turn_on();
+
+		// Assert
+		player.smack.VolumeDb.ShouldBe(-10);
+		player.hurt.VolumeDb.ShouldBe(-10);
+		player.steps.VolumeDb.ShouldBe(-10);
+		player.run_steps.VolumeDb.ShouldBe(-10);
+		player.swings.VolumeDb.ShouldBe(-10);
+		player.super_attack.VolumeDb.ShouldBe(-10);
+		player.death.VolumeDb.ShouldBe(-10);
+		player.jump.VolumeDb.ShouldBe(-10);
+		player.collect.VolumeDb.ShouldBe(-10);
+		player.collect2.VolumeDb.ShouldBe(-10);
+	}
+
+	[Test]
+	public void Test_turn_off()
+	{
+		// Arrange
+		player.smack = new AudioStreamPlayer();
+        player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.hurt = new AudioStreamPlayer();
+        player.hurt.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.steps = new AudioStreamPlayer();
+        player.steps.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.run_steps = new AudioStreamPlayer();
+        player.run_steps.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.swings = new AudioStreamPlayer();
+        player.swings.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.super_attack = new AudioStreamPlayer();
+        player.super_attack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.death = new AudioStreamPlayer();
+        player.death.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.jump = new AudioStreamPlayer();
+        player.jump.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.collect = new AudioStreamPlayer();
+        player.collect.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+		player.collect2 = new AudioStreamPlayer();
+        player.collect2.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+
+		// Act
+		player.turn_off();
+
+		// Assert
+		player.smack.VolumeDb.ShouldBe(-80);
+		player.hurt.VolumeDb.ShouldBe(-80);
+		player.steps.VolumeDb.ShouldBe(-80);
+		player.run_steps.VolumeDb.ShouldBe(-80);
+		player.swings.VolumeDb.ShouldBe(-80);
+		player.super_attack.VolumeDb.ShouldBe(-80);
+		player.death.VolumeDb.ShouldBe(-80);
+		player.jump.VolumeDb.ShouldBe(-80);
+		player.collect.VolumeDb.ShouldBe(-80);
+		player.collect2.VolumeDb.ShouldBe(-80);
+	}
 	
 }

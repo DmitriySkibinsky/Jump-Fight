@@ -143,5 +143,40 @@ public partial class ManagerTests : TestClass
         // Assert
         settings.Sound.ShouldBe(true);
     }
+    [Test]
+    public void Test_Process()
+    {
+        // Arrange
+        SceneTree tree = GetTree?.Invoke();
+        Manager.game_paused = true;
+    
+        if (tree != null)
+        {
+
+            // Act
+            Manager._Process(0.1f);
+
+            // Assert
+            Manager.pause_menu.Visible.ShouldBe(true);
+        }
+    }
+
+    [Test]
+    public void Test_Process2()
+    {
+        // Arrange
+        SceneTree tree = GetTree?.Invoke();
+        Manager.game_paused = false;
+    
+        if (tree != null)
+        {
+
+            // Act
+            Manager._Process(0.1f);
+
+            // Assert
+            Manager.pause_menu.Visible.ShouldBe(false);
+        }
+    }
 
 }
