@@ -464,7 +464,6 @@ target_position = Vector2(0, 40)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(60, -27.5)
-scale = Vector2(1, 1)
 
 [node name="HurtBoxes" type="Area2D" parent="."]
 collision_layer = 4
