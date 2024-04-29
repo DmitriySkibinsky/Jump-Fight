@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dad674tyfcwce"]
+
+[ext_resource type="Script" path="res://scenes/game/entities/Hunter/Etc/Arrow.cs" id="1_jtj68"]
+[ext_resource type="Texture2D" uid="uid://dh8btry6eqnjk" path="res://scenes/game/entities/Hunter/Sprites/projectile.png" id="1_y3esd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqjkd"]
+size = Vector2(128, 32)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jtj68")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fqjkd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_y3esd")
+
+[connection signal="area_entered" from="." to="." method="Collide"]

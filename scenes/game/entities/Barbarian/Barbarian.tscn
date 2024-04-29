@@ -1,7 +1,13 @@
-[gd_scene load_steps=50 format=3 uid="uid://doglnh1avmgig"]
+[gd_scene load_steps=58 format=3 uid="uid://doglnh1avmgig"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Barbarian/Barbarian.cs" id="1_fq5dc"]
-[ext_resource type="Texture2D" uid="uid://eqopxlclhep1" path="res://scenes/game/entities/Barbarian/Animation/Skeleton enemy.png" id="2_flxsb"]
+[ext_resource type="Texture2D" uid="uid://eqopxlclhep1" path="res://scenes/game/entities/Barbarian/Sprites/Skeleton enemy.png" id="2_flxsb"]
+[ext_resource type="AudioStream" uid="uid://brqtve2s2ctuh" path="res://scenes/game/entities/Barbarian/Sounds/brick hit 2.wav" id="3_cnbjv"]
+[ext_resource type="AudioStream" uid="uid://tanfn8q7xci1" path="res://scenes/game/entities/Barbarian/Sounds/brick hit 3.wav" id="4_tmhap"]
+[ext_resource type="AudioStream" uid="uid://cep1itsiurel8" path="res://scenes/game/entities/Barbarian/Sounds/brick hit 6.wav" id="5_m2a8a"]
+[ext_resource type="AudioStream" uid="uid://i0lxa3wqi3xq" path="res://scenes/game/entities/Barbarian/Sounds/brick hit 7.wav" id="6_16hhn"]
+[ext_resource type="AudioStream" uid="uid://coclqwug2lvft" path="res://scenes/game/entities/Barbarian/Sounds/umbrella hit 4.wav" id="7_tiyy7"]
+[ext_resource type="AudioStream" uid="uid://bba3q6kn1figc" path="res://scenes/game/entities/Barbarian/Sounds/ground thump 5.wav" id="8_oen07"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
 radius = 48.0
@@ -341,6 +347,19 @@ size = Vector2(2560, 360)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqrt6"]
 size = Vector2(250, 200)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gsfxa"]
+streams_count = 4
+stream_0/stream = ExtResource("3_cnbjv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_tmhap")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_m2a8a")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_16hhn")
+stream_3/weight = 1.0
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_0xb2e"]
+
 [node name="Barbarian" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 65
@@ -358,14 +377,14 @@ collision_mask = 65
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ec8yf")
-animation = &"Death"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="HitBoxes" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
+[node name="Shape1" type="CollisionShape2D" parent="HitBoxes"]
 position = Vector2(40, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ghn87")
@@ -374,7 +393,7 @@ shape = SubResource("CapsuleShape2D_ghn87")
 collision_layer = 4
 collision_mask = 0
 
-[node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
+[node name="Shape1" type="CollisionShape2D" parent="HurtBoxes"]
 shape = SubResource("CapsuleShape2D_6oe4v")
 
 [node name="FOV" type="Area2D" parent="."]
@@ -391,6 +410,28 @@ collision_mask = 2
 
 [node name="Shape1" type="CollisionShape2D" parent="AttackTrigger"]
 shape = SubResource("RectangleShape2D_iqrt6")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_oen07")
+volume_db = 12.0
+pitch_scale = 0.4
+bus = &"Enemies"
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_tiyy7")
+bus = &"Enemies"
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_gsfxa")
+volume_db = -4.0
+bus = &"Enemies"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = SubResource("AudioStreamWAV_0xb2e")
+volume_db = -4.0
+bus = &"Enemies"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="AnimationFinished"]
 [connection signal="area_entered" from="FOV" to="." method="StartPursue"]

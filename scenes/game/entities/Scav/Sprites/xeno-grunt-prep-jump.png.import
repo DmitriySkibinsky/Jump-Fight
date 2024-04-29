@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eqopxlclhep1"
-path="res://.godot/imported/Skeleton enemy.png-7f30abf6e0e6c73c31ec3969b2202a56.ctex"
+uid="uid://c31i3r0pvrokc"
+path="res://.godot/imported/xeno-grunt-prep-jump.png-f2177e2ec3206d514540240406e2e91f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/entities/Barbarian/Animation/Skeleton enemy.png"
-dest_files=["res://.godot/imported/Skeleton enemy.png-7f30abf6e0e6c73c31ec3969b2202a56.ctex"]
+source_file="res://scenes/game/entities/Scav/Sprites/xeno-grunt-prep-jump.png"
+dest_files=["res://.godot/imported/xeno-grunt-prep-jump.png-f2177e2ec3206d514540240406e2e91f.ctex"]
 
 [params]
 

@@ -143,9 +143,18 @@ public static class Trajectory
 }
 public partial class FloatingEye : CharacterBody2D
 {
+
+    public enum SoundSettings
+    {
+        ON,
+        OFF
+    }
+
+
     public int Speed = 125;
     public int Damage = 20;
     public int direction = 1;
+
     public bool Alive = true;
     public AudioStreamPlayer jump;
 
@@ -269,5 +278,15 @@ public partial class FloatingEye : CharacterBody2D
         Anim.Play("Death");
         await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
         QueueFree();
+    }
+
+    public void turn_on()
+    {
+        //smack.VolumeDb = -10;
+    }
+
+    public void turn_off()
+    {
+        //smack.VolumeDb = -80;
     }
 }

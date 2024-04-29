@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c31i3r0pvrokc"
-path="res://.godot/imported/xeno-grunt-prep-jump.png-b97b91904f7aed49c931f4f7e29f6366.ctex"
+uid="uid://3hrw6ctwfain"
+path="res://.godot/imported/xeno-grunt-run.png-5216071e2c1201618308a19e611cf54f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/entities/Scav/Animation/xeno-grunt-prep-jump.png"
-dest_files=["res://.godot/imported/xeno-grunt-prep-jump.png-b97b91904f7aed49c931f4f7e29f6366.ctex"]
+source_file="res://scenes/game/entities/Scav/Sprites/xeno-grunt-run.png"
+dest_files=["res://.godot/imported/xeno-grunt-run.png-5216071e2c1201618308a19e611cf54f.ctex"]
 
 [params]
 

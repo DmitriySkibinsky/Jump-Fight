@@ -14,16 +14,19 @@ collision_layer = 0
 JumpForce = 1050
 
 [node name="Scav_1" type="Marker2D" parent="EnemyPositions" index="0"]
-position = Vector2(1280, -2561.33)
+position = Vector2(876, -2576)
 
-[node name="Barbarian_1" type="Marker2D" parent="EnemyPositions" index="1"]
-position = Vector2(1280, -2561.33)
+[node name="Scav_3" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(1712, -2565.33)
 
-[node name="Barbarian_2" type="Marker2D" parent="EnemyPositions" index="2"]
-position = Vector2(668, -1838.67)
+[node name="Scav_2" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(669.333, -1844)
 
-[node name="Barbarian_3" type="Marker2D" parent="EnemyPositions" index="3"]
+[node name="Barbarian_1" type="Marker2D" parent="EnemyPositions" index="3"]
 position = Vector2(1857.33, -1825.33)
+
+[node name="Barbarian_2" type="Marker2D" parent="EnemyPositions" index="4"]
+position = Vector2(1280, -2552)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(1280, -1441.33)

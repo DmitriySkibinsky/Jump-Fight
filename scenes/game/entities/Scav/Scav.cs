@@ -13,11 +13,20 @@ public partial class Scav : CharacterBody2D
         Damaged,
         Attack,
     }
-    private static Random RNG = new Random();
+
+    public enum SoundSettings
+    {
+        ON,
+        OFF
+    }
+
+    public static Random RNG = new Random();
 
     public int Speed = 60;
     public int Damage = 30;
     public int Health = 130;
+    public float StunAfterDamage = 0.5f; // Сколько враг будет под станом после удара
+    public float AttackCooldown = 2;
 
 
     public Statement State = Statement.Run;
@@ -34,12 +43,19 @@ public partial class Scav : CharacterBody2D
     public int Direction = RNG.Next(2) == 1 ? 1 : -1;
 
 
-    private RayCast2D rayCast2D;
+    public RayCast2D rayCast2D;
     public AnimatedSprite2D Anim;
     public Area2D HitBoxes;
-    private Area2D HurtBoxes;
-    private CollisionShape2D HitBox1;
-    private CollisionShape2D HurtBox1;
+    public Area2D HurtBoxes;
+    public CollisionShape2D HitBox1;
+    public CollisionShape2D HurtBox1;
+
+    public Node2D Sounds;
+    public AudioStreamPlayer2D Sound_Hit;
+    public AudioStreamPlayer2D Sound_Death;
+
+    public float DeffaultVolume_Sound_Hit;
+    public float DeffaultVolume_Sound_Death;
 
     public player Player;
     public override void _Ready()
@@ -50,6 +66,15 @@ public partial class Scav : CharacterBody2D
         HurtBoxes = GetNode<Area2D>("HurtBoxes");
         HitBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
         HurtBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
+
+        //Звуки
+        Sounds = GetNode<Node2D>("Sounds");
+        Sound_Hit = Sounds.GetNode<AudioStreamPlayer2D>("Hit");
+        Sound_Death = Sounds.GetNode<AudioStreamPlayer2D>("Death");
+
+        DeffaultVolume_Sound_Hit = Sound_Hit.VolumeDb;
+        DeffaultVolume_Sound_Death = Sound_Death.VolumeDb;
+        //
 
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
 
@@ -74,7 +99,7 @@ public partial class Scav : CharacterBody2D
             DamagedTime -= (float)delta;
             if (DamagedTime <= 0 && State != Statement.Attack)
             {
-                if(IdleTime > 0)
+                if (IdleTime > 0)
                 {
                     Anim.Play("Idle");
                 }
@@ -103,7 +128,7 @@ public partial class Scav : CharacterBody2D
             }
         }
 
-        if (Anim.Modulate == new Color(1, 0.5f, 0.5f) &&  Godot.Time.GetTicksMsec() - LastDamagedTime > 100) //Если в последний раз урон проходил 100 милисекунд назад, то убираем красный цвет
+        if (Anim.Modulate == new Color(1, 0.5f, 0.5f) && Godot.Time.GetTicksMsec() - LastDamagedTime > 100) //Если в последний раз урон проходил 100 милисекунд назад, то убираем красный цвет
         {
             Anim.Modulate = new Color(1, 1, 1);
         }
@@ -133,7 +158,8 @@ public partial class Scav : CharacterBody2D
         MoveAndSlide();
 
         Godot.Collections.Array<Area2D> OverlappingBodies = HitBoxes.GetOverlappingAreas();
-        for (int i = 0; i < OverlappingBodies.Count; i++) {
+        for (int i = 0; i < OverlappingBodies.Count; i++)
+        {
             Attack(OverlappingBodies[i]);
         }
     }
@@ -144,6 +170,9 @@ public partial class Scav : CharacterBody2D
     {
         if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
+            Player.CallDeferred("GetDamaged", Damage);
+            State = Statement.Idle;
+            IdleTime = AttackCooldown;
             if (SecondAttack)
             {
                 Anim.Play("Attack2");
@@ -153,15 +182,13 @@ public partial class Scav : CharacterBody2D
                 Anim.Play("Attack1");
             }
             SecondAttack = !SecondAttack;
-            Player.CallDeferred("GetDamaged", Damage);
-            State = Statement.Idle;
-            IdleTime = 2;
+            Sound_Hit.Play(0.25f);
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
             if (DamagedTime > 0)
             {
                 Anim.Play("Grep");
             }
-            else if(IdleTime > 0)
+            else if (IdleTime > 0)
             {
                 Anim.Play("Idle");
             }
@@ -172,7 +199,7 @@ public partial class Scav : CharacterBody2D
     {
 
         Health -= Damage;
-        DamagedTime = 0.5f;
+        LastDamagedTime = Godot.Time.GetTicksMsec();
         Anim.Modulate = new Color(1, 0.5f, 0.5f);
         if (Health <= 0)
         {
@@ -182,15 +209,31 @@ public partial class Scav : CharacterBody2D
         {
             State = Statement.Idle;
             Anim.Play("Grep");
-            LastDamagedTime = Godot.Time.GetTicksMsec();
+            DamagedTime = StunAfterDamage;
         }
     }
 
     public async void Death()
     {
-        Alive = false;
-        Anim.Play("Death");
-        await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
-        QueueFree();
+        if (Alive)
+        {
+            Alive = false;
+            Anim.Play("Death");
+            Sound_Death.Play();
+            await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
+            QueueFree();
+        }
+    }
+
+    public void turn_on()
+    {
+        Sound_Hit.VolumeDb = DeffaultVolume_Sound_Hit;
+        Sound_Death.VolumeDb = DeffaultVolume_Sound_Death;
+    }
+
+    public void turn_off()
+    {
+        Sound_Hit.VolumeDb = -80;
+        Sound_Death.VolumeDb = -80;
     }
 }
