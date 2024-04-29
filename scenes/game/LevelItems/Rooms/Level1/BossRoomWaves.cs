@@ -52,7 +52,7 @@ public partial class BossRoomWaves : Node2D
 
 	public void _on_enemy_killed(){
 		num_enemies -= 1;
-		if (num_enemies == 0){
+		if (num_enemies == 0 && WavesCount != 0){
 			WavesCount -= 1;
 			num_enemies = EnemyPositionsContainer.GetChildCount();
 			SpawnEnemies();
