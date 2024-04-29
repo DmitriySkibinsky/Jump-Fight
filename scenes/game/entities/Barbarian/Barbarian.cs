@@ -30,7 +30,7 @@ public partial class Barbarian : CharacterBody2D
     // Настройки
     public float Speed = 120;
     public int Damage = 20;
-    public int Health = 100;
+    public int Health = 1;//100;
     public double AttackPrepareTime = 1;
     public double AttackFinishTime = 1;
     public double AttackIntermission = 1;
@@ -57,6 +57,10 @@ public partial class Barbarian : CharacterBody2D
     public Area2D HitBoxes;
     public Area2D HurtBoxes;
 
+    public Node2D ForwardWallDetectors;
+    public RayCast2D ForwardWallDetector_1;
+    public RayCast2D ForwardWallDetector_2;
+
     public Node2D Sounds;
     public AudioStreamPlayer2D Sound_Attack;
     public AudioStreamPlayer2D Sound_Hit;
@@ -78,6 +82,10 @@ public partial class Barbarian : CharacterBody2D
         AttackTrigger = GetNode<Area2D>("AttackTrigger");
         HitBoxes = GetNode<Area2D>("HitBoxes");
         HurtBoxes = GetNode<Area2D>("HurtBoxes");
+
+        ForwardWallDetectors = GetNode<Node2D>("ForwardWallDetectors");
+        ForwardWallDetector_1 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_1");
+        ForwardWallDetector_2 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_2");
 
         //Звуки
         Sounds = GetNode<Node2D>("Sounds");
@@ -182,11 +190,11 @@ public partial class Barbarian : CharacterBody2D
         if (IsOnFloor() && (State == Statement.Run || State == Statement.Roam))
         {
             float CurrentSpeed = Speed;
-            if (State == Statement.Roam && (!rayCast2D.IsColliding() || IsOnWall()))
+            if (State == Statement.Roam && (!rayCast2D.IsColliding() || ForwardWallDetector_1.IsColliding() || ForwardWallDetector_2.IsColliding()))
             {
                 Direction *= -1;
             }
-            else if (State == Statement.Run && (!rayCast2D.IsColliding() || IsOnWall()))
+            else if (State == Statement.Run && (!rayCast2D.IsColliding() || ForwardWallDetector_1.IsColliding() || ForwardWallDetector_2.IsColliding()))
             {
                 Anim.Play("Idle");
                 CurrentSpeed = 0;
@@ -219,6 +227,10 @@ public partial class Barbarian : CharacterBody2D
     public void TurnAroundElements(Node2D Obj)
     {
         Obj.Position *= Reverse;
+        if (Obj is RayCast2D rayCast2D)
+        {
+            rayCast2D.TargetPosition *= Reverse;
+        }
         Godot.Collections.Array<Node> Children = Obj.GetChildren();
         for (int i = 0; i < Children.Count; i++)
         {

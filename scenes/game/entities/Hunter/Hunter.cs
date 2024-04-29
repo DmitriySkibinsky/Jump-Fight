@@ -22,8 +22,8 @@ public partial class Hunter : CharacterBody2D
 
     // Настройки
     public float Speed = 260;
-    public int Health = 68;
-    public double Reload = 1;
+    public int Health = 1;//68;
+    public double Reload = 1.5;
     public double RollCooldown = 25;
     public float RollSpeedBoost = 2.5f;
     public int MinIdleTime = 5;
@@ -65,6 +65,13 @@ public partial class Hunter : CharacterBody2D
     public Area2D CloseArea;
     public Area2D DangerArea;
 
+    public Node2D ForwardWallDetectors;
+    public RayCast2D ForwardWallDetector_1;
+    public RayCast2D ForwardWallDetector_2;
+    public Node2D BackWallDetectors;
+    public RayCast2D BackWallDetector_1;
+    public RayCast2D BackWallDetector_2;
+
     public Node2D Sounds;
     public AudioStreamPlayer2D Sound_Attack;
     public AudioStreamPlayer2D Sound_Shoot;
@@ -89,6 +96,13 @@ public partial class Hunter : CharacterBody2D
         FarArea = Triggers.GetNode<Area2D>("FarArea");
         CloseArea = Triggers.GetNode<Area2D>("CloseArea");
         DangerArea = Triggers.GetNode<Area2D>("DangerArea");
+
+        ForwardWallDetectors = GetNode<Node2D>("ForwardWallDetectors");
+        ForwardWallDetector_1 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_1");
+        ForwardWallDetector_2 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_2");
+        BackWallDetectors = GetNode<Node2D>("BackWallDetectors");
+        BackWallDetector_1 = BackWallDetectors.GetNode<RayCast2D>("BackWallDetector_1");
+        BackWallDetector_2 = BackWallDetectors.GetNode<RayCast2D>("BackWallDetector_2");
 
         //Звуки
         Sounds = GetNode<Node2D>("Sounds");
@@ -170,6 +184,10 @@ public partial class Hunter : CharacterBody2D
     public void TurnAroundElements(Node2D Obj)
     {
         Obj.Position *= Reverse;
+        if (Obj is RayCast2D rayCast2D)
+        {
+            rayCast2D.TargetPosition *= Reverse;
+        }
         Godot.Collections.Array<Node> Children = Obj.GetChildren();
         for (int i = 0; i < Children.Count; i++)
         {
@@ -359,6 +377,11 @@ public partial class Hunter : CharacterBody2D
         if (!InDangerArea && IsRunAway)
         {
             IsRunAway = false;
+            float DeffaultTP = ((CapsuleShape2D)CollisionShape.Shape).Radius + 8;
+            ForwardWallDetector_1.TargetPosition = new Vector2(Math.Sign(ForwardWallDetector_1.TargetPosition.X) * DeffaultTP, ForwardWallDetector_1.TargetPosition.Y);
+            ForwardWallDetector_2.TargetPosition = new Vector2(Math.Sign(ForwardWallDetector_2.TargetPosition.X) * DeffaultTP, ForwardWallDetector_2.TargetPosition.Y);
+            BackWallDetector_1.TargetPosition = new Vector2(Math.Sign(BackWallDetector_1.TargetPosition.X) * DeffaultTP, BackWallDetector_1.TargetPosition.Y);
+            BackWallDetector_2.TargetPosition = new Vector2(Math.Sign(BackWallDetector_2.TargetPosition.X) * DeffaultTP, BackWallDetector_2.TargetPosition.Y);
             Godot.Collections.Array<Node> Children = RayCasts.GetChildren();
             for (int i = 0; i < Children.Count; i++)
             {
@@ -373,6 +396,10 @@ public partial class Hunter : CharacterBody2D
                 Godot.Collections.Array<Node> Children = RayCasts.GetChildren();
                 if (Children.Count == 0)
                 {
+                    ForwardWallDetector_1.TargetPosition = new Vector2(Math.Sign(ForwardWallDetector_1.TargetPosition.X) * ForwardCheckArea, ForwardWallDetector_1.TargetPosition.Y);
+                    ForwardWallDetector_2.TargetPosition = new Vector2(Math.Sign(ForwardWallDetector_2.TargetPosition.X) * ForwardCheckArea, ForwardWallDetector_2.TargetPosition.Y);
+                    BackWallDetector_1.TargetPosition = new Vector2(Math.Sign(BackWallDetector_1.TargetPosition.X) * BackCheckArea, BackWallDetector_1.TargetPosition.Y);
+                    BackWallDetector_2.TargetPosition = new Vector2(Math.Sign(BackWallDetector_2.TargetPosition.X) * BackCheckArea, BackWallDetector_2.TargetPosition.Y);
                     PlayerSide = Math.Sign(GlobalPosition.X - Player.GlobalPosition.X); // Для того что бы работало в 2 стороны
                     for (int x = -BackCheckArea * PlayerSide; x * PlayerSide <= ForwardCheckArea; x += StepCheckArea * PlayerSide)
                     {
@@ -387,6 +414,14 @@ public partial class Hunter : CharacterBody2D
                 {
                     int Forward = 0;
                     int Back = 0;
+                    if (ForwardWallDetector_1.IsColliding() || ForwardWallDetector_2.IsColliding())
+                    {
+                        Forward = -3;
+                    }
+                    if (BackWallDetector_1.IsColliding() || BackWallDetector_2.IsColliding())
+                    {
+                        Back = -3;
+                    }
                     for (int x = -StepCheckArea; ; x -= StepCheckArea)
                     {
                         RayCast2D rayCast = RayCasts.GetNodeOrNull<RayCast2D>("RayCast2D_" + x.ToString());
@@ -446,14 +481,14 @@ public partial class Hunter : CharacterBody2D
                 bool IsCanMove = false;
                 if (Math.Sign(GlobalPosition.X - Player.GlobalPosition.X) == Direction)
                 {
-                    if (RayCast2D1.IsColliding())
+                    if (RayCast2D1.IsColliding() || ForwardWallDetector_1.IsColliding() || ForwardWallDetector_2.IsColliding())
                     {
                         IsCanMove = true;
                     }
                 }
                 else
                 {
-                    if (RayCast2D2.IsColliding())
+                    if (RayCast2D2.IsColliding() || BackWallDetector_1.IsColliding() || BackWallDetector_2.IsColliding())
                     {
                         IsCanMove = true;
                     }

@@ -17,16 +17,16 @@ position = Vector2(1562.67, -58.6667)
 JumpForce = 900
 
 [node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
-position = Vector2(441.333, -840)
+position = Vector2(441.333, -900)
 
 [node name="Marker2D4" type="Marker2D" parent="EnemyPositions" index="1"]
-position = Vector2(1452, -840)
+position = Vector2(1452, -900)
 
 [node name="Marker2D6" type="Marker2D" parent="EnemyPositions" index="2"]
-position = Vector2(2141.33, -840)
+position = Vector2(2141.33, -900)
 
 [node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="3"]
-position = Vector2(1001.33, -840)
+position = Vector2(1001.33, -900)
 
 [node name="PlayerDetector" parent="." index="3"]
 position = Vector2(-26.6667, -748)

@@ -299,3 +299,13 @@ stream = ExtResource("9_p7fpn")
 volume_db = -12.0
 pitch_scale = 1.5
 bus = &"Enemies"
+
+[node name="ForwardWallDetectors" type="Node2D" parent="."]
+
+[node name="ForwardWallDetector_1" type="RayCast2D" parent="ForwardWallDetectors"]
+position = Vector2(0, -35)
+target_position = Vector2(48, 0)
+
+[node name="ForwardWallDetector_2" type="RayCast2D" parent="ForwardWallDetectors"]
+position = Vector2(0, 35)
+target_position = Vector2(48, 0)

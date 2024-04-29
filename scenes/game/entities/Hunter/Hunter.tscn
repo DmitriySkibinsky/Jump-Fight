@@ -525,5 +525,25 @@ shape = SubResource("RectangleShape2D_hfh7y")
 
 [node name="RayCasts" type="Node2D" parent="."]
 
+[node name="ForwardWallDetectors" type="Node2D" parent="."]
+
+[node name="ForwardWallDetector_1" type="RayCast2D" parent="ForwardWallDetectors"]
+position = Vector2(0, -40)
+target_position = Vector2(56, 0)
+
+[node name="ForwardWallDetector_2" type="RayCast2D" parent="ForwardWallDetectors"]
+position = Vector2(0, 40)
+target_position = Vector2(56, 0)
+
+[node name="BackWallDetectors" type="Node2D" parent="."]
+
+[node name="BackWallDetector_1" type="RayCast2D" parent="BackWallDetectors"]
+position = Vector2(0, -40)
+target_position = Vector2(-56, 0)
+
+[node name="BackWallDetector_2" type="RayCast2D" parent="BackWallDetectors"]
+position = Vector2(0, 40)
+target_position = Vector2(-56, 0)
+
 [connection signal="area_entered" from="Triggers/FarArea" to="." method="Target_In_Area"]
 [connection signal="area_exited" from="Triggers/FarArea" to="." method="Target_Out_Area"]

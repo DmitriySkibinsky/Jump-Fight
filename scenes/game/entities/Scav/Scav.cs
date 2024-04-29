@@ -24,7 +24,7 @@ public partial class Scav : CharacterBody2D
 
     public int Speed = 60;
     public int Damage = 30;
-    public int Health = 130;
+    public int Health = 1;//130;
     public float StunAfterDamage = 0.5f; // Сколько враг будет под станом после удара
     public float AttackCooldown = 2;
 
@@ -37,7 +37,7 @@ public partial class Scav : CharacterBody2D
     public ulong LastDamagedTime = Godot.Time.GetTicksMsec();
 
     //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
-    private float Gravity = 200;
+    private float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 
     public int Direction = RNG.Next(2) == 1 ? 1 : -1;
@@ -49,6 +49,10 @@ public partial class Scav : CharacterBody2D
     public Area2D HurtBoxes;
     public CollisionShape2D HitBox1;
     public CollisionShape2D HurtBox1;
+
+    public Node2D ForwardWallDetectors;
+    public RayCast2D ForwardWallDetector_1;
+    public RayCast2D ForwardWallDetector_2;
 
     public Node2D Sounds;
     public AudioStreamPlayer2D Sound_Hit;
@@ -67,6 +71,10 @@ public partial class Scav : CharacterBody2D
         HitBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
         HurtBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
 
+        ForwardWallDetectors = GetNode<Node2D>("ForwardWallDetectors");
+        ForwardWallDetector_1 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_1");
+        ForwardWallDetector_2 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_2");
+
         //Звуки
         Sounds = GetNode<Node2D>("Sounds");
         Sound_Hit = Sounds.GetNode<AudioStreamPlayer2D>("Hit");
@@ -77,16 +85,6 @@ public partial class Scav : CharacterBody2D
         //
 
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
-
-        if (Direction == -1)
-        {
-            Anim.FlipH = true;
-
-            Vector2 Reverse = new Vector2(-1, 1);
-            Anim.Position *= Reverse;
-            rayCast2D.Position *= Reverse;
-            HitBox1.Position *= Reverse;
-        }
     }
 
 
@@ -137,14 +135,9 @@ public partial class Scav : CharacterBody2D
 
         if (IsOnFloor() && Alive && State == Statement.Run)
         {
-            if (!rayCast2D.IsColliding() || IsOnWall())
+            if (!rayCast2D.IsColliding() || ForwardWallDetector_1.IsColliding() || ForwardWallDetector_2.IsColliding())
             {
-                Anim.FlipH = !Anim.FlipH;
                 Direction *= -1;
-                Vector2 Reverse = new Vector2(-1, 1);
-                Anim.Position *= Reverse;
-                rayCast2D.Position *= Reverse;
-                HitBox1.Position *= Reverse;
             }
 
             velocity.X += Direction * Speed * (float)delta;
@@ -154,15 +147,51 @@ public partial class Scav : CharacterBody2D
             velocity.Y += Gravity * (float)delta;
         }
 
-        MoveAndCollide(velocity);
-        MoveAndSlide();
-
         Godot.Collections.Array<Area2D> OverlappingBodies = HitBoxes.GetOverlappingAreas();
         for (int i = 0; i < OverlappingBodies.Count; i++)
         {
             Attack(OverlappingBodies[i]);
         }
+
+        MoveAndCollide(velocity);
+        MoveAndSlide();
+        TurnAround();
     }
+
+    Vector2 Reverse = new Vector2(-1, 1);
+    public void TurnAroundElements(Node2D Obj)
+    {
+        Obj.Position *= Reverse;
+        if (Obj is RayCast2D rayCast2D)
+        {
+            rayCast2D.TargetPosition *= Reverse;
+        }
+        Godot.Collections.Array<Node> Children = Obj.GetChildren();
+        for (int i = 0; i < Children.Count; i++)
+        {
+            if (Children[i] is Node2D node2d)
+            {
+                TurnAroundElements(node2d);
+            }
+        }
+    }
+
+    public void TurnAround()
+    {
+        if (Alive && (Direction == 1) == Anim.FlipH)
+        {
+            Anim.FlipH = !Anim.FlipH;
+            Godot.Collections.Array<Node> Children = GetChildren();
+            for (int i = 0; i < Children.Count; i++)
+            {
+                if (Children[i] is Node2D node2d)
+                {
+                    TurnAroundElements(node2d);
+                }
+            }
+        }
+    }
+
 
     public bool SecondAttack = false;
 
