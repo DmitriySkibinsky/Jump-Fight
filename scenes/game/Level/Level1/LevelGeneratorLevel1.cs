@@ -1,3 +1,4 @@
+using Chickensoft.GodotTestDriver.Input;
 using Godot;
 using System;
 
@@ -47,21 +48,53 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
         {
             if ((bool)level.Get("isBattleSection"))
             {
-                if (Music.musicp.Playing) sec = Music.musicp.GetPlaybackPosition();
-                Music.musicp.Stop();
-                if (!Music.musicb.Playing) Music.musicb.Play();
+                if (Music.musicp.Playing)
+                {
+                    sec = Music.musicp.GetPlaybackPosition();
+                    stopper(Music.musicp);
+                }
+                if (!Music.musicb.Playing)
+                {
+                    starter(Music.musicb);
+                } else if (Music.musicb.VolumeDb == -80)
+                {
+                    Music.musicb.VolumeDb = -20;
+                }
             }
 
             else
             {
-                Music.musicb.Stop();
-                if (!Music.musicp.Playing && !(bool)level.Get("game_paused"))
+                stopper(Music.musicb);
+                if ((!Music.musicp.Playing) && !(bool)level.Get("game_paused"))
                 {
-                    Music.musicp.Play();
+                    starter(Music.musicp);
                     Music.musicp.Seek(sec);
+                } else if (Music.musicp.VolumeDb == -80)
+                {
+                    Music.musicp.VolumeDb = -20;
                 }
             }
         }
+        else
+        {
+            Music.musicp.VolumeDb = -80;
+            Music.musicb.VolumeDb = -80;
+        }
+    }
+
+    public async void stopper(AudioStreamPlayer music)
+    {
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(music, "volume_db", -80, 2f);
+        tween.TweenCallback(Callable.From(music.Stop));
+        await ToSignal(tween, Tween.SignalName.Finished);
+    }
+    public async void starter(AudioStreamPlayer music)
+    {
+        Tween tween = GetTree().CreateTween();
+        music.Play();
+        tween.TweenProperty(music, "volume_db", -20, 2f);
+        await ToSignal(tween, Tween.SignalName.Finished);
     }
 
 }

@@ -15,6 +15,7 @@ public partial class menu : Node2D
         Music = GetNode<menu_music>("/root/MenuMusic");
         stop = GetNode<level1_music>("/root/Level1PlatformerMusic");
         stop.musicp.Stop();
+        stop.musicp.Stop();
         if (!Music.music.Playing)
         {
             Music.music.Play();

@@ -9,8 +9,8 @@ public partial class menu_music : Node
         music = new AudioStreamPlayer();
         AddChild(music);
         music.Stream = GD.Load<AudioStream>("res://assets/Music/Pixel2.mp3");
-        music.VolumeDb = -20;
         music.Play();
+        music.VolumeDb = -20;
     }
     public override void _Process(double delta)
     {
