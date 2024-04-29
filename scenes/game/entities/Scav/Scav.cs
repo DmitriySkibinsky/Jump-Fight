@@ -24,7 +24,7 @@ public partial class Scav : CharacterBody2D
 
     public int Speed = 60;
     public int Damage = 30;
-    public int Health = 1;//130;
+    public int Health = 130;
     public float StunAfterDamage = 0.5f; // Сколько враг будет под станом после удара
     public float AttackCooldown = 2;
 

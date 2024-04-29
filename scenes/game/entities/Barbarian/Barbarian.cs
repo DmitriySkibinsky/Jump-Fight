@@ -30,7 +30,7 @@ public partial class Barbarian : CharacterBody2D
     // Настройки
     public float Speed = 120;
     public int Damage = 20;
-    public int Health = 1;//100;
+    public int Health = 100;
     public double AttackPrepareTime = 1;
     public double AttackFinishTime = 1;
     public double AttackIntermission = 1;

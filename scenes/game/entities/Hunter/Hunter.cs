@@ -22,7 +22,7 @@ public partial class Hunter : CharacterBody2D
 
     // Настройки
     public float Speed = 260;
-    public int Health = 1;//68;
+    public int Health = 168;
     public double Reload = 1.5;
     public double RollCooldown = 25;
     public float RollSpeedBoost = 2.5f;
