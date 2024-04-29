@@ -1,0 +1,146 @@
+[gd_scene load_steps=10 format=3 uid="uid://3bm2oeqfijhf"]
+
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/HomingMissile.cs" id="1_aywkv"]
+[ext_resource type="Texture2D" uid="uid://qh8aykorfqap" path="res://assets/sprites/MechaStoneGolem/arm_projectile_glowing.png" id="1_l1mji"]
+[ext_resource type="Texture2D" uid="uid://1h0xw0ivkt2o" path="res://assets/sprites/MechaStoneGolem/explode.png" id="3_ojdb8"]
+[ext_resource type="AudioStream" uid="uid://b1ruswcsu6hlj" path="res://assets/Sounds/MechaStoneGolem/lo-fi-explosion_16bpm_C_major.wav" id="4_jj10o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ts2qj"]
+radius = 8.0
+height = 44.0
+
+[sub_resource type="Animation" id="Animation_igeb8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Missile:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explode:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/explosion:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rc2it"]
+resource_name = "explode"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explode:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/explosion:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_owbsw"]
+resource_name = "idle"
+length = 0.750013
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Missile:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_88b5o"]
+_data = {
+"RESET": SubResource("Animation_igeb8"),
+"explode": SubResource("Animation_rc2it"),
+"idle": SubResource("Animation_owbsw")
+}
+
+[node name="HomingMissile" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_aywkv")
+
+[node name="Missile" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-39, -18)
+scale = Vector2(1.42, 1.42)
+texture = ExtResource("1_l1mji")
+hframes = 3
+vframes = 6
+
+[node name="Explode" type="Sprite2D" parent="."]
+position = Vector2(7, -1)
+scale = Vector2(2.55375, 2.55375)
+texture = ExtResource("3_ojdb8")
+hframes = 6
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ts2qj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_88b5o")
+}
+autoplay = "idle"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="explosion" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_jj10o")
+pitch_scale = 1.92
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="OnLifetimeTimeout"]

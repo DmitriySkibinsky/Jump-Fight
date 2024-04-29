@@ -18,6 +18,7 @@ public partial class ManagerTests : TestClass
     public void SetUp()
     {
         Manager = new Manager();
+        Manager.mute = Substitute.For<AudioStreamPlayer>();
     }
 
      public Func<SceneTree> GetTree { get; set; }
@@ -27,6 +28,7 @@ public partial class ManagerTests : TestClass
     {
         // Arrange
         SceneTree tree = GetTree?.Invoke();
+        settings.Sound = false;
 
     if (tree != null)
     {
@@ -140,6 +142,41 @@ public partial class ManagerTests : TestClass
 
         // Assert
         settings.Sound.ShouldBe(true);
+    }
+    [Test]
+    public void Test_Process()
+    {
+        // Arrange
+        SceneTree tree = GetTree?.Invoke();
+        Manager.game_paused = true;
+    
+        if (tree != null)
+        {
+
+            // Act
+            Manager._Process(0.1f);
+
+            // Assert
+            Manager.pause_menu.Visible.ShouldBe(true);
+        }
+    }
+
+    [Test]
+    public void Test_Process2()
+    {
+        // Arrange
+        SceneTree tree = GetTree?.Invoke();
+        Manager.game_paused = false;
+    
+        if (tree != null)
+        {
+
+            // Act
+            Manager._Process(0.1f);
+
+            // Assert
+            Manager.pause_menu.Visible.ShouldBe(false);
+        }
     }
 
 }

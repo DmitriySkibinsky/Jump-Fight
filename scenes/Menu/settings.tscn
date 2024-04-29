@@ -1,9 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyw0nqgor3xtx"]
+[gd_scene load_steps=11 format=3 uid="uid://cyw0nqgor3xtx"]
 
 [ext_resource type="Script" path="res://scenes/Menu/settings.cs" id="1_g68vc"]
 [ext_resource type="Texture2D" uid="uid://bnd6uj05ayql5" path="res://assets/sprites/Quit Button.png" id="1_tfwcm"]
 [ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_l6s0q"]
-[ext_resource type="Texture2D" uid="uid://c6nijyhgy4p5w" path="res://assets/sprites/Exit Button.png" id="4_w64r6"]
+[ext_resource type="Texture2D" uid="uid://n5jvprapfh34" path="res://assets/sprites/Menu Button.png" id="3_fcse3"]
+[ext_resource type="AudioStream" uid="uid://bof56n680yl3n" path="res://assets/Sounds/Minimalist7.wav" id="5_wxbcn"]
+[ext_resource type="AudioStream" uid="uid://li1ar1yei4p" path="res://assets/Sounds/Minimalist8.wav" id="6_4xb8x"]
+[ext_resource type="AudioStream" uid="uid://dcvv2rd8pkd6q" path="res://assets/Sounds/Modern10.wav" id="7_gq51l"]
+[ext_resource type="AudioStream" uid="uid://b2pw881md7myi" path="res://assets/Sounds/Modern11.wav" id="8_wki8w"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_awef3"]
+streams_count = 2
+stream_0/stream = ExtResource("5_wxbcn")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_4xb8x")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hwp7x"]
+streams_count = 2
+stream_0/stream = ExtResource("7_gq51l")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_wki8w")
+stream_1/weight = 1.0
 
 [node name="Main_settings" type="Control"]
 process_mode = 3
@@ -54,13 +72,13 @@ offset_bottom = 232.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_fcse3")
+
 [node name="Quit" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 icon = ExtResource("1_tfwcm")
-
-[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-icon = ExtResource("4_w64r6")
 
 [node name="Audio" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -88,7 +106,13 @@ grow_horizontal = 0
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="Buttons" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_awef3")
+
+[node name="AudioButtons" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_hwp7x")
+
 [connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Panel/Audio/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="Panel/Sounds/Sounds" to="." method="_on_sounds_pressed"]

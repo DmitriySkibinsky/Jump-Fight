@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfph7mlmasj20"]
+[gd_scene load_steps=5 format=3 uid="uid://bfph7mlmasj20"]
 
 [ext_resource type="Script" path="res://scenes/game/Utils/Interaction/InteractionManager.cs" id="1_rlkh3"]
+[ext_resource type="AudioStream" uid="uid://bjm7l08udx6ei" path="res://assets/SFX RPG/05_door_open_1.mp3" id="2_h6wcd"]
+[ext_resource type="AudioStream" uid="uid://bco6dc6nsxgjp" path="res://assets/SFX RPG/05_door_open_2.mp3" id="3_t41d4"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_07xw1"]
+streams_count = 2
+stream_0/stream = ExtResource("2_h6wcd")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_t41d4")
+stream_1/weight = 1.0
 
 [node name="InteractionManager" type="Node2D" groups=["InteractionManager"]]
 script = ExtResource("1_rlkh3")
@@ -18,3 +27,7 @@ theme_override_font_sizes/font_size = 18
 text = "[E] to interact"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Door" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_07xw1")
+volume_db = -10.0

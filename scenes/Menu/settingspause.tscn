@@ -1,10 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs4ayffshvalm"]
+[gd_scene load_steps=11 format=3 uid="uid://bs4ayffshvalm"]
 
 [ext_resource type="Texture2D" uid="uid://c6nijyhgy4p5w" path="res://assets/sprites/Exit Button.png" id="3_44jc8"]
 [ext_resource type="Texture2D" uid="uid://crtn7kw00ob3e" path="res://assets/sprites/Resume Button.png" id="4_c4355"]
+[ext_resource type="AudioStream" uid="uid://bof56n680yl3n" path="res://assets/Sounds/Minimalist7.wav" id="4_s7qie"]
 [ext_resource type="Texture2D" uid="uid://b6t4yt0jxyp5j" path="res://assets/sprites/New game Button.png" id="5_m4fof"]
+[ext_resource type="AudioStream" uid="uid://li1ar1yei4p" path="res://assets/Sounds/Minimalist8.wav" id="5_oudag"]
+[ext_resource type="AudioStream" uid="uid://dcvv2rd8pkd6q" path="res://assets/Sounds/Modern10.wav" id="6_o5xwf"]
+[ext_resource type="AudioStream" uid="uid://b2pw881md7myi" path="res://assets/Sounds/Modern11.wav" id="7_rf7q5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mpgam"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3i1en"]
+streams_count = 2
+stream_0/stream = ExtResource("4_s7qie")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_oudag")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ryk0a"]
+streams_count = 2
+stream_0/stream = ExtResource("6_o5xwf")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_rf7q5")
+stream_1/weight = 1.0
 
 [node name="Settings" type="Control"]
 process_mode = 2
@@ -79,3 +97,9 @@ offset_bottom = 100.0
 
 [node name="Sounds" type="Button" parent="Panel/Sounds"]
 layout_mode = 2
+
+[node name="Buttons" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_3i1en")
+
+[node name="AudioButtons" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ryk0a")

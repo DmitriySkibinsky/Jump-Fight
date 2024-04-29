@@ -33,6 +33,7 @@ public partial class SpellCast1 : state
 
 	public void SpawnPortal(){
 		Portal = PortalScene.Instantiate<RangedAttack>();
+        Portal.Set("IsSpellCast2", false);
         Owner.GetParent().AddChild(Portal);
         SetProcess(true);
 

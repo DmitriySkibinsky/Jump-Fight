@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8cmvolb1w4gs"]
+
+[ext_resource type="Texture2D" uid="uid://ca1uw68bjjt2h" path="res://assets/sprites/MechaStoneGolem/Laser_sheet.png" id="1_kgwgp"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/LaserBeam.cs" id="1_ltmad"]
+[ext_resource type="AudioStream" uid="uid://cebtxis5l2gcu" path="res://assets/Sounds/MechaStoneGolem/laser_prepare.wav" id="3_i6jic"]
+[ext_resource type="AudioStream" uid="uid://cf1ql7bg0aaxj" path="res://assets/Sounds/MechaStoneGolem/8-bit-laser-fx.wav" id="4_xojbh"]
+
+[sub_resource type="Animation" id="Animation_sugfc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/laser_prepare:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/laser_attack:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_wpx6j"]
+resource_name = "laser_attack"
+length = 1.50001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 9, 10, 11, 12, 13, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/laser_attack:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.125),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0b7l8"]
+resource_name = "laser_prepare"
+length = 1.87501
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/laser_prepare:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r87m5"]
+_data = {
+"RESET": SubResource("Animation_sugfc"),
+"laser_attack": SubResource("Animation_wpx6j"),
+"laser_prepare": SubResource("Animation_0b7l8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4nbm"]
+size = Vector2(776, 19)
+
+[node name="Pivot" type="Node2D"]
+script = ExtResource("1_ltmad")
+
+[node name="Laser" type="Sprite2D" parent="."]
+position = Vector2(291.5, 14)
+scale = Vector2(3, 1)
+texture = ExtResource("1_kgwgp")
+vframes = 15
+
+[node name="LaserIndicator" type="ColorRect" parent="."]
+offset_left = -6.0
+offset_top = -9.0
+offset_right = 740.0
+offset_bottom = 8.0
+color = Color(0.262745, 1, 1, 0)
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r87m5")
+}
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(354, -2.5)
+shape = SubResource("RectangleShape2D_t4nbm")
+disabled = true
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="laser_prepare" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_i6jic")
+
+[node name="laser_attack" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_xojbh")
+volume_db = -10.947
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

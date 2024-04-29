@@ -87,7 +87,7 @@ public partial class player : CharacterBody2D
 
 	public AudioStreamPlayer collect;
 
-	AudioStreamPlayer collect2;
+	public AudioStreamPlayer collect2;
 
 	public override void _Ready()
 	{

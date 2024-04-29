@@ -7,7 +7,8 @@ public partial class BossRoom : Node2D
 	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
-        {"BringerOfDeath", GD.Load<PackedScene>("res://scenes/game/entities/BringerOfDeath/BringerOfDeath.tscn")}
+        {"BringerOfDeath", GD.Load<PackedScene>("res://scenes/game/entities/BringerOfDeath/BringerOfDeath.tscn")},
+		{"MechaStoneGolem", GD.Load<PackedScene>("res://scenes/game/entities/MechaStoneGolem/MechaStoneGolem.tscn")}
     };
 	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;

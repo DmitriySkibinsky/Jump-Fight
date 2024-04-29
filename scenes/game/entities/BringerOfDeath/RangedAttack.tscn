@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://p0wn4b0lgi7l"]
+[gd_scene load_steps=10 format=3 uid="uid://p0wn4b0lgi7l"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/BringerOfDeath/RangedAttack.cs" id="1_eipx6"]
 [ext_resource type="Texture2D" uid="uid://cduboqx1u0mwu" path="res://assets/sprites/BringerOfDeath/Bringer-of-Death-SpritSheet.png" id="1_gvf2t"]
+[ext_resource type="AudioStream" uid="uid://d13jx5sqmr14a" path="res://assets/Sounds/BringerOfDeath/PortalSpawn.wav" id="3_uxykg"]
+[ext_resource type="AudioStream" uid="uid://qeiocsnronyi" path="res://assets/Sounds/BringerOfDeath/arcane.wav" id="4_s3gh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xf65r"]
 size = Vector2(36.8, 111.25)
@@ -20,6 +22,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 6)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sounds/Attack:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_tmxk1"]
 resource_name = "attack"
@@ -35,6 +49,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6), Vector2i(0, 7), Vector2i(1, 7), Vector2i(7, 6), Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sounds/Attack:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_o14s6"]
@@ -96,5 +122,13 @@ libraries = {
 "": SubResource("AnimationLibrary_xrvn1")
 }
 autoplay = "idle"
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Spawn" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_uxykg")
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_s3gh4")
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

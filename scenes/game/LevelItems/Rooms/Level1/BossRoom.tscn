@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0kovkhox1brj"]
+[gd_scene load_steps=4 format=3 uid="uid://c0kovkhox1brj"]
 
 [ext_resource type="PackedScene" uid="uid://b46temebts3n1" path="res://scenes/game/LevelItems/Rooms/BossRoom.tscn" id="1_26mbm"]
 [ext_resource type="PackedScene" uid="uid://exgmjj4k0vm0" path="res://scenes/game/entities/Collectibles/Heart/heart.tscn" id="2_ile2c"]
+[ext_resource type="Script" path="res://scenes/game/LevelItems/Rooms/Level1/BossRoomWaves.cs" id="2_ut7vy"]
 
 [node name="BossRoom" instance=ExtResource("1_26mbm")]
+script = ExtResource("2_ut7vy")
 metadata/_edit_vertical_guides_ = [130.0, 1791.0]
 
 [node name="Jp1" parent="JumpPlatforms" index="0"]
@@ -14,8 +16,17 @@ JumpForce = 900
 position = Vector2(1562.67, -58.6667)
 JumpForce = 900
 
-[node name="BringerOfDeath" type="Marker2D" parent="EnemyPositions" index="0"]
-position = Vector2(1286.67, -904)
+[node name="Marker2D" type="Marker2D" parent="EnemyPositions" index="0"]
+position = Vector2(441.333, -840)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(1452, -840)
+
+[node name="Marker2D6" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(2141.33, -840)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(1001.33, -840)
 
 [node name="PlayerDetector" parent="." index="3"]
 position = Vector2(-26.6667, -748)

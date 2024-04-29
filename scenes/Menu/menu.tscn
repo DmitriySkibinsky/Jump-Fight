@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg6p8cpv2rmw2"]
+[gd_scene load_steps=10 format=3 uid="uid://cg6p8cpv2rmw2"]
 
 [ext_resource type="Script" path="res://scenes/Menu/menu.cs" id="1_8egwg"]
 [ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_uk3d0"]
 [ext_resource type="Texture2D" uid="uid://6h6gnw05nbx6" path="res://assets/sprites/Play Button.png" id="3_wq6um"]
-[ext_resource type="Texture2D" uid="uid://bywr66vgih8g0" path="res://assets/sprites/On Off Square Button.png" id="4_xunoe"]
+[ext_resource type="Texture2D" uid="uid://bnd6uj05ayql5" path="res://assets/sprites/Quit Button.png" id="4_cansb"]
 [ext_resource type="Texture2D" uid="uid://dyvxbkfkhu715" path="res://assets/sprites/Settings Button.png" id="5_ocdad"]
+[ext_resource type="AudioStream" uid="uid://bof56n680yl3n" path="res://assets/Sounds/Minimalist7.wav" id="6_j3axy"]
+[ext_resource type="AudioStream" uid="uid://li1ar1yei4p" path="res://assets/Sounds/Minimalist8.wav" id="7_efwwj"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_w05we"]
 script/source = "using Godot;
@@ -24,6 +26,13 @@ public partial class Node2D : Godot.Node2D
 }
 "
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l4myh"]
+streams_count = 2
+stream_0/stream = ExtResource("6_j3axy")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_efwwj")
+stream_1/weight = 1.0
+
 [node name="Menu" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_8egwg")
@@ -40,27 +49,30 @@ texture = ExtResource("2_uk3d0")
 
 [node name="Play" type="Button" parent="."]
 offset_left = 850.0
-offset_top = 700.0
+offset_top = 650.0
 offset_right = 1158.0
-offset_bottom = 808.0
+offset_bottom = 758.0
 theme_override_font_sizes/font_size = 64
 icon = ExtResource("3_wq6um")
 script = SubResource("CSharpScript_w05we")
 
 [node name="Quit" type="Button" parent="."]
-offset_left = 1811.0
-offset_top = -2.0
-offset_right = 1919.0
-offset_bottom = 106.0
+offset_left = 850.0
+offset_top = 940.0
+offset_right = 1158.0
+offset_bottom = 1048.0
 theme_override_font_sizes/font_size = 64
-icon = ExtResource("4_xunoe")
+icon = ExtResource("4_cansb")
 
 [node name="Settings" type="Button" parent="."]
 offset_left = 850.0
-offset_top = 870.0
+offset_top = 797.0
 offset_right = 1158.0
-offset_bottom = 978.0
+offset_bottom = 905.0
 icon = ExtResource("5_ocdad")
+
+[node name="Buttons" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_l4myh")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

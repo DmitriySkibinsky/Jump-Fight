@@ -15,6 +15,11 @@ run/main_scene="res://Main/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+MenuMusic="*res://global/menu_music.cs"
+Level1PlatformerMusic="*res://global/level1_music.cs"
+
 [display]
 
 window/size/viewport_width=1920
