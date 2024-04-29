@@ -10,6 +10,7 @@ public partial class InteractionManager : Node2D
 {
 	public player Player;
 	public Label label;
+	public AudioStreamPlayer door;
 
 	public string BaseText = "[E] to";
 
@@ -19,6 +20,7 @@ public partial class InteractionManager : Node2D
 	{
 		Player = (player)GetTree().GetFirstNodeInGroup("Player");
 		label = GetNode<Label>("Label");
+		door = GetNode<AudioStreamPlayer>("Door");
 	}
 
 	public void RegisterArea(InteractionArea area){
@@ -66,6 +68,11 @@ public partial class InteractionManager : Node2D
     public override async void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("interact") && CanInteract && ActiveAreas.Count > 0){
+			if (settings.Sound)
+			{
+                door.Play();
+            }
+			await ToSignal(door, AudioStreamPlayer.SignalName.Finished);
 			CanInteract = false;
 			label.Hide();
 

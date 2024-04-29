@@ -7,10 +7,15 @@ public partial class menu : Node2D
 
     public menu_music Music;
 
+    public level1_music stop;
+
     public override void _Ready()
     {
         click = GetNode<AudioStreamPlayer>("Buttons");
         Music = GetNode<menu_music>("/root/MenuMusic");
+        stop = GetNode<level1_music>("/root/Level1PlatformerMusic");
+        stop.musicp.Stop();
+        stop.musicp.Stop();
         if (!Music.music.Playing)
         {
             Music.music.Play();
