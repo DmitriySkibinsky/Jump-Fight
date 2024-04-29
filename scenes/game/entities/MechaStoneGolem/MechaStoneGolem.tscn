@@ -1,0 +1,485 @@
+[gd_scene load_steps=35 format=3 uid="uid://cnu1nu121n8pq"]
+
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/MechaStoneGolem.cs" id="1_0dr35"]
+[ext_resource type="Texture2D" uid="uid://bypra6aampaj" path="res://assets/sprites/MechaStoneGolem/Character_sheet.png" id="2_8vh3x"]
+[ext_resource type="Texture2D" uid="uid://b5y1j8nuqr6j3" path="res://assets/sprites/MechaStoneGolem/MeleeAttack/FE1002_01.png" id="3_qq0bh"]
+[ext_resource type="PackedScene" uid="uid://c8cmvolb1w4gs" path="res://scenes/game/entities/MechaStoneGolem/LaserBeam.tscn" id="4_s1tvc"]
+[ext_resource type="Script" path="res://scenes/game/entities/BringerOfDeath/FiniteStateMachine.cs" id="4_t57lu"]
+[ext_resource type="Texture2D" uid="uid://beby45bl5un0v" path="res://assets/sprites/MechaStoneGolem/MeleeAttack/FE1002_02.png" id="5_incdr"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/SpawnGolem.cs" id="5_jqap4"]
+[ext_resource type="Texture2D" uid="uid://dyi87dn4qw5k4" path="res://assets/sprites/MechaStoneGolem/MeleeAttack/FE1002_03.png" id="6_3m84l"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/IdleGolem.cs" id="6_cwjeh"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/FollowGolem.cs" id="7_asuhl"]
+[ext_resource type="Texture2D" uid="uid://dj6l4o2a45232" path="res://assets/sprites/MechaStoneGolem/MeleeAttack/FE1002_04.png" id="7_ds61n"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/AttackGolem.cs" id="8_we5ku"]
+[ext_resource type="Script" path="res://scenes/game/entities/BringerOfDeath/Death.cs" id="9_un6lg"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/Laser.cs" id="14_nxsxf"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/Rocket.cs" id="15_ky8qd"]
+[ext_resource type="Script" path="res://scenes/game/entities/MechaStoneGolem/Laser2.cs" id="16_6xc0b"]
+[ext_resource type="AudioStream" uid="uid://diynpeu35sha7" path="res://assets/Sounds/MechaStoneGolem/mixkit-system-break-2942.wav" id="17_qur5m"]
+[ext_resource type="AudioStream" uid="uid://by6vbiffoievp" path="res://assets/Sounds/MechaStoneGolem/video-game-missile-whoosh-retro-glitchedtones-1-00-01.mp3" id="18_7obpi"]
+[ext_resource type="AudioStream" uid="uid://bw1p7obunrc3q" path="res://assets/Sounds/MechaStoneGolem/Retro Weapon Plasma Type B 03.wav" id="19_2lmfc"]
+
+[sub_resource type="Animation" id="Animation_t5o3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeAttack:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_qq0bh")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeAttack:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Golem:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/RangedAttack:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/MeleeAttack:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/Death:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3labi"]
+resource_name = "Spawn"
+length = 1.00001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [37, 36, 35, 34, 33, 32, 31, 30]
+}
+
+[sub_resource type="Animation" id="Animation_fnn0a"]
+resource_name = "armor_buff"
+length = 1.12501
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 63, 64, 65, 66, 67, 69]
+}
+
+[sub_resource type="Animation" id="Animation_hogpq"]
+resource_name = "death"
+length = 1.75001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Golem:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -22.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Death:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.375),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ivmt7"]
+resource_name = "glowing"
+length = 1.00001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_ntghg"]
+resource_name = "idle"
+length = 0.500013
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5ku7y"]
+resource_name = "laser_cast"
+length = 0.70001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53, 54, 55]
+}
+
+[sub_resource type="Animation" id="Animation_bv648"]
+resource_name = "melee_attack"
+length = 1.25001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45, 46]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeAttack:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75, 0.875, 1, 1.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_qq0bh"), ExtResource("5_incdr"), ExtResource("6_3m84l"), ExtResource("7_ds61n")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeAttack:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/MeleeAttack:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.875),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1jqim"]
+resource_name = "ranged_attack"
+length = 1.87501
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26, 27, 28]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/RangedAttack:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4jcl1"]
+resource_name = "reboot"
+length = 3.00001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Golem:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 2, 2.125, 2.25, 2.375, 2.5, 2.625, 2.75, 2.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35, 36, 37, 37, 36, 35, 34, 33, 32, 31, 30]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qmmcb"]
+_data = {
+"RESET": SubResource("Animation_t5o3g"),
+"Spawn": SubResource("Animation_3labi"),
+"armor_buff": SubResource("Animation_fnn0a"),
+"death": SubResource("Animation_hogpq"),
+"glowing": SubResource("Animation_ivmt7"),
+"idle": SubResource("Animation_ntghg"),
+"laser_cast": SubResource("Animation_5ku7y"),
+"melee_attack": SubResource("Animation_bv648"),
+"ranged_attack": SubResource("Animation_1jqim"),
+"reboot": SubResource("Animation_4jcl1")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvo7b"]
+radius = 50.5
+height = 119.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtirs"]
+size = Vector2(89.3666, 69.827)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8gass"]
+radius = 53.0
+height = 120.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_46mh3"]
+radius = 57.0
+height = 125.0
+
+[node name="MechaStoneGolem" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_0dr35")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(40, 40)
+scale = Vector2(2, 2)
+target_position = Vector2(0, 20)
+collision_mask = 65
+
+[node name="Golem" type="Sprite2D" parent="."]
+clip_children = 2
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_8vh3x")
+hframes = 10
+vframes = 10
+
+[node name="TakeDamageEffect" type="ColorRect" parent="Golem"]
+offset_left = -59.75
+offset_top = -29.25
+offset_right = 59.25
+offset_bottom = 28.75
+color = Color(1, 1, 1, 0)
+
+[node name="MeleeAttack" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(86, 5)
+rotation = -1.5708
+scale = Vector2(3.15625, 3.15625)
+texture = ExtResource("3_qq0bh")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["AnimationPlayer"]]
+libraries = {
+"": SubResource("AnimationLibrary_qmmcb")
+}
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-2.5, 3)
+shape = SubResource("CapsuleShape2D_hvo7b")
+
+[node name="FiniteStateMachine" type="Node2D" parent="."]
+script = ExtResource("4_t57lu")
+
+[node name="Spawn" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("5_jqap4")
+
+[node name="Idle" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("6_cwjeh")
+
+[node name="Follow" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("7_asuhl")
+
+[node name="Attack" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("8_we5ku")
+
+[node name="Death" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("9_un6lg")
+
+[node name="Laser" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("14_nxsxf")
+
+[node name="LaserContainer" type="Node2D" parent="FiniteStateMachine/Laser"]
+
+[node name="LaserBeam" parent="FiniteStateMachine/Laser/LaserContainer" instance=ExtResource("4_s1tvc")]
+position = Vector2(4.5, -34.5)
+
+[node name="LaserBeam2" parent="FiniteStateMachine/Laser/LaserContainer" instance=ExtResource("4_s1tvc")]
+position = Vector2(100, -100)
+
+[node name="LaserBeam3" parent="FiniteStateMachine/Laser/LaserContainer" instance=ExtResource("4_s1tvc")]
+position = Vector2(-100, -100)
+
+[node name="Rocket" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("15_ky8qd")
+
+[node name="RocketSpawn" type="Marker2D" parent="FiniteStateMachine/Rocket"]
+position = Vector2(50, -18)
+
+[node name="Laser2" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("16_6xc0b")
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(81, 3.5)
+rotation = 2.53979
+shape = SubResource("RectangleShape2D_wtirs")
+disabled = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2.5, 0.5)
+shape = SubResource("CapsuleShape2D_8gass")
+
+[node name="HurtBoxes" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxes"]
+position = Vector2(-2.5, 0.5)
+shape = SubResource("CapsuleShape2D_46mh3")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Death" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("17_qur5m")
+
+[node name="RangedAttack" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("18_7obpi")
+
+[node name="MeleeAttack" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("19_2lmfc")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
