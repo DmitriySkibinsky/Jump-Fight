@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwjkkiuwq7krr"]
+
+[ext_resource type="PackedScene" uid="uid://dqxeqy7xibk4b" path="res://scenes/game/entities/Scav/Scav.tscn" id="1_1vfky"]
+
+[node name="Scav" instance=ExtResource("1_1vfky")]
+Speed = 85
+Damage = 20
+Health = 80
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+self_modulate = Color(1, 0.952941, 0.278431, 1)
