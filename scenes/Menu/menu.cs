@@ -19,7 +19,7 @@ public partial class menu : Node2D
         stop2 = GetNode<level2_music>("/root/Level2PlatformerMusic");
         stop3 = GetNode<level3_music>("/root/Level3PlatformerMusic");
         stop1.musicp.Stop();
-        stop1.musicp.Stop();
+        stop1.musicb.Stop();
         stop2.musicp.Stop();
         stop2.musicb.Stop();
         stop2.musicboss.Stop();
