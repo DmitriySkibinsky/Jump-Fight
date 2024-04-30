@@ -6,11 +6,11 @@ public partial class Arrow : Area2D
 
 	public float Speed = 400;
 	public int Damage = 15;
-    double LiveTime = 10;
+    public double LiveTime = 10;
 
     public int Direction = 1;
 
-    Sprite2D AnimSprite;
+    public Sprite2D AnimSprite;
 
     public player Player;
 
