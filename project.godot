@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 MenuMusic="*res://global/menu_music.cs"
 Level1PlatformerMusic="*res://global/level1_music.cs"
+Level2PlatformerMusic="*res://global/level2_music.cs"
+Level3PlatformerMusic="*res://global/level3_music.cs"
 
 [display]
 

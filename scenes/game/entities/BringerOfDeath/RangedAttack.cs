@@ -50,7 +50,7 @@ public partial class RangedAttack : Node2D
 		PlayerDetector = GetNode<CollisionShape2D>("PlayerDetector/CollisionShape2D");
 		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		Player = (player)GetTree().GetFirstNodeInGroup("Player");
-		SpawnSound = GetNode<AudioStreamPlayer>("Sound/Spawn");
+		SpawnSound = GetNode<AudioStreamPlayer>("Sounds/Spawn");
 
 		SpawnSound.Play();
 		AnimationPlayer.Play("idle");

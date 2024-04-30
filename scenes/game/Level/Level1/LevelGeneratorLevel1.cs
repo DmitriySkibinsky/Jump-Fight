@@ -6,7 +6,6 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
 {
     public level1_music Music;
     public Node2D level;
-    public Node2D manager;
     public float sec = 0f;
     public override void _Ready()
     {
@@ -31,7 +30,6 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
 
         Music = GetNode<level1_music>("/root/Level1PlatformerMusic");
         level = GetNode<Node2D>("../");
-        manager = GetNode<Node2D>("../Manager");
         if (settings.Audio)
         {
             if (!(bool)level.Get("isBattleSection"))

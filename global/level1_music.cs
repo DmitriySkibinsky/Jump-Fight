@@ -14,7 +14,7 @@ public partial class level1_music : Node
         musicp.PitchScale = 1.2f;
         musicb = new AudioStreamPlayer();
         AddChild(musicb);
-        musicb.Stream = GD.Load<AudioStream>("res://assets/Music/Pixel6.mp3");
+        musicb.Stream = GD.Load<AudioStream>("res://assets/Music/Pixel5.mp3");
         musicb.PitchScale = 1.2f;
         musicp.VolumeDb = -20;
         musicb.VolumeDb = -20;

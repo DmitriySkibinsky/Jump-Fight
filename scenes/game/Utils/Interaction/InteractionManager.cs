@@ -71,8 +71,8 @@ public partial class InteractionManager : Node2D
 			if (settings.Sound)
 			{
                 door.Play();
+                await ToSignal(door, AudioStreamPlayer.SignalName.Finished);
             }
-			await ToSignal(door, AudioStreamPlayer.SignalName.Finished);
 			CanInteract = false;
 			label.Hide();
 

@@ -362,7 +362,7 @@ height = 120.0
 radius = 57.0
 height = 125.0
 
-[node name="MechaStoneGolem" type="CharacterBody2D"]
+[node name="MechaStoneGolem" type="CharacterBody2D" groups=["Boss"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_0dr35")
 
