@@ -4,7 +4,9 @@ using System;
 public partial class Arrow : Area2D
 {
 
+    [Export]
 	public float Speed = 400;
+    [Export]
 	public int Damage = 15;
     double LiveTime = 10;
 

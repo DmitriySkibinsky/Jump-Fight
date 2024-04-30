@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://crcmrrqnncssg"]
+
+[ext_resource type="PackedScene" uid="uid://boj01a3tsrbl4" path="res://scenes/game/entities/Hunter/Hunter.tscn" id="1_w6vov"]
+[ext_resource type="PackedScene" uid="uid://cnw4hl6s161u1" path="res://scenes/game/entities/Hunter/Etc/ArrowLv3.tscn" id="2_sbo0k"]
+
+[node name="Node2D" instance=ExtResource("1_w6vov")]
+Speed = 200.0
+Health = 110
+Reload = 1.75
+Arrow = ExtResource("2_sbo0k")
+
+[node name="AnimatedSprite2D" parent="." index="5"]
+self_modulate = Color(0, 1, 0.996078, 1)
+
+[node name="Triggers" parent="." index="8"]
+visible = false
