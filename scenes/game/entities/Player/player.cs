@@ -476,20 +476,26 @@ public partial class player : CharacterBody2D
         }
         EmitSignal(SignalName.HealthChanged, health);
         if (HealingOrb != null){
-            HealingOrb.QueueFree();
+            HealingOrb.Exit();
         }
     }
 
-	public async void jump_boost()
+	public async void jump_boost(jump_boost boost = null)
 	{
+		if (boost != null){
+            boost.Exit();
+        }
 		collect2.Play();
-		jump_multiplier = 1.8f;
+		jump_multiplier = 1.4f;
 		await ToSignal(GetTree().CreateTimer(10), SceneTreeTimer.SignalName.Timeout);
 		jump_multiplier = 1f;
 	}
 
-	public async void attack_boost()
+	public async void attack_boost(attack_boost boost = null)
 	{
+		if (boost != null){
+            boost.Exit();
+        }
 		collect2.Play();
 		damage_basic = 20;
 		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
