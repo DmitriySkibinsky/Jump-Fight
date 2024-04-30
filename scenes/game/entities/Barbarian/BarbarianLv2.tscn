@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpy3cvor58ihm"]
+
+[ext_resource type="PackedScene" uid="uid://doglnh1avmgig" path="res://scenes/game/entities/Barbarian/Barbarian.tscn" id="1_o3vn5"]
+
+[node name="Barbarian" instance=ExtResource("1_o3vn5")]
+Speed = 100.0
+Damage = 30
+Health = 120
+AttackPrepareTime = 1.5
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+self_modulate = Color(1, 0.698039, 0.192157, 1)
+
+[node name="HitBoxes" parent="." index="3"]
+visible = false
+
+[node name="HurtBoxes" parent="." index="4"]
+visible = false
+
+[node name="FOV" parent="." index="5"]
+visible = false
+
+[node name="AttackTrigger" parent="." index="6"]
+visible = false

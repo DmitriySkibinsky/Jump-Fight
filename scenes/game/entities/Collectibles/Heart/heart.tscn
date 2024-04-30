@@ -56,6 +56,7 @@ animations = [{
 }]
 
 [node name="heart" type="Area2D"]
+scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_u17vh")

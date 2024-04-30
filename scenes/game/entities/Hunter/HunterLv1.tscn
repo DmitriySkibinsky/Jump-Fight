@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://3p0tupw1hydq"]
+
+[ext_resource type="PackedScene" uid="uid://boj01a3tsrbl4" path="res://scenes/game/entities/Hunter/Hunter.tscn" id="1_nsu1v"]
+
+[node name="HunterLv1" instance=ExtResource("1_nsu1v")]
+Health = 60
+Reload = 3.0
+RollCooldown = 30.0
+
+[node name="HurtBoxes" parent="." index="4"]
+visible = false
+
+[node name="Triggers" parent="." index="8"]
+visible = false

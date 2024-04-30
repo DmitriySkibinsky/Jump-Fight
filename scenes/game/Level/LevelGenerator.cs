@@ -20,7 +20,7 @@ public partial class LevelGenerator : Node2D
 	};
 
 	public string NextScenePath;
-	public int num_levels = 6;
+	public int num_levels = 4;
 	public int platform_amount = 10;
 	public float last_platform_pos_y = 0;
 	public Camera2D camera;
@@ -86,7 +86,7 @@ public partial class LevelGenerator : Node2D
 				EndRoom.Set("NextScenePath", NextScenePath);
 				this.AddChild(EndRoom);
 			}else{
-				platform_amount += 10;
+				platform_amount += 4;
 				float init_pos_y = prev_battle_room.GetNode<Marker2D>("NextPlatform").GlobalPosition.Y;
 				GeneratePlatform(init_pos_y, platform_amount);
 				prev_room_name = "platform";

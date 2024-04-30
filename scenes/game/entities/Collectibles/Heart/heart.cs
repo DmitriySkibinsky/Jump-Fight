@@ -17,4 +17,7 @@ public partial class heart : Area2D
             
         }
 	}
+	public void Exit(){
+        QueueFree();
+    }
 }

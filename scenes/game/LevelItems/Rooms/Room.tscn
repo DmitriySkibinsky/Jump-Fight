@@ -364,24 +364,36 @@ texture = ExtResource("4_mn6oe")
 1:9/0 = 0
 1:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:9/0/physics_layer_0/angular_velocity = 0.0
+1:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:9/0/physics_layer_0/polygon_0/one_way = true
 2:9/0 = 0
 2:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:9/0/physics_layer_0/angular_velocity = 0.0
+2:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:9/0/physics_layer_0/polygon_0/one_way = true
 3:9/0 = 0
 3:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:9/0/physics_layer_0/angular_velocity = 0.0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:9/0/physics_layer_0/polygon_0/one_way = true
 5:9/0 = 0
 5:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:9/0/physics_layer_0/angular_velocity = 0.0
 7:9/0 = 0
 7:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:9/0/physics_layer_0/angular_velocity = 0.0
+7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:9/0/physics_layer_0/polygon_0/one_way = true
 8:9/0 = 0
 8:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:9/0/physics_layer_0/angular_velocity = 0.0
+8:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.3125, -8, -3.1875, -4.375, -8, 1.875, -8, -8)
+8:9/0/physics_layer_0/polygon_0/one_way = true
 9:9/0 = 0
 9:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:9/0/physics_layer_0/angular_velocity = 0.0
+9:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.9375, -8, 8, -8, 8, 2.25, 2.9375, -4)
+9:9/0/physics_layer_0/polygon_0/one_way = true
 10:9/0 = 0
 10:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:9/0/physics_layer_0/angular_velocity = 0.0
@@ -397,12 +409,18 @@ texture = ExtResource("4_mn6oe")
 1:10/0 = 0
 1:10/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:10/0/physics_layer_0/angular_velocity = 0.0
+1:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:10/0/physics_layer_0/polygon_0/one_way = true
 2:10/0 = 0
 2:10/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:10/0/physics_layer_0/angular_velocity = 0.0
+2:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:10/0/physics_layer_0/polygon_0/one_way = true
 3:10/0 = 0
 3:10/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:10/0/physics_layer_0/angular_velocity = 0.0
+3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:10/0/physics_layer_0/polygon_0/one_way = true
 5:10/0 = 0
 5:10/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:10/0/physics_layer_0/angular_velocity = 0.0
@@ -1166,18 +1184,6 @@ script = ExtResource("1_rbk30")
 position = Vector2(1280, -11.3303)
 scale = Vector2(1.75, 1.75)
 
-[node name="JumpPlatforms" type="Node2D" parent="."]
-
-[node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
-position = Vector2(1016, -58.6667)
-scale = Vector2(1.75, 0.438)
-JumpForce = 1000
-
-[node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
-position = Vector2(1562.67, -65.3333)
-scale = Vector2(1.75, 0.438)
-JumpForce = 1000
-
 [node name="EnemyPositions" type="Node2D" parent="."]
 position = Vector2(0, 5.33333)
 
@@ -1208,6 +1214,18 @@ position = Vector2(-962, 954)
 scale = Vector2(3.5, 3.5)
 tile_set = SubResource("TileSet_gis1m")
 format = 2
+
+[node name="JumpPlatforms" type="Node2D" parent="."]
+
+[node name="Jp1" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
+position = Vector2(1016, -58.6667)
+scale = Vector2(1.75, 0.438)
+JumpForce = 1000
+
+[node name="Jp2" parent="JumpPlatforms" instance=ExtResource("3_cutbx")]
+position = Vector2(1562.67, -65.3333)
+scale = Vector2(1.75, 0.438)
+JumpForce = 1000
 
 [node name="DamageBox" type="Area2D" parent="."]
 collision_layer = 0
