@@ -13,20 +13,17 @@ JumpForce = 1050
 collision_layer = 0
 JumpForce = 1050
 
-[node name="Scav_1" type="Marker2D" parent="EnemyPositions" index="0"]
+[node name="HunterLv1_1" type="Marker2D" parent="EnemyPositions" index="0"]
 position = Vector2(876, -2576)
 
-[node name="Scav_3" type="Marker2D" parent="EnemyPositions" index="1"]
-position = Vector2(1712, -2565.33)
-
-[node name="Scav_2" type="Marker2D" parent="EnemyPositions" index="2"]
+[node name="Scav_2" type="Marker2D" parent="EnemyPositions" index="1"]
 position = Vector2(669.333, -1844)
 
-[node name="Barbarian_1" type="Marker2D" parent="EnemyPositions" index="3"]
+[node name="Barbarian_1" type="Marker2D" parent="EnemyPositions" index="2"]
 position = Vector2(1857.33, -1825.33)
 
-[node name="Barbarian_2" type="Marker2D" parent="EnemyPositions" index="4"]
-position = Vector2(1280, -2552)
+[node name="Barbarian_2" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(1766.67, -2581.33)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(1280, -1441.33)
@@ -44,12 +41,12 @@ collision_layer = 0
 JumpForce = 500
 
 [node name="Jp4" parent="." index="7" instance=ExtResource("3_y0j8n")]
-position = Vector2(2173.33, -1682.67)
+position = Vector2(2296, -1685.33)
 collision_layer = 0
 JumpForce = 800
 
 [node name="Jp5" parent="." index="8" instance=ExtResource("3_y0j8n")]
-position = Vector2(398.667, -1689.33)
+position = Vector2(261.333, -1685.33)
 collision_layer = 0
 JumpForce = 800
 

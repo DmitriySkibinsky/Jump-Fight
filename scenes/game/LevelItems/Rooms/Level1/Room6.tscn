@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciwgp4j61xk3a"]
+
+[ext_resource type="PackedScene" uid="uid://dislaide0ehs7" path="res://scenes/game/LevelItems/Rooms/Room.tscn" id="1_acw7n"]
+
+[node name="Room1" instance=ExtResource("1_acw7n")]
+
+[node name="SolidPlatforms" parent="." index="0"]
+position = Vector2(0, -1368)
+
+[node name="SolidPlatform" parent="SolidPlatforms" index="0"]
+position = Vector2(1280, 1368)
+
+[node name="HunterLv1_1" type="Marker2D" parent="EnemyPositions" index="0"]
+position = Vector2(416, -1389.33)
+
+[node name="HunterLv1_2" type="Marker2D" parent="EnemyPositions" index="1"]
+position = Vector2(2150.67, -1389.33)
+
+[node name="Barbarian_1" type="Marker2D" parent="EnemyPositions" index="2"]
+position = Vector2(1857.33, -1430.67)
+
+[node name="Barbarian_2" type="Marker2D" parent="EnemyPositions" index="3"]
+position = Vector2(785.333, -1430.67)
+
+[node name="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(1280, -1248)
+
+[node name="NextPlatform" parent="." index="3"]
+position = Vector2(1280, -1838.67)
+
+[node name="ExitPlatformPosition" parent="." index="4"]
+position = Vector2(1280, -1336)
+
+[node name="stuff" parent="." index="5"]
+layer_1/tile_data = PackedInt32Array(-2752484, 983040, 7, -2686948, 983040, 8, -2752483, 851968, 7, -2686947, 851968, 8, -2752482, 917504, 7, -2686946, 917504, 8, -2752481, 983040, 7, -2686945, 983040, 8, -2752480, 851968, 7, -2686944, 851968, 8, -2752479, 917504, 7, -2686943, 917504, 8, -2752478, 983040, 7, -2686942, 983040, 8, -2752477, 851968, 7, -2686941, 851968, 8, -2752476, 917504, 7, -2686940, 917504, 8, -2752475, 983040, 7, -2686939, 983040, 8, -2752474, 851968, 7, -2686938, 851968, 8, -2752473, 917504, 7, -2686937, 917504, 8, -2752472, 983040, 7, -2686936, 983040, 8, -2752471, 851968, 7, -2686935, 851968, 8, -2752470, 917504, 7, -2686934, 917504, 8, -2752469, 983040, 7, -2686933, 983040, 8, -2752468, 851968, 7, -2686932, 851968, 8, -2752467, 917504, 7, -2686931, 917504, 8, -2752466, 983040, 7, -2686930, 983040, 8, -2752465, 851968, 7, -2686929, 851968, 8, -2752464, 917504, 7, -2686928, 917504, 8, -2752463, 983040, 7, -2686927, 983040, 8, -2752462, 851968, 7, -2686926, 851968, 8, -2752461, 851968, 7, -2686925, 851968, 8)
+
+[node name="Terrain" parent="." index="6"]
+layer_0/tile_data = PackedInt32Array(-2621410, 131072, 5, -2621409, 131072, 5, -2621408, 131072, 5, -2621407, 131072, 5, -2621406, 131072, 5, -2621405, 131072, 5, -2621404, 131072, 5, -2621403, 131072, 5, -2621402, 131072, 5, -2621399, 131072, 5, -2621398, 131072, 5, -2621397, 131072, 5, -2621396, 131072, 5, -2621395, 131072, 5, -2621394, 131072, 5, -2621393, 131072, 5, -2686945, 720896, 12, -2686940, 655360, 10, -2686939, 655360, 10, -2752476, 786432, 12, -2621412, 65536, 5, -2621411, 131072, 5, -2621418, 327680, 5, -2621417, 131072, 1, -2621416, 131072, 1, -2621415, 131072, 1, -2621414, 393216, 5, -2621392, 131072, 5, -2621391, 131072, 5, -2621390, 131072, 5, -2621389, 196608, 5, -2621384, 131072, 1, -2621383, 393216, 5, -2621387, 327680, 5, -2621386, 131072, 1, -2621385, 131072, 1)
+layer_1/tile_data = PackedInt32Array()
+
+[node name="JumpPlatforms" parent="." index="7"]
+position = Vector2(0, -1368)
+
+[node name="Jp1" parent="JumpPlatforms" index="0"]
+position = Vector2(980, 1318.67)
+collision_layer = 0
+
+[node name="Jp2" parent="JumpPlatforms" index="1"]
+position = Vector2(1562.67, 1318.67)
+collision_layer = 0
+
+[node name="CollisionShape2D" parent="DamageBox" index="0"]
+position = Vector2(1301.33, 98.6667)
+
+[node name="PlayerSpawn" parent="." index="9"]
+position = Vector2(1280, -1456)
+
+[editable path="SolidPlatforms/SolidPlatform"]

@@ -11,7 +11,11 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
     {
         BattleSection = new Godot.Collections.Array<PackedScene>{
         GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room1.tscn"),
-        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room2.tscn")
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room2.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room3.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room4.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room5.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room6.tscn"),
         };
 
         EndRooms = new Godot.Collections.Array<PackedScene>{
