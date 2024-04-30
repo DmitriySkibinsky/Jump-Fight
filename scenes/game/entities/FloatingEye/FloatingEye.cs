@@ -9,7 +9,7 @@ public static class Trajectory
 
     public static Random RNG = new Random();
     public static float FlatY;
-     public static int N;
+    public static int N;
     public static int Amplitude;
 
     enum TrajectoryType
@@ -143,17 +143,26 @@ public static class Trajectory
 }
 public partial class FloatingEye : CharacterBody2D
 {
+
+    public enum SoundSettings
+    {
+        ON,
+        OFF
+    }
+
+
     public int Speed = 125;
     public int Damage = 20;
     public int direction = 1;
+
     public bool Alive = true;
     public AudioStreamPlayer jump;
 
-    public  Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
+    public Vector2[] WayPoints; // Путь/Траектория по которому движеться враг
     private Vector2 StartPos; // Стартовая позиция
-    public  int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
+    public int CurrentWayPoint; // Указывает на индекс Вейпоинта к которому он движется
 
-    public  AnimatedSprite2D Anim;
+    public AnimatedSprite2D Anim;
     private Area2D HitBoxes;
     private Area2D HurtBoxes;
 
@@ -210,7 +219,7 @@ public partial class FloatingEye : CharacterBody2D
         }
     }
 
-    private void TurnAround()
+    public void TurnAround()
     {
         if ((Math.Sign(WayPoints[CurrentWayPoint].X - Position.X) == 1) == Anim.FlipH)
         {
@@ -237,7 +246,12 @@ public partial class FloatingEye : CharacterBody2D
     {
         if (Body == Player && Alive && Player.Velocity.Y >= 0)
         {
-            Player.Velocity = new Vector2(Player.Velocity.X, -500);
+            
+            //if (settings.Sound)
+            //{
+                
+            //}
+            Player.Velocity = new Vector2(Player.Velocity.X, -700);
             Player.MoveAndSlide();
             death();
             if (settings.Sound)
@@ -254,7 +268,7 @@ public partial class FloatingEye : CharacterBody2D
         if (Alive)
         {
             Player.GetDamaged(Damage);
-            Player.Velocity += new Vector2(Math.Sign(Player.Position.X - Position.X) * 700, 0);
+            Player.Velocity = new Vector2(Math.Sign(Player.Position.X - Position.X) * 300, 0);
         }
     }
 
@@ -264,5 +278,15 @@ public partial class FloatingEye : CharacterBody2D
         Anim.Play("Death");
         await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
         QueueFree();
+    }
+
+    public void turn_on()
+    {
+        //smack.VolumeDb = -10;
+    }
+
+    public void turn_off()
+    {
+        //smack.VolumeDb = -80;
     }
 }

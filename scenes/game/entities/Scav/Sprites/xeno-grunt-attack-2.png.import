@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhvxcikghmkc"
-path="res://.godot/imported/xeno-grunt-idle.png-0a4c1a08d175ed9aaa2f762c657fbb11.ctex"
+uid="uid://bfqs3vd1bscsa"
+path="res://.godot/imported/xeno-grunt-attack-2.png-a27150022be463c04026aa4d18ac7f46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/entities/Scav/Animation/xeno-grunt-idle.png"
-dest_files=["res://.godot/imported/xeno-grunt-idle.png-0a4c1a08d175ed9aaa2f762c657fbb11.ctex"]
+source_file="res://scenes/game/entities/Scav/Sprites/xeno-grunt-attack-2.png"
+dest_files=["res://.godot/imported/xeno-grunt-attack-2.png-a27150022be463c04026aa4d18ac7f46.ctex"]
 
 [params]
 

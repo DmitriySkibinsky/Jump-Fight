@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctc1ar18qlqm1"
+path="res://.godot/imported/knife schwing 5.wav-8f01bd4e0b1e2fa61f3795e5b05c74a7.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Hunter/Sounds/knife schwing 5.wav"
+dest_files=["res://.godot/imported/knife schwing 5.wav-8f01bd4e0b1e2fa61f3795e5b05c74a7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

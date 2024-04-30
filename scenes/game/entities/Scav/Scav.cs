@@ -13,11 +13,20 @@ public partial class Scav : CharacterBody2D
         Damaged,
         Attack,
     }
-    private static Random RNG = new Random();
 
-    public int Speed = 50;
-    public int Damage = 20;
-    public int Health = 100;
+    public enum SoundSettings
+    {
+        ON,
+        OFF
+    }
+
+    public static Random RNG = new Random();
+
+    public int Speed = 60;
+    public int Damage = 30;
+    public int Health = 130;
+    public float StunAfterDamage = 0.5f; // Сколько враг будет под станом после удара
+    public float AttackCooldown = 2;
 
 
     public Statement State = Statement.Run;
@@ -25,20 +34,32 @@ public partial class Scav : CharacterBody2D
 
     public float DamagedTime = 0;
     public float IdleTime = 0;
+    public ulong LastDamagedTime = Godot.Time.GetTicksMsec();
 
     //private float Gravity = (float)ProjectSettings.GetSetting("physics/2d/deault_gravity");
-    private float Gravity = 200;
+    private float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 
     public int Direction = RNG.Next(2) == 1 ? 1 : -1;
 
 
-    private RayCast2D rayCast2D;
+    public RayCast2D rayCast2D;
     public AnimatedSprite2D Anim;
     public Area2D HitBoxes;
-    private Area2D HurtBoxes;
-    private CollisionShape2D HitBox1;
-    private CollisionShape2D HurtBox1;
+    public Area2D HurtBoxes;
+    public CollisionShape2D HitBox1;
+    public CollisionShape2D HurtBox1;
+
+    public Node2D ForwardWallDetectors;
+    public RayCast2D ForwardWallDetector_1;
+    public RayCast2D ForwardWallDetector_2;
+
+    public Node2D Sounds;
+    public AudioStreamPlayer2D Sound_Hit;
+    public AudioStreamPlayer2D Sound_Death;
+
+    public float DeffaultVolume_Sound_Hit;
+    public float DeffaultVolume_Sound_Death;
 
     public player Player;
     public override void _Ready()
@@ -50,20 +71,20 @@ public partial class Scav : CharacterBody2D
         HitBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
         HurtBox1 = GetNode<CollisionShape2D>("HitBoxes/Box1");
 
+        ForwardWallDetectors = GetNode<Node2D>("ForwardWallDetectors");
+        ForwardWallDetector_1 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_1");
+        ForwardWallDetector_2 = ForwardWallDetectors.GetNode<RayCast2D>("ForwardWallDetector_2");
+
+        //Звуки
+        Sounds = GetNode<Node2D>("Sounds");
+        Sound_Hit = Sounds.GetNode<AudioStreamPlayer2D>("Hit");
+        Sound_Death = Sounds.GetNode<AudioStreamPlayer2D>("Death");
+
+        DeffaultVolume_Sound_Hit = Sound_Hit.VolumeDb;
+        DeffaultVolume_Sound_Death = Sound_Death.VolumeDb;
+        //
+
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
-
-        if (Direction == -1)
-        {
-            Anim.FlipH = true;
-
-            Vector2 Reverse = new Vector2(-1, 1);
-            Anim.Position *= Reverse;
-            rayCast2D.Position *= Reverse;
-            HitBox1.Position *= Reverse;
-        }
-
-
-        HitBoxes.AreaEntered += Attack;
     }
 
 
@@ -71,14 +92,12 @@ public partial class Scav : CharacterBody2D
     public override void _Process(double delta)
     {
 
-        //GD.Print("Proc");
-
         if (DamagedTime > 0 && Alive)
         {
             DamagedTime -= (float)delta;
             if (DamagedTime <= 0 && State != Statement.Attack)
             {
-                if(IdleTime > 0)
+                if (IdleTime > 0)
                 {
                     Anim.Play("Idle");
                 }
@@ -107,18 +126,18 @@ public partial class Scav : CharacterBody2D
             }
         }
 
+        if (Anim.Modulate == new Color(1, 0.5f, 0.5f) && Godot.Time.GetTicksMsec() - LastDamagedTime > 100) //Если в последний раз урон проходил 100 милисекунд назад, то убираем красный цвет
+        {
+            Anim.Modulate = new Color(1, 1, 1);
+        }
+
         Vector2 velocity = Vector2.Zero;
 
         if (IsOnFloor() && Alive && State == Statement.Run)
         {
-            if (!rayCast2D.IsColliding() || IsOnWall())
+            if (!rayCast2D.IsColliding() || ForwardWallDetector_1.IsColliding() || ForwardWallDetector_2.IsColliding())
             {
-                Anim.FlipH = !Anim.FlipH;
                 Direction *= -1;
-                Vector2 Reverse = new Vector2(-1, 1);
-                Anim.Position *= Reverse;
-                rayCast2D.Position *= Reverse;
-                HitBox1.Position *= Reverse;
             }
 
             velocity.X += Direction * Speed * (float)delta;
@@ -128,21 +147,61 @@ public partial class Scav : CharacterBody2D
             velocity.Y += Gravity * (float)delta;
         }
 
+        Godot.Collections.Array<Area2D> OverlappingBodies = HitBoxes.GetOverlappingAreas();
+        for (int i = 0; i < OverlappingBodies.Count; i++)
+        {
+            Attack(OverlappingBodies[i]);
+        }
+
         MoveAndCollide(velocity);
         MoveAndSlide();
+        TurnAround();
+    }
 
-        Godot.Collections.Array<Area2D> OverlappingBodies = HitBoxes.GetOverlappingAreas();
-        for (int i = 0; i < OverlappingBodies.Count; i++) {
-            Attack(OverlappingBodies[i]);
+    Vector2 Reverse = new Vector2(-1, 1);
+    public void TurnAroundElements(Node2D Obj)
+    {
+        Obj.Position *= Reverse;
+        if (Obj is RayCast2D rayCast2D)
+        {
+            rayCast2D.TargetPosition *= Reverse;
+        }
+        Godot.Collections.Array<Node> Children = Obj.GetChildren();
+        for (int i = 0; i < Children.Count; i++)
+        {
+            if (Children[i] is Node2D node2d)
+            {
+                TurnAroundElements(node2d);
+            }
         }
     }
 
-    private bool SecondAttack = false;
+    public void TurnAround()
+    {
+        if (Alive && (Direction == 1) == Anim.FlipH)
+        {
+            Anim.FlipH = !Anim.FlipH;
+            Godot.Collections.Array<Node> Children = GetChildren();
+            for (int i = 0; i < Children.Count; i++)
+            {
+                if (Children[i] is Node2D node2d)
+                {
+                    TurnAroundElements(node2d);
+                }
+            }
+        }
+    }
+
+
+    public bool SecondAttack = false;
 
     public async void Attack(Node2D Body)
     {
         if (State == Statement.Run && Alive && Body.Name == "HurtBox" && (int)Player.Get("health") > 0)
         {
+            Player.CallDeferred("GetDamaged", Damage);
+            State = Statement.Idle;
+            IdleTime = AttackCooldown;
             if (SecondAttack)
             {
                 Anim.Play("Attack2");
@@ -152,15 +211,13 @@ public partial class Scav : CharacterBody2D
                 Anim.Play("Attack1");
             }
             SecondAttack = !SecondAttack;
-            Player.CallDeferred("GetDamaged", Damage);
-            State = Statement.Idle;
-            IdleTime = 2;
+            Sound_Hit.Play(0.25f);
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
             if (DamagedTime > 0)
             {
                 Anim.Play("Grep");
             }
-            else if(IdleTime > 0)
+            else if (IdleTime > 0)
             {
                 Anim.Play("Idle");
             }
@@ -171,21 +228,41 @@ public partial class Scav : CharacterBody2D
     {
 
         Health -= Damage;
-        State = Statement.Idle;
-        DamagedTime = 1;
-        Anim.Play("Grep");
-
+        LastDamagedTime = Godot.Time.GetTicksMsec();
+        Anim.Modulate = new Color(1, 0.5f, 0.5f);
         if (Health <= 0)
         {
             Death();
+        }
+        else
+        {
+            State = Statement.Idle;
+            Anim.Play("Grep");
+            DamagedTime = StunAfterDamage;
         }
     }
 
     public async void Death()
     {
-        Alive = false;
-        Anim.Play("Death");
-        await ToSignal(GetTree().CreateTimer(3), "timeout");
-        QueueFree();
+        if (Alive)
+        {
+            Alive = false;
+            Anim.Play("Death");
+            Sound_Death.Play();
+            await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
+            QueueFree();
+        }
+    }
+
+    public void turn_on()
+    {
+        Sound_Hit.VolumeDb = DeffaultVolume_Sound_Hit;
+        Sound_Death.VolumeDb = DeffaultVolume_Sound_Death;
+    }
+
+    public void turn_off()
+    {
+        Sound_Hit.VolumeDb = -80;
+        Sound_Death.VolumeDb = -80;
     }
 }

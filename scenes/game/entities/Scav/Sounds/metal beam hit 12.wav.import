@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cclh861nvy0iq"
+path="res://.godot/imported/metal beam hit 12.wav-212041cbf776f65d66d987dcb7fbe73a.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Scav/Sounds/metal beam hit 12.wav"
+dest_files=["res://.godot/imported/metal beam hit 12.wav-212041cbf776f65d66d987dcb7fbe73a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drb74ikssxr2u"
-path="res://.godot/imported/xeno-grunt-death-grounded.png-10f8941915f3a64d8aa492b5ac3cc85f.ctex"
+uid="uid://brtht6ue6igda"
+path="res://.godot/imported/xeno-grunt-attack-1.png-2c096d20c0a4d0ccddb6443b4ba57500.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/entities/Scav/Animation/xeno-grunt-death-grounded.png"
-dest_files=["res://.godot/imported/xeno-grunt-death-grounded.png-10f8941915f3a64d8aa492b5ac3cc85f.ctex"]
+source_file="res://scenes/game/entities/Scav/Sprites/xeno-grunt-attack-1.png"
+dest_files=["res://.godot/imported/xeno-grunt-attack-1.png-2c096d20c0a4d0ccddb6443b4ba57500.ctex"]
 
 [params]
 

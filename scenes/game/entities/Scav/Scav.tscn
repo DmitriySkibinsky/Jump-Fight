@@ -1,23 +1,25 @@
-[gd_scene load_steps=40 format=3 uid="uid://dqxeqy7xibk4b"]
+[gd_scene load_steps=42 format=3 uid="uid://dqxeqy7xibk4b"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Scav/Scav.cs" id="1_3bx88"]
-[ext_resource type="Texture2D" uid="uid://brtht6ue6igda" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-attack-1.png" id="3_wjr8a"]
-[ext_resource type="Texture2D" uid="uid://bfqs3vd1bscsa" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-attack-2.png" id="4_05fi6"]
-[ext_resource type="Texture2D" uid="uid://c31i3r0pvrokc" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-prep-jump.png" id="5_icqji"]
-[ext_resource type="Texture2D" uid="uid://drb74ikssxr2u" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-death-grounded.png" id="5_qbgrl"]
-[ext_resource type="Texture2D" uid="uid://bhvxcikghmkc" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-idle.png" id="6_lfggd"]
-[ext_resource type="Texture2D" uid="uid://3hrw6ctwfain" path="res://scenes/game/entities/Scav/Animation/xeno-grunt-run.png" id="7_e2xi1"]
+[ext_resource type="Texture2D" uid="uid://brtht6ue6igda" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-attack-1.png" id="3_wjr8a"]
+[ext_resource type="Texture2D" uid="uid://bfqs3vd1bscsa" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-attack-2.png" id="4_05fi6"]
+[ext_resource type="Texture2D" uid="uid://c31i3r0pvrokc" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-prep-jump.png" id="5_icqji"]
+[ext_resource type="Texture2D" uid="uid://drb74ikssxr2u" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-death-grounded.png" id="5_qbgrl"]
+[ext_resource type="Texture2D" uid="uid://bhvxcikghmkc" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-idle.png" id="6_lfggd"]
+[ext_resource type="Texture2D" uid="uid://3hrw6ctwfain" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-run.png" id="7_e2xi1"]
+[ext_resource type="AudioStream" uid="uid://cclh861nvy0iq" path="res://scenes/game/entities/Scav/Sounds/metal beam hit 12.wav" id="8_mr02s"]
+[ext_resource type="AudioStream" uid="uid://yjx7gc735sfp" path="res://scenes/game/entities/Scav/Sounds/Monster_Roar7.mp3" id="9_p7fpn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
-radius = 16.0
-height = 58.0
+radius = 40.0
+height = 140.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bfh"]
-size = Vector2(28.9348, 56)
+size = Vector2(80, 140)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6oe4v"]
-radius = 18.75
-height = 68.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5u5bn"]
+radius = 40.0
+height = 140.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xk01o"]
 atlas = ExtResource("3_wjr8a")
@@ -192,12 +194,12 @@ animations = [{
 "speed": 10.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_s4tfv")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 4.0,
@@ -249,7 +251,6 @@ animations = [{
 }]
 
 [node name="Scav" type="CharacterBody2D"]
-scale = Vector2(2.559, 2)
 collision_layer = 0
 collision_mask = 65
 script = ExtResource("1_3bx88")
@@ -259,8 +260,8 @@ metadata/_edit_group_ = true
 shape = SubResource("CapsuleShape2D_qov7e")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(14, 20)
-target_position = Vector2(0, 20)
+position = Vector2(40, 64)
+target_position = Vector2(0, 32)
 collision_mask = 65
 
 [node name="HitBoxes" type="Area2D" parent="."]
@@ -268,7 +269,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Box1" type="CollisionShape2D" parent="HitBoxes"]
-position = Vector2(21.5014, 0)
+position = Vector2(50, 0)
 shape = SubResource("RectangleShape2D_v3bfh")
 
 [node name="HurtBoxes" type="Area2D" parent="."]
@@ -276,14 +277,35 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Box1" type="CollisionShape2D" parent="HurtBoxes"]
-shape = SubResource("CapsuleShape2D_6oe4v")
+shape = SubResource("CapsuleShape2D_5u5bn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(14, -18)
-scale = Vector2(0.319824, 0.648276)
+position = Vector2(36, -40)
+scale = Vector2(0.8, 1.5)
 sprite_frames = SubResource("SpriteFrames_ec8yf")
-animation = &"Grep"
+animation = &"Run"
 autoplay = "Run"
-frame_progress = 0.182215
 
-[connection signal="body_entered" from="HitBoxes" to="." method="Attack"]
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_mr02s")
+volume_db = -12.0
+pitch_scale = 1.5
+bus = &"Enemies"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("9_p7fpn")
+volume_db = -12.0
+pitch_scale = 1.5
+bus = &"Enemies"
+
+[node name="ForwardWallDetectors" type="Node2D" parent="."]
+
+[node name="ForwardWallDetector_1" type="RayCast2D" parent="ForwardWallDetectors"]
+position = Vector2(0, -35)
+target_position = Vector2(48, 0)
+
+[node name="ForwardWallDetector_2" type="RayCast2D" parent="ForwardWallDetectors"]
+position = Vector2(0, 35)
+target_position = Vector2(48, 0)

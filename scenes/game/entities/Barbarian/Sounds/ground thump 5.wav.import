@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bba3q6kn1figc"
+path="res://.godot/imported/ground thump 5.wav-7379afb69f43ab87e4e9970d36c4f0ab.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Barbarian/Sounds/ground thump 5.wav"
+dest_files=["res://.godot/imported/ground thump 5.wav-7379afb69f43ab87e4e9970d36c4f0ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
