@@ -39,6 +39,8 @@ public partial class player : CharacterBody2D
 
 	public Node2D level;
 
+	public CollisionShape2D hitbox;
+
 	Vector2 player_pos;
 
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -92,9 +94,6 @@ public partial class player : CharacterBody2D
 	public override void _Ready()
 	{
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
-		/*smack = new AudioStreamPlayer();
-		smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");*/
 		smack = GetNode<AudioStreamPlayer>("Sounds/Smack");
 		hurt = GetNode<AudioStreamPlayer>("Sounds/Hurt");
 		steps = GetNode<AudioStreamPlayer>("Sounds/Steps");
@@ -105,6 +104,7 @@ public partial class player : CharacterBody2D
 		jump = GetNode<AudioStreamPlayer>("Sounds/Jump");
 		collect = GetNode<AudioStreamPlayer>("Sounds/Collect");
 		collect2 = GetNode<AudioStreamPlayer>("Sounds/Collect2");
+		hitbox = GetNode<CollisionShape2D>("AttackDirection/DamageBox/HitBox/CollisionShape2D");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -397,6 +397,7 @@ public partial class player : CharacterBody2D
 
 	public void GetDamaged(int Damage)
 	{
+		hitbox.Disabled = true;
 		smack.Play();
 	   if (Input.IsActionPressed("block") && (bool)level.Get("isBattleSection"))
 		{
