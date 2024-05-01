@@ -1,4 +1,3 @@
-        
 name: Build Godot Project for Windows
 
 on:
@@ -78,5 +77,4 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/jump-fight .
-        docker push ${{ secrets.DOCKER_USERNAME }}/jump-fight
+        docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/jump-fight:latest . --push
