@@ -23,7 +23,7 @@ public partial class LevelGenerator : Node2D
 	};
 	public PackedScene JumpBoost = GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/JumpBoost/jump_boost.tscn");
 	
-	public bool IsBoostSpawned = false;
+	public bool IsBoostSpawned = true;
 	public string NextScenePath;
 	public int num_levels = 12;
 	public int platform_amount = 10;

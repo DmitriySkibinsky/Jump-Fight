@@ -11,16 +11,21 @@ public partial class LevelGeneratorLevel3 : LevelGenerator
     public override void _Ready()
 	{
 		BattleSection = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/Room1.tscn")
+		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/Room1.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/Room2.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/Room3.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/Room4.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/Room5.tscn"),
 		};
 
 		EndRooms = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/EndRooms/EndRoom.tscn")
 		};
-
+        num_levels = 10;
 		Enemies = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
-		};
+        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/Gargoyle.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/MutatedBat.tscn")
+        };
 		BossRoom = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/BossRoom.tscn");
 		NextScenePath = "res://scenes/Menu/menu.tscn";
 
