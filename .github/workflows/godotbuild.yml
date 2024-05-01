@@ -80,9 +80,9 @@ jobs:
         cd ../Jump-Fight
         tree
         docker buildx build --platform linux/amd64 -t sskibaa/jump-fight:latest . 
-        tree
+        docker image ls -a
         
-    - name: Push Docker image
-      run: |
-        docker push sskibaa/jump-fight:latest --all-tags
+#    - name: Push Docker image
+#      run: |
+#        docker push sskibaa/jump-fight:latest 
         
