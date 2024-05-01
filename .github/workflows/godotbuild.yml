@@ -75,10 +75,14 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push Docker image
+    - name: Build Docker image
       run: |
         cd ../Jump-Fight
         tree
         docker buildx build --platform linux/amd64 -t sskibaa/jump-fight:latest . 
         tree
+        
+    - name: Push Docker image
+      run: |
+        docker push sskibaa/jump-fight:latest
         
