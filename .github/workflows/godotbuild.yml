@@ -79,7 +79,7 @@ jobs:
       run: |
         cd ../Jump-Fight
         tree
-        docker buildx build --platform linux/amd64 -t sskibaa/jump-fight:latest . 
+        docker buildx build --platform linux/amd64 --output=type=docker -t sskibaa/jump-fight:latest . 
         docker image ls -a
         
 #    - name: Push Docker image
