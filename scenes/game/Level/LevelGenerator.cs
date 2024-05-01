@@ -21,7 +21,9 @@ public partial class LevelGenerator : Node2D
 		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/Gargoyle.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/MutatedBat.tscn"),
 	};
-
+	public PackedScene JumpBoost = GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/JumpBoost/jump_boost.tscn");
+	
+	public bool IsBoostSpawned = false;
 	public string NextScenePath;
 	public int num_levels = 12;
 	public int platform_amount = 10;
@@ -123,6 +125,12 @@ public partial class LevelGenerator : Node2D
 			this.Owner.CallDeferred("RegisterPlatform", new_platform);
 			this.AddChild(new_platform);
 			
+			if (rnd.Next(0, 10) > 8 && !IsBoostSpawned){
+				Node2D new_boost = JumpBoost.Instantiate<Node2D>();
+				new_boost.Position = new Vector2(new_platform.Position.X, new_platform.Position.Y-75);
+				this.AddChild(new_boost);
+				IsBoostSpawned = true;
+			}
 		}
 	}
 
