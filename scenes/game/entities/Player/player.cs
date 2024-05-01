@@ -489,7 +489,7 @@ public partial class player : CharacterBody2D
             boost.Exit();
         }
 		collect2.Play();
-		jump_multiplier = 1.4f;
+		jump_multiplier = 1.2f;
 		await ToSignal(GetTree().CreateTimer(10), SceneTreeTimer.SignalName.Timeout);
 		jump_multiplier = 1f;
 	}
@@ -502,7 +502,7 @@ public partial class player : CharacterBody2D
 		collect2.Play();
 		damage_basic = 20;
 		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
-		damage_multiplier = 10;
+		damage_basic = 10;
 	}
 
 	public async void reload_boost(reload_boost boost = null)
