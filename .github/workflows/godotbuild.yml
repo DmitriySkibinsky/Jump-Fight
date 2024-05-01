@@ -80,4 +80,7 @@ jobs:
         cd ..
         ls -al
         pwd
+        cd Jump-Fight
+        ls -al
+        tree
         
