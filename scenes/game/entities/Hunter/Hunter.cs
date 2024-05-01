@@ -23,6 +23,7 @@ public partial class Hunter : CharacterBody2D
     public Godot.Collections.Array<PackedScene> Collectibles = new Godot.Collections.Array<PackedScene>{
 		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/AttackBoost/attack_boost.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Reload Boost/reload_boost.tscn")
 	};
 
     public int CollectiblesDropChance = 70;

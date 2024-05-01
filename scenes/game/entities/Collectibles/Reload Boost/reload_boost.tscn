@@ -43,6 +43,8 @@ animations = [{
 radius = 20.0
 
 [node name="Reload boost" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_jh653")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
