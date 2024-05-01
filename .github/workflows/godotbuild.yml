@@ -82,7 +82,7 @@ jobs:
         docker buildx build --platform linux/amd64 --output=type=docker -t sskibaa/jump-fight:latest . 
         docker image ls -a
         
-#    - name: Push Docker image
-#      run: |
-#        docker push sskibaa/jump-fight:latest 
+    - name: Push Docker image
+      run: |
+        docker push sskibaa/jump-fight:latest 
         
