@@ -84,5 +84,5 @@ jobs:
         
     - name: Push Docker image
       run: |
-        docker images
+        docker push sskibaa/jump-fight:latest
         
