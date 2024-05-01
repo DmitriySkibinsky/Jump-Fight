@@ -77,5 +77,6 @@ jobs:
 
     - name: Build and push Docker image
       run: |
+        cd ../Jump-Fight
         docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/jump-fight:latest . --push
         
