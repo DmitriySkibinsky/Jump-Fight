@@ -150,8 +150,9 @@ public partial class FloatingEye : CharacterBody2D
         OFF
     }
 
-
+    [Export]
     public int Speed = 125;
+    [Export]
     public int Damage = 20;
     public int direction = 1;
 

@@ -70,8 +70,8 @@ animations = [{
 size = Vector2(70.3125, 2.22222)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h7hmk"]
-radius = 7.75
-height = 19.5
+radius = 8.75
+height = 17.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61nv8"]
 size = Vector2(27.6, 28.8)
@@ -88,7 +88,6 @@ scale = Vector2(4, 4)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_bqkjj")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.25, 1.25)

@@ -23,7 +23,9 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
         };
 
         Enemies = new Godot.Collections.Array<PackedScene>{
-        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
+        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingSkull.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/MutatedBat.tscn")
         };
 
         BossRoom = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/BossRoom.tscn");

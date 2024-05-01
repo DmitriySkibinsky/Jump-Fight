@@ -16,11 +16,14 @@ public partial class LevelGenerator : Node2D
 	};
 	public PackedScene BossRoom = new PackedScene();
 	public Godot.Collections.Array<PackedScene> Enemies = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingSkull.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/Gargoyle.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/MutatedBat.tscn"),
 	};
 
 	public string NextScenePath;
-	public int num_levels = 4;
+	public int num_levels = 12;
 	public int platform_amount = 10;
 	public float last_platform_pos_y = 0;
 	public Camera2D camera;
