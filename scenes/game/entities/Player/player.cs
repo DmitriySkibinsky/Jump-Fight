@@ -39,6 +39,8 @@ public partial class player : CharacterBody2D
 
 	public Node2D level;
 
+	public CollisionShape2D hitbox;
+
 	Vector2 player_pos;
 
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -56,6 +58,8 @@ public partial class player : CharacterBody2D
 	public bool combo = false;
 
 	public bool attack_cooldown = false;
+
+	public float attack_cooldown_multiplier = 1f;
 
 	public bool super_cooldown = false;
 
@@ -92,9 +96,6 @@ public partial class player : CharacterBody2D
 	public override void _Ready()
 	{
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
-		/*smack = new AudioStreamPlayer();
-		smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");*/
 		smack = GetNode<AudioStreamPlayer>("Sounds/Smack");
 		hurt = GetNode<AudioStreamPlayer>("Sounds/Hurt");
 		steps = GetNode<AudioStreamPlayer>("Sounds/Steps");
@@ -105,6 +106,7 @@ public partial class player : CharacterBody2D
 		jump = GetNode<AudioStreamPlayer>("Sounds/Jump");
 		collect = GetNode<AudioStreamPlayer>("Sounds/Collect");
 		collect2 = GetNode<AudioStreamPlayer>("Sounds/Collect2");
+		hitbox = GetNode<CollisionShape2D>("AttackDirection/DamageBox/HitBox/CollisionShape2D");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -397,6 +399,7 @@ public partial class player : CharacterBody2D
 
 	public void GetDamaged(int Damage)
 	{
+		hitbox.Disabled = true;
 		smack.Play();
 	   if (Input.IsActionPressed("block") && (bool)level.Get("isBattleSection"))
 		{
@@ -415,7 +418,7 @@ public partial class player : CharacterBody2D
 	public async void attack_freeze()
 	{
 		attack_cooldown = true;
-		await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
+		await ToSignal(GetTree().CreateTimer(0.5f * attack_cooldown_multiplier), SceneTreeTimer.SignalName.Timeout);
 		attack_cooldown = false;
 	}
 
@@ -486,7 +489,7 @@ public partial class player : CharacterBody2D
             boost.Exit();
         }
 		collect2.Play();
-		jump_multiplier = 1.4f;
+		jump_multiplier = 1.2f;
 		await ToSignal(GetTree().CreateTimer(10), SceneTreeTimer.SignalName.Timeout);
 		jump_multiplier = 1f;
 	}
@@ -499,8 +502,20 @@ public partial class player : CharacterBody2D
 		collect2.Play();
 		damage_basic = 20;
 		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
-		damage_multiplier = 10;
+		damage_basic = 10;
 	}
+
+	public async void reload_boost(reload_boost boost = null)
+	{
+        if (boost != null)
+        {
+            boost.Exit();
+        }
+        collect2.Play();
+		attack_cooldown_multiplier = 0.2f;
+        await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
+		attack_cooldown_multiplier = 1f;
+    }
 
 	public void teleport_to(float target_posX)
 	{
