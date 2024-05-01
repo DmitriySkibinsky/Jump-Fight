@@ -4,7 +4,7 @@ RUN apk add --no-cache unzip
 
 RUN mkdir /output
 
-COPY ./build/Jump-Fight.zip /tmp/
+COPY ./Jump-Fight.zip /tmp/
 
 RUN unzip /tmp/Jump-Fight.zip -d /output
 
