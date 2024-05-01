@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbyo4jy5ognot"]
+
+[ext_resource type="Texture2D" uid="uid://cialfo7vbmx6u" path="res://assets/sprites/S001_nyknck.png" id="1_iy34j"]
+[ext_resource type="Script" path="res://scenes/game/entities/Collectibles/Reload Boost/reload_boost.cs" id="1_jh653"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_342c6"]
+atlas = ExtResource("1_iy34j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d04ie"]
+atlas = ExtResource("1_iy34j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfg2u"]
+atlas = ExtResource("1_iy34j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3y2p2"]
+atlas = ExtResource("1_iy34j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v4ypl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_342c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d04ie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfg2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3y2p2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvgfd"]
+radius = 20.0
+
+[node name="Reload boost" type="Area2D"]
+script = ExtResource("1_jh653")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -1)
+scale = Vector2(1.8125, 1.71598)
+sprite_frames = SubResource("SpriteFrames_v4ypl")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.243427
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bvgfd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

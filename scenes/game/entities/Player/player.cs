@@ -59,6 +59,8 @@ public partial class player : CharacterBody2D
 
 	public bool attack_cooldown = false;
 
+	public float attack_cooldown_multiplier = 1f;
+
 	public bool super_cooldown = false;
 
 	public float damage_basic = 10;
@@ -416,7 +418,7 @@ public partial class player : CharacterBody2D
 	public async void attack_freeze()
 	{
 		attack_cooldown = true;
-		await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
+		await ToSignal(GetTree().CreateTimer(0.5f * attack_cooldown_multiplier), SceneTreeTimer.SignalName.Timeout);
 		attack_cooldown = false;
 	}
 
@@ -502,6 +504,18 @@ public partial class player : CharacterBody2D
 		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
 		damage_multiplier = 10;
 	}
+
+	public async void reload_boost(reload_boost boost = null)
+	{
+        if (boost != null)
+        {
+            boost.Exit();
+        }
+        collect2.Play();
+		attack_cooldown_multiplier = 0.2f;
+        await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
+		attack_cooldown_multiplier = 1f;
+    }
 
 	public void teleport_to(float target_posX)
 	{
