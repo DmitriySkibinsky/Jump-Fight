@@ -157,6 +157,7 @@ public class FloatingEyeTests:TestClass
     {
         // Arrange
         var player = new player();
+        player.hitbox = new CollisionShape2D();
         player. smack = new AudioStreamPlayer();
         player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
         FloatingEye.Alive = true;

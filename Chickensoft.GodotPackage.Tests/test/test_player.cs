@@ -121,6 +121,7 @@ public class PlayerTests : TestClass
 	public void Test_GetDamaged_Blocking()
 	{
 		// Arrange
+		player.hitbox = new CollisionShape2D();
 		player. smack = new AudioStreamPlayer();
         player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
 		var initialHealth = player.health;

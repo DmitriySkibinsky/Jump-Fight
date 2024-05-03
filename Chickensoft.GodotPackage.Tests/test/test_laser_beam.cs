@@ -32,6 +32,7 @@ public class LaserBeamTests : TestClass
         Laser.Player = new player();
         Laser.Player.health = 100;
         body = Laser.Player;
+        Laser.Player.hitbox = new CollisionShape2D();
         Laser.Player.smack = new AudioStreamPlayer();
         Laser.Player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
         Laser.Damage = 10;
