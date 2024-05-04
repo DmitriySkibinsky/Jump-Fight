@@ -131,4 +131,9 @@ stream = ExtResource("3_uxykg")
 [node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("4_s3gh4")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

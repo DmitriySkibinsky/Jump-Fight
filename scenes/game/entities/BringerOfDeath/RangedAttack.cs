@@ -90,6 +90,9 @@ public partial class RangedAttack : Node2D
 		PlayerDetector.Set("disabled", true);
 		AnimationPlayer.Play("idle");
 	}
+	public void _on_timer_timeout(){
+		QueueFree();
+	}
 
 	public void _on_player_detector_body_entered(Node2D Body){
 		if (Body == Player){
