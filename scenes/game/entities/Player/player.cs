@@ -360,7 +360,7 @@ public partial class player : CharacterBody2D
 		animPlayer.Play("Death");
 		await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
 		QueueFree();
-		GetTree().ChangeSceneToFile("res://scenes/Menu/menu.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/Menu/lose_screen.tscn");
 	}
 
 	public async void damage_state()

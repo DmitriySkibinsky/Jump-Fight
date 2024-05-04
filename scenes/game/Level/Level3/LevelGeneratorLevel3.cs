@@ -27,7 +27,7 @@ public partial class LevelGeneratorLevel3 : LevelGenerator
         GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/MutatedBat.tscn")
         };
 		BossRoom = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level3/BossRoom.tscn");
-		NextScenePath = "res://scenes/Menu/menu.tscn";
+		NextScenePath = "res://scenes/Menu/win_screen.tscn";
 
 		Player = GetParent().GetNode<player>("Player");
 
