@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://de4fo44b618ui"
-path="res://.godot/imported/Free Smoke Fx  Pixel 07.png-43c4c1cadd69d4921cc028ad68acc55e.ctex"
+path="res://.godot/imported/FreeSmokeFxPixel07.png-4058aab41332be2bffdf541f7c240268.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Free Smoke Fx  Pixel 07.png"
-dest_files=["res://.godot/imported/Free Smoke Fx  Pixel 07.png-43c4c1cadd69d4921cc028ad68acc55e.ctex"]
+source_file="res://assets/sprites/FreeSmokeFxPixel07.png"
+dest_files=["res://.godot/imported/FreeSmokeFxPixel07.png-4058aab41332be2bffdf541f7c240268.ctex"]
 
 [params]
 

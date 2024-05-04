@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public partial class Room : Node2D
 {
-	public PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
-	public PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
+	public PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
+	public PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	public Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
 		{"Scav", GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")},
@@ -50,7 +50,7 @@ public partial class Room : Node2D
 			enemy.Position = EnemyPosition.Position;
 			this.AddChild(enemy);
 
-			SpawnExplosion SpawnExplosion = SpawnExplosionScene.Instantiate<SpawnExplosion>();
+			Node2D SpawnExplosion = SpawnExplosionScene.Instantiate<Node2D>();
 			SpawnExplosion.Position = EnemyPosition.Position;
 			
 			this.AddChild(SpawnExplosion);
