@@ -53,7 +53,7 @@ public partial class player : CharacterBody2D
 
 	public float jump_multiplier = 1f;
 
-	public int health = 100;
+	public int health = 150;
 
 	public bool combo = false;
 
@@ -63,7 +63,7 @@ public partial class player : CharacterBody2D
 
 	public bool super_cooldown = false;
 
-	public float damage_basic = 10;
+	public float damage_basic = 15;
 
 	public float damage_multiplier = 1;
 
@@ -473,9 +473,9 @@ public partial class player : CharacterBody2D
     {
         collect.Play();
         health += hp;
-        if (health > 100)
+        if (health > 150)
         {
-            health = 100;
+            health = 150;
         }
         EmitSignal(SignalName.HealthChanged, health);
         if (HealingOrb != null){
@@ -500,9 +500,9 @@ public partial class player : CharacterBody2D
             boost.Exit();
         }
 		collect2.Play();
-		damage_basic = 20;
+		damage_basic = 30;
 		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
-		damage_basic = 10;
+		damage_basic = 15;
 	}
 
 	public async void reload_boost(reload_boost boost = null)

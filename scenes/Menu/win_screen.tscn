@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cixwkn7momwlo"]
+[gd_scene load_steps=10 format=3 uid="uid://cixwkn7momwlo"]
 
 [ext_resource type="Script" path="res://scenes/Menu/win_screen.cs" id="1_vtjwa"]
 [ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_kn57w"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b6t4yt0jxyp5j" path="res://assets/sprites/New game Button.png" id="3_w7v0n"]
 [ext_resource type="AudioStream" uid="uid://bof56n680yl3n" path="res://assets/Sounds/Minimalist7.wav" id="5_toda6"]
 [ext_resource type="AudioStream" uid="uid://li1ar1yei4p" path="res://assets/Sounds/Minimalist8.wav" id="6_act0q"]
+[ext_resource type="AudioStream" uid="uid://cjop1as401j1b" path="res://assets/Music/Where Have the Flowers Gone.mp3" id="8_dliii"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_awef3"]
 streams_count = 2
@@ -103,6 +104,10 @@ icon = ExtResource("3_b1edw")
 
 [node name="Buttons" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_awef3")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_dliii")
+volume_db = -20.0
 
 [connection signal="pressed" from="Panel/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

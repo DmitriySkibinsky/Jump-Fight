@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://5225036q14o6"]
+[gd_scene load_steps=10 format=3 uid="uid://5225036q14o6"]
 
 [ext_resource type="Script" path="res://scenes/Menu/win_screen.cs" id="1_7ihjo"]
 [ext_resource type="Texture2D" uid="uid://23y8udfm483w" path="res://assets/sprites/retro-game-background-For-Free-Wallpaper.jpg" id="2_a48lk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://n5jvprapfh34" path="res://assets/sprites/Menu Button.png" id="5_2a2l3"]
 [ext_resource type="AudioStream" uid="uid://bof56n680yl3n" path="res://assets/Sounds/Minimalist7.wav" id="6_ic33e"]
 [ext_resource type="AudioStream" uid="uid://li1ar1yei4p" path="res://assets/Sounds/Minimalist8.wav" id="7_pu2w2"]
+[ext_resource type="AudioStream" uid="uid://m00ovrnk41cx" path="res://assets/Music/Sea of Life.mp3" id="8_k6xbt"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_awef3"]
 streams_count = 2
@@ -102,6 +103,11 @@ icon = ExtResource("5_2a2l3")
 
 [node name="Buttons" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_awef3")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_k6xbt")
+volume_db = -20.0
+pitch_scale = 1.2
 
 [connection signal="pressed" from="Panel/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

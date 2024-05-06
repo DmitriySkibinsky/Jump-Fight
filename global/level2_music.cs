@@ -20,7 +20,7 @@ public partial class level2_music : Node
         musicb.PitchScale = 1.2f;
         musicboss = new AudioStreamPlayer();
         AddChild(musicboss);
-        musicboss.Stream = GD.Load<AudioStream>("res://assets/Music/Claimed.mp3");
+        musicboss.Stream = GD.Load<AudioStream>("res://assets/Music/Falling to Earth (Loop).mp3");
         musicp.VolumeDb = -20;
         musicb.VolumeDb = -20;
         musicboss.VolumeDb = -20;
