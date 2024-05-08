@@ -878,9 +878,17 @@ public partial class Destroyer : CharacterBody2D
 
     public void turn_on()
     {
-    }
+    Sound_ArmorHurt.VolumeDb = DeffaultVolume_Sound_ArmorHurt;
+    Sound_BlockHurt.VolumeDb = DeffaultVolume_Sound_BlockHurt;
+    Sound_Hurt.VolumeDb = DeffaultVolume_Sound_Hurt;
+    Sound_Hit.VolumeDb = DeffaultVolume_Sound_Hit;
+}
 
     public void turn_off()
     {
+        Sound_ArmorHurt.VolumeDb = -80;
+        Sound_BlockHurt.VolumeDb = -80;
+        Sound_Hurt.VolumeDb = -80;
+        Sound_Hit.VolumeDb = -80;
     }
 }
