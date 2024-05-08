@@ -7,14 +7,17 @@ public partial class attack_boost : Area2D
     {
         if (body.Name == "Player")
         {
-            CharacterBody2D Player = (player)GetTree().GetFirstNodeInGroup("Player");
-            Player.CallDeferred("attack_boost");
+            player Player = (player)GetTree().GetFirstNodeInGroup("Player");
+            Player.attack_boost(this);
             var tween = GetTree().CreateTween();
             var tween_fade = GetTree().CreateTween();
             Vector2 collect = new Vector2(0, 25);
-            tween.TweenProperty(GetNode("attack_boost"), "position", Position - collect, 0.3f);
-            tween_fade.TweenProperty(GetNode("attack_boost"), "modulate:a", 0, 0.3f);
-            tween.TweenCallback(Callable.From(GetNode("attack_boost").QueueFree));
+            tween.TweenProperty(this, "position", Position - collect, 0.3f);
+            tween_fade.TweenProperty(this, "modulate:a", 0, 0.3f);
         }
+    }
+
+    public void Exit(){
+        QueueFree();
     }
 }

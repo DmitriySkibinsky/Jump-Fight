@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bibs3gx3ehxlr"
+path="res://.godot/imported/Falling to Earth (Loop).mp3-0816a212f6a58b8f88d446b55669a4d4.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/Falling to Earth (Loop).mp3"
+dest_files=["res://.godot/imported/Falling to Earth (Loop).mp3-0816a212f6a58b8f88d446b55669a4d4.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

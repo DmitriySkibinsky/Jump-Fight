@@ -157,6 +157,7 @@ public class FloatingEyeTests:TestClass
     {
         // Arrange
         var player = new player();
+        player.hitbox = new CollisionShape2D();
         player. smack = new AudioStreamPlayer();
         player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
         FloatingEye.Alive = true;
@@ -167,7 +168,7 @@ public class FloatingEyeTests:TestClass
         FloatingEye.Attack(player);
 
         // Assert
-        player.Velocity.ShouldBe(new Vector2(700, 0));
+        player.Velocity.ShouldBe(new Vector2(300, 0));
     }
 
     [Test]
@@ -204,7 +205,7 @@ public class FloatingEyeTests:TestClass
         FloatingEye._on_hurt_boxes_body_entered(player);
 
         // Assert
-        player.Velocity.ShouldBe(new Vector2(0, -500));
+        player.Velocity.ShouldBe(new Vector2(0, -700));
     }
 
     

@@ -21,7 +21,7 @@ public partial class JumpPlatform : StaticBody2D
 		if (body.Name == "Player"){
 			player Player = (player)body;
 				if (Player.Velocity.Y >= 0){
-				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
+				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce*Player.jump_multiplier);
 				Player.GetNode<AnimationPlayer>("AnimationPlayer").Play("Jump");
                 await ToSignal(Player.GetNode<AnimationPlayer>("AnimationPlayer"), AnimationPlayer.SignalName.AnimationFinished);
                 Player.MoveAndSlide();

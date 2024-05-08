@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://d32wip5d4ouq8"]
+
+[ext_resource type="PackedScene" uid="uid://hgtqpmihduqs" path="res://scenes/game/entities/FloatingEye/FloatingEye.tscn" id="1_rr380"]
+[ext_resource type="Texture2D" uid="uid://bssw7lwfebbv7" path="res://assets/sprites/MutatedBat/Mutated_Bat.png" id="2_4a8kp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfagc"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(0, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aotdf"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(96, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0pd6"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(192, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mprax"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(288, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_526uf"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(384, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f47w8"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(480, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifojt"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(576, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyyp8"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(672, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ku7cu"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymc5"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25b2c"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ky0o"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u8kp"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7c76a"]
+atlas = ExtResource("2_4a8kp")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t4anc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfagc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aotdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0pd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mprax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_526uf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f47w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifojt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyyp8")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ku7cu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25b2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ky0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u8kp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7c76a")
+}],
+"loop": true,
+"name": &"Floating",
+"speed": 8.0
+}]
+
+[node name="FloatingEye" instance=ExtResource("1_rr380")]
+Speed = 200
+Damage = 7
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(2.5, -5)
+sprite_frames = SubResource("SpriteFrames_t4anc")
+flip_h = true

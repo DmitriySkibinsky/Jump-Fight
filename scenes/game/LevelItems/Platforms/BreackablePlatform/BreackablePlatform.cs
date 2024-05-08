@@ -24,7 +24,7 @@ public partial class BreackablePlatform : JumpPlatform
 		if (body.Name == "Player"){
 			player Player = (player)body;
 			if (Player.Velocity.Y >= 0){
-				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce);
+				Player.Velocity = new Vector2(Player.Velocity.X, -JumpForce*Player.jump_multiplier);
 				Platform.Hide();
 				Explosion.Play();
                 Player.GetNode<AnimationPlayer>("AnimationPlayer").Play("Jump");

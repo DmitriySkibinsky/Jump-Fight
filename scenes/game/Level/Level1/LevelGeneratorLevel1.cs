@@ -6,13 +6,16 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
 {
     public level1_music Music;
     public Node2D level;
-    public Node2D manager;
     public float sec = 0f;
     public override void _Ready()
     {
         BattleSection = new Godot.Collections.Array<PackedScene>{
         GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room1.tscn"),
-        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room2.tscn")
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room2.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room3.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room4.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room5.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/Room6.tscn"),
         };
 
         EndRooms = new Godot.Collections.Array<PackedScene>{
@@ -20,7 +23,9 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
         };
 
         Enemies = new Godot.Collections.Array<PackedScene>{
-        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn")
+        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingEye.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/FloatingSkull.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/FloatingEye/MutatedBat.tscn")
         };
 
         BossRoom = GD.Load<PackedScene>("res://scenes/game/LevelItems/Rooms/Level1/BossRoom.tscn");
@@ -31,7 +36,6 @@ public partial class LevelGeneratorLevel1 : LevelGenerator
 
         Music = GetNode<level1_music>("/root/Level1PlatformerMusic");
         level = GetNode<Node2D>("../");
-        manager = GetNode<Node2D>("../Manager");
         if (settings.Audio)
         {
             if (!(bool)level.Get("isBattleSection"))

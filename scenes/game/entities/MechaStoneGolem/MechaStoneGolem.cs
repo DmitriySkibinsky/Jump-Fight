@@ -16,7 +16,8 @@ public partial class MechaStoneGolem : CharacterBody2D
 	public Area2D HurtBoxes;
 	public ColorRect TakeDamageEffect;
 	public float Direction;
-	private float healthPoints = 500;
+	public bool Alive = true;
+	private float healthPoints = 840;
 	public bool HealthToPlayerDroped = false;
 	public SoundSettings Switcher = SoundSettings.ON;
 	public Node2D Sounds;
@@ -26,6 +27,7 @@ public partial class MechaStoneGolem : CharacterBody2D
     }set{
         healthPoints = value;
         if (healthPoints <= 0){
+			Alive = false;
 			GetNode<FiniteStateMachine>("FiniteStateMachine").ChangeState("Death");
 		}
     }}

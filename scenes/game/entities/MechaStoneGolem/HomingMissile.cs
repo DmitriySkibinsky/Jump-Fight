@@ -53,7 +53,7 @@ public partial class HomingMissile : Area2D
         target = _target;
     }
 
-    private Vector2 Seek()
+    public Vector2 Seek()
     {
         Vector2 steer = Vector2.Zero;
         if (target != null)

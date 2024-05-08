@@ -30,6 +30,11 @@ layer_0/tile_data = PackedInt32Array()
 [node name="Footer" parent="." index="8"]
 layer_0/tile_data = PackedInt32Array(720906, 131072, 1, 720907, 131072, 1, 720908, 131072, 1, 720909, 131072, 1, 720910, 131072, 1, 720911, 131072, 1, 720912, 131072, 1, 720913, 131072, 1, 720914, 131072, 1, 720915, 131072, 1, 786451, 393216, 4, 851987, 458752, 5, 917523, 327680, 5, 983059, 327680, 6, 1048595, 327680, 6, 786442, 393216, 4, 851978, 393216, 5, 917514, 327680, 5, 983050, 327680, 6, 1048586, 327680, 6, 786443, 458752, 4, 786444, 393216, 4, 851981, 327680, 6, 851982, 327680, 6, 851983, 327680, 6, 851984, 327680, 6, 851985, 327680, 5, 851986, 327680, 6, 786450, 458752, 4, 786449, 458752, 4, 786448, 458752, 4, 786447, 393216, 4, 786446, 393216, 4, 786445, 458752, 4, 851980, 327680, 6, 917516, 327680, 5, 917515, 327680, 6, 851979, 327680, 5, 917518, 327680, 6, 917519, 327680, 5, 917520, 327680, 5, 917521, 327680, 5, 917522, 327680, 5, 983058, 327680, 6, 983057, 327680, 6, 983056, 327680, 5, 983055, 327680, 5, 983054, 327680, 6, 983053, 327680, 5, 983052, 327680, 5, 983051, 327680, 6, 1048587, 327680, 6, 1048588, 327680, 6, 1048589, 327680, 5, 1048590, 327680, 5, 1048591, 327680, 6, 1048592, 327680, 6, 1048593, 327680, 5, 1048594, 327680, 6, 917517, 327680, 5)
 
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/Audio/Audio" to="Manager" method="_on_audio_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/Sounds/Sounds" to="Manager" method="_on_sounds_pressed"]
+
 [editable path="InLevelUI"]
 [editable path="InLevelUI/Pause"]
 [editable path="ParallaxBackground"]

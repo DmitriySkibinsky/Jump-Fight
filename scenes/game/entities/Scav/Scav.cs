@@ -21,9 +21,19 @@ public partial class Scav : CharacterBody2D
     }
 
     public static Random RNG = new Random();
+    public Godot.Collections.Array<PackedScene> Collectibles = new Godot.Collections.Array<PackedScene>{
+		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/AttackBoost/attack_boost.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Reload Boost/reload_boost.tscn")
+	};
 
+    public int CollectiblesDropChance = 30;
+
+    [Export]
     public int Speed = 60;
+    [Export]
     public int Damage = 30;
+    [Export]
     public int Health = 130;
     public float StunAfterDamage = 0.5f; // Сколько враг будет под станом после удара
     public float AttackCooldown = 2;
@@ -250,6 +260,14 @@ public partial class Scav : CharacterBody2D
             Anim.Play("Death");
             Sound_Death.Play();
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
+            //Дроп бонусов
+             Random rnd = new Random();
+		    if (rnd.Next(100) < CollectiblesDropChance){
+			    int random_collectibles = rnd.Next(Collectibles.Count);
+			    Node2D new_collectibles = Collectibles[random_collectibles].Instantiate<Node2D>();
+                new_collectibles.GlobalPosition = GlobalPosition;
+                GetParent().GetParent().AddChild(new_collectibles);
+		    }
             QueueFree();
         }
     }

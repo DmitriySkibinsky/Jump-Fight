@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 public partial class BossRoomWaves : Node2D
 {
-	private PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
+	private PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
 
-	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
+	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	public Godot.Collections.Array<PackedScene> Enemies = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")
+		GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/Barbarian/Barbarian.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/Hunter/HunterLv1.tscn")
 	};	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;
 	private Marker2D ExitPlatformPosition;
@@ -41,7 +44,7 @@ public partial class BossRoomWaves : Node2D
 			enemy.Position = EnemyPosition.Position;
 			this.AddChild(enemy);
 
-			SpawnExplosion SpawnExplosion = SpawnExplosionScene.Instantiate<SpawnExplosion>();
+			Node2D SpawnExplosion = SpawnExplosionScene.Instantiate<Node2D>();
 			SpawnExplosion.Position = EnemyPosition.Position;
 			
 			this.AddChild(SpawnExplosion);
@@ -52,12 +55,11 @@ public partial class BossRoomWaves : Node2D
 
 	public void _on_enemy_killed(){
 		num_enemies -= 1;
-		if (num_enemies == 0 && WavesCount != 0){
+		if (num_enemies == 0 && WavesCount > 0){
 			WavesCount -= 1;
 			num_enemies = EnemyPositionsContainer.GetChildCount();
 			SpawnEnemies();
-		}
-		if (WavesCount == 0){
+		}else if (WavesCount == 0){
 			ExitPlatform exitPlatform = ExitPlatformScene.Instantiate<ExitPlatform>();
 			exitPlatform.Position = ExitPlatformPosition.Position;
 			this.AddChild(exitPlatform);

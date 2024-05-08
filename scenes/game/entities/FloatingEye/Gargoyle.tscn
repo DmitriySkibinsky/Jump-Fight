@@ -1,0 +1,103 @@
+[gd_scene load_steps=15 format=3 uid="uid://bsku3fxbp5a2w"]
+
+[ext_resource type="PackedScene" uid="uid://hgtqpmihduqs" path="res://scenes/game/entities/FloatingEye/FloatingEye.tscn" id="1_isyeu"]
+[ext_resource type="Texture2D" uid="uid://ci3buy8nfmycc" path="res://assets/sprites/Gargoyle/Death.png" id="2_lj1rd"]
+[ext_resource type="Texture2D" uid="uid://cuj6riyao6weq" path="res://assets/sprites/Gargoyle/Flight.png" id="3_5tmww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb2gq"]
+atlas = ExtResource("2_lj1rd")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0paeh"]
+atlas = ExtResource("2_lj1rd")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibndq"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjwam"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6p0d"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ceby"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3suq"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc4gk"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(750, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y1pd"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(900, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y0fh"]
+atlas = ExtResource("3_5tmww")
+region = Rect2(1050, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uqsit"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb2gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0paeh")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibndq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjwam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6p0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ceby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3suq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc4gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7y1pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7y0fh")
+}],
+"loop": true,
+"name": &"Floating",
+"speed": 8.0
+}]
+
+[node name="FloatingEye" instance=ExtResource("1_isyeu")]
+Speed = 100
+Damage = 15
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(-0.75, -8.5)
+scale = Vector2(0.825, 0.825)
+sprite_frames = SubResource("SpriteFrames_uqsit")
+
+[node name="HitBox" parent="HitBoxes" index="0"]
+position = Vector2(3.25, -6.5)
+
+[node name="CollisionShape2D" parent="." index="3"]
+visible = false

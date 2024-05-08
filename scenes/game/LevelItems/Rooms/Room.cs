@@ -4,20 +4,27 @@ using System.Collections.Generic;
 
 public partial class Room : Node2D
 {
-	private PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
-	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
+	public PackedScene SpawnExplosionScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/SpawnExplosion/SpawnExplosion.tscn");
+	public PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
-	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
+	public Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
 		{"Scav", GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")},
+		{"ScavLv2", GD.Load<PackedScene>("res://scenes/game/entities/Scav/ScavLv2.tscn")},
+		{"ScavLv3", GD.Load<PackedScene>("res://scenes/game/entities/Scav/ScavLv3.tscn")},
         {"Barbarian", GD.Load<PackedScene>("res://scenes/game/entities/Barbarian/Barbarian.tscn")},
+		{"BarbarianLv2", GD.Load<PackedScene>("res://scenes/game/entities/Barbarian/BarbarianLv2.tscn")},
+		{"BarbarianLv3", GD.Load<PackedScene>("res://scenes/game/entities/Barbarian/BarbarianLv3.tscn")},
         {"Hunter", GD.Load<PackedScene>("res://scenes/game/entities/Hunter/Hunter.tscn")},
+		{"HunterLv1", GD.Load<PackedScene>("res://scenes/game/entities/Hunter/HunterLv1.tscn")},
+		{"HunterLv2", GD.Load<PackedScene>("res://scenes/game/entities/Hunter/HunterLv2.tscn")},
+		{"HunterLv3", GD.Load<PackedScene>("res://scenes/game/entities/Hunter/HunterLv3.tscn")},
         {"Destroyer", GD.Load<PackedScene>("res://scenes/game/entities/Destroyer/Destroyer.tscn")},
     };
-	private Node2D EnemyPositionsContainer;
-	private Area2D PlayerDetector;
-	private Marker2D ExitPlatformPosition;
-	private Marker2D PlayerSpawn;
-	private Area2D DamageBox;
+	public Node2D EnemyPositionsContainer;
+	public Area2D PlayerDetector;
+	public Marker2D ExitPlatformPosition;
+	public Marker2D PlayerSpawn;
+	public Area2D DamageBox;
 
 	public int num_enemies;
 	public override void _Ready()
@@ -35,7 +42,7 @@ public partial class Room : Node2D
 	{
 	}
 
-	private async void SpawnEnemies(){
+	public async void SpawnEnemies(){
 		foreach(Marker2D EnemyPosition in EnemyPositionsContainer.GetChildren()){
 			string EnemyName = EnemyPosition.Name.ToString();
 			EnemyName = EnemyName.Substr(0, EnemyName.IndexOf("_"));
@@ -44,7 +51,7 @@ public partial class Room : Node2D
 			enemy.Position = EnemyPosition.Position;
 			this.AddChild(enemy);
 
-			SpawnExplosion SpawnExplosion = SpawnExplosionScene.Instantiate<SpawnExplosion>();
+			Node2D SpawnExplosion = SpawnExplosionScene.Instantiate<Node2D>();
 			SpawnExplosion.Position = EnemyPosition.Position;
 			
 			this.AddChild(SpawnExplosion);

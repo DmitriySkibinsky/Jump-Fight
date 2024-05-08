@@ -15,16 +15,18 @@ public partial class BringerOfDeath : CharacterBody2D
 	public Area2D HurtBoxes;
 	public ColorRect TakeDamageEffect;
 	public float Direction;
-	private float healthPoints = 500;
+	private float healthPoints = 600;
 	public bool HealthToPlayerDroped = false;
 	public SoundSettings Switcher = SoundSettings.ON;
 	public Node2D Sounds;
+	public bool Alive = true;
 	Tween tween;
 	public float HealthPoints{get{
         return healthPoints;
     }set{
         healthPoints = value;
         if (healthPoints <= 0){
+			Alive = false;
 			GetNode<FiniteStateMachine>("FiniteStateMachine").ChangeState("Death");
 		}
     }}

@@ -50,7 +50,7 @@ public partial class RangedAttack : Node2D
 		PlayerDetector = GetNode<CollisionShape2D>("PlayerDetector/CollisionShape2D");
 		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		Player = (player)GetTree().GetFirstNodeInGroup("Player");
-		SpawnSound = GetNode<AudioStreamPlayer>("Sound/Spawn");
+		SpawnSound = GetNode<AudioStreamPlayer>("Sounds/Spawn");
 
 		SpawnSound.Play();
 		AnimationPlayer.Play("idle");
@@ -89,6 +89,9 @@ public partial class RangedAttack : Node2D
 
 		PlayerDetector.Set("disabled", true);
 		AnimationPlayer.Play("idle");
+	}
+	public void _on_timer_timeout(){
+		QueueFree();
 	}
 
 	public void _on_player_detector_body_entered(Node2D Body){

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chul7s70gpbr1"]
+
+[ext_resource type="Script" path="res://global/menu_music.cs" id="1_n150e"]
+
+[node name="MenuMusic" type="Node2D"]
+script = ExtResource("1_n150e")

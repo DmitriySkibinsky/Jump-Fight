@@ -8,5 +8,10 @@
 [node name="LevelGenerator" parent="." index="3"]
 script = ExtResource("2_rjfds")
 
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/Resum" to="Manager" method="_on_resum_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/VBoxContainer/new_game" to="Manager" method="_on_new_game_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/Audio/Audio" to="Manager" method="_on_audio_pressed"]
+[connection signal="pressed" from="InLevelUI/Pause/Panel/Sounds/Sounds" to="Manager" method="_on_sounds_pressed"]
+
 [editable path="InLevelUI"]
 [editable path="InLevelUI/Pause"]

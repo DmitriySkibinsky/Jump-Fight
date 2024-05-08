@@ -30,7 +30,7 @@ public class LevelTest : TestClass {
 	}
 
 	[Test]
-    public void Process_WhenPlayerBelowCameraAndMoveableCameraIsTrue_YCoordinateIsAdjusted()
+    public void Test_Process_1()
     {
         // Arrange
         player.Position = new Vector2(0, -10); 
@@ -45,7 +45,7 @@ public class LevelTest : TestClass {
     }
 
     [Test]
-    public void Process_WhenPlayerBelowCameraAndMoveableCameraIsFalse_YCoordinateIsNotAdjusted()
+    public void Test_Process_2()
     {
         // Arrange
         player.Position = new Vector2(0, -10); // Player below the camera
@@ -60,7 +60,7 @@ public class LevelTest : TestClass {
     }
 
     [Test]
-    public void Process_WhenPlayerAboveCamera_YCoordinateIsNotAdjusted()
+    public void Test_Process_3()
     {
         // Arrange
         player.Position = new Vector2(0, 0); 
@@ -82,6 +82,7 @@ public class LevelTest : TestClass {
         player.health = 100;
         player. smack = new AudioStreamPlayer();
         player.smack.Stream = ResourceLoader.Load<AudioStream>("Sounds/Smack");
+        player.hitbox = new CollisionShape2D();
 
         // Act
         level._on_cleaner_area_body_entered(player);

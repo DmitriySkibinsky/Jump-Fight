@@ -254,6 +254,8 @@ animations = [{
 collision_layer = 0
 collision_mask = 65
 script = ExtResource("1_3bx88")
+Damage = 15
+Health = 70
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

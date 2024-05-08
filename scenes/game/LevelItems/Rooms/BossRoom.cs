@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class BossRoom : Node2D
 {
-	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/Game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
+	private PackedScene ExitPlatformScene = GD.Load<PackedScene>("res://scenes/game/LevelItems/RoomItems/ExitPlatform/ExitPlatform.tscn");
 
 	private Dictionary<string, PackedScene> Enemies = new Dictionary<string, PackedScene>{
         {"BringerOfDeath", GD.Load<PackedScene>("res://scenes/game/entities/BringerOfDeath/BringerOfDeath.tscn")},

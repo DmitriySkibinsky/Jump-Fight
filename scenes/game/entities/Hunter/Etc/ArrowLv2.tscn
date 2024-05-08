@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjh6vnacgnq0m"]
+
+[ext_resource type="PackedScene" uid="uid://dad674tyfcwce" path="res://scenes/game/entities/Hunter/Etc/Arrow.tscn" id="1_q4miy"]
+
+[node name="Area2D" instance=ExtResource("1_q4miy")]
+Speed = 600.0
+Damage = 10
+
+[node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(1, 1, 0, 1)

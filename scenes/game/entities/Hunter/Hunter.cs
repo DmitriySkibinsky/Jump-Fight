@@ -19,12 +19,25 @@ public partial class Hunter : CharacterBody2D
     }
 
     public static Random RNG = new Random();
+     //Дроп бонусов
+    public Godot.Collections.Array<PackedScene> Collectibles = new Godot.Collections.Array<PackedScene>{
+		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/AttackBoost/attack_boost.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Reload Boost/reload_boost.tscn")
+	};
+
+    public int CollectiblesDropChance = 70;
 
     // Настройки
+    [Export]
     public float Speed = 260;
+    [Export]
     public int Health = 168;
+    [Export]
     public double Reload = 1.5;
+    [Export]
     public double RollCooldown = 25;
+    [Export]
     public float RollSpeedBoost = 2.5f;
     public int MinIdleTime = 5;
     public int MinMoveTime = 2;
@@ -78,8 +91,8 @@ public partial class Hunter : CharacterBody2D
 
     public float DeffaultVolume_Sound_Attack;
     public float DeffaultVolume_Sound_Shoot;
-
-    public PackedScene Arrow;
+    [Export]
+    public PackedScene Arrow = GD.Load<PackedScene>("res://scenes/game/entities/Hunter/Etc/Arrow.tscn");
 
     public player Player;
     public override void _Ready()
@@ -113,7 +126,6 @@ public partial class Hunter : CharacterBody2D
         DeffaultVolume_Sound_Shoot = Sound_Shoot.VolumeDb;
         //
 
-        Arrow = GD.Load<PackedScene>("res://scenes/game/entities/Hunter/Etc/Arrow.tscn");
 
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
 
@@ -577,6 +589,14 @@ public partial class Hunter : CharacterBody2D
         Anim.Play("Death");
         //Sound_Death.Play();
         await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
+        //Дроп бонусов
+        Random rnd = new Random();
+		if (rnd.Next(100) < CollectiblesDropChance){
+			int random_collectibles = rnd.Next(Collectibles.Count);
+			Node2D new_collectibles = Collectibles[random_collectibles].Instantiate<Node2D>();
+            new_collectibles.GlobalPosition = GlobalPosition;
+            GetParent().GetParent().AddChild(new_collectibles);
+		}
         QueueFree();
     }
 
