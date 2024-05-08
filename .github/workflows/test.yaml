@@ -30,7 +30,10 @@ jobs:
     - name: Verify
       run: |
         v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --version
-
+    - name: Build project
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --quit --build-solutions
+        
     - name: Testing Project
       run: | 
         sudo mkdir testing_proj
@@ -38,4 +41,3 @@ jobs:
         sudo mv Validation.py testing_proj/Validation.py
         sudo v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 -d --headless --run-tests --quit-on-finish >> testing_proj/result.txt
         sudo cat testing_proj/result.txt
- 
