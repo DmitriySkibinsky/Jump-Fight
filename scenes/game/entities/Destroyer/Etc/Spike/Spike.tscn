@@ -1,0 +1,172 @@
+[gd_scene load_steps=17 format=3 uid="uid://bcglmi6k00hqg"]
+
+[ext_resource type="Texture2D" uid="uid://bp8gi5ch1wocu" path="res://scenes/game/entities/Destroyer/Sprites/Armored/Golem_Armor_AttackA_FX.png" id="1_c36cd"]
+[ext_resource type="Script" path="res://scenes/game/entities/Destroyer/Etc/Spike/Spike.cs" id="1_siwps"]
+[ext_resource type="AudioStream" uid="uid://dg0q2iia3j85c" path="res://scenes/game/entities/Destroyer/Sounds/silicon hit 25.wav" id="3_gip5c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwvi0"]
+size = Vector2(96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wowyd"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a2ir"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7l2at"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8ag2"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjbef"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nsah"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a7cy"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkv7d"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4xu7"]
+atlas = ExtResource("1_c36cd")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4m2pe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wowyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a2ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7l2at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8ag2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjbef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nsah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a7cy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkv7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4xu7")
+}],
+"loop": false,
+"name": &"Spike",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_u03v8"]
+resource_name = "Spike"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Spike"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"SetState"
+}, {
+"args": [false],
+"method": &"SetState"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/Appear")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ffkw"]
+_data = {
+"Spike": SubResource("Animation_u03v8")
+}
+
+[node name="Spike" type="Area2D"]
+position = Vector2(0, -48)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_siwps")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bwvi0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_4m2pe")
+animation = &"Spike"
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ffkw")
+}
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Appear" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("3_gip5c")
+volume_db = -4.0
+pitch_scale = 0.9
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="Destroy"]

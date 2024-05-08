@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3y8qr150xvdt"]
+
+[ext_resource type="Script" path="res://scenes/game/entities/Destroyer/Etc/Plasma/Plasma.cs" id="1_0liql"]
+[ext_resource type="Texture2D" uid="uid://c71dsaj5rkdnw" path="res://scenes/game/entities/Destroyer/Sprites/Armored/Golem_Armor_AttackC_FX.png" id="1_242cg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tuqum"]
+radius = 32.0
+height = 128.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q84p"]
+atlas = ExtResource("1_242cg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1edkl"]
+atlas = ExtResource("1_242cg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0ydj"]
+atlas = ExtResource("1_242cg")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_daotr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q84p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1edkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0ydj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Plasma" type="Area2D"]
+collision_layer = 0
+collision_mask = 34
+script = ExtResource("1_0liql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tuqum")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_daotr")
+autoplay = "default"
+frame_progress = 0.234748
+
+[connection signal="area_entered" from="." to="." method="Collide"]

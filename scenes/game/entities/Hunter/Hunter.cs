@@ -125,7 +125,6 @@ public partial class Hunter : CharacterBody2D
 
     public override void _Process(double delta) // НЕ МЕНЯТЬ НА _PhysicsProcess!
     {
-        //GD.Print(State, "\t", AnimSprite.Animation);
         if (DamageEffectTime > 0)
         {
             DamageEffectTime -= delta;
@@ -133,6 +132,11 @@ public partial class Hunter : CharacterBody2D
             {
                 AnimSprite.Modulate = new Color(1, 1f, 1f);
             }
+        }
+
+        if (!Alive)
+        {
+            return;
         }
 
         if (DeltaReload > 0 && State != Statement.Attack)
@@ -143,11 +147,6 @@ public partial class Hunter : CharacterBody2D
         if (DeltaRollCooldown > 0)
         {
             DeltaRollCooldown -= delta;
-        }
-
-        if (!Alive)
-        {
-            return;
         }
 
         switch (State)

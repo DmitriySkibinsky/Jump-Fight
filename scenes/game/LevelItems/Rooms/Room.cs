@@ -11,6 +11,7 @@ public partial class Room : Node2D
 		{"Scav", GD.Load<PackedScene>("res://scenes/game/entities/Scav/Scav.tscn")},
         {"Barbarian", GD.Load<PackedScene>("res://scenes/game/entities/Barbarian/Barbarian.tscn")},
         {"Hunter", GD.Load<PackedScene>("res://scenes/game/entities/Hunter/Hunter.tscn")},
+        {"Destroyer", GD.Load<PackedScene>("res://scenes/game/entities/Destroyer/Destroyer.tscn")},
     };
 	private Node2D EnemyPositionsContainer;
 	private Area2D PlayerDetector;

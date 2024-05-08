@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b17ru57giwi2b"
+path="res://.godot/imported/brick hit 34.wav-78806001294c6376c34acf00626f736b.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Destroyer/Sounds/brick hit 34.wav"
+dest_files=["res://.godot/imported/brick hit 34.wav-78806001294c6376c34acf00626f736b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -477,7 +477,6 @@ scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_aacjc")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -491,11 +490,9 @@ autoplay = "Idle"
 stream = ExtResource("2_7suuk")
 volume_db = -4.0
 pitch_scale = 1.6
-bus = &"Enemies"
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("3_uomdq")
-bus = &"Enemies"
 
 [node name="Triggers" type="Node2D" parent="."]
 

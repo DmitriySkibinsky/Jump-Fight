@@ -1547,6 +1547,9 @@ autoplay = "Idle"
 
 [node name="DamageBox" parent="AttackDirection" instance=ExtResource("5_xwwmt")]
 
+[node name="HitBox" parent="AttackDirection/DamageBox" index="1"]
+collision_layer = 32
+
 [node name="CollisionShape2D" parent="AttackDirection/DamageBox/HitBox" index="0"]
 disabled = true
 

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dg0q2iia3j85c"
+path="res://.godot/imported/silicon hit 25.wav-99097948f2e723b739c40495680d1317.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Destroyer/Sounds/silicon hit 25.wav"
+dest_files=["res://.godot/imported/silicon hit 25.wav-99097948f2e723b739c40495680d1317.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

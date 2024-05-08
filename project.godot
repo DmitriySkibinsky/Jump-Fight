@@ -94,6 +94,7 @@ super={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="PlayerJumpAttack"
+2d_physics/layer_6="Parry"
 2d_physics/layer_8="DisappearingOb"
 
 [rendering]
