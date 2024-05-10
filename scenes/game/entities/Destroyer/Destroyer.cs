@@ -596,7 +596,7 @@ public partial class Destroyer : CharacterBody2D
         }
     }
 
-    private Vector2 BezierCurve(float t)
+    public Vector2 BezierCurve(float t)
     {
         Vector2 Q0 = P0.Lerp(Ph, t);
         Vector2 Q1 = Ph.Lerp(P1, t);
