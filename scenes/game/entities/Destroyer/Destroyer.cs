@@ -28,29 +28,52 @@ public partial class Destroyer : CharacterBody2D
     public static Random RNG = new Random();
 
     // Настройки
+    [Export]
     public float Speed = 40;
+    [Export]
     public int Damage = 25;
+    [Export]
     public int ArmorRushDamage = 30;
+    [Export]
     public int RushDamage = 40;
+    [Export]
     public int ZoomDamage = 30;
+    [Export]
     public int Health = 200;
+    [Export]
     public int Armor = 2;
+    [Export]
     public double BasicAttackCooldown = 2;
+    [Export]
     public double ShootCooldown = 12;
+    [Export]
     public double AbilityCooldown = 12;
+    [Export]
     public double IntermissionAfterAbility = 6; // Сколько секунд после способности не сможет юзать способность
+    [Export]
     public Vector2 Bounce = new Vector2(1000, -600); // Откидывание рашем на 1 стадии
+    [Export]
     public double RushTime = 5;
+    [Export]
     public float RushSpeedMultiplier = 7; // Множитель скорости раша на 1 стадии
     public float ArmorBreakRushSpeedMultiplier = 5; // Множитель скорости раша во 2 стадии
+    [Export]
     public float StepCheckArea = 64; // Для проверки на наличие обрыва между игроком и врагом
+    [Export]
     public int ChanceToZoom = 0; // Шанс зума вместо раша на 1 стадии
+    [Export]
     public float AddSizeToHitBox = 8; // На сколько увеличится хитбокс во второй стадии(хз на сколько он нужно)
+    [Export]
     public double StunTime = 5; // Время стана во 2 стадии после абилок
+    [Export]
     public int SpikeAttackDistance = 2048; // Дистанция атаки шипами
+    [Export]
     public int SpikeAttackStep = 96;
+    [Export]
     public double SpikeAttackDuration = 3; // За сколько секунд закончит атаку с шипами
+    [Export]
     public double NewAbilityCooldown = 8; // Кулдаун абилок во 2 стадии
+    [Export]
 
     public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 

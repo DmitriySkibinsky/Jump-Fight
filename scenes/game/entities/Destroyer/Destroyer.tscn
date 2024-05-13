@@ -2662,6 +2662,10 @@ radius = 256.0
 collision_layer = 0
 collision_mask = 65
 script = ExtResource("1_vkovr")
+Speed = 75.0
+Damage = 15
+Health = 175
+ShootCooldown = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)
@@ -2677,9 +2681,8 @@ position = Vector2(16, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_e0f7d")
-animation = &"BasicAttack"
+animation = &"Hit1"
 autoplay = "ArmorIdle"
-frame = 1
 
 [node name="Effects" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
