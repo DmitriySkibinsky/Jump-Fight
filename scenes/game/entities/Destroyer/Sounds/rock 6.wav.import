@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3fksu8dqrktk"
+path="res://.godot/imported/rock 6.wav-90da79f4902478bcaf53713a19a73e33.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Destroyer/Sounds/rock 6.wav"
+dest_files=["res://.godot/imported/rock 6.wav-90da79f4902478bcaf53713a19a73e33.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

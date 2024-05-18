@@ -1,9 +1,12 @@
-[gd_scene load_steps=51 format=3 uid="uid://boj01a3tsrbl4"]
+[gd_scene load_steps=55 format=3 uid="uid://boj01a3tsrbl4"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Hunter/Hunter.cs" id="1_12x4b"]
 [ext_resource type="Texture2D" uid="uid://b187gx00bppgj" path="res://scenes/game/entities/Hunter/Sprites/spritesheet.png" id="1_y5dpu"]
 [ext_resource type="AudioStream" uid="uid://bu53vvdpgtokf" path="res://scenes/game/entities/Hunter/Sounds/box crunch 6.wav" id="2_7suuk"]
 [ext_resource type="AudioStream" uid="uid://ctc1ar18qlqm1" path="res://scenes/game/entities/Hunter/Sounds/knife schwing 5.wav" id="3_uomdq"]
+[ext_resource type="AudioStream" uid="uid://d4lmv47duoxk5" path="res://scenes/game/entities/Hunter/Sounds/Beast_Grunt.wav" id="5_yn3kf"]
+[ext_resource type="AudioStream" uid="uid://jauq3x514rxs" path="res://scenes/game/entities/Hunter/Sounds/Beast_Grunt2.wav" id="6_5t8lx"]
+[ext_resource type="AudioStream" uid="uid://3axfhyk33105" path="res://scenes/game/entities/Hunter/Sounds/SerpentBeast_Hiss.wav" id="7_n40is"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xwgya"]
 radius = 50.0
@@ -437,6 +440,14 @@ _data = {
 "Run": SubResource("Animation_03dd6")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wueiy"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("5_yn3kf")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_5t8lx")
+stream_1/weight = 1.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0b6h"]
 size = Vector2(2560, 480)
 
@@ -493,6 +504,14 @@ pitch_scale = 1.6
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("3_uomdq")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_wueiy")
+volume_db = -8.0
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_n40is")
+volume_db = -6.0
 
 [node name="Triggers" type="Node2D" parent="."]
 

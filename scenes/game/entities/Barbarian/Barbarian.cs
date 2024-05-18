@@ -25,6 +25,8 @@ public partial class Barbarian : CharacterBody2D
         OFF
     }
 
+    public SoundSettings Switcher = SoundSettings.ON;
+
     public static Random RNG = new Random();
 
     //Дроп бонусов
@@ -125,6 +127,26 @@ public partial class Barbarian : CharacterBody2D
 
     public override void _Process(double delta)
     {
+
+        if (settings.Sound)
+        {
+            Switcher = SoundSettings.ON;
+        }
+        else
+        {
+            Switcher = SoundSettings.OFF;
+        }
+
+        switch (Switcher)
+        {
+            case SoundSettings.ON:
+                turn_on();
+                break;
+            case SoundSettings.OFF:
+                turn_off();
+                break;
+        }
+
 
         if (TimeOfState[(int)Statement.Damaged] > 0)
         {

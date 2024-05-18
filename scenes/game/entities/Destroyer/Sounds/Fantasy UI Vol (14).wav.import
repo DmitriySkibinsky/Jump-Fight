@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cfw0tl3uvp3vf"
+path="res://.godot/imported/Fantasy UI Vol (14).wav-4b2f7d5001126229b75eafa72c3c06d0.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Destroyer/Sounds/Fantasy UI Vol (14).wav"
+dest_files=["res://.godot/imported/Fantasy UI Vol (14).wav-4b2f7d5001126229b75eafa72c3c06d0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

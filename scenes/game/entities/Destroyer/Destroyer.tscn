@@ -1,4 +1,4 @@
-[gd_scene load_steps=237 format=3 uid="uid://3p26avqfg0ik"]
+[gd_scene load_steps=244 format=3 uid="uid://3p26avqfg0ik"]
 
 [ext_resource type="Texture2D" uid="uid://4u2dbga2n256" path="res://scenes/game/entities/Destroyer/Sprites/Armored/Golem_Armor_Ability.png" id="1_mow50"]
 [ext_resource type="Script" path="res://scenes/game/entities/Destroyer/Destroyer.cs" id="1_vkovr"]
@@ -28,6 +28,13 @@
 [ext_resource type="AudioStream" uid="uid://b17ru57giwi2b" path="res://scenes/game/entities/Destroyer/Sounds/brick hit 34.wav" id="26_4kaa4"]
 [ext_resource type="AudioStream" uid="uid://d25vrgsrbx6w0" path="res://scenes/game/entities/Destroyer/Sounds/ground thump 4.wav" id="27_587jv"]
 [ext_resource type="AudioStream" uid="uid://cn256cxaocw52" path="res://scenes/game/entities/Destroyer/Sounds/plastic rice bag hit 4.wav" id="28_fsjiv"]
+[ext_resource type="AudioStream" uid="uid://cfw0tl3uvp3vf" path="res://scenes/game/entities/Destroyer/Sounds/Fantasy UI Vol (14).wav" id="29_nwtjp"]
+[ext_resource type="AudioStream" uid="uid://bv5cxmyjw5yiw" path="res://scenes/game/entities/Destroyer/Sounds/hammer hits glass 2.wav" id="30_rjf3a"]
+[ext_resource type="AudioStream" uid="uid://bbqstier1u5tm" path="res://scenes/game/entities/Destroyer/Sounds/rock 6 low.wav" id="31_3jqlm"]
+[ext_resource type="AudioStream" uid="uid://bwpqa6xkuqe2g" path="res://scenes/game/entities/Destroyer/Sounds/rock 11 low.wav" id="32_lpkjq"]
+[ext_resource type="AudioStream" uid="uid://casl0xnyib8xr" path="res://scenes/game/entities/Destroyer/Sounds/rocks handle 4.wav" id="33_xsm58"]
+[ext_resource type="AudioStream" uid="uid://liplym74s1g8" path="res://scenes/game/entities/Destroyer/Sounds/rocks handle 35 low.wav" id="34_r4ilj"]
+[ext_resource type="AudioStream" uid="uid://cx23wam42cxtg" path="res://scenes/game/entities/Destroyer/Sounds/fbang01.wav" id="35_a48x6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qgb0"]
 radius = 48.0
@@ -1456,6 +1463,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["ArmorBreak"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sounds/ArmorBreak:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_iyjgv"]
 length = 1.4
@@ -1604,6 +1623,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["ArmorHit"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sounds/ArmorHurt:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_73ydx"]
@@ -1806,6 +1837,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Death"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sounds/Death:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_j5cn2"]
 length = 1.5
@@ -1969,6 +2012,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["PrepareToRush"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sounds/StartRushAttack:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_1ma7u"]
 length = 0.001
@@ -2098,7 +2153,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_oe0g8"]
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2130,7 +2185,7 @@ tracks/2/path = NodePath("../Effects:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [&"RushAttack", &"Nothing"]
@@ -2142,10 +2197,22 @@ tracks/3/path = NodePath("../Effects:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sounds/RushAttack:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_1uh2l"]
@@ -2416,6 +2483,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/Explosion:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_a4twj"]
 length = 0.2
@@ -2662,10 +2741,6 @@ radius = 256.0
 collision_layer = 0
 collision_mask = 65
 script = ExtResource("1_vkovr")
-Speed = 75.0
-Damage = 15
-Health = 175
-ShootCooldown = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)
@@ -2681,13 +2756,13 @@ position = Vector2(16, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_e0f7d")
-animation = &"Hit1"
+animation = &"ArmorFinishZoom"
 autoplay = "ArmorIdle"
+frame = 4
 
 [node name="Effects" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
-position = Vector2(16, 0)
-scale = Vector2(5, 5)
+scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_tr67q")
 animation = &"Nothing"
 autoplay = "Nothing"
@@ -2760,7 +2835,7 @@ target_position = Vector2(80, 0)
 
 [node name="Sounds" type="Node2D" parent="."]
 
-[node name="ArmorHurt" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="ArmorBlock" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("25_mj2g2")
 volume_db = -2.0
 
@@ -2776,6 +2851,38 @@ pitch_scale = 2.0
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("28_fsjiv")
 volume_db = -4.0
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("29_nwtjp")
+volume_db = -2.0
+pitch_scale = 2.0
+
+[node name="RushAttack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("30_rjf3a")
+volume_db = -4.0
+pitch_scale = 1.5
+
+[node name="StartRushAttack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("31_3jqlm")
+volume_db = -8.0
+pitch_scale = 0.6
+
+[node name="ArmorHurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("32_lpkjq")
+volume_db = -4.0
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("33_xsm58")
+volume_db = -6.0
+pitch_scale = 0.4
+
+[node name="ArmorBreak" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("34_r4ilj")
+volume_db = -4.0
+pitch_scale = 0.6
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("35_a48x6")
 
 [connection signal="area_entered" from="HurtBoxes" to="." method="Collided"]
 [connection signal="area_entered" from="HitBoxes" to="." method="InHitArea"]

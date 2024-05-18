@@ -18,6 +18,8 @@ public partial class Hunter : CharacterBody2D
         OFF
     }
 
+    public SoundSettings Switcher = SoundSettings.ON;
+
     public static Random RNG = new Random();
      //Дроп бонусов
     public Godot.Collections.Array<PackedScene> Collectibles = new Godot.Collections.Array<PackedScene>{
@@ -88,9 +90,14 @@ public partial class Hunter : CharacterBody2D
     public Node2D Sounds;
     public AudioStreamPlayer2D Sound_Attack;
     public AudioStreamPlayer2D Sound_Shoot;
+    public AudioStreamPlayer2D Sound_Hurt;
+    public AudioStreamPlayer2D Sound_Death;
 
     public float DeffaultVolume_Sound_Attack;
     public float DeffaultVolume_Sound_Shoot;
+    public float DeffaultVolume_Sound_Hurt;
+    public float DeffaultVolume_Sound_Death;
+
     [Export]
     public PackedScene Arrow = GD.Load<PackedScene>("res://scenes/game/entities/Hunter/Etc/Arrow.tscn");
 
@@ -121,9 +128,13 @@ public partial class Hunter : CharacterBody2D
         Sounds = GetNode<Node2D>("Sounds");
         Sound_Attack = Sounds.GetNode<AudioStreamPlayer2D>("Attack");
         Sound_Shoot = Sounds.GetNode<AudioStreamPlayer2D>("Shoot");
+        Sound_Hurt = Sounds.GetNode<AudioStreamPlayer2D>("Hurt");
+        Sound_Death = Sounds.GetNode<AudioStreamPlayer2D>("Death");
 
         DeffaultVolume_Sound_Attack = Sound_Attack.VolumeDb;
         DeffaultVolume_Sound_Shoot = Sound_Shoot.VolumeDb;
+        DeffaultVolume_Sound_Hurt = Sound_Hurt.VolumeDb;
+        DeffaultVolume_Sound_Death = Sound_Death.VolumeDb;
         //
 
 
@@ -137,6 +148,27 @@ public partial class Hunter : CharacterBody2D
 
     public override void _Process(double delta) // НЕ МЕНЯТЬ НА _PhysicsProcess!
     {
+
+        if (settings.Sound)
+        {
+            Switcher = SoundSettings.ON;
+        }
+        else
+        {
+            Switcher = SoundSettings.OFF;
+        }
+
+        switch (Switcher)
+        {
+            case SoundSettings.ON:
+                turn_on();
+                break;
+            case SoundSettings.OFF:
+                turn_off();
+                break;
+        }
+
+
         if (DamageEffectTime > 0)
         {
             DamageEffectTime -= delta;
@@ -574,7 +606,7 @@ public partial class Hunter : CharacterBody2D
         DamageEffectTime = 0.1;
         AnimSprite.Modulate = new Color(1, 0.5f, 0.5f);
         FinishAttack();
-        //Sound_Hurt.Play();
+        Sound_Hurt.Play();
 
         if (Health <= 0)
         {
@@ -587,7 +619,7 @@ public partial class Hunter : CharacterBody2D
         Alive = false;
         IsRunAway = false;
         Anim.Play("Death");
-        //Sound_Death.Play();
+        Sound_Death.Play();
         await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
         //Дроп бонусов
         Random rnd = new Random();
@@ -604,11 +636,15 @@ public partial class Hunter : CharacterBody2D
     {
         Sound_Attack.VolumeDb = DeffaultVolume_Sound_Attack;
         Sound_Shoot.VolumeDb = DeffaultVolume_Sound_Shoot;
+        Sound_Hurt.VolumeDb = DeffaultVolume_Sound_Hurt;
+        Sound_Death.VolumeDb = DeffaultVolume_Sound_Death;
     }
 
     public void turn_off()
     {
         Sound_Attack.VolumeDb = -80;
         Sound_Shoot.VolumeDb = -80;
+        Sound_Hurt.VolumeDb = -80;
+        Sound_Death.VolumeDb = -80;
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dqxeqy7xibk4b"]
+[gd_scene load_steps=46 format=3 uid="uid://dqxeqy7xibk4b"]
 
 [ext_resource type="Script" path="res://scenes/game/entities/Scav/Scav.cs" id="1_3bx88"]
 [ext_resource type="Texture2D" uid="uid://brtht6ue6igda" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-attack-1.png" id="3_wjr8a"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://3hrw6ctwfain" path="res://scenes/game/entities/Scav/Sprites/xeno-grunt-run.png" id="7_e2xi1"]
 [ext_resource type="AudioStream" uid="uid://cclh861nvy0iq" path="res://scenes/game/entities/Scav/Sounds/metal beam hit 12.wav" id="8_mr02s"]
 [ext_resource type="AudioStream" uid="uid://yjx7gc735sfp" path="res://scenes/game/entities/Scav/Sounds/Monster_Roar7.mp3" id="9_p7fpn"]
+[ext_resource type="AudioStream" uid="uid://358t6rvof8kb" path="res://assets/SFX RPG/21_orc_damage_1.wav" id="10_gg7cr"]
+[ext_resource type="AudioStream" uid="uid://c0dgfnoiqra16" path="res://assets/SFX RPG/21_orc_damage_2.wav" id="11_1kasm"]
+[ext_resource type="AudioStream" uid="uid://bqskj0j3w17tu" path="res://assets/SFX RPG/21_orc_damage_3.wav" id="12_3q23s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qov7e"]
 radius = 40.0
@@ -250,6 +253,16 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mm7hv"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("10_gg7cr")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_1kasm")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_3q23s")
+stream_2/weight = 1.0
+
 [node name="Scav" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 65
@@ -297,6 +310,10 @@ pitch_scale = 1.5
 stream = ExtResource("9_p7fpn")
 volume_db = -12.0
 pitch_scale = 1.5
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_mm7hv")
+volume_db = -6.0
 
 [node name="ForwardWallDetectors" type="Node2D" parent="."]
 

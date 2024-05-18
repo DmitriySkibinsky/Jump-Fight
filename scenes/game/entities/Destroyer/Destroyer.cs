@@ -25,6 +25,8 @@ public partial class Destroyer : CharacterBody2D
         OFF
     }
 
+    public SoundSettings Switcher = SoundSettings.ON;
+
     public static Random RNG = new Random();
 
     // Настройки
@@ -131,15 +133,29 @@ public partial class Destroyer : CharacterBody2D
     public RayCast2D ForwardWallDetector_2;
 
     public Node2D Sounds;
-    public AudioStreamPlayer2D Sound_ArmorHurt;
+    public AudioStreamPlayer2D Sound_ArmorBlock;
     public AudioStreamPlayer2D Sound_BlockHurt;
     public AudioStreamPlayer2D Sound_Hurt;
     public AudioStreamPlayer2D Sound_Hit;
+    public AudioStreamPlayer2D Sound_Shoot;
+    public AudioStreamPlayer2D Sound_RushAttack;
+    public AudioStreamPlayer2D Sound_StartRushAttack;
+    public AudioStreamPlayer2D Sound_ArmorHurt;
+    public AudioStreamPlayer2D Sound_Death;
+    public AudioStreamPlayer2D Sound_ArmorBreak;
+    public AudioStreamPlayer2D Sound_Explosion;
 
-    public float DeffaultVolume_Sound_ArmorHurt;
+    public float DeffaultVolume_Sound_ArmorBlock;
     public float DeffaultVolume_Sound_BlockHurt;
     public float DeffaultVolume_Sound_Hurt;
     public float DeffaultVolume_Sound_Hit;
+    public float DeffaultVolume_Sound_Shoot;
+    public float DeffaultVolume_Sound_RushAttack;
+    public float DeffaultVolume_Sound_StartRushAttack;
+    public float DeffaultVolume_Sound_ArmorHurt;
+    public float DeffaultVolume_Sound_Death;
+    public float DeffaultVolume_Sound_ArmorBreak;
+    public float DeffaultVolume_Sound_Explosion;
 
     public PackedScene Plasma;
     public PackedScene Spike;
@@ -166,15 +182,29 @@ public partial class Destroyer : CharacterBody2D
         //Звуки
         Sounds = GetNode<Node2D>("Sounds");
 
-        Sound_ArmorHurt = Sounds.GetNode<AudioStreamPlayer2D>("ArmorHurt");
+        Sound_ArmorBlock = Sounds.GetNode<AudioStreamPlayer2D>("ArmorBlock");
         Sound_BlockHurt = Sounds.GetNode<AudioStreamPlayer2D>("BlockHurt");
         Sound_Hurt = Sounds.GetNode<AudioStreamPlayer2D>("Hurt");
         Sound_Hit = Sounds.GetNode<AudioStreamPlayer2D>("Hit");
+        Sound_Shoot = Sounds.GetNode<AudioStreamPlayer2D>("Shoot");
+        Sound_RushAttack = Sounds.GetNode<AudioStreamPlayer2D>("RushAttack");
+        Sound_StartRushAttack = Sounds.GetNode<AudioStreamPlayer2D>("StartRushAttack");
+        Sound_ArmorHurt = Sounds.GetNode<AudioStreamPlayer2D>("ArmorHurt");
+        Sound_Death = Sounds.GetNode<AudioStreamPlayer2D>("Death");
+        Sound_ArmorBreak = Sounds.GetNode<AudioStreamPlayer2D>("ArmorBreak");
+        Sound_Explosion = Sounds.GetNode<AudioStreamPlayer2D>("Explosion");
 
-        DeffaultVolume_Sound_ArmorHurt = Sound_ArmorHurt.VolumeDb;
+        DeffaultVolume_Sound_ArmorBlock = Sound_ArmorBlock.VolumeDb;
         DeffaultVolume_Sound_BlockHurt = Sound_BlockHurt.VolumeDb;
         DeffaultVolume_Sound_Hurt = Sound_Hurt.VolumeDb;
         DeffaultVolume_Sound_Hit = Sound_Hit.VolumeDb;
+        DeffaultVolume_Sound_Shoot = Sound_Shoot.VolumeDb;
+        DeffaultVolume_Sound_RushAttack = Sound_RushAttack.VolumeDb;
+        DeffaultVolume_Sound_StartRushAttack = Sound_StartRushAttack.VolumeDb;
+        DeffaultVolume_Sound_ArmorHurt = Sound_ArmorHurt.VolumeDb;
+        DeffaultVolume_Sound_Death = Sound_Death.VolumeDb;
+        DeffaultVolume_Sound_ArmorBreak = Sound_ArmorBreak.VolumeDb;
+        DeffaultVolume_Sound_Explosion = Sound_Explosion.VolumeDb;
         //
 
         Plasma = GD.Load<PackedScene>("res://scenes/game/entities/Destroyer/Etc/Plasma/Plasma.tscn");
@@ -195,6 +225,26 @@ public partial class Destroyer : CharacterBody2D
 
     public override void _Process(double delta)
     {
+
+        if (settings.Sound)
+        {
+            Switcher = SoundSettings.ON;
+        }
+        else
+        {
+            Switcher = SoundSettings.OFF;
+        }
+
+        switch (Switcher)
+        {
+            case SoundSettings.ON:
+                turn_on();
+                break;
+            case SoundSettings.OFF:
+                turn_off();
+                break;
+        }
+
 
         if (DamageEffectTime > 0)
         {
@@ -487,6 +537,7 @@ public partial class Destroyer : CharacterBody2D
             DeltaBasicAttackCooldown = BasicAttackCooldown;
             Intermission = IntermissionAfterAbility;
             Anim.Play("Shoot");
+            Sound_Shoot.Play();
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
             if (IsInHitArea || !IsInBattleArea || Armor <= 0)
             {
@@ -883,7 +934,7 @@ public partial class Destroyer : CharacterBody2D
         }
         else if (Armor > 0)
         {
-            Sound_ArmorHurt.Play();
+            Sound_ArmorBlock.Play();
         }
         else
         {
@@ -901,17 +952,31 @@ public partial class Destroyer : CharacterBody2D
 
     public void turn_on()
     {
-    Sound_ArmorHurt.VolumeDb = DeffaultVolume_Sound_ArmorHurt;
-    Sound_BlockHurt.VolumeDb = DeffaultVolume_Sound_BlockHurt;
-    Sound_Hurt.VolumeDb = DeffaultVolume_Sound_Hurt;
-    Sound_Hit.VolumeDb = DeffaultVolume_Sound_Hit;
-}
+        Sound_ArmorBlock.VolumeDb = DeffaultVolume_Sound_ArmorBlock;
+        Sound_BlockHurt.VolumeDb = DeffaultVolume_Sound_BlockHurt;
+        Sound_Hurt.VolumeDb = DeffaultVolume_Sound_Hurt;
+        Sound_Hit.VolumeDb = DeffaultVolume_Sound_Hit;
+        Sound_Shoot.VolumeDb = DeffaultVolume_Sound_Shoot;
+        Sound_RushAttack.VolumeDb = DeffaultVolume_Sound_RushAttack;
+        Sound_StartRushAttack.VolumeDb = DeffaultVolume_Sound_StartRushAttack;
+        Sound_ArmorHurt.VolumeDb = DeffaultVolume_Sound_ArmorHurt;
+        Sound_Death.VolumeDb = DeffaultVolume_Sound_Death;
+        Sound_ArmorBreak.VolumeDb = DeffaultVolume_Sound_ArmorBreak;
+        Sound_Explosion.VolumeDb = DeffaultVolume_Sound_Explosion;
+    }
 
     public void turn_off()
     {
-        Sound_ArmorHurt.VolumeDb = -80;
+        Sound_ArmorBlock.VolumeDb = -80;
         Sound_BlockHurt.VolumeDb = -80;
         Sound_Hurt.VolumeDb = -80;
         Sound_Hit.VolumeDb = -80;
+        Sound_Shoot.VolumeDb = -80;
+        Sound_RushAttack.VolumeDb = -80;
+        Sound_StartRushAttack.VolumeDb = -80;
+        Sound_ArmorHurt.VolumeDb = -80;
+        Sound_Death.VolumeDb = -80;
+        Sound_ArmorBreak.VolumeDb = -80;
+        Sound_Explosion.VolumeDb = -80;
     }
 }

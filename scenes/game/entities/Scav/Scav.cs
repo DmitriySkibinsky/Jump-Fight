@@ -20,12 +20,14 @@ public partial class Scav : CharacterBody2D
         OFF
     }
 
+    public SoundSettings Switcher = SoundSettings.ON;
+
     public static Random RNG = new Random();
     public Godot.Collections.Array<PackedScene> Collectibles = new Godot.Collections.Array<PackedScene>{
-		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn"),
-		GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/AttackBoost/attack_boost.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Heart/heart.tscn"),
+        GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/AttackBoost/attack_boost.tscn"),
         GD.Load<PackedScene>("res://scenes/game/entities/Collectibles/Reload Boost/reload_boost.tscn")
-	};
+    };
 
     public int CollectiblesDropChance = 30;
 
@@ -67,9 +69,11 @@ public partial class Scav : CharacterBody2D
     public Node2D Sounds;
     public AudioStreamPlayer2D Sound_Hit;
     public AudioStreamPlayer2D Sound_Death;
+    public AudioStreamPlayer2D Sound_Hurt;
 
     public float DeffaultVolume_Sound_Hit;
     public float DeffaultVolume_Sound_Death;
+    public float DeffaultVolume_Sound_Hurt;
 
     public player Player;
     public override void _Ready()
@@ -89,9 +93,11 @@ public partial class Scav : CharacterBody2D
         Sounds = GetNode<Node2D>("Sounds");
         Sound_Hit = Sounds.GetNode<AudioStreamPlayer2D>("Hit");
         Sound_Death = Sounds.GetNode<AudioStreamPlayer2D>("Death");
+        Sound_Hurt = Sounds.GetNode<AudioStreamPlayer2D>("Hurt");
 
         DeffaultVolume_Sound_Hit = Sound_Hit.VolumeDb;
         DeffaultVolume_Sound_Death = Sound_Death.VolumeDb;
+        DeffaultVolume_Sound_Hurt = Sound_Hurt.VolumeDb;
         //
 
         Player = (player)GetTree().GetFirstNodeInGroup("Player");
@@ -101,6 +107,25 @@ public partial class Scav : CharacterBody2D
 
     public override void _Process(double delta)
     {
+
+        if (settings.Sound)
+        {
+            Switcher = SoundSettings.ON;
+        }
+        else
+        {
+            Switcher = SoundSettings.OFF;
+        }
+
+        switch (Switcher)
+        {
+            case SoundSettings.ON:
+                turn_on();
+                break;
+            case SoundSettings.OFF:
+                turn_off();
+                break;
+        }
 
         if (DamagedTime > 0 && Alive)
         {
@@ -240,6 +265,7 @@ public partial class Scav : CharacterBody2D
         Health -= Damage;
         LastDamagedTime = Godot.Time.GetTicksMsec();
         Anim.Modulate = new Color(1, 0.5f, 0.5f);
+        Sound_Hurt.Play();
         if (Health <= 0)
         {
             Death();
@@ -261,13 +287,14 @@ public partial class Scav : CharacterBody2D
             Sound_Death.Play();
             await ToSignal(Anim, AnimatedSprite2D.SignalName.AnimationFinished);
             //Дроп бонусов
-             Random rnd = new Random();
-		    if (rnd.Next(100) < CollectiblesDropChance){
-			    int random_collectibles = rnd.Next(Collectibles.Count);
-			    Node2D new_collectibles = Collectibles[random_collectibles].Instantiate<Node2D>();
+            Random rnd = new Random();
+            if (rnd.Next(100) < CollectiblesDropChance)
+            {
+                int random_collectibles = rnd.Next(Collectibles.Count);
+                Node2D new_collectibles = Collectibles[random_collectibles].Instantiate<Node2D>();
                 new_collectibles.GlobalPosition = GlobalPosition;
                 GetParent().GetParent().AddChild(new_collectibles);
-		    }
+            }
             QueueFree();
         }
     }
@@ -276,11 +303,13 @@ public partial class Scav : CharacterBody2D
     {
         Sound_Hit.VolumeDb = DeffaultVolume_Sound_Hit;
         Sound_Death.VolumeDb = DeffaultVolume_Sound_Death;
+        Sound_Hurt.VolumeDb = DeffaultVolume_Sound_Hurt;
     }
 
     public void turn_off()
     {
         Sound_Hit.VolumeDb = -80;
         Sound_Death.VolumeDb = -80;
+        Sound_Hurt.VolumeDb = -80;
     }
 }

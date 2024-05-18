@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://liplym74s1g8"
+path="res://.godot/imported/rocks handle 35 low.wav-e7a5690af3ba3dc703451471ea5f23f8.sample"
+
+[deps]
+
+source_file="res://scenes/game/entities/Destroyer/Sounds/rocks handle 35 low.wav"
+dest_files=["res://.godot/imported/rocks handle 35 low.wav-e7a5690af3ba3dc703451471ea5f23f8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
