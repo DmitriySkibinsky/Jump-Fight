@@ -469,25 +469,25 @@ public partial class player : CharacterBody2D
 		collect2.VolumeDb = -80;
 	}
 
-    public void heal(int hp, heart HealingOrb=null)
-    {
-        collect.Play();
-        health += hp;
-        if (health > 150)
-        {
-            health = 150;
-        }
-        EmitSignal(SignalName.HealthChanged, health);
-        if (HealingOrb != null){
-            HealingOrb.Exit();
-        }
-    }
+	public void heal(int hp, heart HealingOrb=null)
+	{
+		collect.Play();
+		health += hp;
+		if (health > 150)
+		{
+			health = 150;
+		}
+		EmitSignal(SignalName.HealthChanged, health);
+		if (HealingOrb != null){
+			HealingOrb.Exit();
+		}
+	}
 
 	public async void jump_boost(jump_boost boost = null)
 	{
 		if (boost != null){
-            boost.Exit();
-        }
+			boost.Exit();
+		}
 		collect2.Play();
 		jump_multiplier = 1.2f;
 		await ToSignal(GetTree().CreateTimer(10), SceneTreeTimer.SignalName.Timeout);
@@ -497,8 +497,8 @@ public partial class player : CharacterBody2D
 	public async void attack_boost(attack_boost boost = null)
 	{
 		if (boost != null){
-            boost.Exit();
-        }
+			boost.Exit();
+		}
 		collect2.Play();
 		damage_basic = 30;
 		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
@@ -507,15 +507,15 @@ public partial class player : CharacterBody2D
 
 	public async void reload_boost(reload_boost boost = null)
 	{
-        if (boost != null)
-        {
-            boost.Exit();
-        }
-        collect2.Play();
+		if (boost != null)
+		{
+			boost.Exit();
+		}
+		collect2.Play();
 		attack_cooldown_multiplier = 0.2f;
-        await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
+		await ToSignal(GetTree().CreateTimer(15), SceneTreeTimer.SignalName.Timeout);
 		attack_cooldown_multiplier = 1f;
-    }
+	}
 
 	public void teleport_to(float target_posX)
 	{

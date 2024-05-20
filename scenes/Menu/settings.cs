@@ -7,10 +7,10 @@ public partial class settings : Control
 	public static bool Sound = true;
 	public static Button button;
 	public static Button button_s;
-    public AudioStreamPlayer click;
-    public AudioStreamPlayer mute;
+	public AudioStreamPlayer click;
+	public AudioStreamPlayer mute;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		button_s = GetNode<Button>("Panel/Sounds/Sounds");
 		if (!Sound){
@@ -27,52 +27,48 @@ public partial class settings : Control
 		}
 		AddChild(button);
 
-        click = GetNode<AudioStreamPlayer>("Buttons");
-        mute = GetNode<AudioStreamPlayer>("AudioButtons");
-    }
+		click = GetNode<AudioStreamPlayer>("Buttons");
+		mute = GetNode<AudioStreamPlayer>("AudioButtons");
+	}
 	
 	public async void _on_quit_pressed()
 	{
 		if (Sound)
 		{
-            click.Play();
-            await ToSignal(click, AudioStreamPlayer.SignalName.Finished);
-        }
-        GetTree().Quit();
+			click.Play();
+			await ToSignal(click, AudioStreamPlayer.SignalName.Finished);
+		}
+		GetTree().Quit();
 	}
 	public async void _on_exit_pressed()
 	{
-        if (Sound)
-        {
-            click.Play();
-            await ToSignal(click, AudioStreamPlayer.SignalName.Finished);
-        }
-        GetTree().ChangeSceneToFile("res://scenes/Menu/menu.tscn");
+		if (Sound)
+		{
+			click.Play();
+			await ToSignal(click, AudioStreamPlayer.SignalName.Finished);
+		}
+		GetTree().ChangeSceneToFile("res://scenes/Menu/menu.tscn");
 	}
 	
 	public void _on_audio_pressed()
 	{
+		if (Sound)
+			{
+				mute.Play();
+			}
 		if (Audio){
-            if (Sound)
-            {
-                mute.Play();
-            }
-            button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
+			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button Off.png");
 			Audio = false;
 		}else{
-            if (Sound)
-            {
-                mute.Play();
-            }
-            button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
+			button.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Music Square Button.png");
 			Audio = true;
 		}
 	}
 	public void _on_sounds_pressed()
 	{
 		if (Sound){
-            mute.Play();
-            button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
+			mute.Play();
+			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button Off.png");
 			Sound = false;
 		}else{
 			button_s.Icon = (Texture2D)ResourceLoader.Load("res://assets/sprites/Audio Square Button.png");
