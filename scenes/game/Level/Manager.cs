@@ -15,6 +15,8 @@ public partial class Manager : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		game_paused = false;
+		GetTree().Paused = false;
 		pause_menu = GetNode<Control>("../InLevelUI/Pause");
 		button_s = GetNode<Button>("../InLevelUI/Pause/Panel/Sounds/Sounds");
 		if (!settings.Sound){

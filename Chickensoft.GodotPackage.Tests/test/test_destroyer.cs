@@ -22,6 +22,13 @@ public partial class DestroyerTests : TestClass
         Destroyer.Sound_BlockHurt = new AudioStreamPlayer2D();
         Destroyer.Sound_Hurt = new AudioStreamPlayer2D();
         Destroyer.Sound_Hit = new AudioStreamPlayer2D();
+        Destroyer.Sound_RushAttack = new AudioStreamPlayer2D();
+        Destroyer.Sound_StartRushAttack = new AudioStreamPlayer2D();
+        Destroyer.Sound_ArmorBlock = new AudioStreamPlayer2D();
+        Destroyer.Sound_Death = new AudioStreamPlayer2D();
+        Destroyer.Sound_ArmorBreak = new AudioStreamPlayer2D();
+        Destroyer.Sound_Explosion = new AudioStreamPlayer2D();
+        Destroyer.Sound_Shoot = new AudioStreamPlayer2D();
         Destroyer.Anim = Substitute.For<AnimationPlayer>();
         Destroyer.AnimSprite = Substitute.For<AnimatedSprite2D>();
         Destroyer.Player = new player();

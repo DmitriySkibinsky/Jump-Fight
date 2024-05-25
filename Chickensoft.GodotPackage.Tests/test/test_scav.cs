@@ -22,6 +22,10 @@ public class ScavTests : TestClass
     public void SetUp()
     {
         Scav = new Scav();
+        Scav.Switcher = new Scav.SoundSettings();
+        Scav.Sound_Hit = new AudioStreamPlayer2D();
+        Scav.Sound_Death = new AudioStreamPlayer2D();
+        Scav.Sound_Hurt = new AudioStreamPlayer2D();
     }
 
     [Test]

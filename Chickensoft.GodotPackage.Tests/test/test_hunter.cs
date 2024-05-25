@@ -20,6 +20,8 @@ public partial class HunterTests : TestClass
         Hunter = new Hunter();
         Hunter.Sound_Attack = new AudioStreamPlayer2D();
         Hunter.Sound_Shoot = new AudioStreamPlayer2D();
+        Hunter.Sound_Hurt = new AudioStreamPlayer2D();
+        Hunter.Sound_Death = new AudioStreamPlayer2D();
         Hunter.Anim = Substitute.For<AnimationPlayer>();
         Hunter.AnimSprite = Substitute.For<AnimatedSprite2D>();
     }
