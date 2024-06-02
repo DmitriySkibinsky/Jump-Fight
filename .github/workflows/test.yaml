@@ -41,5 +41,5 @@ jobs:
         sudo mv Validation.py testing_proj/Validation.py
         sudo v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 -d --headless --run-tests --quit-on-finish >> testing_proj/result.txt
         sudo cat testing_proj/result.txt
-        ls
-        pwd
+        cd testing_proj
+        ls -al
