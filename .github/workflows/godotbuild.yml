@@ -7,6 +7,45 @@ on:
     branches: [ main ]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: dev
+
+    - name: Setup Godot
+      uses: lihop/setup-godot@v2
+      with:
+        version: 4.2.1-stable
+        bits: 64
+        mono: true
+        alias: godot
+        export-templates: true
+      
+    - name: Install dotnet
+      run: sudo apt install -y mono-devel
+  
+    - name: Verify
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --version
+    - name: Build project
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --quit --build-solutions
+        
+    - name: Testing Project
+      run: | 
+        sudo mkdir testing_proj
+        sudo chmod -R 777 testing_proj
+        sudo mv Validation.py testing_proj/Validation.py
+        sudo v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 -d --headless --run-tests --quit-on-finish >> testing_proj/result.txt
+        sudo cat testing_proj/result.txt
+        cd testing_proj
+        python3 Validation.py
+
+jobs:
   build:
     runs-on: ubuntu-latest
 
