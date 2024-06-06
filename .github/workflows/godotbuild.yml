@@ -45,7 +45,6 @@ jobs:
         cd testing_proj
         python3 Validation.py
 
-jobs:
   build:
     runs-on: ubuntu-latest
 
