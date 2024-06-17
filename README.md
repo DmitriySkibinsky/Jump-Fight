@@ -17,7 +17,11 @@
 [![Build Godot Project for Windows](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godotbuild.yml/badge.svg)](https://github.com/DmitriySkiba/Jump-Fight/actions/workflows/godotbuild.yml) 
 
 ## Инструкции по установке/запуску:
--
+Установить наш продукт можно несколькими способами 
+- Скачать архив из вкладки GitHub Release
+- Посетить наш сайт и установить игру: https://maksimbaturin.github.io/Jump-Fight_Website
+- Jump & Fight также можно найти в магазине приложений itch.io: https://baturbai.itch.io/jump-and-fight?secret=RhJ7SuyluR2xat1X3j4nSH5xOk
+- Запустив контейнер docker run --rm -v "$(pwd):/host" sskibaa/jump-fight
 ## Разработчики
 - [Dmitriy Skibinskiy](https://github.com/DmitriySkiba)
 - [Maksim Baturin](https://github.com/MaksimBaturin)
